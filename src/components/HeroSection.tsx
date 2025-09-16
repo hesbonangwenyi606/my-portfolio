@@ -46,10 +46,7 @@ const HeroSection: React.FC = () => {
 
           <div className="flex gap-4">
             <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors">
-              
-
-              
-             
+<a href="#projects" className="text-gray-300 hover:text-blue-400 transition-colors">Projects</a>
             </button>
             <button className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
              <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-colors">Contact</a>
