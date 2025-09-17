@@ -26,16 +26,7 @@ const AboutSection: React.FC = () => {
               JavaScript frameworks, cloud platforms, and infrastructure automation.
             </p>
             
-            <div className="grid grid-cols-2 gap-6 pt-6">
-              <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-3xl font-bold text-blue-650">50+</div>
-                <div className="text-Blue-600">Projects Completed</div>
-              </div>
-              <div className="text-center p-4 bg-Blue-50 rounded-lg">
-                <div className="text-3xl font-bold text-Blue-650">3+</div>
-                <div className="text-Blue-600">Years Experience</div>
-              </div>
-            </div>
+
             
             <a
               href="https://hesbon-developer.netlify.app/"
@@ -55,7 +46,7 @@ const AboutSection: React.FC = () => {
                   Full-Stack Web Development
                 </li>
                 <li className="flex items-center">
-                  <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
+                  <span className="w-2 h-2 bg-red-600 rounded-full mr-3+"></span>
                   DevOps & Cloud Infrastructure
                 </li>
                 <li className="flex items-center">
@@ -63,7 +54,7 @@ const AboutSection: React.FC = () => {
                   API Design & Integration
                 </li>
                 <li className="flex items-center">
-                  <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
+                  <span className="w-2 h-2 bg-red-600 rounded-full mr-3+"></span>
                   Database Architecture
                 </li>
               </ul>
