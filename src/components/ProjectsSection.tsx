@@ -40,8 +40,8 @@ const ProjectsSection: React.FC = () => {
       description: 'Multi-region cloud infrastructure with auto-scaling, load balancing, and disaster recovery.',
       image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046321119_f33652ac.webp',
       technologies: ['AWS', 'Terraform', 'CloudFormation', 'Lambda'],
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://cloud-scale-aws.vercel.app/',
+      githubUrl: 'https://github.com/hesbonangwenyi606/cloud-scale-aws.git'
     },
     {
       title: 'Real-Time Analytics Dashboard',
