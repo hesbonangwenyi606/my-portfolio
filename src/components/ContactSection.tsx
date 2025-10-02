@@ -22,7 +22,7 @@ const ContactSection: React.FC = () => {
       event.currentTarget.reset();
     } else {
       console.error("Error:", data);
-      setResult("❌ " + data.message);
+      setResult(" " + data.message);
     }
   };
 
