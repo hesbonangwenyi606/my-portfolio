@@ -2,45 +2,38 @@ import React from 'react';
 
 const ProjectsSection: React.FC = () => {
   const projects = [
+       {
+      title: 'DevOps Automation Suite',
+      description: 'Comprehensive CI/CD pipeline automation with Docker, Kubernetes, and Terraform. Reduced deployment time by 75%.',
+      image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046313774_71daf725.webp',
+      technologies: ['Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'AWS'],
+      liveUrl: 'https://deploy-cloud-tools.vercel.app/',
+      githubUrl: 'https://github.com/hesbonangwenyi606/deploy-cloud-tools.git'
+    },
     {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.',
       image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046311972_9d9a50a4.webp',
       technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS'],
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://ecommerce-web-five-sepia.vercel.app/',
+      githubUrl: 'https://github.com/hesbonangwenyi606/Ecommerce-web.git'
     },
-    {
-      title: 'DevOps Automation Suite',
-      description: 'Comprehensive CI/CD pipeline automation with Docker, Kubernetes, and Terraform. Reduced deployment time by 75%.',
-      image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046313774_71daf725.webp',
-      technologies: ['Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'AWS'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      title: 'Real-Time Analytics Dashboard',
-      description: 'Interactive dashboard for real-time data visualization using React, D3.js, and WebSocket connections.',
-      image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046315545_694ca339.webp',
-      technologies: ['React', 'D3.js', 'WebSocket', 'Redis', 'Node.js'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
+    
     {
       title: 'Microservices Architecture',
       description: 'Scalable microservices platform with API Gateway, service discovery, and distributed logging.',
       image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046317361_95ed4190.webp',
       technologies: ['Node.js', 'Docker', 'Kong', 'MongoDB', 'ELK Stack'],
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://scalable-docker-logging.vercel.app/',
+      githubUrl: 'https://github.com/hesbonangwenyi606/scalable-docker-logging.git'
     },
     {
       title: 'Mobile-First Web App',
       description: 'Progressive Web App with offline capabilities, push notifications, and responsive design.',
       image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046319262_3477b495.webp',
       technologies: ['Vue.js', 'PWA', 'Service Workers', 'Firebase'],
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://celadon-chaja-e416dc.netlify.app/',
+      githubUrl: 'https://github.com/hesbonangwenyi606/mobile-web-app.git'
     },
     {
       title: 'Cloud Infrastructure',
@@ -49,6 +42,14 @@ const ProjectsSection: React.FC = () => {
       technologies: ['AWS', 'Terraform', 'CloudFormation', 'Lambda'],
       liveUrl: '#',
       githubUrl: '#'
+    },
+    {
+      title: 'Real-Time Analytics Dashboard',
+      description: 'Interactive dashboard for real-time data visualization using React, D3.js, and WebSocket connections.',
+      image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046315545_694ca339.webp',
+      technologies: ['React', 'D3.js', 'WebSocket', 'Redis', 'Node.js'],
+      liveUrl: 'https://realtime-analytics-opal.vercel.app/',
+      githubUrl: 'https://github.com/hesbonangwenyi606/realtime-analytics.git'
     }
   ];
 
