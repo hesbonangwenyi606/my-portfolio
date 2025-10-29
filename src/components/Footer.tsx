@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
         {/* Bottom */}
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-300">
-            © 2021 -{currentYear} Hesbon Angwenyi. All rights reserved.
+            © 2021 - {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
       </div>
