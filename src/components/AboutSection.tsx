@@ -28,7 +28,7 @@ const AboutSection: React.FC = () => {
             </p>
 
             <a
-              href="https://hesbon-developer.netlify.app/"
+              href="https://hesbon-resume.vercel.app/"
               download
               className="inline-block bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors"
             >
