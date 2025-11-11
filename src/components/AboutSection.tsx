@@ -55,22 +55,7 @@ const AboutSection: React.FC = () => {
 
   return (
     <section id="about" className="py-20 bg-white relative overflow-hidden">
-      {/* Particles */}
-      {particles.map((p, i) => (
-        <motion.div
-          key={i}
-          className="absolute bg-white rounded-full opacity-50"
-          style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
-          animate={{
-            y: [0, p.yOffset, 0],
-            x: [0, p.xOffset, 0],
-            rotate: [0, p.rotate, 0],
-          }}
-          transition={{ repeat: Infinity, repeatType: 'loop', duration: 4, delay: p.delay }}
-        />
-      ))}
-
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
+      <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16 relative group">
           <motion.h2
@@ -81,6 +66,7 @@ const AboutSection: React.FC = () => {
             About Me
           </motion.h2>
 
+          {/* Underline */}
           <motion.div
             className="h-1 bg-blue-600 mx-auto rounded relative overflow-hidden"
             animate={{ x: ['-10%', '10%', '-10%'] }}
@@ -98,7 +84,7 @@ const AboutSection: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left Panel */}
           <motion.div
-            className="space-y-6 bg-blue-600 p-8 rounded-xl shadow-lg"
+            className="space-y-6 bg-blue-600 p-8 rounded-xl shadow-lg relative z-10"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -114,10 +100,12 @@ const AboutSection: React.FC = () => {
 
             {/* First Paragraph with Image */}
             <div className="flex flex-col md:flex-row items-start gap-4">
-              <img
+              <motion.img
                 src="https://i.pinimg.com/736x/ef/e1/5c/efe15c31e146989f9df6277418a5057c.jpg"
                 alt="Full-stack development & DevOps"
                 className="w-full md:w-40 h-24 md:h-32 object-cover rounded-lg shadow-md"
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3 }}
               />
               <p className="text-blue-50 text-lg leading-relaxed md:flex-1">
                 With over 3+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing robust CI/CD pipelines. My passion lies in solving complex problems and delivering high-quality solutions that drive business growth.
@@ -126,10 +114,12 @@ const AboutSection: React.FC = () => {
 
             {/* Second Paragraph with Image */}
             <div className="flex flex-col md:flex-row items-start gap-4">
-              <img
+              <motion.img
                 src="https://i.pinimg.com/736x/0e/a7/ef/0ea7ef79bbfe9c8a6e2b16cf2b3d9cd5.jpg"
                 alt="Projects & Teams"
                 className="w-full md:w-40 h-24 md:h-32 object-cover rounded-lg shadow-md"
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3 }}
               />
               <p className="text-blue-50 text-lg leading-relaxed md:flex-1">
                 I have successfully led multiple projects from conception to deployment, working with diverse teams and technologies. My expertise spans modern JavaScript frameworks, cloud platforms, and infrastructure automation.
@@ -145,7 +135,7 @@ const AboutSection: React.FC = () => {
             </a>
           </motion.div>
 
-          {/* Right Panel with Bullet Items */}
+          {/* Right Panel with Images */}
           <motion.div
             className="space-y-6 bg-gray-100 p-8 rounded-xl shadow-lg"
             initial={{ opacity: 0, x: 50 }}
@@ -166,6 +156,7 @@ const AboutSection: React.FC = () => {
                     </div>
                   </div>
 
+                  {/* Images grid */}
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
                     {item.images.map((img, i) => (
                       <motion.img
