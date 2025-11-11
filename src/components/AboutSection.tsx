@@ -8,19 +8,11 @@ const AboutSection: React.FC = () => {
       left: Math.random() * 100 + '%',
       size: Math.random() * 4 + 2 + 'px',
       delay: Math.random() * 5,
+      rotate: Math.random() * 360,
+      xOffset: Math.random() * 30 - 15,
+      yOffset: Math.random() * 20 - 10,
     }))
   );
-
-  // Variants for bullets and paragraphs
-  const listVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.2 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: 30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
 
   const paragraphVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
@@ -53,14 +45,26 @@ const AboutSection: React.FC = () => {
 
   return (
     <section id="about" className="py-20 bg-white relative overflow-hidden">
-      {/* Floating Particles */}
+      {/* Animated Particles */}
       {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute bg-blue-200 rounded-full opacity-40"
           style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
-          animate={{ opacity: [0.4, 0.1, 0.4], scale: [1, 1.3, 1] }}
-          transition={{ repeat: Infinity, repeatType: 'loop', duration: 3, delay: p.delay }}
+          animate={{
+            rotate: [0, 360],
+            x: [0, p.xOffset, 0],
+            y: [0, p.yOffset, 0],
+            opacity: [0.4, 0.1, 0.4],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            repeat: Infinity,
+            repeatType: 'loop',
+            duration: 6 + Math.random() * 4,
+            delay: p.delay,
+            ease: 'easeInOut',
+          }}
         />
       ))}
 
@@ -89,11 +93,17 @@ const AboutSection: React.FC = () => {
             {paragraphs.map((p, idx) => (
               <motion.p
                 key={idx}
-                className="text-blue-50 text-lg leading-relaxed"
+                className="text-blue-50 text-lg leading-relaxed cursor-pointer"
                 initial="hidden"
                 whileInView="visible"
                 variants={paragraphVariants}
                 viewport={{ once: true }}
+                whileHover={{
+                  y: -5,
+                  scale: 1.02,
+                  textShadow: '0 0 10px rgba(255,255,255,0.3)',
+                  transition: { duration: 0.3, ease: 'easeOut' },
+                }}
               >
                 {p}
               </motion.p>
@@ -124,7 +134,6 @@ const AboutSection: React.FC = () => {
 
             <motion.ul
               className="space-y-4 text-gray-800"
-              variants={listVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -132,8 +141,8 @@ const AboutSection: React.FC = () => {
               {bulletItems.map((item, idx) => (
                 <motion.li
                   key={idx}
-                  className="transition-transform duration-300 hover:scale-105 hover:bg-gray-200 rounded-lg p-2"
-                  variants={itemVariants}
+                  className="transition-transform duration-300 hover:scale-105 hover:bg-gray-200 rounded-lg p-2 cursor-pointer"
+                  whileHover={{ y: -3, scale: 1.02, boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
                 >
                   <h5 className="flex items-center font-semibold text-gray-900">
                     <span className="w-2 h-2 bg-gray-700 rounded-full mr-3"></span>
