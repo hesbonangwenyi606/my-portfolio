@@ -118,7 +118,7 @@ const SkillCategory = ({ title, skills }) => (
   </div>
 );
 
-/* Skill Progress Bar Component with animation */
+/* Skill Progress Bar Component with animated gradient and hover effect */
 const SkillBar = ({ name, level }) => {
   const [inView, setInView] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -154,13 +154,19 @@ const SkillBar = ({ name, level }) => {
   return (
     <div ref={barRef}>
       <div className="flex justify-between mb-1">
-        <span className="text-gray-700 font-medium">{name}</span>
+        <span className="text-gray-700 font-medium transition-transform transform hover:scale-105 hover:text-blue-500">
+          {name}
+        </span>
         <span className="text-blue-600 font-semibold">{progress}%</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-3">
+      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
         <div
-          className="bg-blue-500 h-3 rounded-full transition-all duration-500 ease-in-out"
-          style={{ width: `${progress}%` }}
+          className="h-3 rounded-full transition-all duration-500 ease-in-out"
+          style={{
+            width: `${progress}%`,
+            background: `linear-gradient(90deg, #4f46e5, #ec4899, #facc15)`,
+            boxShadow: `0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)`,
+          }}
         ></div>
       </div>
     </div>
