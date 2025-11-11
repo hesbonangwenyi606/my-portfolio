@@ -43,6 +43,7 @@ const Stats = () => {
                 { name: "Python", level: 90 },
                 { name: "Java", level: 60 },
                 { name: "C++", level: 50 },
+                { name: "PHP", level: 75 },
                 { name: "REST APIs", level: 92 },
                 { name: "GraphQL", level: 75 },
               ]}
@@ -56,7 +57,7 @@ const Stats = () => {
                 { name: "Kubernetes", level: 75 },
                 { name: "Ansible", level: 80 },
                 { name: "Terraform", level: 78 },
-                { name: "Git & GitHub", level: 92 }, // Added GitHub
+                { name: "Git & GitHub", level: 92 },
                 { name: "CI/CD Pipelines", level: 85 },
                 { name: "AWS", level: 80 },
                 { name: "Azure", level: 70 },
@@ -99,10 +100,14 @@ const StatCard = ({ number, label }) => (
   </div>
 );
 
-/* Skill Category Component */
+/* Skill Category Component with polished title */
 const SkillCategory = ({ title, skills }) => (
   <div className="bg-white p-5 rounded-xl shadow-md">
-    <h3 className="text-xl font-semibold text-blue-600 mb-4 text-center">
+    <h3 className="text-xl font-bold text-center 
+                   bg-clip-text text-transparent 
+                   bg-gradient-to-r from-indigo-500 via-pink-500 to-yellow-400
+                   drop-shadow-lg
+                   transition transform hover:scale-110 hover:drop-shadow-xl mb-4">
       {title}
     </h3>
     <div className="space-y-4">
