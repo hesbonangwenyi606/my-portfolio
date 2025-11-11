@@ -5,18 +5,14 @@ const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
   };
 
@@ -24,23 +20,29 @@ const Navigation: React.FC = () => {
     { label: 'About', id: 'about' },
     { label: 'Skills', id: 'skills' },
     { label: 'Projects', id: 'projects' },
-    { label: 'Contact', id: 'contact' }
+    { label: 'Contact', id: 'contact' },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
-    }`}>
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold">
-            <span className={`${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-              Hesbon
-            </span>
-            <span className="text-blue-600"> Angwenyi</span>
-          </div>
+    <>
+      {/* Small profile picture with gentle pulse animation */}
+      <div className="fixed top-2 left-2 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
+        <img
+          src="/updated.jpeg" // replace with your profile picture path
+          alt="Hesbon Angwenyi"
+          className="w-full h-full object-cover rounded-full"
+        />
+      </div>
 
-          {/* Desktop Navigation */}
+      {/* Navigation Bar */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 flex justify-end items-center py-3">
+
+          {/* Desktop Navigation (Always Right) */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <button
@@ -55,22 +57,35 @@ const Navigation: React.FC = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Hamburger Button (Right) */}
           <button
-            className={`md:hidden ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+            className={`md:hidden ml-auto ${isScrolled ? 'text-gray-900' : 'text-white'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={
+                  isMobileMenuOpen
+                    ? 'M6 18L18 6M6 6l12 12'
+                    : 'M4 6h16M4 12h16M4 18h16'
+                }
+              />
             </svg>
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t shadow-lg">
-            <div className="py-4 space-y-4">
+            <div className="py-4 flex flex-col space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -83,8 +98,21 @@ const Navigation: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
-    </nav>
+      </nav>
+
+      {/* Tailwind custom animation */}
+      <style>
+        {`
+          @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+          }
+          .animate-pulse-slow {
+            animation: pulse-slow 2s infinite;
+          }
+        `}
+      </style>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import Footer from './Footer';
 
 const AppLayout: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <Navigation />
       <main>
         <HeroSection />
