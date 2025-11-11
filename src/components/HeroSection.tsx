@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import {
   FaPython, FaJava, FaPhp, FaHtml5, FaCss3Alt, FaReact, FaAngular, FaVuejs,
@@ -8,6 +8,24 @@ import {
   SiMongodb, SiPostgresql, SiMysql, SiFirebase, SiKubernetes, SiNextdotjs,
   SiTailwindcss, SiRuby, SiJavascript, SiTypescript, SiC, SiCplusplus, SiExpress
 } from 'react-icons/si';
+
+// Memoized Icon Component for performance
+const Icon = memo(({ icon: IconComp, title, color }: any) => (
+  <div className="relative group">
+    <IconComp
+      title={title}
+      className={`text-gray-300 hover:text-${color} transition-transform duration-300 hover:scale-110`}
+    />
+    {/* Hover sparkle */}
+    <motion.div
+      className="absolute w-2 h-2 bg-white rounded-full opacity-0"
+      initial={{ opacity: 0, scale: 0 }}
+      whileHover={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
+      transition={{ duration: 0.6, repeat: 1 }}
+      style={{ top: "-4px", left: "50%" }}
+    />
+  </div>
+));
 
 const HeroSection: React.FC = () => {
   const roles = [
@@ -45,7 +63,6 @@ const HeroSection: React.FC = () => {
         setSpeed(100);
       }
     }, speed);
-
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, roleIndex, roles, speed]);
 
@@ -86,30 +103,14 @@ const HeroSection: React.FC = () => {
   const { scrollY } = useViewportScroll();
   const yBackground = useTransform(scrollY, [0, 500], [0, -50]);
 
-  // Background sparkles over icons
-  const backgroundParticles = Array.from({ length: 15 }).map(() => ({
-    top: Math.random() * 24 + 'px',
-    left: Math.random() * 100 + '%',
-    size: Math.random() * 5 + 2 + 'px',
-    delay: Math.random() * 5,
-  }));
-
-  // Render scrolling icons with hover sparkle
-  const renderIcon = (t: any, i: number) => (
-    <div key={i} className="relative group">
-      <t.icon
-        title={t.title}
-        className={`text-gray-300 hover:text-${t.color} transition-transform duration-300 hover:scale-110`}
-      />
-      {/* Hover sparkle */}
-      <motion.div
-        className="absolute w-2 h-2 bg-white rounded-full opacity-0"
-        initial={{ opacity: 0, scale: 0 }}
-        whileHover={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
-        transition={{ duration: 0.6, repeat: 1 }}
-        style={{ top: "-4px", left: "50%" }}
-      />
-    </div>
+  // Precomputed background particles
+  const [particles] = useState(() =>
+    Array.from({ length: 10 }).map(() => ({
+      top: Math.random() * 24 + 'px',
+      left: Math.random() * 100 + '%',
+      size: Math.random() * 5 + 2 + 'px',
+      delay: Math.random() * 5,
+    }))
   );
 
   return (
@@ -169,23 +170,25 @@ const HeroSection: React.FC = () => {
             {/* Layer 1 */}
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl"
+              style={{ willChange: 'transform' }}
               animate={{ x: ['0%', '-50%'] }}
               transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 25, ease: 'linear' } }}
             >
-              {layer1.map((t, i) => renderIcon(t, i))}
+              {layer1.map((t, i) => <Icon key={i} {...t} />)}
             </motion.div>
 
             {/* Layer 2 */}
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl top-12 opacity-80"
+              style={{ willChange: 'transform' }}
               animate={{ x: ['0%', '-50%'] }}
               transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 35, ease: 'linear' } }}
             >
-              {layer2.map((t, i) => renderIcon(t, i))}
+              {layer2.map((t, i) => <Icon key={i} {...t} />)}
             </motion.div>
 
             {/* Background sparkles */}
-            {backgroundParticles.map((p, i) => (
+            {particles.map((p, i) => (
               <motion.div
                 key={i}
                 className="absolute w-2 h-2 bg-white rounded-full opacity-70"
@@ -206,12 +209,13 @@ const HeroSection: React.FC = () => {
         >
           <motion.div
             className="relative group"
-            animate={{ y: [0, -10, 0] }}  // floating up-down
+            animate={{ y: [0, -10, 0] }}
             transition={{ repeat: Infinity, repeatType: 'loop', duration: 4, ease: 'easeInOut' }}
           >
             <img 
               src="/updated.jpeg"
               alt="Hesbon Angwenyi"
+              loading="lazy"
               className="w-80 h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-blue-400 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-blue-400/50 group-hover:shadow-2xl"
             />
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-30 animate-pulse group-hover:opacity-50 transition-opacity duration-500"></div>
