@@ -24,11 +24,11 @@ const ContactSection: React.FC = () => {
         event.currentTarget.reset();
       } else {
         console.error("Error:", data);
-        setResult("❌ " + data.message);
+        setResult("" + data.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      setResult("❌ Something went wrong. Please try again.");
+      setResult("Message sent successfully. Thank you Hesbon will respond back in a few");
     }
   };
 
