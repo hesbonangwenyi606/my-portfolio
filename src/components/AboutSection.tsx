@@ -64,11 +64,15 @@ const AboutSection: React.FC = () => {
       ))}
 
       <div className="max-w-6xl mx-auto px-4">
-        {/* Section Header */}
+        {/* Section Header with Gentle Float */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-4">
+          <motion.h2
+            className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-4"
+            animate={{ y: [0, -5, 0], scale: [1, 1.02, 1] }}
+            transition={{ repeat: Infinity, repeatType: 'loop', duration: 4, ease: 'easeInOut' }}
+          >
             About Me
-          </h2>
+          </motion.h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded"></div>
         </div>
 
