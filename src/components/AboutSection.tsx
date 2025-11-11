@@ -21,7 +21,7 @@ const AboutSection: React.FC = () => {
       images: [
         'https://i.pinimg.com/736x/08/72/8f/08728f42513b4d9194d46d0d6655cde0.jpg',
         'https://i.pinimg.com/1200x/f9/01/bb/f901bb71e28c559d90257a4a3880e773.jpg',
-        'https://i.pinimg.com/736x/7d/c0/09/7dc009ab8c4f27f597ca10f47e4408bf.jpg',
+        'https://i.pinimg.com/736x/1a/e3/ff/1ae3ffdb10326a80e333550ad69f1fa4.jpg',
       ],
     },
     {
@@ -90,9 +90,16 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold text-blue-100">
-              Crafting Digital Excellence Through Code
-            </h3>
+            {/* Shorter Title with Floating Animation */}
+            <motion.h3
+              className="text-2xl font-semibold text-blue-100"
+              initial={{ y: 0, scale: 1 }}
+              whileHover={{ y: -5, scale: 1.03 }}
+              animate={{ y: [0, -2, 0], transition: { repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' } }}
+            >
+              Building Digital Excellence
+            </motion.h3>
+
             <p className="text-blue-50 text-lg leading-relaxed">
               With over 3+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing robust CI/CD pipelines. My passion lies in solving complex problems and delivering high-quality solutions that drive business growth.
             </p>
