@@ -86,6 +86,14 @@ const HeroSection: React.FC = () => {
   const { scrollY } = useViewportScroll();
   const yBackground = useTransform(scrollY, [0, 500], [0, -50]);
 
+  // Particle sparkle positions
+  const particles = Array.from({ length: 12 }).map(() => ({
+    top: Math.random() * 24 + 'px',
+    left: Math.random() * 100 + '%',
+    size: Math.random() * 6 + 2 + 'px',
+    delay: Math.random() * 5,
+  }));
+
   return (
     <motion.section
       style={{ y: yBackground }}
@@ -138,8 +146,9 @@ const HeroSection: React.FC = () => {
             </button>
           </motion.div>
 
-          {/* Scrolling Tech Icons */}
+          {/* Scrolling Tech Icons with Sparkles */}
           <div className="overflow-hidden relative h-24 w-full mt-12">
+            {/* Layer 1 */}
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300"
               animate={{ x: ['0%', '-50%'] }}
@@ -148,6 +157,7 @@ const HeroSection: React.FC = () => {
               {layer1.map((icon, index) => <div key={index}>{icon}</div>)}
             </motion.div>
 
+            {/* Layer 2 */}
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300 top-12 opacity-80"
               animate={{ x: ['0%', '-50%'] }}
@@ -155,10 +165,21 @@ const HeroSection: React.FC = () => {
             >
               {layer2.map((icon, index) => <div key={index}>{icon}</div>)}
             </motion.div>
+
+            {/* Sparkle particles */}
+            {particles.map((p, i) => (
+              <motion.div
+                key={i}
+                className="absolute bg-white rounded-full opacity-70"
+                style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
+                animate={{ opacity: [0.7, 0.2, 0.7], scale: [1, 1.5, 1] }}
+                transition={{ repeat: Infinity, repeatType: 'loop', duration: 2, delay: p.delay }}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Right: Floating Profile Image */}
+        {/* Floating Profile Image */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
