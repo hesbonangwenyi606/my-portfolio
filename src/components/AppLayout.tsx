@@ -7,6 +7,7 @@ import ProjectsSection from './ProjectsSection';
 import TestimonialsSection from './TestimonialsSection';
 import ContactSection from './ContactSection';
 import Footer from './Footer';
+import FloatingWhatsAppButton from './FloatingWhatsAppButton';
 
 const AppLayout: React.FC = () => {
   return (
@@ -21,6 +22,12 @@ const AppLayout: React.FC = () => {
         <ContactSection />
       </main>
       <Footer />
+
+      {/* Floating WhatsApp Button */}
+      <FloatingWhatsAppButton
+        phoneNumber="254743573380"
+        message="Hi Hesbon — I saw your portfolio and would like to connect!"
+      />
     </div>
   );
 };
