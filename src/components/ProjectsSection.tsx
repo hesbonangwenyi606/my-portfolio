@@ -5,7 +5,7 @@ const ProjectsSection: React.FC = () => {
        {
       title: 'DevOps Automation Suite',
       description: 'Comprehensive CI/CD pipeline automation with Docker, Kubernetes, and Terraform. Reduced deployment time by 75%.',
-      image: 'https://d64gsuwffb70l.cloudfront.net/68c9a83a51c69b0449b3f9d0_1758046313774_71daf725.webp',
+      image: 'https://images.writeupcafe.com/PNEAqr8qhdqGlZD8EOfyVFOuXSJ7pv3fNHiyO3TEiUA/resize:fill:800:/aHR0cHM6Ly93cml0ZXVwY2FmZS5jb20vZGF0YS9wb3N0LzE0Njc4MDgvYWQ5OTA2NjJkMzg1OGRiZGFhYmQ2MDgwNDZlYmZkZGIuanBnLndlYnA',
       technologies: ['Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'AWS'],
       liveUrl: 'https://deploy-cloud-tools.vercel.app/',
       githubUrl: 'https://github.com/hesbonangwenyi606/deploy-cloud-tools.git'
