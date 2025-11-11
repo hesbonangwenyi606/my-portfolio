@@ -21,6 +21,7 @@ const Stats = () => {
 
           {/* Grid of Skill Categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+            {/* 1. Frontend */}
             <SkillCategory
               title="Frontend"
               skills={[
@@ -33,18 +34,21 @@ const Stats = () => {
               ]}
             />
 
+            {/* 2. Backend */}
             <SkillCategory
               title="Backend"
               skills={[
                 { name: "Node.js", level: 90 },
                 { name: "Express.js", level: 88 },
-                { name: "Python", level: 85 },
-                { name: "Java", level: 80 },
+                { name: "Python", level: 90 },
+                { name: "Java", level: 60 },
+                { name: "C++", level: 50 },
                 { name: "REST APIs", level: 92 },
                 { name: "GraphQL", level: 75 },
               ]}
             />
 
+            {/* 3. DevOps */}
             <SkillCategory
               title="DevOps"
               skills={[
@@ -52,13 +56,14 @@ const Stats = () => {
                 { name: "Kubernetes", level: 75 },
                 { name: "Ansible", level: 80 },
                 { name: "Terraform", level: 78 },
-                { name: "Jenkins", level: 70 },
+                { name: "Git & GitHub", level: 92 }, // Added GitHub
                 { name: "CI/CD Pipelines", level: 85 },
                 { name: "AWS", level: 80 },
                 { name: "Azure", level: 70 },
               ]}
             />
 
+            {/* 4. Databases */}
             <SkillCategory
               title="Databases"
               skills={[
@@ -69,6 +74,7 @@ const Stats = () => {
               ]}
             />
 
+            {/* 5. Other Tools */}
             <SkillCategory
               title="Other Tools"
               skills={[
