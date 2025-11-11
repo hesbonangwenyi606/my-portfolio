@@ -118,7 +118,7 @@ const SkillCategory = ({ title, skills }) => (
   </div>
 );
 
-/* Skill Progress Bar Component with animated gradient + glow + moving shine */
+/* Skill Progress Bar Component with animated fill + flowing gradient + moving shine */
 const SkillBar = ({ name, level }) => {
   const [inView, setInView] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -160,15 +160,18 @@ const SkillBar = ({ name, level }) => {
         <span className="text-blue-600 font-semibold">{progress}%</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden relative">
-        {/* Main gradient bar */}
+        {/* Animated flowing gradient */}
         <div
           className="h-3 rounded-full transition-all duration-500 ease-in-out"
           style={{
             width: `${progress}%`,
-            background: `linear-gradient(90deg, #4f46e5, #ec4899, #facc15)`,
+            background: `linear-gradient(270deg, #4f46e5, #ec4899, #facc15, #4f46e5)`,
+            backgroundSize: "600% 100%",
+            animation: "flowGradient 3s ease infinite",
             boxShadow: `0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)`,
           }}
         ></div>
+
         {/* Moving shine overlay */}
         <div
           className="absolute top-0 left-0 h-3 rounded-full pointer-events-none"
@@ -181,15 +184,17 @@ const SkillBar = ({ name, level }) => {
         ></div>
       </div>
 
-      {/* Shine animation keyframes */}
+      {/* Keyframes for gradient flow + shine */}
       <style jsx>{`
         @keyframes shine {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+
+        @keyframes flowGradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
       `}</style>
     </div>
