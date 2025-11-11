@@ -58,10 +58,7 @@ const Stats = () => {
             <SkillCategory
               title="DevOps"
               skills={[
-                { name: "Linux / Bash", level: 85 },
-                { name: "Git & GitHub", level: 92 },
                 { name: "Docker", level: 90 },
-                { name: "Docker Compose", level: 85 },
                 { name: "Kubernetes", level: 75 },
                 { name: "Ansible", level: 80 },
                 { name: "Terraform", level: 78 },
@@ -69,7 +66,6 @@ const Stats = () => {
                 { name: "CI/CD Pipelines", level: 85 },
                 { name: "AWS", level: 80 },
                 { name: "Azure", level: 70 },
-                { name: "Google Cloud (GCP)", level: 70 },
               ]}
             />
 
