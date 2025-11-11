@@ -84,28 +84,44 @@ const AboutSection: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left Panel */}
           <motion.div
-            className="space-y-6 bg-blue-600 p-8 rounded-xl shadow-lg"
+            className="space-y-6 bg-blue-600 p-8 rounded-xl shadow-lg relative z-10"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            {/* Shorter Title with Floating Animation */}
             <motion.h3
               className="text-2xl font-semibold text-blue-100"
-              initial={{ y: 0, scale: 1 }}
-              whileHover={{ y: -5, scale: 1.03 }}
-              animate={{ y: [0, -2, 0], transition: { repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' } }}
+              animate={{ y: [0, -2, 0] }}
+              transition={{ repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' }}
             >
               Building Digital Excellence
             </motion.h3>
 
-            <p className="text-blue-50 text-lg leading-relaxed">
-              With over 3+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing robust CI/CD pipelines. My passion lies in solving complex problems and delivering high-quality solutions that drive business growth.
-            </p>
-            <p className="text-blue-50 text-lg leading-relaxed">
-              I have successfully led multiple projects from conception to deployment, working with diverse teams and technologies. My expertise spans modern JavaScript frameworks, cloud platforms, and infrastructure automation.
-            </p>
+            {/* First Paragraph with Image */}
+            <div className="flex flex-col md:flex-row items-start gap-4">
+              <img
+                src="https://i.pinimg.com/736x/ef/e1/5c/efe15c31e146989f9df6277418a5057c.jpg"
+                alt="Full-stack development & DevOps"
+                className="w-full md:w-40 h-24 md:h-32 object-cover rounded-lg shadow-md"
+              />
+              <p className="text-blue-50 text-lg leading-relaxed md:flex-1">
+                With over 3+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing robust CI/CD pipelines. My passion lies in solving complex problems and delivering high-quality solutions that drive business growth.
+              </p>
+            </div>
+
+            {/* Second Paragraph with Image */}
+            <div className="flex flex-col md:flex-row items-start gap-4">
+              <img
+                src="https://i.pinimg.com/736x/0e/a7/ef/0ea7ef79bbfe9c8a6e2b16cf2b3d9cd5.jpg"
+                alt="Projects & Teams"
+                className="w-full md:w-40 h-24 md:h-32 object-cover rounded-lg shadow-md"
+              />
+              <p className="text-blue-50 text-lg leading-relaxed md:flex-1">
+                I have successfully led multiple projects from conception to deployment, working with diverse teams and technologies. My expertise spans modern JavaScript frameworks, cloud platforms, and infrastructure automation.
+              </p>
+            </div>
+
             <a
               href="https://hesbon-resume.vercel.app/"
               download
