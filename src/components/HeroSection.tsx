@@ -83,7 +83,6 @@ const HeroSection: React.FC = () => {
   const layer1 = [...techIcons, ...techIcons];
   const layer2 = [...techIcons.reverse(), ...techIcons.reverse()];
 
-  // Parallax background
   const { scrollY } = useViewportScroll();
   const yBackground = useTransform(scrollY, [0, 500], [0, -50]);
 
@@ -139,7 +138,7 @@ const HeroSection: React.FC = () => {
             </button>
           </motion.div>
 
-          {/* Scrolling Tech Icons - Dual Layer */}
+          {/* Scrolling Tech Icons */}
           <div className="overflow-hidden relative h-24 w-full mt-12">
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300"
@@ -159,21 +158,25 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Profile Image */}
+        {/* Right: Floating Profile Image */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex justify-center"
         >
-          <div className="relative group">
+          <motion.div
+            className="relative group"
+            animate={{ y: [0, -10, 0] }}  // floating up-down
+            transition={{ repeat: Infinity, repeatType: 'loop', duration: 4, ease: 'easeInOut' }}
+          >
             <img 
               src="/updated.jpeg"
               alt="Hesbon Angwenyi"
               className="w-80 h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-blue-400 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-blue-400/50 group-hover:shadow-2xl"
             />
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-30 animate-pulse group-hover:opacity-50 transition-opacity duration-500"></div>
-          </div>
+          </motion.div>
         </motion.div>
 
       </div>
