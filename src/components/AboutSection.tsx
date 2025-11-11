@@ -64,8 +64,8 @@ const AboutSection: React.FC = () => {
       ))}
 
       <div className="max-w-6xl mx-auto px-4">
-        {/* Section Header with Floating & Animated Underline */}
-        <div className="text-center mb-16 relative">
+        {/* Header with Hover Shimmer */}
+        <div className="text-center mb-16 relative group">
           <motion.h2
             className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-4"
             animate={{ y: [0, -5, 0], scale: [1, 1.02, 1] }}
@@ -74,12 +74,19 @@ const AboutSection: React.FC = () => {
             About Me
           </motion.h2>
 
-          {/* Animated Underline */}
+          {/* Animated & Hover Shimmer Underline */}
           <motion.div
-            className="h-1 bg-blue-600 mx-auto rounded"
+            className="h-1 bg-blue-600 mx-auto rounded relative overflow-hidden"
             animate={{ x: ['-10%', '10%', '-10%'] }}
             transition={{ repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' }}
-          ></motion.div>
+          >
+            <motion.div
+              className="absolute top-0 left-0 h-full w-1/3 bg-white opacity-20 blur-md"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: '100%' }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </motion.div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -99,7 +106,7 @@ const AboutSection: React.FC = () => {
               <motion.p
                 key={idx}
                 className="text-blue-50 text-lg leading-relaxed cursor-pointer"
-                animate={{ y: [0, -5, 0] }} // gentle float
+                animate={{ y: [0, -5, 0] }}
                 transition={{
                   repeat: Infinity,
                   repeatType: 'loop',
@@ -145,8 +152,8 @@ const AboutSection: React.FC = () => {
               {bulletItems.map((item, idx) => (
                 <motion.li
                   key={idx}
-                  className="transition-transform duration-300 hover:scale-105 hover:bg-gray-200 rounded-lg p-2 cursor-pointer"
-                  animate={{ y: [0, -5, 0] }} // gentle float
+                  className="transition-transform duration-300 hover:scale-105 hover:bg-gray-200 rounded-lg p-2 cursor-pointer flex items-start"
+                  animate={{ y: [0, -5, 0] }}
                   transition={{
                     repeat: Infinity,
                     repeatType: 'loop',
@@ -156,11 +163,21 @@ const AboutSection: React.FC = () => {
                   }}
                   whileHover={{ y: -3, scale: 1.02, boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
                 >
-                  <h5 className="flex items-center font-semibold text-gray-900">
-                    <span className="w-2 h-2 bg-gray-700 rounded-full mr-3"></span>
-                    {item.title}
-                  </h5>
-                  <p className="ml-5 text-sm text-gray-700">{item.description}</p>
+                  {/* Sparkling Bullet */}
+                  <motion.span
+                    className="w-3 h-3 bg-gray-700 rounded-full mr-3 relative"
+                    whileHover={{
+                      scale: [1, 1.5, 1],
+                      rotate: [0, 20, -20, 0],
+                      backgroundColor: ['#374151', '#60a5fa', '#fff', '#60a5fa', '#374151'],
+                      boxShadow: '0 0 10px rgba(96,165,250,0.6), 0 0 20px rgba(255,255,255,0.4)',
+                    }}
+                    transition={{ duration: 0.8, repeat: Infinity, repeatType: 'loop', ease: 'easeInOut' }}
+                  ></motion.span>
+                  <div>
+                    <h5 className="font-semibold text-gray-900">{item.title}</h5>
+                    <p className="ml-1 text-sm text-gray-700">{item.description}</p>
+                  </div>
                 </motion.li>
               ))}
             </ul>
