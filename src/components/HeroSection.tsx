@@ -49,35 +49,35 @@ const HeroSection: React.FC = () => {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, roleIndex, roles, speed]);
 
-  // Tech icons
+  // Tech icons definition
   const techIcons = [
-    <FaPython title="Python" className="hover:text-yellow-400 transition-transform duration-300 hover:scale-110" />,
-    <FaJava title="Java" className="hover:text-red-500 transition-transform duration-300 hover:scale-110" />,
-    <FaPhp title="PHP" className="hover:text-indigo-400 transition-transform duration-300 hover:scale-110" />,
-    <FaHtml5 title="HTML5" className="hover:text-orange-500 transition-transform duration-300 hover:scale-110" />,
-    <FaCss3Alt title="CSS3" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
-    <SiJavascript title="JavaScript" className="hover:text-yellow-300 transition-transform duration-300 hover:scale-110" />,
-    <SiTypescript title="TypeScript" className="hover:text-sky-400 transition-transform duration-300 hover:scale-110" />,
-    <FaReact title="React" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
-    <SiNextdotjs title="Next.js" className="hover:text-white transition-transform duration-300 hover:scale-110" />,
-    <FaAngular title="Angular" className="hover:text-red-500 transition-transform duration-300 hover:scale-110" />,
-    <FaVuejs title="Vue.js" className="hover:text-green-400 transition-transform duration-300 hover:scale-110" />,
-    <FaNodeJs title="Node.js" className="hover:text-green-500 transition-transform duration-300 hover:scale-110" />,
-    <SiExpress title="Express.js" className="hover:text-gray-300 transition-transform duration-300 hover:scale-110" />,
-    <SiTailwindcss title="Tailwind CSS" className="hover:text-sky-400 transition-transform duration-300 hover:scale-110" />,
-    <SiMongodb title="MongoDB" className="hover:text-green-500 transition-transform duration-300 hover:scale-110" />,
-    <SiPostgresql title="PostgreSQL" className="hover:text-sky-500 transition-transform duration-300 hover:scale-110" />,
-    <SiMysql title="MySQL" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
-    <FaDocker title="Docker" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
-    <SiKubernetes title="Kubernetes" className="hover:text-sky-500 transition-transform duration-300 hover:scale-110" />,
-    <FaAws title="AWS" className="hover:text-orange-400 transition-transform duration-300 hover:scale-110" />,
-    <SiFirebase title="Firebase" className="hover:text-yellow-400 transition-transform duration-300 hover:scale-110" />,
-    <FaGitAlt title="GitHub" className="hover:text-red-400 transition-transform duration-300 hover:scale-110 hover:animate-pulse" />,
-    <FaLinux title="Linux" className="hover:text-orange-500 transition-transform duration-300 hover:scale-110" />,
-    <FaRust title="Rust" className="hover:text-orange-400 transition-transform duration-300 hover:scale-110" />,
-    <SiRuby title="Ruby" className="hover:text-red-400 transition-transform duration-300 hover:scale-110" />,
-    <SiC title="C" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
-    <SiCplusplus title="C++" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
+    { icon: FaPython, title: "Python", color: "yellow-400" },
+    { icon: FaJava, title: "Java", color: "red-500" },
+    { icon: FaPhp, title: "PHP", color: "indigo-400" },
+    { icon: FaHtml5, title: "HTML5", color: "orange-500" },
+    { icon: FaCss3Alt, title: "CSS3", color: "blue-400" },
+    { icon: SiJavascript, title: "JavaScript", color: "yellow-300" },
+    { icon: SiTypescript, title: "TypeScript", color: "sky-400" },
+    { icon: FaReact, title: "React", color: "blue-400" },
+    { icon: SiNextdotjs, title: "Next.js", color: "white" },
+    { icon: FaAngular, title: "Angular", color: "red-500" },
+    { icon: FaVuejs, title: "Vue.js", color: "green-400" },
+    { icon: FaNodeJs, title: "Node.js", color: "green-500" },
+    { icon: SiExpress, title: "Express.js", color: "gray-300" },
+    { icon: SiTailwindcss, title: "Tailwind CSS", color: "sky-400" },
+    { icon: SiMongodb, title: "MongoDB", color: "green-500" },
+    { icon: SiPostgresql, title: "PostgreSQL", color: "sky-500" },
+    { icon: SiMysql, title: "MySQL", color: "blue-400" },
+    { icon: FaDocker, title: "Docker", color: "blue-400" },
+    { icon: SiKubernetes, title: "Kubernetes", color: "sky-500" },
+    { icon: FaAws, title: "AWS", color: "orange-400" },
+    { icon: SiFirebase, title: "Firebase", color: "yellow-400" },
+    { icon: FaGitAlt, title: "GitHub", color: "red-400" },
+    { icon: FaLinux, title: "Linux", color: "orange-500" },
+    { icon: FaRust, title: "Rust", color: "orange-400" },
+    { icon: SiRuby, title: "Ruby", color: "red-400" },
+    { icon: SiC, title: "C", color: "blue-400" },
+    { icon: SiCplusplus, title: "C++", color: "blue-400" },
   ];
 
   const layer1 = [...techIcons, ...techIcons];
@@ -86,23 +86,41 @@ const HeroSection: React.FC = () => {
   const { scrollY } = useViewportScroll();
   const yBackground = useTransform(scrollY, [0, 500], [0, -50]);
 
-  // Particle sparkle positions
-  const particles = Array.from({ length: 12 }).map(() => ({
+  // Background sparkles over icons
+  const backgroundParticles = Array.from({ length: 15 }).map(() => ({
     top: Math.random() * 24 + 'px',
     left: Math.random() * 100 + '%',
-    size: Math.random() * 6 + 2 + 'px',
+    size: Math.random() * 5 + 2 + 'px',
     delay: Math.random() * 5,
   }));
+
+  // Render scrolling icons with hover sparkle
+  const renderIcon = (t: any, i: number) => (
+    <div key={i} className="relative group">
+      <t.icon
+        title={t.title}
+        className={`text-gray-300 hover:text-${t.color} transition-transform duration-300 hover:scale-110`}
+      />
+      {/* Hover sparkle */}
+      <motion.div
+        className="absolute w-2 h-2 bg-white rounded-full opacity-0"
+        initial={{ opacity: 0, scale: 0 }}
+        whileHover={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
+        transition={{ duration: 0.6, repeat: 1 }}
+        style={{ top: "-4px", left: "50%" }}
+      />
+    </div>
+  );
 
   return (
     <motion.section
       style={{ y: yBackground }}
-      className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4"
+      className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4 relative"
     >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
         {/* Left: Text */}
-        <div className="text-white space-y-6 md:space-y-8">
+        <div className="text-white space-y-6 md:space-y-8 z-10 relative">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,31 +164,31 @@ const HeroSection: React.FC = () => {
             </button>
           </motion.div>
 
-          {/* Scrolling Tech Icons with Sparkles */}
-          <div className="overflow-hidden relative h-24 w-full mt-12">
+          {/* Scrolling Tech Icons */}
+          <div className="overflow-hidden relative h-24 w-full mt-12 z-10">
             {/* Layer 1 */}
             <motion.div
-              className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300"
+              className="absolute flex gap-10 text-6xl md:text-7xl"
               animate={{ x: ['0%', '-50%'] }}
               transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 25, ease: 'linear' } }}
             >
-              {layer1.map((icon, index) => <div key={index}>{icon}</div>)}
+              {layer1.map((t, i) => renderIcon(t, i))}
             </motion.div>
 
             {/* Layer 2 */}
             <motion.div
-              className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300 top-12 opacity-80"
+              className="absolute flex gap-10 text-6xl md:text-7xl top-12 opacity-80"
               animate={{ x: ['0%', '-50%'] }}
               transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 35, ease: 'linear' } }}
             >
-              {layer2.map((icon, index) => <div key={index}>{icon}</div>)}
+              {layer2.map((t, i) => renderIcon(t, i))}
             </motion.div>
 
-            {/* Sparkle particles */}
-            {particles.map((p, i) => (
+            {/* Background sparkles */}
+            {backgroundParticles.map((p, i) => (
               <motion.div
                 key={i}
-                className="absolute bg-white rounded-full opacity-70"
+                className="absolute w-2 h-2 bg-white rounded-full opacity-70"
                 style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
                 animate={{ opacity: [0.7, 0.2, 0.7], scale: [1, 1.5, 1] }}
                 transition={{ repeat: Infinity, repeatType: 'loop', duration: 2, delay: p.delay }}
@@ -184,7 +202,7 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex justify-center"
+          className="flex justify-center z-10"
         >
           <motion.div
             className="relative group"
