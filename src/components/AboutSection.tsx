@@ -14,11 +14,6 @@ const AboutSection: React.FC = () => {
     }))
   );
 
-  const paragraphVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
-
   const bulletItems = [
     {
       title: 'Full-Stack Web Development',
@@ -94,10 +89,14 @@ const AboutSection: React.FC = () => {
               <motion.p
                 key={idx}
                 className="text-blue-50 text-lg leading-relaxed cursor-pointer"
-                initial="hidden"
-                whileInView="visible"
-                variants={paragraphVariants}
-                viewport={{ once: true }}
+                animate={{ y: [0, -5, 0] }} // gentle float
+                transition={{
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                  duration: 4 + idx * 0.5,
+                  delay: idx * 0.2,
+                  ease: 'easeInOut',
+                }}
                 whileHover={{
                   y: -5,
                   scale: 1.02,
@@ -132,16 +131,19 @@ const AboutSection: React.FC = () => {
           >
             <h4 className="font-semibold text-black mb-6 text-xl">What I Do</h4>
 
-            <motion.ul
-              className="space-y-4 text-gray-800"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
+            <ul className="space-y-4 text-gray-800">
               {bulletItems.map((item, idx) => (
                 <motion.li
                   key={idx}
                   className="transition-transform duration-300 hover:scale-105 hover:bg-gray-200 rounded-lg p-2 cursor-pointer"
+                  animate={{ y: [0, -5, 0] }} // gentle float
+                  transition={{
+                    repeat: Infinity,
+                    repeatType: 'loop',
+                    duration: 4 + idx * 0.3,
+                    delay: idx * 0.2,
+                    ease: 'easeInOut',
+                  }}
                   whileHover={{ y: -3, scale: 1.02, boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
                 >
                   <h5 className="flex items-center font-semibold text-gray-900">
@@ -151,7 +153,7 @@ const AboutSection: React.FC = () => {
                   <p className="ml-5 text-sm text-gray-700">{item.description}</p>
                 </motion.li>
               ))}
-            </motion.ul>
+            </ul>
           </motion.div>
         </div>
       </div>
