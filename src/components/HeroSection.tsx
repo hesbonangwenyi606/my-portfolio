@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import {
   FaPython, FaJava, FaPhp, FaHtml5, FaCss3Alt, FaReact, FaAngular, FaVuejs,
   FaNodeJs, FaDocker, FaAws, FaGitAlt, FaLinux, FaRust
@@ -32,7 +32,7 @@ const HeroSection: React.FC = () => {
         setDisplayText(currentRole.substring(0, displayText.length + 1));
         if (displayText.length + 1 === currentRole.length) {
           setIsDeleting(true);
-          setSpeed(1000); // pause before deleting
+          setSpeed(1000);
         } else {
           setSpeed(150);
         }
@@ -82,8 +82,15 @@ const HeroSection: React.FC = () => {
 
   const scrollingIcons = [...techIcons, ...techIcons];
 
+  // Parallax background
+  const { scrollY } = useViewportScroll();
+  const yBackground = useTransform(scrollY, [0, 500], [0, -50]); // subtle upward movement
+
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4">
+    <motion.section
+      style={{ y: yBackground }}
+      className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4"
+    >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
         {/* Left: Text */}
@@ -172,7 +179,7 @@ const HeroSection: React.FC = () => {
         </motion.div>
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 
