@@ -118,7 +118,7 @@ const SkillCategory = ({ title, skills }) => (
   </div>
 );
 
-/* Skill Progress Bar Component with animated gradient and hover effect */
+/* Skill Progress Bar Component with animated gradient + glow + moving shine */
 const SkillBar = ({ name, level }) => {
   const [inView, setInView] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -159,7 +159,8 @@ const SkillBar = ({ name, level }) => {
         </span>
         <span className="text-blue-600 font-semibold">{progress}%</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden relative">
+        {/* Main gradient bar */}
         <div
           className="h-3 rounded-full transition-all duration-500 ease-in-out"
           style={{
@@ -168,7 +169,29 @@ const SkillBar = ({ name, level }) => {
             boxShadow: `0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)`,
           }}
         ></div>
+        {/* Moving shine overlay */}
+        <div
+          className="absolute top-0 left-0 h-3 rounded-full pointer-events-none"
+          style={{
+            width: `${progress}%`,
+            background:
+              "linear-gradient(120deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%)",
+            animation: "shine 2s infinite linear",
+          }}
+        ></div>
       </div>
+
+      {/* Shine animation keyframes */}
+      <style jsx>{`
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
