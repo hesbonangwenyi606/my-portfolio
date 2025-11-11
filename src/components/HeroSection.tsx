@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   FaPython, FaJava, FaPhp, FaHtml5, FaCss3Alt, FaReact, FaAngular, FaVuejs,
@@ -10,6 +10,49 @@ import {
 } from 'react-icons/si';
 
 const HeroSection: React.FC = () => {
+  // Optimized roles for animation
+  const roles = [
+    'Software Developer',
+    'DevOps Engineer',
+    'Cloud Architect',
+    'Problem Solver',
+    'Full-Stack Developer',
+    'Infrastructure Automator'
+  ];
+
+  const [displayText, setDisplayText] = useState('');
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [speed, setSpeed] = useState(150);
+
+  useEffect(() => {
+    const currentRole = `Hi, I'm a ${roles[roleIndex]}`;
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      timer = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, displayText.length + 1));
+        if (displayText.length + 1 === currentRole.length) {
+          setIsDeleting(true);
+          setSpeed(1000); // pause before deleting
+        } else {
+          setSpeed(150);
+        }
+      }, speed);
+    } else {
+      timer = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, displayText.length - 1));
+        if (displayText.length - 1 === 0) {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+        setSpeed(100); // deleting speed
+      }, speed);
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, roleIndex, roles, speed]);
+
   const techIcons = [
     <FaPython title="Python" className="hover:text-yellow-400" />,
     <FaJava title="Java" className="hover:text-red-500" />,
@@ -40,20 +83,25 @@ const HeroSection: React.FC = () => {
     <SiCplusplus title="C++" className="hover:text-blue-400" />,
   ];
 
-  // Duplicate icons to create seamless loop
   const scrollingIcons = [...techIcons, ...techIcons];
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
+
         {/* Left: Text */}
-        <div className="text-white space-y-6">
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-            <span className="text-blue-400">HESBON </span>
+        <div className="text-white space-y-6 md:space-y-8">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight whitespace-nowrap">
+            <span className="text-blue-400">Hesbon Angwenyi</span>
           </h1>
 
-          <p className="text-xl text-gray-300 leading-relaxed max-w-lg mt-2">
+          {/* Typewriter Animated Role */}
+          <p className="text-3xl md:text-4xl text-gray-300 font-semibold h-10">
+            {displayText}
+            <span className="border-r-2 border-gray-300 animate-pulse ml-1"></span>
+          </p>
+
+          <p className="text-2xl md:text-2xl text-gray-300 leading-relaxed max-w-lg mt-2">
             Passionate about building scalable applications and robust infrastructure. 
             I transform ideas into powerful digital solutions using cutting-edge technologies.
           </p>
@@ -69,9 +117,9 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Scrolling Tech Icons */}
-          <div className="overflow-hidden relative h-20 w-full mt-12">
+          <div className="overflow-hidden relative h-24 w-full mt-12">
             <motion.div
-              className="absolute flex gap-10 text-5xl text-gray-300"
+              className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300"
               animate={{ x: ['0%', '-50%'] }}
               transition={{
                 x: {
@@ -89,13 +137,13 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Image */}
+        {/* Right: Profile Image */}
         <div className="flex justify-center">
           <div className="relative">
             <img 
               src="/updated.jpeg"
               alt="Hesbon Angwenyi"
-              className="w-80 h-80 rounded-full object-cover border-4 border-blue-400 shadow-2xl"
+              className="w-96 h-96 md:w-96 md:h-96 rounded-full object-cover border-4 border-blue-400 shadow-2xl"
             />
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-30 animate-pulse"></div>
           </div>
