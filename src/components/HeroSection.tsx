@@ -80,11 +80,12 @@ const HeroSection: React.FC = () => {
     <SiCplusplus title="C++" className="hover:text-blue-400 transition-transform duration-300 hover:scale-110" />,
   ];
 
-  const scrollingIcons = [...techIcons, ...techIcons];
+  const layer1 = [...techIcons, ...techIcons];
+  const layer2 = [...techIcons.reverse(), ...techIcons.reverse()];
 
   // Parallax background
   const { scrollY } = useViewportScroll();
-  const yBackground = useTransform(scrollY, [0, 500], [0, -50]); // subtle upward movement
+  const yBackground = useTransform(scrollY, [0, 500], [0, -50]);
 
   return (
     <motion.section
@@ -104,7 +105,6 @@ const HeroSection: React.FC = () => {
             <span className="text-blue-400">Hesbon Angwenyi</span>
           </motion.h1>
 
-          {/* Typewriter Animated Role */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -125,38 +125,36 @@ const HeroSection: React.FC = () => {
             I transform ideas into powerful digital solutions using cutting-edge technologies.
           </motion.p>
 
-          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.5 }}
             className="flex flex-wrap gap-4 mt-4"
           >
-            <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors transition-transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-400">
               <a href="#projects" className="text-gray-300 hover:text-white transition-colors">Projects</a>
             </button>
-            <button className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors transition-transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-400/50 focus:outline-none focus:ring-2 focus:ring-blue-400">
               <a href="#contact" className="transition-colors">Contact</a>
             </button>
           </motion.div>
 
-          {/* Scrolling Tech Icons */}
+          {/* Scrolling Tech Icons - Dual Layer */}
           <div className="overflow-hidden relative h-24 w-full mt-12">
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300"
               animate={{ x: ['0%', '-50%'] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: 'loop',
-                  duration: 25,
-                  ease: 'linear',
-                },
-              }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 25, ease: 'linear' } }}
             >
-              {scrollingIcons.map((icon, index) => (
-                <div key={index} className="flex items-center">{icon}</div>
-              ))}
+              {layer1.map((icon, index) => <div key={index}>{icon}</div>)}
+            </motion.div>
+
+            <motion.div
+              className="absolute flex gap-10 text-6xl md:text-7xl text-gray-300 top-12 opacity-80"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 35, ease: 'linear' } }}
+            >
+              {layer2.map((icon, index) => <div key={index}>{icon}</div>)}
             </motion.div>
           </div>
         </div>
@@ -168,13 +166,13 @@ const HeroSection: React.FC = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex justify-center"
         >
-          <div className="relative">
+          <div className="relative group">
             <img 
               src="/updated.jpeg"
               alt="Hesbon Angwenyi"
-              className="w-80 h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-blue-400 shadow-2xl transform motion-safe:hover:scale-105 transition-transform duration-500"
+              className="w-80 h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-blue-400 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-blue-400/50 group-hover:shadow-2xl"
             />
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-30 animate-pulse"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-30 animate-pulse group-hover:opacity-50 transition-opacity duration-500"></div>
           </div>
         </motion.div>
 
