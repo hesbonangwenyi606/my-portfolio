@@ -6,11 +6,11 @@ const Stats = () => {
       <div className="max-w-6xl mx-auto px-6">
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center mb-12">
-          <StatCard number={3} suffix="+" label="Years Experience" delay={0} />
-          <StatCard number={50} suffix="+" label="Projects Completed" delay={0.1} />
-          <StatCard number={16} suffix="+" label="Clients Served" delay={0.2} />
-          <StatCard number={10} suffix="+" label="Awards Won" delay={0.3} />
-          <StatCard number={100} suffix="%" label="Client Satisfaction" delay={0.4} />
+          <AnimatedStat number={3} suffix="+" label="Years Experience" glow="from-green-400 via-green-500 to-green-600"/>
+          <AnimatedStat number={50} suffix="+" label="Projects Completed" glow="from-blue-400 via-blue-500 to-blue-600"/>
+          <AnimatedStat number={16} suffix="+" label="Clients Served" glow="from-purple-400 via-purple-500 to-purple-600"/>
+          <AnimatedStat number={10} suffix="+" label="Awards Won" glow="from-pink-400 via-pink-500 to-pink-600"/>
+          <AnimatedStat number={100} suffix="%" label="Client Satisfaction" glow="from-yellow-400 via-yellow-500 to-yellow-600"/>
         </div>
 
         {/* Skills Section */}
@@ -31,7 +31,6 @@ const Stats = () => {
                 { name: "TypeScript", level: 80 },
               ]}
             />
-
             <SkillCategory
               title="Backend"
               skills={[
@@ -45,7 +44,6 @@ const Stats = () => {
                 { name: "GraphQL", level: 75 },
               ]}
             />
-
             <SkillCategory
               title="DevOps"
               skills={[
@@ -59,7 +57,6 @@ const Stats = () => {
                 { name: "Azure", level: 70 },
               ]}
             />
-
             <SkillCategory
               title="Databases"
               skills={[
@@ -69,7 +66,6 @@ const Stats = () => {
                 { name: "Redis", level: 75 },
               ]}
             />
-
             <SkillCategory
               title="Other Tools"
               skills={[
@@ -86,28 +82,21 @@ const Stats = () => {
   );
 };
 
-/* ✅ StatCard with glow pulse animation */
-const StatCard = ({ number, suffix, label, delay }) => {
+/* Animated Stat Card with dynamic glow scaling */
+const AnimatedStat = ({ number, suffix, label, glow }) => {
   const [count, setCount] = useState(0);
   const [inView, setInView] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [pop, setPop] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          setVisible(true);
-        }
+        if (entry.isIntersecting) setInView(true);
       },
-      { threshold: 0.3 }
+      { threshold: 0.4 }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
+    return () => ref.current && observer.unobserve(ref.current);
   }, []);
 
   useEffect(() => {
@@ -115,65 +104,38 @@ const StatCard = ({ number, suffix, label, delay }) => {
       let start = 0;
       const end = number;
       const duration = 1500;
-      const increment = end / (duration / 16);
-
-      const timer = setInterval(() => {
+      const increment = end / (duration / 30);
+      const counter = setInterval(() => {
         start += increment;
         if (start >= end) {
           start = end;
-          clearInterval(timer);
-          setPop(true);
-          setTimeout(() => setPop(false), 800); // glow pulse lasts longer
+          clearInterval(counter);
         }
         setCount(Math.floor(start));
-      }, 16);
+      }, 30);
     }
   }, [inView, number]);
+
+  // Glow scale: map count to scale (1 → 1.5)
+  const scale = Math.min(1 + (count / number) * 0.5, 1.5);
 
   return (
     <div
       ref={ref}
-      className={`cursor-pointer bg-white shadow-lg rounded-2xl p-6 border-t-4 border-blue-500 transform transition-all duration-700 ease-out
-        ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-      `}
-      style={{ transitionDelay: `${delay}s` }}
+      className="cursor-pointer bg-white shadow-lg rounded-2xl p-6 border-t-4 border-blue-500 hover:scale-105 transform transition duration-300"
     >
-      <div className="relative flex justify-center items-center">
-        {/* Glow Pulse Ring */}
-        {pop && (
-          <div className="absolute w-20 h-20 rounded-full animate-glow-pulse bg-blue-400/30 blur-lg"></div>
-        )}
-
-        <h3
-          className={`text-3xl font-bold text-blue-600 transition-transform duration-300 ${
-            pop ? "scale-125" : "scale-100"
-          }`}
-        >
-          {count}
-          {suffix}
-        </h3>
-      </div>
-      <p className="text-gray-700 mt-2">{label}</p>
-
-      <style jsx>{`
-        @keyframes glowPulse {
-          0% {
-            transform: scale(0.8);
-            opacity: 0.6;
-          }
-          50% {
-            transform: scale(1.3);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(1.5);
-            opacity: 0;
-          }
-        }
-        .animate-glow-pulse {
-          animation: glowPulse 0.8s ease-out;
-        }
-      `}</style>
+      <h3
+        className={`text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${glow}`}
+        style={{
+          transform: `scale(${scale})`,
+          transition: "transform 0.1s linear",
+          textShadow: `0 0 ${2 + (scale - 1) * 10}px rgba(255,255,255,0.7)`,
+        }}
+      >
+        {count}
+        {suffix}
+      </h3>
+      <p className="text-gray-700">{label}</p>
     </div>
   );
 };
@@ -198,7 +160,7 @@ const SkillCategory = ({ title, skills }) => (
   </div>
 );
 
-/* Skill Progress Bar */
+/* Skill Bar */
 const SkillBar = ({ name, level }) => {
   const [inView, setInView] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -212,9 +174,7 @@ const SkillBar = ({ name, level }) => {
       { threshold: 0.3 }
     );
     if (barRef.current) observer.observe(barRef.current);
-    return () => {
-      if (barRef.current) observer.unobserve(barRef.current);
-    };
+    return () => barRef.current && observer.unobserve(barRef.current);
   }, []);
 
   useEffect(() => {
@@ -244,12 +204,10 @@ const SkillBar = ({ name, level }) => {
           className="h-3 rounded-full transition-all duration-500 ease-in-out"
           style={{
             width: `${progress}%`,
-            background:
-              "linear-gradient(270deg, #4f46e5, #ec4899, #facc15, #4f46e5)",
+            background: `linear-gradient(270deg, #4f46e5, #ec4899, #facc15, #4f46e5)`,
             backgroundSize: "600% 100%",
             animation: "flowGradient 3s ease infinite",
-            boxShadow:
-              "0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)",
+            boxShadow: `0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)`,
           }}
         ></div>
         <div
@@ -265,24 +223,13 @@ const SkillBar = ({ name, level }) => {
 
       <style jsx>{`
         @keyframes shine {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
-
         @keyframes flowGradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
       `}</style>
     </div>
