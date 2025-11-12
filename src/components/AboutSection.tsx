@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { FaEye } from "react-icons/fa";
 import CountUp from "react-countup";
 
@@ -68,9 +68,20 @@ const AboutSection: React.FC = () => {
     }))
   );
 
+  const [raindrops] = useState(
+    Array.from({ length: 50 }).map(() => ({
+      left: Math.random() * 100 + "%",
+      length: Math.random() * 20 + 10 + "px",
+      delay: Math.random() * 5,
+      duration: Math.random() * 2 + 1,
+    }))
+  );
+
+  const [landed, setLanded] = useState<boolean[]>(Array(stats.length).fill(false));
+
   return (
     <section id="about" className="py-20 bg-white relative overflow-hidden scroll-mt-16">
-      {/* Particle Background */}
+      {/* Particles + Rain */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {particles.map((p, idx) => (
           <motion.div
@@ -81,6 +92,15 @@ const AboutSection: React.FC = () => {
             transition={{ duration: p.duration, repeat: Infinity, repeatType: "mirror", delay: p.delay }}
           />
         ))}
+        {raindrops.map((r, idx) => (
+          <motion.div
+            key={idx}
+            className="absolute bg-blue-300 w-[2px]"
+            style={{ top: "-10%", left: r.left, height: r.length }}
+            animate={{ y: ["-10%", "110%"] }}
+            transition={{ duration: r.duration, repeat: Infinity, delay: r.delay, ease: "linear" }}
+          />
+        ))}
       </div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
@@ -89,7 +109,6 @@ const AboutSection: React.FC = () => {
           {stats.map((stat, idx) => {
             const ref = useRef(null);
             const isInView = useInView(ref, { margin: "-100px" });
-
             const numericValue = parseInt(stat.value);
             const suffix = stat.value.replace(/\d+/g, "");
 
@@ -97,23 +116,45 @@ const AboutSection: React.FC = () => {
               <motion.div
                 key={idx}
                 ref={ref}
-                className="bg-gray-100 p-6 rounded-xl shadow-lg"
-                initial={{ opacity: 0, y: -120 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="bg-gray-100 p-6 rounded-xl shadow-lg relative overflow-visible"
+                initial={{ opacity: 0, y: -200, rotate: -5 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                 viewport={{ once: false }}
                 transition={{
                   type: "spring",
                   stiffness: 120,
                   damping: 15,
-                  delay: idx * 0.3, // Wave-like sequential fall
+                  delay: idx * 0.3,
+                }}
+                onAnimationComplete={() => {
+                  setLanded(prev => {
+                    const updated = [...prev];
+                    updated[idx] = true;
+                    return updated;
+                  });
                 }}
               >
-                <h3 className="text-3xl font-bold text-blue-600">
+                <h3 className="text-3xl font-bold text-blue-600 relative inline-block">
                   {isInView ? (
                     <CountUp start={0} end={numericValue} duration={2} suffix={suffix} redraw={true} />
                   ) : (
                     "0" + suffix
                   )}
+
+                  <AnimatePresence>
+                    {landed[idx] && (
+                      <motion.span
+                        key={`splash-${idx}`}
+                        className="absolute inset-0 flex items-center justify-center"
+                        initial={{ scale: 0, opacity: 0.6 }}
+                        animate={{ scale: 1.5, opacity: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                      >
+                        <span className="block w-6 h-6 bg-blue-400 rounded-full opacity-30"></span>
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                 </h3>
                 <p className="text-gray-700 mt-2">{stat.label}</p>
               </motion.div>

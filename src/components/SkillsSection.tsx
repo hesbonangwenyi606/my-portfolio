@@ -4,15 +4,6 @@ const Stats = () => {
   return (
     <section className="py-10 bg-blue-50">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center mb-12">
-          <AnimatedStat number={3} suffix="+" label="Years Experience" glow="from-green-400 via-green-500 to-green-600"/>
-          <AnimatedStat number={50} suffix="+" label="Projects Completed" glow="from-blue-400 via-blue-500 to-blue-600"/>
-          <AnimatedStat number={16} suffix="+" label="Clients Served" glow="from-purple-400 via-purple-500 to-purple-600"/>
-          <AnimatedStat number={10} suffix="+" label="Awards Won" glow="from-pink-400 via-pink-500 to-pink-600"/>
-          <AnimatedStat number={100} suffix="%" label="Client Satisfaction" glow="from-yellow-400 via-yellow-500 to-yellow-600"/>
-        </div>
-
         {/* Skills Section */}
         <div id="skills">
           <h2 className="text-2xl font-bold text-center text-blue-700 mb-8">
@@ -79,64 +70,6 @@ const Stats = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-/* Animated Stat Card with dynamic glow scaling */
-const AnimatedStat = ({ number, suffix, label, glow }) => {
-  const [count, setCount] = useState(0);
-  const [inView, setInView] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setInView(true);
-      },
-      { threshold: 0.4 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => ref.current && observer.unobserve(ref.current);
-  }, []);
-
-  useEffect(() => {
-    if (inView) {
-      let start = 0;
-      const end = number;
-      const duration = 1500;
-      const increment = end / (duration / 30);
-      const counter = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          start = end;
-          clearInterval(counter);
-        }
-        setCount(Math.floor(start));
-      }, 30);
-    }
-  }, [inView, number]);
-
-  // Glow scale: map count to scale (1 → 1.5)
-  const scale = Math.min(1 + (count / number) * 0.5, 1.5);
-
-  return (
-    <div
-      ref={ref}
-      className="cursor-pointer bg-white shadow-lg rounded-2xl p-6 border-t-4 border-blue-500 hover:scale-105 transform transition duration-300"
-    >
-      <h3
-        className={`text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${glow}`}
-        style={{
-          transform: `scale(${scale})`,
-          transition: "transform 0.1s linear",
-          textShadow: `0 0 ${2 + (scale - 1) * 10}px rgba(255,255,255,0.7)`,
-        }}
-      >
-        {count}
-        {suffix}
-      </h3>
-      <p className="text-gray-700">{label}</p>
-    </div>
   );
 };
 
