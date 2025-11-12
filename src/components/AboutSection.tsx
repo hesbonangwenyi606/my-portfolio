@@ -85,7 +85,16 @@ const AboutSection: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-16">
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.15 } },
+          }}
+        >
           {stats.map((stat, idx) => {
             const ref = useRef(null);
             const isInView = useInView(ref, { margin: "-100px" });
@@ -98,10 +107,11 @@ const AboutSection: React.FC = () => {
                 key={idx}
                 ref={ref}
                 className="bg-gray-100 p-6 rounded-xl shadow-lg"
-                initial={{ opacity: 0, y: -80 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1, delay: idx * 0.2, ease: "easeOut" }}
+                variants={{
+                  hidden: { opacity: 0, y: -80 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ type: "spring", stiffness: 120, damping: 15 }}
               >
                 <h3 className="text-3xl font-bold text-blue-600">
                   {isInView ? (
@@ -114,7 +124,7 @@ const AboutSection: React.FC = () => {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* About Me Header */}
         <motion.div
