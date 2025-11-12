@@ -21,7 +21,7 @@ const ProjectsSection: React.FC = () => {
     {
       title: 'Microservices Architecture',
       description: 'Scalable microservices platform with API Gateway, service discovery, and distributed logging.',
-      image: 'https://i.pinimg.com/736x/92/da/32/92da32d2614ec736d735e0447902422e.jpg',
+      image: 'https://i.pinimg.com/736x/a2/c7/d3/a2c7d366fff3ca3e66b59c211aa9d4e4.jpg',
       technologies: ['Node.js', 'Docker', 'Kong', 'MongoDB', 'ELK Stack'],
       liveUrl: 'https://scalable-docker-logging.vercel.app/',
       githubUrl: 'https://github.com/hesbonangwenyi606/scalable-docker-logging.git'
