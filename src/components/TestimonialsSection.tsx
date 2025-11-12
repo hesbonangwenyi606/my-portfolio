@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -52,14 +52,26 @@ const TestimonialsSection: React.FC = () => {
     autoplaySpeed: 5000,
   };
 
+  const [offsetY, setOffsetY] = useState(0);
+  const handleScroll = () => setOffsetY(window.scrollY);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* Animated background shapes */}
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-20 -z-10 animate-gradient-float1"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-20 -z-10 animate-gradient-float2"></div>
+      {/* Floating background shapes */}
+      <div
+        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-20 -z-10 animate-gradient-float1"
+        style={{ transform: `translateX(-50%) translateY(${offsetY * 0.2}px)` }}
+      ></div>
+      <div
+        className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-20 -z-10 animate-gradient-float2"
+        style={{ transform: `translateX(${offsetY * -0.1}px) translateY(${offsetY * 0.15}px)` }}
+      ></div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
-        {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-3">What Clients Say</h2>
           <div className="w-28 h-1 bg-gradient-to-r from-blue-500 to-green-400 mx-auto mb-4 rounded-full"></div>
@@ -68,38 +80,34 @@ const TestimonialsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Desktop grid */}
+        {/* Desktop */}
         <div className="hidden md:grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((t, i) => (
             <div
-              key={index}
-              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300"
+              key={i}
+              className="animated-card p-6 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300 rounded-2xl text-white"
             >
-              <StarRating rating={testimonial.rating} />
-              <blockquote className="text-gray-700 mt-4 mb-6 leading-relaxed italic">
-                "{testimonial.content}"
-              </blockquote>
+              <StarRating rating={t.rating} />
+              <blockquote className="mt-4 mb-6 leading-relaxed italic">"{t.content}"</blockquote>
               <div className="border-t pt-4 flex flex-col">
-                <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                <div className="text-blue-500 text-sm">{testimonial.position}</div>
+                <div className="font-semibold">{t.name}</div>
+                <div className="text-sm text-blue-200">{t.position}</div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Mobile carousel */}
+        {/* Mobile */}
         <div className="md:hidden">
           <Slider {...settings}>
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="px-2">
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 duration-300">
-                  <StarRating rating={testimonial.rating} />
-                  <blockquote className="text-gray-700 mt-4 mb-6 leading-relaxed italic">
-                    "{testimonial.content}"
-                  </blockquote>
+            {testimonials.map((t, i) => (
+              <div key={i} className="px-2">
+                <div className="animated-card p-6 shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 duration-300 rounded-2xl text-white">
+                  <StarRating rating={t.rating} />
+                  <blockquote className="mt-4 mb-6 leading-relaxed italic">"{t.content}"</blockquote>
                   <div className="border-t pt-4 flex flex-col">
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-blue-500 text-sm">{testimonial.position}</div>
+                    <div className="font-semibold">{t.name}</div>
+                    <div className="text-sm text-blue-200">{t.position}</div>
                   </div>
                 </div>
               </div>
@@ -108,9 +116,7 @@ const TestimonialsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Tailwind custom animations */}
       <style jsx>{`
-        /* Gradient color animations */
         @keyframes gradient1 {
           0% { background: linear-gradient(45deg, #6EE7B7, #3B82F6); }
           50% { background: linear-gradient(45deg, #3B82F6, #F472B6); }
@@ -121,17 +127,21 @@ const TestimonialsSection: React.FC = () => {
           50% { background: linear-gradient(135deg, #8B5CF6, #FCD34D); }
           100% { background: linear-gradient(135deg, #F9A8D4, #8B5CF6); }
         }
-
-        /* Floating animations */
         @keyframes float1 {
           0% { transform: translateX(-50%) translateY(0) scale(1); }
           50% { transform: translateX(-50%) translateY(-20px) scale(1.05); }
           100% { transform: translateX(-50%) translateY(0) scale(1); }
         }
         @keyframes float2 {
-          0% { transform: translateY(0) translateX(0) scale(1); }
-          50% { transform: translateY(15px) translateX(-10px) scale(1.03); }
-          100% { transform: translateY(0) translateX(0) scale(1); }
+          0% { transform: translateX(0) translateY(0) scale(1); }
+          50% { transform: translateX(-10px) translateY(15px) scale(1.03); }
+          100% { transform: translateX(0) translateY(0) scale(1); }
+        }
+
+        @keyframes cardGradient {
+          0% { background: linear-gradient(135deg, #3B82F6, #6EE7B7); }
+          50% { background: linear-gradient(135deg, #F472B6, #3B82F6); }
+          100% { background: linear-gradient(135deg, #3B82F6, #6EE7B7); }
         }
 
         .animate-gradient-float1 {
@@ -139,6 +149,11 @@ const TestimonialsSection: React.FC = () => {
         }
         .animate-gradient-float2 {
           animation: gradient2 20s ease infinite, float2 30s ease-in-out infinite;
+        }
+
+        .animated-card {
+          animation: cardGradient 12s ease infinite;
+          background-size: 400% 400%;
         }
       `}</style>
     </section>
