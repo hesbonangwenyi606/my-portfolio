@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                 { icon: FaWhatsapp, href: 'https://wa.me/254743573380', bg: 'bg-green-500', hover: 'hover:bg-green-600' },
                 { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', bg: 'bg-red-500', hover: 'hover:bg-red-600' },
                 { icon: FaTwitter, href: 'https://x.com/home', bg: 'bg-sky-500', hover: 'hover:bg-sky-600' },
-                { icon: FaFacebook, href: 'https://facebook.com/', bg: 'bg-blue-800', hover: 'hover:bg-blue-900' },
+                { icon: FaFacebook, href: 'https://www.facebook.com/hesbon.hemon', bg: 'bg-blue-800', hover: 'hover:bg-blue-900' },
               ].map(({ icon: Icon, href, bg, hover }, i) => (
                 <a
                   key={i}
