@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProjectsSection: React.FC = () => {
   const projects = [
-       {
+    {
       title: 'DevOps Automation Suite',
       description: 'Comprehensive CI/CD pipeline automation with Docker, Kubernetes, and Terraform. Reduced deployment time by 75%.',
       image: 'https://i.pinimg.com/736x/ef/bc/10/efbc10dba963d0a3ecba49b9f89e427a.jpg',
@@ -18,7 +18,6 @@ const ProjectsSection: React.FC = () => {
       liveUrl: 'https://ecommerce-web-five-sepia.vercel.app/',
       githubUrl: 'https://github.com/hesbonangwenyi606/Ecommerce-web.git'
     },
-    
     {
       title: 'Microservices Architecture',
       description: 'Scalable microservices platform with API Gateway, service discovery, and distributed logging.',
@@ -58,7 +57,7 @@ const ProjectsSection: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+          <div className="w-24 h-1 bg-blue-600 mx-auto mb-4 rounded-full"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
             A showcase of my recent work demonstrating expertise in full-stack development and DevOps practices.
           </p>
@@ -66,11 +65,14 @@ const ProjectsSection: React.FC = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+            >
               <img 
                 src={project.image} 
                 alt={project.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110"
               />
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{project.title}</h3>
@@ -78,18 +80,31 @@ const ProjectsSection: React.FC = () => {
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
+                    <span
+                      key={techIndex}
+                      className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium"
+                    >
                       {tech}
                     </span>
                   ))}
                 </div>
                 
-                <div className="flex gap-4">
-                  <a href={project.liveUrl} className="text-blue-600 hover:text-blue-800 font-semibold">
-                    Live Demo →
+                <div className="flex gap-4 mt-2">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold transition"
+                  >
+                    Live Demo
                   </a>
-                  <a href={project.githubUrl} className="text-gray-600 hover:text-gray-800 font-semibold">
-                    GitHub →
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-700 hover:text-gray-900 px-4 py-2 rounded-lg font-semibold border border-gray-300 transition"
+                  >
+                    GitHub
                   </a>
                 </div>
               </div>
