@@ -53,12 +53,16 @@ const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="relative py-24 overflow-hidden">
+      {/* Animated background shapes */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-20 -z-10 animate-gradient-float1"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-20 -z-10 animate-gradient-float2"></div>
+
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Clients Say</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-4 rounded"></div>
+          <h2 className="text-4xl font-bold text-gray-900 mb-3">What Clients Say</h2>
+          <div className="w-28 h-1 bg-gradient-to-r from-blue-500 to-green-400 mx-auto mb-4 rounded-full"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Testimonials from clients and colleagues who have experienced the quality of my work.
           </p>
@@ -69,15 +73,15 @@ const TestimonialsSection: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-6 shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl duration-300"
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300"
             >
               <StarRating rating={testimonial.rating} />
-              <blockquote className="text-gray-600 mt-4 mb-6 leading-relaxed">
+              <blockquote className="text-gray-700 mt-4 mb-6 leading-relaxed italic">
                 "{testimonial.content}"
               </blockquote>
-              <div className="border-t pt-4">
+              <div className="border-t pt-4 flex flex-col">
                 <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                <div className="text-blue-600 text-sm">{testimonial.position}</div>
+                <div className="text-blue-500 text-sm">{testimonial.position}</div>
               </div>
             </div>
           ))}
@@ -88,14 +92,14 @@ const TestimonialsSection: React.FC = () => {
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
               <div key={index} className="px-2">
-                <div className="bg-white rounded-lg p-6 shadow-lg">
+                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 duration-300">
                   <StarRating rating={testimonial.rating} />
-                  <blockquote className="text-gray-600 mt-4 mb-6 leading-relaxed">
+                  <blockquote className="text-gray-700 mt-4 mb-6 leading-relaxed italic">
                     "{testimonial.content}"
                   </blockquote>
-                  <div className="border-t pt-4">
+                  <div className="border-t pt-4 flex flex-col">
                     <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-blue-600 text-sm">{testimonial.position}</div>
+                    <div className="text-blue-500 text-sm">{testimonial.position}</div>
                   </div>
                 </div>
               </div>
@@ -103,6 +107,40 @@ const TestimonialsSection: React.FC = () => {
           </Slider>
         </div>
       </div>
+
+      {/* Tailwind custom animations */}
+      <style jsx>{`
+        /* Gradient color animations */
+        @keyframes gradient1 {
+          0% { background: linear-gradient(45deg, #6EE7B7, #3B82F6); }
+          50% { background: linear-gradient(45deg, #3B82F6, #F472B6); }
+          100% { background: linear-gradient(45deg, #6EE7B7, #3B82F6); }
+        }
+        @keyframes gradient2 {
+          0% { background: linear-gradient(135deg, #F9A8D4, #8B5CF6); }
+          50% { background: linear-gradient(135deg, #8B5CF6, #FCD34D); }
+          100% { background: linear-gradient(135deg, #F9A8D4, #8B5CF6); }
+        }
+
+        /* Floating animations */
+        @keyframes float1 {
+          0% { transform: translateX(-50%) translateY(0) scale(1); }
+          50% { transform: translateX(-50%) translateY(-20px) scale(1.05); }
+          100% { transform: translateX(-50%) translateY(0) scale(1); }
+        }
+        @keyframes float2 {
+          0% { transform: translateY(0) translateX(0) scale(1); }
+          50% { transform: translateY(15px) translateX(-10px) scale(1.03); }
+          100% { transform: translateY(0) translateX(0) scale(1); }
+        }
+
+        .animate-gradient-float1 {
+          animation: gradient1 15s ease infinite, float1 25s ease-in-out infinite;
+        }
+        .animate-gradient-float2 {
+          animation: gradient2 20s ease infinite, float2 30s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };
