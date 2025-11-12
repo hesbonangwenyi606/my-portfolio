@@ -5,10 +5,10 @@ import CountUp from "react-countup";
 
 const stats = [
   { label: "Years Experience", value: "3+" },
-  { label: "Projects Completed", value: "50+" },
+  { label: "Projects Completed", value: "49+" },
   { label: "Clients Served", value: "16+" },
-  { label: "Awards Won", value: "10+" },
-  { label: "Client Satisfaction", value: "100%" },
+  { label: "Awards Won", value: "13+" },
+  { label: "Client Satisfaction", value: "99%" },
 ];
 
 const bulletItems = [
@@ -85,16 +85,7 @@ const AboutSection: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Stats Section */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.15 } },
-          }}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-16">
           {stats.map((stat, idx) => {
             const ref = useRef(null);
             const isInView = useInView(ref, { margin: "-100px" });
@@ -107,11 +98,15 @@ const AboutSection: React.FC = () => {
                 key={idx}
                 ref={ref}
                 className="bg-gray-100 p-6 rounded-xl shadow-lg"
-                variants={{
-                  hidden: { opacity: 0, y: -80 },
-                  visible: { opacity: 1, y: 0 },
+                initial={{ opacity: 0, y: -120 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 15,
+                  delay: idx * 0.3, // Wave-like sequential fall
                 }}
-                transition={{ type: "spring", stiffness: 120, damping: 15 }}
               >
                 <h3 className="text-3xl font-bold text-blue-600">
                   {isInView ? (
@@ -124,7 +119,7 @@ const AboutSection: React.FC = () => {
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* About Me Header */}
         <motion.div
