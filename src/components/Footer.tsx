@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter, FaFacebookF } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter, FaFacebook } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2025;
 
   return (
     <footer className="relative bg-gray-900 text-white py-16 overflow-hidden">
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                 { icon: FaWhatsapp, href: 'https://wa.me/254743573380', bg: 'bg-green-500', hover: 'hover:bg-green-600' },
                 { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', bg: 'bg-red-500', hover: 'hover:bg-red-600' },
                 { icon: FaTwitter, href: 'https://x.com/home', bg: 'bg-sky-500', hover: 'hover:bg-sky-600' },
-                { icon: FaFacebookF, href: 'https://www.facebook.com/hesbon.hemon', bg: 'bg-blue-800', hover: 'hover:bg-blue-900' },
+                { icon: FaFacebook, href: 'https://facebook.com/', bg: 'bg-blue-800', hover: 'hover:bg-blue-900' },
               ].map(({ icon: Icon, href, bg, hover }, i) => (
                 <a
                   key={i}
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
 
         {/* Bottom */}
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-300 font-semibold text-sm tracking-wider animate-shimmer bg-gradient-to-r from-gray-400 via-white to-gray-400 bg-clip-text text-transparent">
+          <p className="text-white font-bold text-sm tracking-wider text-transparent bg-clip-text animate-rainbow-neon">
             © 2021 - {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
@@ -100,14 +100,75 @@ const Footer: React.FC = () => {
         .animate-gradient-float2 { animation: gradient2 20s ease infinite, float2 30s ease-in-out infinite; }
         .animate-gradient-float3 { animation: gradient3 18s ease infinite, float3 28s ease-in-out infinite; }
 
-        /* Shimmer for copyright */
-        @keyframes shimmer {
-          0% { background-position: -500px 0; }
-          100% { background-position: 500px 0; }
+        /* Rainbow Neon Glow Animation */
+        @keyframes rainbowNeon {
+          0%,100% {
+            text-shadow:
+              0 0 5px #ff0000,
+              0 0 10px #ff7f00,
+              0 0 20px #ffff00,
+              0 0 30px #00ff00,
+              0 0 40px #0000ff,
+              0 0 50px #4b0082,
+              0 0 60px #8f00ff;
+          }
+          14% { text-shadow:
+              0 0 5px #ff7f00,
+              0 0 10px #ffff00,
+              0 0 20px #00ff00,
+              0 0 30px #0000ff,
+              0 0 40px #4b0082,
+              0 0 50px #8f00ff,
+              0 0 60px #ff0000;
+          }
+          28% { text-shadow:
+              0 0 5px #ffff00,
+              0 0 10px #00ff00,
+              0 0 20px #0000ff,
+              0 0 30px #4b0082,
+              0 0 40px #8f00ff,
+              0 0 50px #ff0000,
+              0 0 60px #ff7f00;
+          }
+          42% { text-shadow:
+              0 0 5px #00ff00,
+              0 0 10px #0000ff,
+              0 0 20px #4b0082,
+              0 0 30px #8f00ff,
+              0 0 40px #ff0000,
+              0 0 50px #ff7f00,
+              0 0 60px #ffff00;
+          }
+          57% { text-shadow:
+              0 0 5px #0000ff,
+              0 0 10px #4b0082,
+              0 0 20px #8f00ff,
+              0 0 30px #ff0000,
+              0 0 40px #ff7f00,
+              0 0 50px #ffff00,
+              0 0 60px #00ff00;
+          }
+          71% { text-shadow:
+              0 0 5px #4b0082,
+              0 0 10px #8f00ff,
+              0 0 20px #ff0000,
+              0 0 30px #ff7f00,
+              0 0 40px #ffff00,
+              0 0 50px #00ff00,
+              0 0 60px #0000ff;
+          }
+          85% { text-shadow:
+              0 0 5px #8f00ff,
+              0 0 10px #ff0000,
+              0 0 20px #ff7f00,
+              0 0 30px #ffff00,
+              0 0 40px #00ff00,
+              0 0 50px #0000ff,
+              0 0 60px #4b0082;
+          }
         }
-        .animate-shimmer {
-          background-size: 1000px 100%;
-          animation: shimmer 3s linear infinite;
+        .animate-rainbow-neon {
+          animation: rainbowNeon 5s linear infinite;
         }
       `}</style>
     </footer>
