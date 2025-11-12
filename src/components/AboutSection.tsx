@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaEye } from 'react-icons/fa';
 
 const AboutSection: React.FC = () => {
   const [particles] = useState(
-    Array.from({ length: 15 }).map(() => ({
-      top: Math.random() * 300 + 'px',
+    Array.from({ length: 30 }).map(() => ({
+      top: Math.random() * 100 + '%',
       left: Math.random() * 100 + '%',
       size: Math.random() * 4 + 2 + 'px',
+      duration: Math.random() * 10 + 5,
       delay: Math.random() * 5,
       rotate: Math.random() * 360,
-      xOffset: Math.random() * 30 - 15,
+      xOffset: Math.random() * 20 - 10,
       yOffset: Math.random() * 20 - 10,
     }))
   );
@@ -20,8 +22,8 @@ const AboutSection: React.FC = () => {
       description: `I design and develop responsive, scalable web applications using modern frameworks like React, Node.js, and Express.js to deliver seamless user experiences.`,
       images: [
         'https://i.pinimg.com/736x/08/72/8f/08728f42513b4d9194d46d0d6655cde0.jpg',
-        'https://i.pinimg.com/1200x/f9/01/bb/f901bb71e28c559d90257a4a3880e773.jpg',
-        'https://i.pinimg.com/736x/1a/e3/ff/1ae3ffdb10326a80e333550ad69f1fa4.jpg',
+        'https://i.pinimg.com/736x/40/26/ba/4026ba46fd98ac6223e83607e0de1709.jpg',
+        'https://i.pinimg.com/1200x/02/f2/cc/02f2cca1044cad7e4b878aaf75583a42.jpg',
       ],
     },
     {
@@ -55,7 +57,35 @@ const AboutSection: React.FC = () => {
 
   return (
     <section id="about" className="py-20 bg-white relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4">
+      {/* Particle Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {particles.map((p, idx) => (
+          <motion.div
+            key={idx}
+            className="absolute bg-blue-400 rounded-full opacity-30"
+            style={{
+              top: p.top,
+              left: p.left,
+              width: p.size,
+              height: p.size,
+            }}
+            animate={{
+              x: [0, p.xOffset, 0],
+              y: [0, p.yOffset, 0],
+              rotate: [0, p.rotate, 0],
+            }}
+            transition={{
+              duration: p.duration,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              delay: p.delay,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16 relative group">
           <motion.h2
@@ -66,7 +96,6 @@ const AboutSection: React.FC = () => {
             About Me
           </motion.h2>
 
-          {/* Underline */}
           <motion.div
             className="h-1 bg-blue-600 mx-auto rounded relative overflow-hidden"
             animate={{ x: ['-10%', '10%', '-10%'] }}
@@ -98,46 +127,60 @@ const AboutSection: React.FC = () => {
               Building Digital Excellence
             </motion.h3>
 
-            {/* First Paragraph with Image */}
+            {/* Paragraph 1 with Image */}
             <div className="flex flex-col md:flex-row items-start gap-4">
-              <motion.img
+              <img
                 src="https://i.pinimg.com/736x/ef/e1/5c/efe15c31e146989f9df6277418a5057c.jpg"
                 alt="Full-stack development & DevOps"
                 className="w-full md:w-40 h-24 md:h-32 object-cover rounded-lg shadow-md"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
               />
               <p className="text-blue-50 text-lg leading-relaxed md:flex-1">
                 With over 3+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing robust CI/CD pipelines. My passion lies in solving complex problems and delivering high-quality solutions that drive business growth.
               </p>
             </div>
 
-            {/* Second Paragraph with Image */}
+            {/* Paragraph 2 with Image */}
             <div className="flex flex-col md:flex-row items-start gap-4">
-              <motion.img
+              <img
                 src="https://i.pinimg.com/736x/0e/a7/ef/0ea7ef79bbfe9c8a6e2b16cf2b3d9cd5.jpg"
                 alt="Projects & Teams"
                 className="w-full md:w-40 h-24 md:h-32 object-cover rounded-lg shadow-md"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
               />
               <p className="text-blue-50 text-lg leading-relaxed md:flex-1">
                 I have successfully led multiple projects from conception to deployment, working with diverse teams and technologies. My expertise spans modern JavaScript frameworks, cloud platforms, and infrastructure automation.
               </p>
             </div>
 
-            <a
-              href="https://hesbon-resume.vercel.app/"
-              download
-              className="inline-block bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-blue-400/50"
-            >
-              My Resume
-            </a>
+            {/* View Resume Button */}
+            <div className="relative flex gap-4 mt-4">
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-purple-500 blur-lg opacity-40 animate-pulse"></div>
+              <motion.a
+                href="https://hesbon-resume.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-md z-10"
+                animate={{ y: [0, -5, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                  ease: 'easeInOut',
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  backgroundColor: '#e0f2fe',
+                  boxShadow: '0 10px 20px rgba(59,130,246,0.3)',
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaEye /> View Resume
+              </motion.a>
+            </div>
           </motion.div>
 
-          {/* Right Panel with Images */}
+          {/* Right Panel */}
           <motion.div
-            className="space-y-6 bg-gray-100 p-8 rounded-xl shadow-lg"
+            className="space-y-6 bg-gray-100 p-8 rounded-xl shadow-lg relative z-10"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -156,7 +199,6 @@ const AboutSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Images grid */}
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
                     {item.images.map((img, i) => (
                       <motion.img
