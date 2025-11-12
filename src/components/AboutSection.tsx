@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { FaEye } from "react-icons/fa";
+import CountUp from "react-countup";
 
 const stats = [
   { label: "Years Experience", value: "3+" },
@@ -84,34 +85,42 @@ const AboutSection: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Stats Section */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.2 }}
-        >
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              className="bg-gray-100 p-6 rounded-xl shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <h3 className="text-3xl font-bold text-blue-600">{stat.value}</h3>
-              <p className="text-gray-700 mt-2">{stat.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-16">
+          {stats.map((stat, idx) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { margin: "-100px" });
 
-        {/* About Me Section */}
+            const numericValue = parseInt(stat.value);
+            const suffix = stat.value.replace(/\d+/g, "");
+
+            return (
+              <motion.div
+                key={idx}
+                ref={ref}
+                className="bg-gray-100 p-6 rounded-xl shadow-lg"
+                initial={{ opacity: 0, y: -80 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 1, delay: idx * 0.2, ease: "easeOut" }}
+              >
+                <h3 className="text-3xl font-bold text-blue-600">
+                  {isInView ? (
+                    <CountUp start={0} end={numericValue} duration={2} suffix={suffix} redraw={true} />
+                  ) : (
+                    "0" + suffix
+                  )}
+                </h3>
+                <p className="text-gray-700 mt-2">{stat.label}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* About Me Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-4">
@@ -126,6 +135,7 @@ const AboutSection: React.FC = () => {
           </div>
         </motion.div>
 
+        {/* Left and Right Panels */}
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left Panel */}
           <motion.div
@@ -151,7 +161,13 @@ const AboutSection: React.FC = () => {
                 img: "https://i.pinimg.com/1200x/36/d1/6a/36d16a8bc9597f727d31bf16b3d6872c.jpg",
               },
             ].map((block, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: idx * 0.2 }} viewport={{ once: false, amount: 0.4 }}>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.2 }}
+                viewport={{ once: false, amount: 0.4 }}
+              >
                 <p className="text-blue-50 text-lg leading-relaxed mb-3">{block.text}</p>
                 <motion.img
                   src={block.img}
@@ -197,7 +213,13 @@ const AboutSection: React.FC = () => {
             <h4 className="font-semibold text-black mb-6 text-xl">What I Do</h4>
             <ul className="space-y-8 text-gray-800">
               {bulletItems.map((item, idx) => (
-                <motion.li key={idx} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: idx * 0.1 }} viewport={{ once: false }}>
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  viewport={{ once: false }}
+                >
                   <div className="flex items-start mb-2">
                     <span className="w-3 h-3 bg-gray-700 rounded-full mr-3 mt-1"></span>
                     <div>
