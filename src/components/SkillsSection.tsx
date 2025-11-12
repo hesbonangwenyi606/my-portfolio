@@ -6,11 +6,11 @@ const Stats = () => {
       <div className="max-w-6xl mx-auto px-6">
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center mb-12">
-          <StatCard number="50+" label="Projects Completed" />
-          <StatCard number="3+" label="Years Experience" />
-          <StatCard number="10+" label="Clients Served" />
-          <StatCard number="10+" label="Awards Won" />
-          <StatCard number="100%" label="Client Satisfaction" />
+          <StatCard number={3} suffix="+" label="Years Experience" delay={0} />
+          <StatCard number={50} suffix="+" label="Projects Completed" delay={0.1} />
+          <StatCard number={16} suffix="+" label="Clients Served" delay={0.2} />
+          <StatCard number={10} suffix="+" label="Awards Won" delay={0.3} />
+          <StatCard number={100} suffix="%" label="Client Satisfaction" delay={0.4} />
         </div>
 
         {/* Skills Section */}
@@ -19,9 +19,7 @@ const Stats = () => {
             My Skills
           </h2>
 
-          {/* Grid of Skill Categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {/* 1. Frontend */}
             <SkillCategory
               title="Frontend"
               skills={[
@@ -34,7 +32,6 @@ const Stats = () => {
               ]}
             />
 
-            {/* 2. Backend */}
             <SkillCategory
               title="Backend"
               skills={[
@@ -49,7 +46,6 @@ const Stats = () => {
               ]}
             />
 
-            {/* 3. DevOps */}
             <SkillCategory
               title="DevOps"
               skills={[
@@ -64,7 +60,6 @@ const Stats = () => {
               ]}
             />
 
-            {/* 4. Databases */}
             <SkillCategory
               title="Databases"
               skills={[
@@ -75,7 +70,6 @@ const Stats = () => {
               ]}
             />
 
-            {/* 5. Other Tools */}
             <SkillCategory
               title="Other Tools"
               skills={[
@@ -92,22 +86,108 @@ const Stats = () => {
   );
 };
 
-/* Reusable Stat Card */
-const StatCard = ({ number, label }) => (
-  <div className="cursor-pointer bg-white shadow-lg rounded-2xl p-6 border-t-4 border-blue-500 hover:scale-105 transform transition duration-300">
-    <h3 className="text-3xl font-bold text-blue-600">{number}</h3>
-    <p className="text-gray-700">{label}</p>
-  </div>
-);
+/* ✅ StatCard with glow pulse animation */
+const StatCard = ({ number, suffix, label, delay }) => {
+  const [count, setCount] = useState(0);
+  const [inView, setInView] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [pop, setPop] = useState(false);
+  const ref = useRef(null);
 
-/* Skill Category Component with polished title */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          setVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (inView) {
+      let start = 0;
+      const end = number;
+      const duration = 1500;
+      const increment = end / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+          setPop(true);
+          setTimeout(() => setPop(false), 800); // glow pulse lasts longer
+        }
+        setCount(Math.floor(start));
+      }, 16);
+    }
+  }, [inView, number]);
+
+  return (
+    <div
+      ref={ref}
+      className={`cursor-pointer bg-white shadow-lg rounded-2xl p-6 border-t-4 border-blue-500 transform transition-all duration-700 ease-out
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+      `}
+      style={{ transitionDelay: `${delay}s` }}
+    >
+      <div className="relative flex justify-center items-center">
+        {/* Glow Pulse Ring */}
+        {pop && (
+          <div className="absolute w-20 h-20 rounded-full animate-glow-pulse bg-blue-400/30 blur-lg"></div>
+        )}
+
+        <h3
+          className={`text-3xl font-bold text-blue-600 transition-transform duration-300 ${
+            pop ? "scale-125" : "scale-100"
+          }`}
+        >
+          {count}
+          {suffix}
+        </h3>
+      </div>
+      <p className="text-gray-700 mt-2">{label}</p>
+
+      <style jsx>{`
+        @keyframes glowPulse {
+          0% {
+            transform: scale(0.8);
+            opacity: 0.6;
+          }
+          50% {
+            transform: scale(1.3);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1.5);
+            opacity: 0;
+          }
+        }
+        .animate-glow-pulse {
+          animation: glowPulse 0.8s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+/* Skill Category */
 const SkillCategory = ({ title, skills }) => (
   <div className="bg-white p-5 rounded-xl shadow-md">
-    <h3 className="text-xl font-bold text-center 
-                   bg-clip-text text-transparent 
-                   bg-gradient-to-r from-indigo-500 via-pink-500 to-yellow-400
-                   drop-shadow-lg
-                   transition transform hover:scale-110 hover:drop-shadow-xl mb-4">
+    <h3
+      className="text-xl font-bold text-center 
+                 bg-clip-text text-transparent 
+                 bg-gradient-to-r from-indigo-500 via-pink-500 to-yellow-400
+                 drop-shadow-lg
+                 transition transform hover:scale-110 hover:drop-shadow-xl mb-4"
+    >
       {title}
     </h3>
     <div className="space-y-4">
@@ -118,7 +198,7 @@ const SkillCategory = ({ title, skills }) => (
   </div>
 );
 
-/* Skill Progress Bar Component with animated fill + flowing gradient + moving shine */
+/* Skill Progress Bar */
 const SkillBar = ({ name, level }) => {
   const [inView, setInView] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -160,19 +240,18 @@ const SkillBar = ({ name, level }) => {
         <span className="text-blue-600 font-semibold">{progress}%</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden relative">
-        {/* Animated flowing gradient */}
         <div
           className="h-3 rounded-full transition-all duration-500 ease-in-out"
           style={{
             width: `${progress}%`,
-            background: `linear-gradient(270deg, #4f46e5, #ec4899, #facc15, #4f46e5)`,
+            background:
+              "linear-gradient(270deg, #4f46e5, #ec4899, #facc15, #4f46e5)",
             backgroundSize: "600% 100%",
             animation: "flowGradient 3s ease infinite",
-            boxShadow: `0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)`,
+            boxShadow:
+              "0 0 8px rgba(236,72,153,0.5), 0 0 8px rgba(252,204,21,0.5)",
           }}
         ></div>
-
-        {/* Moving shine overlay */}
         <div
           className="absolute top-0 left-0 h-3 rounded-full pointer-events-none"
           style={{
@@ -184,17 +263,26 @@ const SkillBar = ({ name, level }) => {
         ></div>
       </div>
 
-      {/* Keyframes for gradient flow + shine */}
       <style jsx>{`
         @keyframes shine {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
         }
 
         @keyframes flowGradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
       `}</style>
     </div>
