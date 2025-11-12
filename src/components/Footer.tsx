@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-10 h-10 ${bg} rounded-full flex items-center justify-center transition-transform duration-300 transform hover:scale-125 hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] ${hover}`}
+                  className={`w-10 h-10 ${bg} rounded-full flex items-center justify-center transition-transform duration-300 transform hover:scale-125 ${hover} hover:animate-rainbow-neon-icon`}
                   aria-label="Social Link"
                 >
                   <Icon className="w-5 h-5 text-white" />
@@ -102,73 +102,20 @@ const Footer: React.FC = () => {
 
         /* Rainbow Neon Glow Animation */
         @keyframes rainbowNeon {
-          0%,100% {
-            text-shadow:
-              0 0 5px #ff0000,
-              0 0 10px #ff7f00,
-              0 0 20px #ffff00,
-              0 0 30px #00ff00,
-              0 0 40px #0000ff,
-              0 0 50px #4b0082,
-              0 0 60px #8f00ff;
-          }
-          14% { text-shadow:
-              0 0 5px #ff7f00,
-              0 0 10px #ffff00,
-              0 0 20px #00ff00,
-              0 0 30px #0000ff,
-              0 0 40px #4b0082,
-              0 0 50px #8f00ff,
-              0 0 60px #ff0000;
-          }
-          28% { text-shadow:
-              0 0 5px #ffff00,
-              0 0 10px #00ff00,
-              0 0 20px #0000ff,
-              0 0 30px #4b0082,
-              0 0 40px #8f00ff,
-              0 0 50px #ff0000,
-              0 0 60px #ff7f00;
-          }
-          42% { text-shadow:
-              0 0 5px #00ff00,
-              0 0 10px #0000ff,
-              0 0 20px #4b0082,
-              0 0 30px #8f00ff,
-              0 0 40px #ff0000,
-              0 0 50px #ff7f00,
-              0 0 60px #ffff00;
-          }
-          57% { text-shadow:
-              0 0 5px #0000ff,
-              0 0 10px #4b0082,
-              0 0 20px #8f00ff,
-              0 0 30px #ff0000,
-              0 0 40px #ff7f00,
-              0 0 50px #ffff00,
-              0 0 60px #00ff00;
-          }
-          71% { text-shadow:
-              0 0 5px #4b0082,
-              0 0 10px #8f00ff,
-              0 0 20px #ff0000,
-              0 0 30px #ff7f00,
-              0 0 40px #ffff00,
-              0 0 50px #00ff00,
-              0 0 60px #0000ff;
-          }
-          85% { text-shadow:
-              0 0 5px #8f00ff,
-              0 0 10px #ff0000,
-              0 0 20px #ff7f00,
-              0 0 30px #ffff00,
-              0 0 40px #00ff00,
-              0 0 50px #0000ff,
-              0 0 60px #4b0082;
-          }
+          0%,100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff7f00, 0 0 20px #ffff00, 0 0 30px #00ff00, 0 0 40px #0000ff, 0 0 50px #4b0082, 0 0 60px #8f00ff; }
+          14% { text-shadow: 0 0 5px #ff7f00, 0 0 10px #ffff00, 0 0 20px #00ff00, 0 0 30px #0000ff, 0 0 40px #4b0082, 0 0 50px #8f00ff, 0 0 60px #ff0000; }
+          28% { text-shadow: 0 0 5px #ffff00, 0 0 10px #00ff00, 0 0 20px #0000ff, 0 0 30px #4b0082, 0 0 40px #8f00ff, 0 0 50px #ff0000, 0 0 60px #ff7f00; }
+          42% { text-shadow: 0 0 5px #00ff00, 0 0 10px #0000ff, 0 0 20px #4b0082, 0 0 30px #8f00ff, 0 0 40px #ff0000, 0 0 50px #ff7f00, 0 0 60px #ffff00; }
+          57% { text-shadow: 0 0 5px #0000ff, 0 0 10px #4b0082, 0 0 20px #8f00ff, 0 0 30px #ff0000, 0 0 40px #ff7f00, 0 0 50px #ffff00, 0 0 60px #00ff00; }
+          71% { text-shadow: 0 0 5px #4b0082, 0 0 10px #8f00ff, 0 0 20px #ff0000, 0 0 30px #ff7f00, 0 0 40px #ffff00, 0 0 50px #00ff00, 0 0 60px #0000ff; }
+          85% { text-shadow: 0 0 5px #8f00ff, 0 0 10px #ff0000, 0 0 20px #ff7f00, 0 0 30px #ffff00, 0 0 40px #00ff00, 0 0 50px #0000ff, 0 0 60px #4b0082; }
         }
-        .animate-rainbow-neon {
-          animation: rainbowNeon 5s linear infinite;
+        .animate-rainbow-neon { animation: rainbowNeon 5s linear infinite; }
+
+        /* Rainbow neon glow for social icons */
+        .hover\\:animate-rainbow-neon-icon:hover {
+          animation: rainbowNeon 3s linear infinite;
+          box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
         }
       `}</style>
     </footer>
