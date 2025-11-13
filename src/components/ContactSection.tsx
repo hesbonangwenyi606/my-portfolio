@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
   const [result, setResult] = useState("");
-  const [hue, setHue] = useState(0);
+  const [hue, setHue] = useState(50); // Start yellowish
 
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone: "+254 7XX XXX XXX",
     subject: "",
     message: "",
   });
 
-  // Animate hue for rainbow effects
+  // Animate hue for rainbow effects (yellowish glow)
   useEffect(() => {
     const interval = setInterval(() => {
-      setHue((prev) => (prev + 0.5) % 360);
+      setHue((prev) => (prev + 0.3) % 60); // Keep hue in yellow range
     }, 30);
     return () => clearInterval(interval);
   }, []);
@@ -55,12 +55,13 @@ const ContactSection: React.FC = () => {
     }
   };
 
+  // Floating particles
   const particles = Array.from({ length: 50 }, (_, i) => i);
 
   return (
     <section
       id="contact"
-      className="relative py-24 md:py-32 min-h-[80vh] overflow-hidden"
+      className="relative py-20 md:py-24 min-h-[80vh] overflow-hidden"
       style={{
         backgroundImage:
           "url('https://scontent.fnbo16-1.fna.fbcdn.net/v/t39.30808-6/581055697_1605855860788408_6355822191920083654_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=aHeSFiulopEQ7kNvwHDmWAr&_nc_oc=Adl_Yhd7k3yIUi3wojUDMFYA02d-cUcZn8WN7WjGvgeVz8guB8pJSaugXbo_sySWGxA&_nc_zt=23&_nc_ht=scontent.fnbo16-1.fna&_nc_gid=LK9tJI93gy6ZKIbB9-4tOA&oh=00_AfiUzkygcXu5khcSW7HMcBZyZTJTJdMeMwRItfBpN2vebA&oe=691B5638')",
@@ -78,7 +79,7 @@ const ContactSection: React.FC = () => {
           key={i}
           className="absolute w-2 h-2 rounded-full bg-white opacity-30 animate-float"
           style={{
-            top: `${Math.random() * 100}%`,
+            top: `${Math.max(0, Math.random() * 100 - 8)}%`,
             left: `${Math.random() * 100}%`,
             animationDelay: `${Math.random() * 5}s`,
             animationDuration: `${5 + Math.random() * 5}s`,
@@ -87,44 +88,35 @@ const ContactSection: React.FC = () => {
       ))}
 
       {/* Header */}
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-16 text-white">
+      <div className="max-w-4xl mx-auto px-4 relative z-10 -translate-y-8">
+        <div className="text-center mb-16">
           <h2
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ color: `hsl(${hue}, 80%, 70%)` }}
+            className="text-4xl md:text-5xl font-bold mb-4 animate-glow-text"
+            style={{ color: `hsl(${hue}, 100%, 60%)` }}
           >
             Get In Touch
           </h2>
-          <div
-            className="w-24 h-1 mx-auto mb-4 rounded-full shadow-md"
-            style={{
-              background: `linear-gradient(90deg, hsl(${hue}, 80%, 70%), hsl(${(hue + 60) % 360}, 80%, 70%), hsl(${(hue + 120) % 360}, 80%, 70%))`,
-            }}
-          ></div>
           <p
-            className="max-w-2xl mx-auto text-base md:text-lg"
-            style={{ color: `black` }}
+            className="max-w-2xl mx-auto text-base md:text-lg animate-glow-text"
+            style={{ color: `hsl(${(hue + 10) % 60}, 100%, 60%)` }}
           >
-            Ready to start your next project? Fill out the form below and I’ll get
-            back to you.
+            Ready to start your next project? Fill out the form below and I’ll get back to you.
           </p>
         </div>
 
         {/* Contact Form */}
         <form
           onSubmit={onSubmit}
-          className="space-y-6 p-8 rounded-2xl border border-gray-200 shadow-xl relative transition-all duration-1000 animate-glow-container hover-glow-container"
+          className="space-y-6 p-8 rounded-2xl border border-gray-200 shadow-xl relative transition-all duration-1000 animate-glow hover-glow"
           style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(10px)",
-            boxShadow: `0 0 20px hsl(${hue}, 80%, 60%), 0 0 40px hsl(${(hue + 60) % 360}, 80%, 60%), 0 0 60px hsl(${(hue + 120) % 360}, 80%, 60%)`,
+            boxShadow: `0 0 20px hsl(${hue}, 100%, 50%), 0 0 40px hsl(${(hue + 10) % 60}, 100%, 50%)`,
           }}
         >
           {/* Name */}
           <div>
-            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
-              Name
-            </label>
+            <label className="block text-blue-400 font-semibold mb-2">Name</label>
             <input
               type="text"
               name="name"
@@ -132,16 +124,13 @@ const ContactSection: React.FC = () => {
               value={formValues.name}
               onFocus={() => handleFocus("name")}
               onChange={(e) => handleChange("name", e.target.value)}
-              placeholder="John Doe"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
-              Email
-            </label>
+            <label className="block text-blue-400 font-semibold mb-2">Email</label>
             <input
               type="email"
               name="email"
@@ -149,16 +138,13 @@ const ContactSection: React.FC = () => {
               value={formValues.email}
               onFocus={() => handleFocus("email")}
               onChange={(e) => handleChange("email", e.target.value)}
-              placeholder="john.doe@example.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
             />
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
-              Phone
-            </label>
+            <label className="block text-blue-400 font-semibold mb-2">Phone</label>
             <input
               type="tel"
               name="phone"
@@ -166,16 +152,13 @@ const ContactSection: React.FC = () => {
               value={formValues.phone}
               onFocus={() => handleFocus("phone")}
               onChange={(e) => handleChange("phone", e.target.value)}
-              placeholder="+254 7XX XXX XXX"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
             />
           </div>
 
           {/* Subject */}
           <div>
-            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
-              Subject
-            </label>
+            <label className="block text-blue-400 font-semibold mb-2">Subject</label>
             <input
               type="text"
               name="subject"
@@ -183,16 +166,13 @@ const ContactSection: React.FC = () => {
               value={formValues.subject}
               onFocus={() => handleFocus("subject")}
               onChange={(e) => handleChange("subject", e.target.value)}
-              placeholder="Project Inquiry"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
             />
           </div>
 
           {/* Message */}
           <div>
-            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
-              Message
-            </label>
+            <label className="block text-blue-400 font-semibold mb-2">Message</label>
             <textarea
               name="message"
               required
@@ -200,17 +180,15 @@ const ContactSection: React.FC = () => {
               value={formValues.message}
               onFocus={() => handleFocus("message")}
               onChange={(e) => handleChange("message", e.target.value)}
-              placeholder="Describe your project or question..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105"
+            className="w-full text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all animate-glow-button hover-glow"
             style={{
-              background: `linear-gradient(90deg, hsl(${hue}, 80%, 60%), hsl(${(hue + 60) % 360}, 80%, 60%), hsl(${(hue + 120) % 360}, 80%, 60%))`,
-              boxShadow: `0 0 20px hsl(${hue}, 80%, 60%), 0 0 40px hsl(${(hue + 60) % 360}, 80%, 60%), 0 0 60px hsl(${(hue + 120) % 360}, 80%, 60%)`,
+              background: `linear-gradient(90deg, hsl(${hue}, 100%, 50%), hsl(${(hue + 10) % 60}, 100%, 50%), hsl(${(hue + 20) % 60}, 100%, 50%))`,
             }}
           >
             Send Message
@@ -228,6 +206,22 @@ const ContactSection: React.FC = () => {
           100% { transform: translateY(0px); opacity: 0.3; }
         }
         .animate-float { animation-name: float; animation-duration: 6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+
+        @keyframes glowAnimation {
+          0% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }
+          50% { box-shadow: 0 0 20px #fff176, 0 0 40px #ffeb3b; }
+          100% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }
+        }
+        .animate-glow { animation: glowAnimation 6s ease-in-out infinite; }
+        .animate-glow-button { animation: glowAnimation 4s ease-in-out infinite; }
+        .hover-glow:hover { animation: glowAnimation 2s ease-in-out infinite; transform: scale(1.02); }
+
+        @keyframes glowText {
+          0% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }
+          50% { color: hsl(55, 100%, 65%); text-shadow: 0 0 15px #ffeb3b; }
+          100% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }
+        }
+        .animate-glow-text { animation: glowText 2s ease-in-out infinite; }
       `}</style>
     </section>
   );
