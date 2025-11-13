@@ -5,11 +5,11 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#EA4335' }, // Email first
-    { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606', color: '#333' },    // GitHub second
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/', color: '#0077b5' }, // LinkedIn third
-    { icon: FaTwitter, href: 'https://x.com/home', color: '#1DA1F2' },                  // Twitter fourth
-    { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#25D366' },         // WhatsApp last
+    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#EA4335' },
+    { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606', color: '#333' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/', color: '#0077b5' },
+    { icon: FaTwitter, href: 'https://x.com/home', color: '#1DA1F2' },
+    { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#25D366' },
   ];
 
   return (
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location (Clickable Links) */}
+          {/* Location */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
             <p className="mb-1">
@@ -65,37 +65,28 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-yellow-400 transition-colors"
               >
-                📍 Nairobi, Kenya
+                Nairobi, Kenya
               </a>
             </p>
             <p className="mb-1">
-              <a
-                href="tel:+254743573380"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                📞 +254 743 573 380
+              <a href="tel:+254743573380" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                +254 743 573 380
               </a>
             </p>
             <p className="mb-1">
-              <a
-                href="tel:+254722514540"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                📞 +254 722 514 540
+              <a href="tel:+254722514540" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                +254 722 514 540
               </a>
             </p>
             <p className="mb-1">
-              <a
-                href="mailto:hesbonmanyinsa96@gmail.com"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
+              <a href="mailto:hesbonmanyinsa96@gmail.com" className="text-gray-300 hover:text-yellow-400 transition-colors">
                 hesbonmanyinsa96@gmail.com
               </a>
             </p>
           </div>
         </div>
 
-        {/* Social Icons ABOVE the copyright */}
+        {/* Social Icons */}
         <div className="flex justify-center gap-7 mt-10">
           {socialLinks.map(({ icon: Icon, href, color }, i) => (
             <a
@@ -106,10 +97,7 @@ const Footer: React.FC = () => {
               className="relative w-16 h-16 flex items-center justify-center group"
               aria-label="Social Link"
             >
-              {/* Rotating rainbow ring */}
               <div className="absolute inset-0 rounded-full rainbow-rotate"></div>
-
-              {/* Icon */}
               <div
                 className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center text-white bg-gray-900 hover:white-glow transition-transform duration-300 transform hover:scale-110 pulse-icon"
                 style={{ color }}
@@ -130,13 +118,9 @@ const Footer: React.FC = () => {
 
       {/* Animations */}
       <style jsx>{`
-        @keyframes fadeUp {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
         .animate-fade-up { animation: fadeUp 1s ease-out forwards; }
 
-        /* Gradient float backgrounds */
         @keyframes gradient1 { 0%,100% { background: linear-gradient(45deg,#6EE7B7,#3B82F6); } 50% { background: linear-gradient(45deg,#3B82F6,#F472B6); } }
         @keyframes gradient2 { 0%,100% { background: linear-gradient(135deg,#F9A8D4,#8B5CF6); } 50% { background: linear-gradient(135deg,#8B5CF6,#FCD34D); } }
         @keyframes gradient3 { 0%,100% { background: linear-gradient(225deg,#FBBF24,#3B82F6); } 50% { background: linear-gradient(225deg,#3B82F6,#EC4899); } }
@@ -149,36 +133,16 @@ const Footer: React.FC = () => {
         .animate-gradient-float2 { animation: gradient2 20s ease infinite, float2 30s ease-in-out infinite; }
         .animate-gradient-float3 { animation: gradient3 18s ease infinite, float3 28s ease-in-out infinite; }
 
-        /* Rainbow rotating ring */
-        @keyframes rotateRainbow {
-          0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
-          100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
-        }
-        .rainbow-rotate {
-          border: 3px solid transparent;
-          background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);
-          border-radius: 9999px;
-          animation: rotateRainbow 10s linear infinite;
-        }
+        @keyframes rotateRainbow { 0% { transform: rotate(0deg); filter: hue-rotate(0deg); } 100% { transform: rotate(360deg); filter: hue-rotate(360deg); } }
+        .rainbow-rotate { border: 3px solid transparent; background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red); border-radius: 9999px; animation: rotateRainbow 10s linear infinite; }
 
-        /* Icon pulse */
-        @keyframes pulseIcon {
-          0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-          50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255,255,255,0.8); }
-        }
+        @keyframes pulseIcon { 0%,100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.3); } 50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255,255,255,0.8); } }
         .pulse-icon { animation: pulseIcon 3s ease-in-out infinite; }
 
-        /* Neon rainbow text */
-        @keyframes rainbowNeon {
-          0%,100% { text-shadow: 0 0 8px #ff0000, 0 0 16px #ff7f00, 0 0 24px #ffff00, 0 0 32px #00ff00, 0 0 40px #0000ff, 0 0 48px #4b0082, 0 0 56px #8f00ff; }
-          50% { text-shadow: 0 0 10px #8f00ff, 0 0 20px #0000ff, 0 0 30px #00ff00, 0 0 40px #ffff00, 0 0 50px #ff7f00, 0 0 60px #ff0000; }
-        }
+        @keyframes rainbowNeon { 0%,100% { text-shadow: 0 0 8px #ff0000, 0 0 16px #ff7f00, 0 0 24px #ffff00, 0 0 32px #00ff00, 0 0 40px #0000ff, 0 0 48px #4b0082, 0 0 56px #8f00ff; } 50% { text-shadow: 0 0 10px #8f00ff, 0 0 20px #0000ff, 0 0 30px #00ff00, 0 0 40px #ffff00, 0 0 50px #ff7f00, 0 0 60px #ff0000; } }
         .animate-rainbow-neon { animation: rainbowNeon 6s linear infinite; }
 
-        /* White glow hover */
-        .white-glow:hover {
-          box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #fff;
-        }
+        .white-glow:hover { box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #fff; }
       `}</style>
     </footer>
   );
