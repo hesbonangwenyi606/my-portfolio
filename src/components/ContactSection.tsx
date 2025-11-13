@@ -103,7 +103,7 @@ const ContactSection: React.FC = () => {
           ></div>
           <p
             className="max-w-2xl mx-auto text-base md:text-lg"
-            style={{ color: `hsl(${(hue + 180) % 360}, 70%, 70%)` }}
+            style={{ color: `black` }}
           >
             Ready to start your next project? Fill out the form below and I’ll get
             back to you.
@@ -113,16 +113,18 @@ const ContactSection: React.FC = () => {
         {/* Contact Form */}
         <form
           onSubmit={onSubmit}
-          className="space-y-6 p-8 rounded-2xl border border-gray-200 shadow-xl relative transition-all duration-1000 animate-glow hover-glow"
+          className="space-y-6 p-8 rounded-2xl border border-gray-200 shadow-xl relative transition-all duration-1000 animate-glow-container hover-glow-container"
           style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(10px)",
-            boxShadow: `0 0 20px hsl(${hue}, 80%, 60%), 0 0 40px hsl(${(hue + 60) % 360}, 80%, 60%)`,
+            boxShadow: `0 0 20px hsl(${hue}, 80%, 60%), 0 0 40px hsl(${(hue + 60) % 360}, 80%, 60%), 0 0 60px hsl(${(hue + 120) % 360}, 80%, 60%)`,
           }}
         >
           {/* Name */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Name</label>
+            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
+              Name
+            </label>
             <input
               type="text"
               name="name"
@@ -131,14 +133,15 @@ const ContactSection: React.FC = () => {
               onFocus={() => handleFocus("name")}
               onChange={(e) => handleChange("name", e.target.value)}
               placeholder="John Doe"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
             />
-            <p className="text-sm text-gray-400 mt-1">Enter your full name</p>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Email</label>
+            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -147,14 +150,15 @@ const ContactSection: React.FC = () => {
               onFocus={() => handleFocus("email")}
               onChange={(e) => handleChange("email", e.target.value)}
               placeholder="john.doe@example.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
             />
-            <p className="text-sm text-gray-400 mt-1">Enter a valid email address</p>
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Phone</label>
+            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
+              Phone
+            </label>
             <input
               type="tel"
               name="phone"
@@ -163,14 +167,15 @@ const ContactSection: React.FC = () => {
               onFocus={() => handleFocus("phone")}
               onChange={(e) => handleChange("phone", e.target.value)}
               placeholder="+254 7XX XXX XXX"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
             />
-            <p className="text-sm text-gray-400 mt-1">Include country code</p>
           </div>
 
           {/* Subject */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Subject</label>
+            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
+              Subject
+            </label>
             <input
               type="text"
               name="subject"
@@ -179,14 +184,15 @@ const ContactSection: React.FC = () => {
               onFocus={() => handleFocus("subject")}
               onChange={(e) => handleChange("subject", e.target.value)}
               placeholder="Project Inquiry"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
             />
-            <p className="text-sm text-gray-400 mt-1">Briefly summarize your message</p>
           </div>
 
           {/* Message */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Message</label>
+            <label className="block font-semibold mb-2" style={{ color: "blue" }}>
+              Message
+            </label>
             <textarea
               name="message"
               required
@@ -195,12 +201,10 @@ const ContactSection: React.FC = () => {
               onFocus={() => handleFocus("message")}
               onChange={(e) => handleChange("message", e.target.value)}
               placeholder="Describe your project or question..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-transparent transition hover:shadow-lg hover:scale-105 placeholder-blue-400 text-blue-600"
             />
-            <p className="text-sm text-gray-400 mt-1">Provide details about your project or inquiry</p>
           </div>
 
-          {/* Submit Button with dynamic rainbow glow */}
           <button
             type="submit"
             className="w-full text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105"
@@ -224,15 +228,6 @@ const ContactSection: React.FC = () => {
           100% { transform: translateY(0px); opacity: 0.3; }
         }
         .animate-float { animation-name: float; animation-duration: 6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
-
-        @keyframes typingGlow {
-          0% { box-shadow: 0 0 5px #ff6ec7; border-color: #ff6ec7; }
-          25% { box-shadow: 0 0 10px #6effaa; border-color: #6effaa; }
-          50% { box-shadow: 0 0 15px #6eafff; border-color: #6eafff; }
-          75% { box-shadow: 0 0 10px #ff9e6e; border-color: #ff9e6e; }
-          100% { box-shadow: 0 0 5px #ff6ec7; border-color: #ff6ec7; }
-        }
-        input:focus, textarea:focus { animation: typingGlow 2s linear infinite; outline: none; }
       `}</style>
     </section>
   );
