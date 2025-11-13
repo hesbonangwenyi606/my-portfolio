@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-yellow-400 transition-colors"
               >
-                📍 Nairobi, Kenya
+                📍 Nairobi CBD, Kenya
               </a>
             </p>
             <p className="mb-1">
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
                 href="mailto:hesbonmanyinsa96@gmail.com"
                 className="text-gray-300 hover:text-yellow-400 transition-colors"
               >
-                hesbonmanyinsa96@gmail.com
+                ✉️ hesbonmanyinsa96@gmail.com
               </a>
             </p>
           </div>
