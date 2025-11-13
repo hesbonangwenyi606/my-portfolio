@@ -38,7 +38,7 @@ const HeroSection: React.FC = () => {
     'Cloud Architect',
     'Problem Solver',
     'Full-Stack Developer',
-    'Infrastructure Automator'
+    'Web Developer'
   ];
 
   const [displayText, setDisplayText] = useState('');
