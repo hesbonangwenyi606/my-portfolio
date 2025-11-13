@@ -200,7 +200,7 @@ const AboutSection: React.FC = () => {
               },
               {
                 text: "I’ve led projects from concept to launch, collaborating with diverse teams across modern stacks, focusing on clean code, teamwork, and innovation.",
-                img: "https://i.pinimg.com/736x/0e/a7/ef/0ea7ef79bbfe9c8a6e2b16cf2b3d9cd5.jpg",
+                img: "https://i.pinimg.com/736x/4e/19/82/4e1982ddc4dbc34b5843f7443f4fc676.jpg",
               },
               {
                 text: "Beyond coding, I thrive on solving challenges, mentoring peers, and continuously learning to stay ahead in a fast-evolving tech landscape.",
