@@ -44,7 +44,7 @@ const HeroSection: React.FC = () => {
   const [displayText, setDisplayText] = useState('');
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [speed, setSpeed] = useState(150);
+  const [speed, setSpeed] = useState(70); // Base typing speed
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
 
@@ -52,12 +52,13 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     const currentRole = `Hi, I'm a ${roles[roleIndex]}`;
     const timer = setTimeout(() => {
-      const adjustedSpeed = speed + (isMobile ? 50 : 0);
+      const adjustedSpeed = speed + (isMobile ? -20 : 0);
+
       if (!isDeleting) {
         setDisplayText(currentRole.substring(0, displayText.length + 1));
         if (displayText.length + 1 === currentRole.length) {
           setIsDeleting(true);
-          setSpeed(1000);
+          setSpeed(isMobile ? 300 : 500);
         } else {
           setSpeed(adjustedSpeed);
         }
@@ -67,7 +68,7 @@ const HeroSection: React.FC = () => {
           setIsDeleting(false);
           setRoleIndex((prev) => (prev + 1) % roles.length);
         }
-        setSpeed(100);
+        setSpeed(isMobile ? 30 : 50);
       }
     }, speed);
     return () => clearTimeout(timer);
@@ -151,7 +152,7 @@ const HeroSection: React.FC = () => {
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl"
               animate={{ x: ['0%', '-50%'] }}
-              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 25, ease: 'linear' } }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: isMobile ? 12 : 25, ease: 'linear' } }}
             >
               {iconsLayer1.map((t, i) => <Icon key={i} {...t} />)}
             </motion.div>
@@ -160,7 +161,7 @@ const HeroSection: React.FC = () => {
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl top-12 opacity-80"
               animate={{ x: ['-50%', '0%'] }}
-              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 25, ease: 'linear' } }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: isMobile ? 12 : 25, ease: 'linear' } }}
             >
               {iconsLayer2.map((t, i) => <Icon key={i} {...t} />)}
             </motion.div>
