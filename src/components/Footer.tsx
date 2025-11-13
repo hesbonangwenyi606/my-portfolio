@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Social Icons Section ABOVE the Line */}
+        {/* Social Icons ABOVE the line */}
         <div className="flex justify-center gap-7 mt-8">
           {socialLinks.map(({ icon: Icon, href, color }, i) => (
             <a
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 rounded-full flex items-center justify-center gradient-ring hover:white-glow transition-transform duration-300 transform hover:scale-110"
+              className="w-14 h-14 rounded-full flex items-center justify-center gradient-ring pulse-animation hover:white-glow transition-transform duration-300 transform hover:scale-110"
               style={{ color }}
               aria-label="Social Link"
             >
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
           ))}
         </div>
 
-        {/* Copyright Line BELOW Icons */}
+        {/* Copyright BELOW icons */}
         <div className="border-t border-gray-700 pt-8 text-center">
           <p className="text-white font-bold text-sm tracking-wider text-transparent bg-clip-text animate-rainbow-neon">
             © 2021 - {currentYear} Hesbon Angwenyi. All rights reserved.
@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Animations and Effects */}
+      {/* Animations */}
       <style jsx>{`
         @keyframes fadeUp {
           0% { opacity: 0; transform: translateY(20px); }
@@ -130,8 +130,17 @@ const Footer: React.FC = () => {
           100% { filter: hue-rotate(360deg); }
         }
 
+        /* Pulse Animation for the Icons */
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+          50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255,255,255,0.7); }
+        }
+        .pulse-animation {
+          animation: pulse 3s ease-in-out infinite;
+        }
+
         .white-glow:hover {
-          box-shadow: 0 0 15px #fff, 0 0 30px #fff, 0 0 45px #fff;
+          box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #fff;
         }
       `}</style>
     </footer>
