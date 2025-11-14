@@ -1,8 +1,5 @@
 import React from 'react';
-import { 
-  FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter, 
-  FaMapMarkerAlt, FaPhoneAlt 
-} from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -60,52 +57,33 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location with Icons */}
+          {/* Location — PULSING YELLOW GLOW DOTS */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
 
-            <p className="mb-3 flex items-center gap-3">
-              <FaMapMarkerAlt className="text-yellow-400 w-5 h-5" />
-              <a
-                href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                Nairobi, Kenya
-              </a>
-            </p>
-
-            <p className="mb-3 flex items-center gap-3">
-              <FaPhoneAlt className="text-yellow-400 w-5 h-5" />
-              <a
-                href="tel:+254743573380"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                +254 (0)743-573-380
-              </a>
-            </p>
-
-            <p className="mb-3 flex items-center gap-3">
-              <FaPhoneAlt className="text-yellow-400 w-5 h-5" />
-              <a
-                href="tel:+254722514540"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                +254 (0)722-514-540
-              </a>
-            </p>
-
-            <p className="mb-3 flex items-center gap-3">
-              <FaEnvelope className="text-yellow-400 w-5 h-5" />
-              <a
-                href="mailto:hesbonmanyinsa96@gmail.com"
-                className="text-gray-300 hover:text-yellow-400 transition-colors"
-              >
-                hesbonmanyinsa96@gmail.com
-              </a>
-            </p>
+            {[
+              { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya', type: 'link' },
+              { label: '+254 (0)743-573-380', href: 'tel:+254743573380', type: 'link' },
+              { label: '+254 (0)722-514-540', href: 'tel:+254722514540', type: 'link' },
+              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', type: 'link' },
+            ].map((item, i) => (
+              <p key={i} className="mb-1 flex items-start gap-3">
+                <span className="relative flex items-center justify-center mt-1 pulse-dot">
+                  <span className="absolute w-3 h-3 rounded-full bg-yellow-400 opacity-70 blur-sm"></span>
+                  <span className="text-3xl leading-none text-yellow-300 drop-shadow-[0_0_8px_rgba(250,204,21,0.9)]">•</span>
+                </span>
+                <a
+                  href={item.href}
+                  target={item.type === 'link' && item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.type === 'link' && item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-gray-300 hover:text-yellow-400 transition-colors"
+                >
+                  {item.label}
+                </a>
+              </p>
+            ))}
           </div>
+
         </div>
 
         {/* Social Icons */}
@@ -140,63 +118,38 @@ const Footer: React.FC = () => {
 
       {/* Animations */}
       <style jsx>{`
-        @keyframes fadeUp {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { 0% { opacity:0; transform:translateY(20px);} 100% { opacity:1; transform:translateY(0);} }
         .animate-fade-up { animation: fadeUp 1s ease-out forwards; }
 
-        @keyframes gradient1 {
-          0%,100% { background: linear-gradient(45deg,#6EE7B7,#3B82F6); }
-          50% { background: linear-gradient(45deg,#3B82F6,#F472B6); }
-        }
-        @keyframes gradient2 {
-          0%,100% { background: linear-gradient(135deg,#F9A8D4,#8B5CF6); }
-          50% { background: linear-gradient(135deg,#8B5CF6,#FCD34D); }
-        }
-        @keyframes gradient3 {
-          0%,100% { background: linear-gradient(225deg,#FBBF24,#3B82F6); }
-          50% { background: linear-gradient(225deg,#3B82F6,#EC4899); }
-        }
+        @keyframes gradient1 {0%,100%{background:linear-gradient(45deg,#6EE7B7,#3B82F6);}50%{background:linear-gradient(45deg,#3B82F6,#F472B6);}}
+        @keyframes gradient2 {0%,100%{background:linear-gradient(135deg,#F9A8D4,#8B5CF6);}50%{background:linear-gradient(135deg,#8B5CF6,#FCD34D);}}
+        @keyframes gradient3 {0%,100%{background:linear-gradient(225deg,#FBBF24,#3B82F6);}50%{background:linear-gradient(225deg,#3B82F6,#EC4899);}}
 
-        @keyframes float1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        @keyframes float2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(25px); } }
-        @keyframes float3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes float1 {0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+        @keyframes float2 {0%,100%{transform:translateY(0);}50%{transform:translateY(25px);}}
+        @keyframes float3 {0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
 
         .animate-gradient-float1 { animation: gradient1 15s ease infinite, float1 25s ease-in-out infinite; }
         .animate-gradient-float2 { animation: gradient2 20s ease infinite, float2 30s ease-in-out infinite; }
         .animate-gradient-float3 { animation: gradient3 18s ease infinite, float3 28s ease-in-out infinite; }
 
-        @keyframes rotateRainbow {
-          0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
-          100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
-        }
-        .rainbow-rotate {
-          border: 3px solid transparent;
-          background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);
-          border-radius: 9999px;
-          animation: rotateRainbow 10s linear infinite;
-        }
+        @keyframes rotateRainbow {0%{transform:rotate(0deg); filter:hue-rotate(0deg);}100%{transform:rotate(360deg); filter:hue-rotate(360deg);}}
+        .rainbow-rotate { border:3px solid transparent; background:conic-gradient(red,orange,yellow,green,blue,indigo,violet,red); border-radius:9999px; animation:rotateRainbow 10s linear infinite;}
 
-        @keyframes pulseIcon {
-          0%,100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-          50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255,255,255,0.8); }
-        }
+        @keyframes pulseIcon {0%,100%{transform:scale(1); box-shadow:0 0 10px rgba(255,255,255,0.3);}50%{transform:scale(1.08); box-shadow:0 0 25px rgba(255,255,255,0.8);}}
         .pulse-icon { animation: pulseIcon 3s ease-in-out infinite; }
 
-        @keyframes rainbowNeon {
-          0%,100% {
-            text-shadow: 0 0 8px #ff0000, 0 0 16px #ff7f00, 0 0 24px #ffff00,
-            0 0 32px #00ff00, 0 0 40px #0000ff, 0 0 48px #4b0082, 0 0 56px #8f00ff;
-          }
-          50% {
-            text-shadow: 0 0 10px #8f00ff, 0 0 20px #0000ff, 0 0 30px #00ff00,
-            0 0 40px #ffff00, 0 0 50px #ff7f00, 0 0 60px #ff0000;
-          }
-        }
+        @keyframes rainbowNeon {0%,100%{text-shadow:0 0 8px #ff0000,0 0 16px #ff7f00,0 0 24px #ffff00,0 0 32px #00ff00,0 0 40px #0000ff,0 0 48px #4b0082,0 0 56px #8f00ff;}50%{text-shadow:0 0 10px #8f00ff,0 0 20px #0000ff,0 0 30px #00ff00,0 0 40px #ffff00,0 0 50px #ff7f00,0 0 60px #ff0000;}}
         .animate-rainbow-neon { animation: rainbowNeon 6s linear infinite; }
 
-        .white-glow:hover { box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #fff; }
+        .white-glow:hover { box-shadow: 0 0 20px #fff,0 0 40px #fff,0 0 60px #fff; }
+
+        /* PULSING DOT ANIMATION */
+        @keyframes pulseDot {
+          0%, 100% { transform: scale(1); opacity: 0.7; }
+          50% { transform: scale(1.2); opacity: 1; }
+        }
+        .pulse-dot span.absolute { animation: pulseDot 2s ease-in-out infinite; }
       `}</style>
 
     </footer>
