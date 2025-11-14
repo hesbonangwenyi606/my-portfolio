@@ -1,5 +1,8 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import { 
+  FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter, 
+  FaMapMarkerAlt, FaPhoneAlt 
+} from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -57,12 +60,12 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location — STARTS WITH DOTS */}
+          {/* Location with Icons */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
 
-            <p className="mb-1 flex items-start gap-2">
-              <span>•</span>
+            <p className="mb-3 flex items-center gap-3">
+              <FaMapMarkerAlt className="text-yellow-400 w-5 h-5" />
               <a
                 href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya"
                 target="_blank"
@@ -73,23 +76,32 @@ const Footer: React.FC = () => {
               </a>
             </p>
 
-            <p className="mb-1 flex items-start gap-2">
-              <span>•</span>
-              <a href="tel:+254743573380" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <p className="mb-3 flex items-center gap-3">
+              <FaPhoneAlt className="text-yellow-400 w-5 h-5" />
+              <a
+                href="tel:+254743573380"
+                className="text-gray-300 hover:text-yellow-400 transition-colors"
+              >
                 +254 (0)743-573-380
               </a>
             </p>
 
-            <p className="mb-1 flex items-start gap-2">
-              <span>•</span>
-              <a href="tel:+254722514540" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <p className="mb-3 flex items-center gap-3">
+              <FaPhoneAlt className="text-yellow-400 w-5 h-5" />
+              <a
+                href="tel:+254722514540"
+                className="text-gray-300 hover:text-yellow-400 transition-colors"
+              >
                 +254 (0)722-514-540
               </a>
             </p>
 
-            <p className="mb-1 flex items-start gap-2">
-              <span>•</span>
-              <a href="mailto:hesbonmanyinsa96@gmail.com" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <p className="mb-3 flex items-center gap-3">
+              <FaEnvelope className="text-yellow-400 w-5 h-5" />
+              <a
+                href="mailto:hesbonmanyinsa96@gmail.com"
+                className="text-gray-300 hover:text-yellow-400 transition-colors"
+              >
                 hesbonmanyinsa96@gmail.com
               </a>
             </p>
