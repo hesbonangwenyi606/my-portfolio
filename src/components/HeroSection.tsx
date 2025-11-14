@@ -117,6 +117,9 @@ const HeroSection: React.FC = () => {
     }))
   );
 
+  // Scroll speed variable
+  const iconScrollDuration = isMobile ? 30 : 60; // adjust this value to control speed
+
   return (
     <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4 relative">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -152,7 +155,7 @@ const HeroSection: React.FC = () => {
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl"
               animate={{ x: ['0%', '-50%'] }}
-              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: isMobile ? 12 : 25, ease: 'linear' } }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: iconScrollDuration, ease: 'linear' } }}
             >
               {iconsLayer1.map((t, i) => <Icon key={i} {...t} />)}
             </motion.div>
@@ -161,7 +164,7 @@ const HeroSection: React.FC = () => {
             <motion.div
               className="absolute flex gap-10 text-6xl md:text-7xl top-12 opacity-80"
               animate={{ x: ['-50%', '0%'] }}
-              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: isMobile ? 12 : 25, ease: 'linear' } }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: iconScrollDuration, ease: 'linear' } }}
             >
               {iconsLayer2.map((t, i) => <Icon key={i} {...t} />)}
             </motion.div>
