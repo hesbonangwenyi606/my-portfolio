@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location — PULSING YELLOW GLOW DOTS */}
+          {/* Location — WHITE PULSING DOTS */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
 
@@ -69,14 +69,14 @@ const Footer: React.FC = () => {
             ].map((item, i) => (
               <p key={i} className="mb-1 flex items-start gap-3">
                 <span className="relative flex items-center justify-center mt-1 pulse-dot">
-                  <span className="absolute w-3 h-3 rounded-full bg-yellow-400 opacity-70 blur-sm"></span>
-                  <span className="text-3xl leading-none text-yellow-300 drop-shadow-[0_0_8px_rgba(250,204,21,0.9)]">•</span>
+                  <span className="absolute w-3 h-3 rounded-full bg-white opacity-40 blur-sm"></span>
+                  <span className="text-3xl leading-none text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">•</span>
                 </span>
                 <a
                   href={item.href}
                   target={item.type === 'link' && item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.type === 'link' && item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="text-gray-300 hover:text-yellow-400 transition-colors"
+                  className="text-gray-300 hover:text-white transition-colors"
                 >
                   {item.label}
                 </a>
@@ -144,7 +144,7 @@ const Footer: React.FC = () => {
 
         .white-glow:hover { box-shadow: 0 0 20px #fff,0 0 40px #fff,0 0 60px #fff; }
 
-        /* PULSING DOT ANIMATION */
+        /* PULSING WHITE DOT ANIMATION */
         @keyframes pulseDot {
           0%, 100% { transform: scale(1); opacity: 0.7; }
           50% { transform: scale(1.2); opacity: 1; }
