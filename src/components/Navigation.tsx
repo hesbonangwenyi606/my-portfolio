@@ -34,7 +34,7 @@ const Navigation: React.FC = () => {
         />
       </div>
 
-      {/* Navigation Bar */}
+      {/*Navigation Bar*/}
       <nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
