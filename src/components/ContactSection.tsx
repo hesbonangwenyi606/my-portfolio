@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
   const [result, setResult] = useState("");
-  const [hue, setHue] = useState(50); // Start yellowish
+  const [hue, setHue] = useState(50);
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -12,10 +12,9 @@ const ContactSection: React.FC = () => {
     message: "",
   });
 
-  // Animate hue for rainbow effects (yellowish glow)
   useEffect(() => {
     const interval = setInterval(() => {
-      setHue((prev) => (prev + 0.3) % 60); // Keep hue in yellow range
+      setHue((prev) => (prev + 0.3) % 60);
     }, 30);
     return () => clearInterval(interval);
   }, []);
@@ -55,7 +54,6 @@ const ContactSection: React.FC = () => {
     }
   };
 
-  // Floating particles
   const particles = Array.from({ length: 50 }, (_, i) => i);
 
   return (
@@ -63,8 +61,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative py-20 md:py-24 min-h-[80vh] overflow-hidden"
       style={{
-        backgroundImage:
-          "url('https://scontent.fnbo16-1.fna.fbcdn.net/v/t39.30808-6/581055697_1605855860788408_6355822191920083654_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=aHeSFiulopEQ7kNvwHDmWAr&_nc_oc=Adl_Yhd7k3yIUi3wojUDMFYA02d-cUcZn8WN7WjGvgeVz8guB8pJSaugXbo_sySWGxA&_nc_zt=23&_nc_ht=scontent.fnbo16-1.fna&_nc_gid=LK9tJI93gy6ZKIbB9-4tOA&oh=00_AfiUzkygcXu5khcSW7HMcBZyZTJTJdMeMwRItfBpN2vebA&oe=691B5638')",
+        backgroundImage: "url('https://i.pinimg.com/736x/06/16/40/061640a1b26c8eba715849b0d0245869.jpg')", // <-- Local image
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
