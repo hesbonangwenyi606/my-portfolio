@@ -4,7 +4,7 @@ const ContactSection: React.FC = () => {
   const templateValues = {
     name: "John Doe",
     email: "john.doe@example.com",
-    phone: "+254 712 345 678",
+    phone: "+254 700 000 00",
     subject: "Project Inquiry / Collaboration / Question",
     message: "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
   };
@@ -50,7 +50,7 @@ const ContactSection: React.FC = () => {
       });
       const data = await response.json();
       if (data.success) {
-        setResult("✅ Form Submitted Successfully!");
+        setResult("✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You");
         setFormValues(templateValues);
         localStorage.removeItem("contactForm"); // clear storage after success
       } else {
@@ -68,7 +68,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative py-20 md:py-24 min-h-[80vh] overflow-hidden"
       style={{
-        backgroundImage: "url('/contact-bg.jpg')",
+        backgroundImage: "url('https://i.pinimg.com/736x/b1/33/1c/b1331cb44d1bb42361ff79153754a884.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
