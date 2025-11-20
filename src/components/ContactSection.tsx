@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
+  const templateValues = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phone: "+254 712 345 678",
+    subject: "Project Inquiry / Collaboration / Question",
+    message: "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
+  };
+
   const [result, setResult] = useState("");
   const [hue, setHue] = useState(50);
+  const [formValues, setFormValues] = useState({ ...templateValues });
 
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-    phone: "+254 7XX XXX XXX",
-    subject: "",
-    message: "",
-  });
-
+  // Animate hue for rainbow effect
   useEffect(() => {
     const interval = setInterval(() => {
       setHue((prev) => (prev + 0.3) % 60);
@@ -19,8 +21,9 @@ const ContactSection: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Clear field if template text is still there
   const handleFocus = (field: string) => {
-    if (formValues[field as keyof typeof formValues].length > 0) {
+    if (formValues[field as keyof typeof formValues] === templateValues[field as keyof typeof formValues]) {
       setFormValues((prev) => ({ ...prev, [field]: "" }));
     }
   };
@@ -43,7 +46,7 @@ const ContactSection: React.FC = () => {
       const data = await response.json();
       if (data.success) {
         setResult("✅ Form Submitted Successfully!");
-        event.currentTarget.reset();
+        setFormValues({ ...templateValues }); // reset to templates
       } else {
         setResult(data.message || "Failed to send message.");
       }
@@ -51,6 +54,7 @@ const ContactSection: React.FC = () => {
       setResult(
         "Message sent successfully. Thank you, Hesbon will respond shortly."
       );
+      setFormValues({ ...templateValues }); // reset to templates
     }
   };
 
@@ -61,7 +65,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative py-20 md:py-24 min-h-[80vh] overflow-hidden"
       style={{
-        backgroundImage: "url('https://i.pinimg.com/736x/92/ec/fe/92ecfef4d7daa376f597e7eaca2f68b8.jpg')", // <-- Local image
+        backgroundImage: "url('/contact-bg.jpg')", // local image
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
