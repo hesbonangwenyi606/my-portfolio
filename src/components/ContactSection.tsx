@@ -9,11 +9,17 @@ const ContactSection: React.FC = () => {
     message: "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
   };
 
+  // Load saved values from localStorage or use template
+  const savedValues = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("contactForm") || "null") : null;
+  const [formValues, setFormValues] = useState(savedValues || templateValues);
   const [result, setResult] = useState("");
   const [hue, setHue] = useState(50);
-  const [formValues, setFormValues] = useState({ ...templateValues });
 
-  // Animate hue for rainbow effect
+  // Save values to localStorage whenever form changes
+  useEffect(() => {
+    localStorage.setItem("contactForm", JSON.stringify(formValues));
+  }, [formValues]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setHue((prev) => (prev + 0.3) % 60);
@@ -21,7 +27,6 @@ const ContactSection: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Clear field if template text is still there
   const handleFocus = (field: string) => {
     if (formValues[field as keyof typeof formValues] === templateValues[field as keyof typeof formValues]) {
       setFormValues((prev) => ({ ...prev, [field]: "" }));
@@ -46,15 +51,13 @@ const ContactSection: React.FC = () => {
       const data = await response.json();
       if (data.success) {
         setResult("✅ Form Submitted Successfully!");
-        setFormValues({ ...templateValues }); // reset to templates
+        setFormValues(templateValues);
+        localStorage.removeItem("contactForm"); // clear storage after success
       } else {
         setResult(data.message || "Failed to send message.");
       }
     } catch (error) {
-      setResult(
-        "Message sent successfully. Thank you, Hesbon will respond shortly."
-      );
-      setFormValues({ ...templateValues }); // reset to templates
+      setResult("Message sent successfully. Thank you, Hesbon will respond shortly.");
     }
   };
 
@@ -65,16 +68,14 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative py-20 md:py-24 min-h-[80vh] overflow-hidden"
       style={{
-        backgroundImage: "url('/contact-bg.jpg')", // local image
+        backgroundImage: "url('/contact-bg.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-40 -z-10"></div>
 
-      {/* Floating particles */}
       {particles.map((i) => (
         <div
           key={i}
@@ -88,7 +89,6 @@ const ContactSection: React.FC = () => {
         />
       ))}
 
-      {/* Header */}
       <div className="max-w-4xl mx-auto px-4 relative z-10 -translate-y-8">
         <div className="text-center mb-16">
           <h2
@@ -105,7 +105,6 @@ const ContactSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Contact Form */}
         <form
           onSubmit={onSubmit}
           className="space-y-6 p-8 rounded-2xl border border-gray-200 shadow-xl relative transition-all duration-1000 animate-glow hover-glow"
@@ -115,65 +114,26 @@ const ContactSection: React.FC = () => {
             boxShadow: `0 0 20px hsl(${hue}, 100%, 50%), 0 0 40px hsl(${(hue + 10) % 60}, 100%, 50%)`,
           }}
         >
-          {/* Name */}
-          <div>
-            <label className="block text-blue-400 font-semibold mb-2">Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={formValues.name}
-              onFocus={() => handleFocus("name")}
-              onChange={(e) => handleChange("name", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
-            />
-          </div>
+          {["name","email","phone","subject"].map((field) => (
+            <div key={field} className="w-full">
+              <label className="block text-black font-semibold mb-2">
+                {field.charAt(0).toUpperCase() + field.slice(1)}
+              </label>
+              <input
+                type={field==="email"?"email":field==="phone"?"tel":"text"}
+                name={field}
+                required
+                value={formValues[field as keyof typeof formValues]}
+                onFocus={() => handleFocus(field)}
+                onChange={(e) => handleChange(field, e.target.value)}
+                placeholder={templateValues[field as keyof typeof templateValues]}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400 placeholder-gray-400"
+              />
+            </div>
+          ))}
 
-          {/* Email */}
-          <div>
-            <label className="block text-blue-400 font-semibold mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={formValues.email}
-              onFocus={() => handleFocus("email")}
-              onChange={(e) => handleChange("email", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
-            />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="block text-blue-400 font-semibold mb-2">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              required
-              value={formValues.phone}
-              onFocus={() => handleFocus("phone")}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
-            />
-          </div>
-
-          {/* Subject */}
-          <div>
-            <label className="block text-blue-400 font-semibold mb-2">Subject</label>
-            <input
-              type="text"
-              name="subject"
-              required
-              value={formValues.subject}
-              onFocus={() => handleFocus("subject")}
-              onChange={(e) => handleChange("subject", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
-            />
-          </div>
-
-          {/* Message */}
-          <div>
-            <label className="block text-blue-400 font-semibold mb-2">Message</label>
+          <div className="w-full">
+            <label className="block text-black font-semibold mb-2">Message</label>
             <textarea
               name="message"
               required
@@ -181,7 +141,8 @@ const ContactSection: React.FC = () => {
               value={formValues.message}
               onFocus={() => handleFocus("message")}
               onChange={(e) => handleChange("message", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400"
+              placeholder={templateValues.message}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400 placeholder-gray-400 resize-none"
             />
           </div>
 
@@ -199,29 +160,16 @@ const ContactSection: React.FC = () => {
         </form>
       </div>
 
-      {/* Animations */}
       <style>{`
-        @keyframes float {
-          0% { transform: translateY(0px); opacity: 0.3; }
-          50% { transform: translateY(-20px); opacity: 0.6; }
-          100% { transform: translateY(0px); opacity: 0.3; }
-        }
+        @keyframes float {0% { transform: translateY(0px); opacity: 0.3; }50% { transform: translateY(-20px); opacity: 0.6; }100% { transform: translateY(0px); opacity: 0.3; }}
         .animate-float { animation-name: float; animation-duration: 6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
 
-        @keyframes glowAnimation {
-          0% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }
-          50% { box-shadow: 0 0 20px #fff176, 0 0 40px #ffeb3b; }
-          100% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }
-        }
+        @keyframes glowAnimation {0% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }50% { box-shadow: 0 0 20px #fff176, 0 0 40px #ffeb3b; }100% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }}
         .animate-glow { animation: glowAnimation 6s ease-in-out infinite; }
         .animate-glow-button { animation: glowAnimation 4s ease-in-out infinite; }
         .hover-glow:hover { animation: glowAnimation 2s ease-in-out infinite; transform: scale(1.02); }
 
-        @keyframes glowText {
-          0% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }
-          50% { color: hsl(55, 100%, 65%); text-shadow: 0 0 15px #ffeb3b; }
-          100% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }
-        }
+        @keyframes glowText {0% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }50% { color: hsl(55, 100%, 65%); text-shadow: 0 0 15px #ffeb3b; }100% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }}
         .animate-glow-text { animation: glowText 2s ease-in-out infinite; }
       `}</style>
     </section>
