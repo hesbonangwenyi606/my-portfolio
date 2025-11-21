@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location — WHITE PULSING DOTS */}
+          {/* Location — STATIC WHITE DOTS */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
 
@@ -68,10 +68,7 @@ const Footer: React.FC = () => {
               { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', type: 'link' },
             ].map((item, i) => (
               <p key={i} className="mb-1 flex items-start gap-3">
-                <span className="relative flex items-center justify-center mt-1 pulse-dot">
-                  <span className="absolute w-3 h-3 rounded-full bg-white opacity-40 blur-sm"></span>
-                  <span className="text-3xl leading-none text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">•</span>
-                </span>
+                <span className="text-3xl leading-none text-white">•</span>
                 <a
                   href={item.href}
                   target={item.type === 'link' && item.href.startsWith('http') ? '_blank' : undefined}
@@ -143,13 +140,6 @@ const Footer: React.FC = () => {
         .animate-rainbow-neon { animation: rainbowNeon 6s linear infinite; }
 
         .white-glow:hover { box-shadow: 0 0 20px #fff,0 0 40px #fff,0 0 60px #fff; }
-
-        /* PULSING WHITE DOT ANIMATION */
-        @keyframes pulseDot {
-          0%, 100% { transform: scale(1); opacity: 0.7; }
-          50% { transform: scale(1.2); opacity: 1; }
-        }
-        .pulse-dot span.absolute { animation: pulseDot 2s ease-in-out infinite; }
       `}</style>
 
     </footer>
