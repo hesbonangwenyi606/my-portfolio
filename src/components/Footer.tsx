@@ -87,19 +87,19 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center gap-7 mt-10">
+        <div className="flex justify-center gap-5 mt-8">
           {socialLinks.map(({ icon: Icon, href, color }, i) => (
             <a
               key={i}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative w-16 h-16 flex items-center justify-center group"
+              className="relative w-12 h-12 flex items-center justify-center group"
               aria-label="Social Link"
             >
               <div className="absolute inset-0 rounded-full rainbow-rotate"></div>
               <div
-                className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center text-white bg-gray-900 hover:white-glow transition-transform duration-300 transform hover:scale-110 pulse-icon"
+                className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-white bg-gray-900 hover:white-glow transition-transform duration-300 transform hover:scale-110 pulse-icon"
                 style={{ color }}
               >
                 <Icon className="w-7 h-7" />
