@@ -9,26 +9,27 @@ const ContactSection: React.FC = () => {
     message: "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
   };
 
-  // Load saved values from localStorage or use template
-  const savedValues = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("contactForm") || "null") : null;
+  const savedValues =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("contactForm") || "null")
+      : null;
   const [formValues, setFormValues] = useState(savedValues || templateValues);
   const [result, setResult] = useState("");
-  const [hue, setHue] = useState(50);
+  const [hue, setHue] = useState(0); // We'll use for black-ish glow if needed
 
-  // Save values to localStorage whenever form changes
   useEffect(() => {
     localStorage.setItem("contactForm", JSON.stringify(formValues));
   }, [formValues]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setHue((prev) => (prev + 0.3) % 60);
+      setHue((prev) => (prev + 0.3) % 360);
     }, 30);
     return () => clearInterval(interval);
   }, []);
 
   const handleFocus = (field: string) => {
-    if (formValues[field as keyof typeof formValues] === templateValues[field as keyof typeof formValues]) {
+    if (formValues[field as keyof typeof formValues] === templateValues[field as keyof typeof templateValues]) {
       setFormValues((prev) => ({ ...prev, [field]: "" }));
     }
   };
@@ -52,7 +53,7 @@ const ContactSection: React.FC = () => {
       if (data.success) {
         setResult("✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You");
         setFormValues(templateValues);
-        localStorage.removeItem("contactForm"); // clear storage after success
+        localStorage.removeItem("contactForm");
       } else {
         setResult(data.message || "Failed to send message.");
       }
@@ -68,7 +69,8 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative py-20 md:py-24 min-h-[80vh] overflow-hidden"
       style={{
-        backgroundImage: "url('https://i.pinimg.com/1200x/50/47/d8/5047d848af13c665cd97bd5ede694157.jpg')",
+        backgroundImage:
+          "url('https://i.pinimg.com/736x/71/a6/d8/71a6d82e769b7778fb900203ab9d45de.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -79,7 +81,7 @@ const ContactSection: React.FC = () => {
       {particles.map((i) => (
         <div
           key={i}
-          className="absolute w-2 h-2 rounded-full bg-white opacity-30 animate-float"
+          className="absolute w-2 h-2 rounded-full bg-white opacity-20 animate-float"
           style={{
             top: `${Math.max(0, Math.random() * 100 - 8)}%`,
             left: `${Math.random() * 100}%`,
@@ -92,14 +94,14 @@ const ContactSection: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 relative z-10 -translate-y-8">
         <div className="text-center mb-16">
           <h2
-            className="text-4xl md:text-5xl font-bold mb-4 animate-glow-text"
-            style={{ color: `hsl(${hue}, 100%, 60%)` }}
+            className="text-4xl md:text-5xl font-bold animate-glow-text"
+            style={{ color: "#000" }}
           >
             Get In Touch
           </h2>
           <p
             className="max-w-2xl mx-auto text-base md:text-lg animate-glow-text"
-            style={{ color: `hsl(${(hue + 10) % 60}, 100%, 60%)` }}
+            style={{ color: "#111" }}
           >
             Ready to start your next project? Fill out the form below and I’ll get back to you.
           </p>
@@ -107,27 +109,27 @@ const ContactSection: React.FC = () => {
 
         <form
           onSubmit={onSubmit}
-          className="space-y-6 p-8 rounded-2xl border border-gray-200 shadow-xl relative transition-all duration-1000 animate-glow hover-glow"
+          className="space-y-6 p-8 rounded-2xl border border-gray-300 shadow-xl relative transition-all duration-1000 animate-glow hover-glow"
           style={{
-            background: "rgba(255, 255, 255, 0.1)",
+            background: "rgba(255, 255, 255, 0.05)",
             backdropFilter: "blur(10px)",
-            boxShadow: `0 0 20px hsl(${hue}, 100%, 50%), 0 0 40px hsl(${(hue + 10) % 60}, 100%, 50%)`,
+            boxShadow: "0 0 20px #000, 0 0 40px #222",
           }}
         >
-          {["name","email","phone","subject"].map((field) => (
+          {["name", "email", "phone", "subject"].map((field) => (
             <div key={field} className="w-full">
               <label className="block text-black font-semibold mb-2">
                 {field.charAt(0).toUpperCase() + field.slice(1)}
               </label>
               <input
-                type={field==="email"?"email":field==="phone"?"tel":"text"}
+                type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
                 name={field}
                 required
                 value={formValues[field as keyof typeof formValues]}
                 onFocus={() => handleFocus(field)}
                 onChange={(e) => handleChange(field, e.target.value)}
                 placeholder={templateValues[field as keyof typeof templateValues]}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400 placeholder-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-700 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-black placeholder-gray-500"
               />
             </div>
           ))}
@@ -142,7 +144,7 @@ const ContactSection: React.FC = () => {
               onFocus={() => handleFocus("message")}
               onChange={(e) => handleChange("message", e.target.value)}
               placeholder={templateValues.message}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-blue-400 placeholder-gray-400 resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-700 focus:border-transparent transition hover:shadow-lg hover:scale-105 text-black placeholder-gray-500 resize-none"
             />
           </div>
 
@@ -150,7 +152,7 @@ const ContactSection: React.FC = () => {
             type="submit"
             className="w-full text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all animate-glow-button hover-glow"
             style={{
-              background: `linear-gradient(90deg, hsl(${hue}, 100%, 50%), hsl(${(hue + 10) % 60}, 100%, 50%), hsl(${(hue + 20) % 60}, 100%, 50%))`,
+              background: "#000",
             }}
           >
             Send Message
@@ -161,15 +163,15 @@ const ContactSection: React.FC = () => {
       </div>
 
       <style>{`
-        @keyframes float {0% { transform: translateY(0px); opacity: 0.3; }50% { transform: translateY(-20px); opacity: 0.6; }100% { transform: translateY(0px); opacity: 0.3; }}
+        @keyframes float {0% { transform: translateY(0px); opacity: 0.2; }50% { transform: translateY(-20px); opacity: 0.4; }100% { transform: translateY(0px); opacity: 0.2; }}
         .animate-float { animation-name: float; animation-duration: 6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
 
-        @keyframes glowAnimation {0% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }50% { box-shadow: 0 0 20px #fff176, 0 0 40px #ffeb3b; }100% { box-shadow: 0 0 10px #ffea00, 0 0 20px #ffd700; }}
+        @keyframes glowAnimation {0% { box-shadow: 0 0 10px #222, 0 0 20px #000; }50% { box-shadow: 0 0 20px #111, 0 0 40px #222; }100% { box-shadow: 0 0 10px #222, 0 0 20px #000; }}
         .animate-glow { animation: glowAnimation 6s ease-in-out infinite; }
         .animate-glow-button { animation: glowAnimation 4s ease-in-out infinite; }
         .hover-glow:hover { animation: glowAnimation 2s ease-in-out infinite; transform: scale(1.02); }
 
-        @keyframes glowText {0% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }50% { color: hsl(55, 100%, 65%); text-shadow: 0 0 15px #ffeb3b; }100% { color: hsl(50, 100%, 60%); text-shadow: 0 0 5px #fff176; }}
+        @keyframes glowText {0% { color: #000; text-shadow: 0 0 5px #111; }50% { color: #111; text-shadow: 0 0 15px #222; }100% { color: #000; text-shadow: 0 0 5px #111; }}
         .animate-glow-text { animation: glowText 2s ease-in-out infinite; }
       `}</style>
     </section>
