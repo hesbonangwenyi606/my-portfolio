@@ -4,7 +4,7 @@ const ContactSection: React.FC = () => {
   const templateValues = {
     name: "John Doe",
     email: "john.doe@example.com",
-    phone: "+254 700 000 00",
+    phone: "+254 700 000 000",
     subject: "Project Inquiry / Collaboration / Question",
     message:
       "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
