@@ -19,16 +19,29 @@ const ContactSection: React.FC = () => {
   const [result, setResult] = useState("");
   const [hue, setHue] = useState(210); // Blue hue animation
 
+  // Save form to localStorage
   useEffect(() => {
     localStorage.setItem("contactForm", JSON.stringify(formValues));
   }, [formValues]);
 
+  // Hue animation for rainbow/gradient effects
   useEffect(() => {
     const interval = setInterval(() => {
       setHue((prev) => (prev + 0.3) % 360);
     }, 30);
     return () => clearInterval(interval);
   }, []);
+
+  // Auto-reopen form 3 seconds after successful submission
+  useEffect(() => {
+    if (result.includes("Successfully")) {
+      const timer = setTimeout(() => {
+        setResult("");
+        setFormValues(templateValues);
+      }, 3000); // 3 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [result]);
 
   const handleFocus = (field: string) => {
     if (
@@ -130,8 +143,7 @@ const ContactSection: React.FC = () => {
           >
             <h3 className="text-3xl font-bold mb-4">🎉 Thank You!</h3>
             <p className="text-xl mb-6">{result}</p>
-
-            <p className="text-blue-200">You can close this page now.</p>
+            <p className="text-blue-200">Form will reopen automatically...</p>
           </div>
         ) : (
           /* CONTACT FORM */
