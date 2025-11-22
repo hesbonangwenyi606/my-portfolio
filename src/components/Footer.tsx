@@ -5,8 +5,8 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#EA4335' },
     { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606', color: '#333' },
+    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#EA4335' },
     { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/', color: '#0077b5' },
     { icon: FaTwitter, href: 'https://x.com/home', color: '#1DA1F2' },
     { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#25D366' },
