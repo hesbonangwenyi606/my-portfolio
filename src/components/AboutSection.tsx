@@ -4,8 +4,8 @@ import { FaEye } from "react-icons/fa";
 import CountUp from "react-countup";
 
 const stats = [
-  { label: "Years Experience Professional", value: "3+" },
-  { label: "Projects Completed", value: "65+" },
+  { label: "Years Experience", value: "3+" },
+  { label: "Projects Completed", value: "57+" },
   { label: "Clients Served", value: "23+" },
   { label: "Awards Won", value: "17+" },
   { label: "Client Satisfaction", value: "99%" },
