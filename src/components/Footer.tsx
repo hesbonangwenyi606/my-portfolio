@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center gap-5 mt-8">
+        <div className="flex justify-center gap-7 mt-10">
           {socialLinks.map(({ icon: Icon, href, color }, i) => (
             <a
               key={i}
@@ -96,10 +96,10 @@ const Footer: React.FC = () => {
             >
               <div className="absolute inset-0 rounded-full rainbow-rotate"></div>
               <div
-                className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-white bg-gray-900 hover:white-glow transition-transform duration-300 transform hover:scale-110 pulse-icon"
+                className="relative z-11 w-11 h-11 rounded-full flex items-center justify-center text-white bg-gray-900 hover:white-glow transition-transform duration-300 transform hover:scale-110 pulse-icon"
                 style={{ color }}
               >
-                <Icon className="w-7 h-7" />
+                <Icon className="w-8 h-8" />
               </div>
             </a>
           ))}
