@@ -34,7 +34,7 @@ const Icon = memo(({ icon: IconComp, title, color }: any) => (
 const HeroSection: React.FC = () => {
   const roles = [
     'Software Developer',
-    'DevOps Engineer',
+    'DevOp Engineer',
     'Cloud Architect',
     'Problem Solver',
     'Full-Stack Developer',
