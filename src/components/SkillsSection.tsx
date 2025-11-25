@@ -19,6 +19,7 @@ const Stats = () => {
                 { name: "JavaScript (ES6+)", level: 92 },
                 { name: "React.js", level: 90 },
                 { name: "Next.js", level: 85 },
+                { name: "Vue.js", level:75},
                 { name: "TypeScript", level: 80 },
               ]}
             />
