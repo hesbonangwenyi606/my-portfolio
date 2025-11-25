@@ -57,22 +57,20 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location — STATIC WHITE DOTS */}
+          {/* Location */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
 
             {[
-              { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya', type: 'link' },
-              { label: '+254 (0)743-573-380', href: 'tel:+254743573380', type: 'link' },
-              { label: '+254 (0)722-514-540', href: 'tel:+254722514540', type: 'link' },
-              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', type: 'link' },
+              { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya' },
+              { label: '+254 (0)743-573-380', href: 'tel:+254743573380' },
+              { label: '+254 (0)722-514-540', href: 'tel:+254722514540' },
+              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com' },
             ].map((item, i) => (
               <p key={i} className="mb-1 flex items-start gap-3">
                 <span className="text-3xl leading-none text-white">•</span>
                 <a
                   href={item.href}
-                  target={item.type === 'link' && item.href.startsWith('http') ? '_blank' : undefined}
-                  rel={item.type === 'link' && item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   {item.label}
@@ -95,8 +93,12 @@ const Footer: React.FC = () => {
               aria-label="Social Link"
             >
               <div className="absolute inset-0 rounded-full rainbow-rotate"></div>
+
+              {/* Updated hover brighten effect */}
               <div
-                className="relative z-11 w-11 h-11 rounded-full flex items-center justify-center text-white bg-gray-900 hover:white-glow transition-transform duration-300 transform hover:scale-110 pulse-icon"
+                className="relative z-11 w-11 h-11 rounded-full flex items-center justify-center 
+                text-white bg-gray-900 pulse-icon transition-transform duration-300 
+                transform hover:scale-110 hover:brightness-150 icon-bright"
                 style={{ color }}
               >
                 <Icon className="w-8 h-8" />
@@ -138,6 +140,9 @@ const Footer: React.FC = () => {
 
         @keyframes rainbowNeon {0%,100%{text-shadow:0 0 8px #ff0000,0 0 16px #ff7f00,0 0 24px #ffff00,0 0 32px #00ff00,0 0 40px #0000ff,0 0 48px #4b0082,0 0 56px #8f00ff;}50%{text-shadow:0 0 10px #8f00ff,0 0 20px #0000ff,0 0 30px #00ff00,0 0 40px #ffff00,0 0 50px #ff7f00,0 0 60px #ff0000;}}
         .animate-rainbow-neon { animation: rainbowNeon 6s linear infinite; }
+
+        /* Extra brightness effect */
+        .icon-bright:hover { filter: brightness(1.8); }
 
         .white-glow:hover { box-shadow: 0 0 20px #fff,0 0 40px #fff,0 0 60px #fff; }
       `}</style>
