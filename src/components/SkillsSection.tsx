@@ -27,10 +27,11 @@ const Stats = () => {
               title="Backend"
               skills={[
                 { name: "Node.js", level: 90 },
-                { name: "Express.js", level: 88 },
+                { name: "Express.js", level: 80 },
                 { name: "Python", level: 90 },
-                { name: "Java", level: 60 },
+                { name: "Java", level: 50 },
                 { name: "C++", level: 50 },
+                { name: "Flask", level:70},
                 { name: "PHP", level: 75 },
                 { name: "REST APIs", level: 92 },
                 { name: "GraphQL", level: 75 },
@@ -52,10 +53,9 @@ const Stats = () => {
             <SkillCategory
               title="Databases"
               skills={[
-                { name: "MongoDB", level: 90 },
-                { name: "MySQL", level: 88 },
+                { name: "MongoDB", level: 70 },
+                { name: "MySQL", level: 80 },
                 { name: "PostgreSQL", level: 85 },
-                { name: "Redis", level: 75 },
               ]}
             />
             <SkillCategory
