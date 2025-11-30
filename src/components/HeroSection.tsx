@@ -68,7 +68,7 @@ const HeroSection: React.FC = () => {
           setIsDeleting(false);
           setRoleIndex((prev) => (prev + 1) % roles.length);
         }
-        setSpeed(isMobile ? 30 : 50);
+        setSpeed(isMobile ? 50 : 70);
       }
     }, speed);
     return () => clearTimeout(timer);
