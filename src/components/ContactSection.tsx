@@ -137,7 +137,7 @@ const ContactSection: React.FC = () => {
             style={{ color: "#0f4bbd" }}
           >
             Ready to start your next project? Fill out the form below and I’ll
-            get back to you as soon as 24hrs.
+            get back to you within 24hrs.
           </p>
         </div>
 
