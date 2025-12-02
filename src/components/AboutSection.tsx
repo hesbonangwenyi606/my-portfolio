@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import CountUp from "react-countup";
 
 const stats = [
-  { label: "Years Experience", value: "3+" },
+  { label: "Years Experience", value: "2+" },
   { label: "Projects Completed", value: "57+" },
   { label: "Clients Served", value: "23+" },
   { label: "Awards Won", value: "17+" },
@@ -195,7 +195,7 @@ const AboutSection: React.FC = () => {
 
             {[
               {
-                text: "With over 3+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing reliable automation pipelines that streamline deployment.",
+                text: "With over 2+ years of experience in full-stack development and DevOps, I specialize in building scalable web applications and implementing reliable automation pipelines that streamline deployment.",
                 img: "https://i.pinimg.com/736x/ef/e1/5c/efe15c31e146989f9df6277418a5057c.jpg",
               },
               {
