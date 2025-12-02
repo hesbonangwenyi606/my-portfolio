@@ -60,7 +60,6 @@ const Footer: React.FC = () => {
           {/* Location */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
-
             {[
               { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya' },
               { label: '+254 (0)743-573-380', href: 'tel:+254743573380' },
@@ -94,7 +93,6 @@ const Footer: React.FC = () => {
             >
               <div className="absolute inset-0 rounded-full rainbow-rotate"></div>
 
-              {/* Updated hover brighten effect */}
               <div
                 className="relative z-11 w-11 h-11 rounded-full flex items-center justify-center 
                 text-white bg-gray-900 pulse-icon transition-transform duration-300 
@@ -109,7 +107,7 @@ const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-8 text-center">
-          <p className="text-white font-bold text-sm tracking-wider text-transparent bg-clip-text animate-rainbow-neon">
+          <p className="text-white font-bold text-sm tracking-wider">
             © 2021 - {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
@@ -137,9 +135,6 @@ const Footer: React.FC = () => {
 
         @keyframes pulseIcon {0%,100%{transform:scale(1); box-shadow:0 0 10px rgba(255,255,255,0.3);}50%{transform:scale(1.08); box-shadow:0 0 25px rgba(255,255,255,0.8);}}
         .pulse-icon { animation: pulseIcon 3s ease-in-out infinite; }
-
-        @keyframes rainbowNeon {0%,100%{text-shadow:0 0 8px #ff0000,0 0 16px #ff7f00,0 0 24px #ffff00,0 0 32px #00ff00,0 0 40px #0000ff,0 0 48px #4b0082,0 0 56px #8f00ff;}50%{text-shadow:0 0 10px #8f00ff,0 0 20px #0000ff,0 0 30px #00ff00,0 0 40px #ffff00,0 0 50px #ff7f00,0 0 60px #ff0000;}}
-        .animate-rainbow-neon { animation: rainbowNeon 6s linear infinite; }
 
         /* Extra brightness effect */
         .icon-bright:hover { filter: brightness(1.8); }
