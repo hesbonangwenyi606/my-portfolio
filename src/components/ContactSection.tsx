@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
-  const templateValues = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+254 700 000 000",
-    subject: "Project Inquiry / Collaboration / Question",
-    message:
-      "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
+  const initialValues = {
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   };
 
   const savedValues =
@@ -15,7 +14,7 @@ const ContactSection: React.FC = () => {
       ? JSON.parse(localStorage.getItem("contactForm") || "null")
       : null;
 
-  const [formValues, setFormValues] = useState(savedValues || templateValues);
+  const [formValues, setFormValues] = useState(savedValues || initialValues);
   const [result, setResult] = useState("");
   const [hue, setHue] = useState(210); // Blue hue animation
 
@@ -37,20 +36,11 @@ const ContactSection: React.FC = () => {
     if (result.includes("Successfully")) {
       const timer = setTimeout(() => {
         setResult("");
-        setFormValues(templateValues);
-      }, 3000); // 3 seconds
+        setFormValues(initialValues);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [result]);
-
-  const handleFocus = (field: string) => {
-    if (
-      formValues[field as keyof typeof formValues] ===
-      templateValues[field as keyof typeof templateValues]
-    ) {
-      setFormValues((prev) => ({ ...prev, [field]: "" }));
-    }
-  };
 
   const handleChange = (field: string, value: string) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
@@ -72,7 +62,7 @@ const ContactSection: React.FC = () => {
         setResult(
           "✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You"
         );
-        setFormValues(templateValues);
+        setFormValues(initialValues);
         localStorage.removeItem("contactForm");
       } else {
         setResult(data.message || "Failed to send message.");
@@ -130,7 +120,6 @@ const ContactSection: React.FC = () => {
           </p>
         </div>
 
-        {/* SUCCESS SECTION */}
         {result && result.includes("Successfully") ? (
           <div
             className="p-8 rounded-2xl border border-blue-700 shadow-xl text-center animate-glow"
@@ -146,7 +135,6 @@ const ContactSection: React.FC = () => {
             <p className="text-blue-200">Form will reopen automatically...</p>
           </div>
         ) : (
-          /* CONTACT FORM */
           <form
             onSubmit={onSubmit}
             className="space-y-6 p-8 rounded-2xl border border-blue-700 shadow-xl relative transition-all duration-1000 animate-glow hover-glow"
@@ -173,11 +161,7 @@ const ContactSection: React.FC = () => {
                   name={field}
                   required
                   value={formValues[field as keyof typeof formValues]}
-                  onFocus={() => handleFocus(field)}
                   onChange={(e) => handleChange(field, e.target.value)}
-                  placeholder={
-                    templateValues[field as keyof typeof templateValues]
-                  }
                   className="w-full px-4 py-3 border border-blue-500 rounded-lg 
                      focus:ring-2 focus:ring-blue-400 focus:border-transparent 
                      transition hover:shadow-lg hover:scale-105 
@@ -195,9 +179,7 @@ const ContactSection: React.FC = () => {
                 required
                 rows={5}
                 value={formValues.message}
-                onFocus={() => handleFocus("message")}
                 onChange={(e) => handleChange("message", e.target.value)}
-                placeholder={templateValues.message}
                 className="w-full px-4 py-3 border border-blue-500 rounded-lg 
                    focus:ring-2 focus:ring-blue-400 focus:border-transparent 
                    transition hover:shadow-lg hover:scale-105 
