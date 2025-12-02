@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-8 text-center">
           <p className="text-white font-bold text-sm tracking-wider">
-            © 2021 - {currentYear} Hesbon Angwenyi. All rights reserved.
+            © 2023 - {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
       </div>
