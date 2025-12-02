@@ -34,7 +34,6 @@ const Stats = () => {
                 { name: "Flask", level:70},
                 { name: "PHP", level: 75 },
                 { name: "REST APIs", level: 92 },
-                { name: "GraphQL", level: 75 },
               ]}
             />
             <SkillCategory
@@ -56,6 +55,7 @@ const Stats = () => {
                 { name: "MongoDB", level: 70 },
                 { name: "MySQL", level: 80 },
                 { name: "PostgreSQL", level: 85 },
+
               ]}
             />
             <SkillCategory
