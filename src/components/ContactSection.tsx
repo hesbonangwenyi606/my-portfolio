@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
-  const initialValues = {
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
+  const placeholderValues = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phone: "+254 700 000 000",
+    subject: "Project Inquiry / Collaboration / Question",
+    message:
+      "Hello Hesbon, I’d like to discuss a new project idea. Here are the details...",
   };
 
   const savedValues =
@@ -14,16 +15,24 @@ const ContactSection: React.FC = () => {
       ? JSON.parse(localStorage.getItem("contactForm") || "null")
       : null;
 
-  const [formValues, setFormValues] = useState(savedValues || initialValues);
+  const [formValues, setFormValues] = useState(
+    savedValues || {
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    }
+  );
   const [result, setResult] = useState("");
-  const [hue, setHue] = useState(210); // Blue hue animation
+  const [hue, setHue] = useState(210);
 
   // Save form to localStorage
   useEffect(() => {
     localStorage.setItem("contactForm", JSON.stringify(formValues));
   }, [formValues]);
 
-  // Hue animation for rainbow/gradient effects
+  // Hue animation
   useEffect(() => {
     const interval = setInterval(() => {
       setHue((prev) => (prev + 0.3) % 360);
@@ -31,12 +40,18 @@ const ContactSection: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Auto-reopen form 3 seconds after successful submission
+  // Auto-reset form after success
   useEffect(() => {
     if (result.includes("Successfully")) {
       const timer = setTimeout(() => {
         setResult("");
-        setFormValues(initialValues);
+        setFormValues({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -62,7 +77,13 @@ const ContactSection: React.FC = () => {
         setResult(
           "✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You"
         );
-        setFormValues(initialValues);
+        setFormValues({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
         localStorage.removeItem("contactForm");
       } else {
         setResult(data.message || "Failed to send message.");
@@ -162,6 +183,7 @@ const ContactSection: React.FC = () => {
                   required
                   value={formValues[field as keyof typeof formValues]}
                   onChange={(e) => handleChange(field, e.target.value)}
+                  placeholder={placeholderValues[field as keyof typeof placeholderValues]}
                   className="w-full px-4 py-3 border border-blue-500 rounded-lg 
                      focus:ring-2 focus:ring-blue-400 focus:border-transparent 
                      transition hover:shadow-lg hover:scale-105 
@@ -180,6 +202,7 @@ const ContactSection: React.FC = () => {
                 rows={5}
                 value={formValues.message}
                 onChange={(e) => handleChange("message", e.target.value)}
+                placeholder={placeholderValues.message}
                 className="w-full px-4 py-3 border border-blue-500 rounded-lg 
                    focus:ring-2 focus:ring-blue-400 focus:border-transparent 
                    transition hover:shadow-lg hover:scale-105 
