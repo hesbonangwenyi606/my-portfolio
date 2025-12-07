@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface ExperienceItem {
@@ -79,9 +79,19 @@ const generateSparkles = (count: number) => {
 const sparkles = generateSparkles(30);
 
 const Experience: React.FC = () => {
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMouse({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <section className="relative py-16 bg-gray-900 overflow-hidden">
-      {/* Sparkles in background */}
+      {/* Cursor-reactive sparkles */}
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
@@ -92,18 +102,22 @@ const Experience: React.FC = () => {
             width: sparkle.size,
             height: sparkle.size,
           }}
-          animate={{ y: ["0%", "10%", "0%"] }}
+          animate={{
+            x: (mouse.x / window.innerWidth - 0.5) * 50, // move horizontally relative to cursor
+            y: (mouse.y / window.innerHeight - 0.5) * 50, // move vertically relative to cursor
+          }}
           transition={{
-            duration: 3,
+            duration: 1.5,
             repeat: Infinity,
             repeatType: "mirror",
+            ease: "easeInOut",
             delay: sparkle.delay,
           }}
         />
       ))}
 
-      <div className="relative max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center text-teal-400 mb-8 z-10 relative">
+      <div className="relative max-w-6xl mx-auto px-6 z-10">
+        <h2 className="text-3xl font-bold text-center text-teal-400 mb-8 relative z-10">
           Work Experience
         </h2>
 
