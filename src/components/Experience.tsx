@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Server, Monitor, Code2 } from "lucide-react"; // ← ICONS ADDED
+import { Server, Monitor, Code2 } from "lucide-react";
 
 interface ExperienceItem {
   title: string;
@@ -11,9 +11,9 @@ interface ExperienceItem {
 }
 
 const iconMap: Record<string, JSX.Element> = {
-  "Backend Developer Intern": <Server className="w-7 h-7 text-blue-600" />,
-  "Front-End Developer Intern": <Monitor className="w-7 h-7 text-blue-600" />,
-  "Full Stack Software Engineer": <Code2 className="w-7 h-7 text-blue-600" />,
+  "Backend Developer Intern": <Server className="w-6 h-6 text-white" />,
+  "Front-End Developer Intern": <Monitor className="w-6 h-6 text-white" />,
+  "Full Stack Software Engineer": <Code2 className="w-6 h-6 text-white" />,
 };
 
 const experiences: ExperienceItem[] = [
@@ -74,38 +74,58 @@ const experiences: ExperienceItem[] = [
 
 const Experience: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-blue-50">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-12">
+    <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+      <div className="max-w-5xl mx-auto px-6">
+        <h2 className="text-4xl font-bold text-center text-blue-700 mb-16">
           Work Experience
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {experiences.map((exp, idx) => (
-            <motion.div
-              key={idx}
-              className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-            >
-              {/* ICON + TITLE */}
-              <div className="flex items-center gap-3 mb-3">
-                {iconMap[exp.title] || <Code2 className="w-7 h-7 text-blue-600" />}
-                <h3 className="text-xl font-semibold text-blue-800">{exp.title}</h3>
-              </div>
+        <div className="relative">
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-6 top-0 w-1 h-full bg-blue-200 rounded-full" />
 
-              <p className="text-blue-600 font-medium">{exp.company}</p>
-              <p className="text-sm text-gray-500 italic mb-4">{exp.period}</p>
+          <div className="space-y-16">
+            {experiences.map((exp, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.2 }}
+                className="relative pl-20"
+              >
+                {/* ICON AREA */}
+                <motion.div
+                  initial={{ scale: 0.7 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute left-0 top-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 shadow-lg flex items-center justify-center"
+                >
+                  {iconMap[exp.title] || (
+                    <Code2 className="w-6 h-6 text-white" />
+                  )}
+                </motion.div>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
-                {exp.responsibilities.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+                {/* CARD */}
+                <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300">
+                  <h3 className="text-xl font-semibold text-blue-800 mb-1">
+                    {exp.title}
+                  </h3>
+
+                  <p className="text-blue-600 font-medium">{exp.company}</p>
+                  <p className="text-sm text-gray-500 italic mb-4">
+                    {exp.period}
+                  </p>
+
+                  <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+                    {exp.responsibilities.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
