@@ -112,7 +112,15 @@ const Experience: React.FC = () => {
 
               <ul className="list-disc list-inside space-y-2 text-gray-300 leading-relaxed relative z-10">
                 {exp.responsibilities.map((item, i) => (
-                  <li key={i}>{item}</li>
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                  >
+                    {item}
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
