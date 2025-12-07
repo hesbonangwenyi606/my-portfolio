@@ -65,7 +65,6 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
-// Generate sparkles
 const generateSparkles = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -92,20 +91,24 @@ const Experience: React.FC = () => {
       className="relative py-16 bg-gray-900 overflow-hidden font-serif"
       style={{ fontFamily: '"Times New Roman", Times, serif' }}
     >
-      {/* Sparkles */}
+      {/* Pulsating & cursor-reactive sparkles */}
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
-          className="absolute bg-teal-400 rounded-full opacity-50"
+          className="absolute rounded-full"
           style={{
             top: sparkle.top,
             left: sparkle.left,
             width: sparkle.size,
             height: sparkle.size,
+            backgroundColor: "#14B8A6", // teal color
+            boxShadow: "0 0 10px #14B8A6, 0 0 20px #14B8A6",
           }}
           animate={{
             y: [0, 10 * Math.random(), -10 * Math.random(), 0],
             x: [0, 10 * Math.random(), -10 * Math.random(), 0],
+            opacity: [0.3, 0.7, 0.3], // pulsate
+            scale: [0.8, 1.2, 0.8], // subtle growth/shrink
           }}
           transition={{
             duration: sparkle.speed,
