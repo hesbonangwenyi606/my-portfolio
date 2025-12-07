@@ -65,16 +65,16 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
-// Generate random sparkles
-const generateSparkles = (count: number) => {
-  return Array.from({ length: count }, (_, i) => ({
+// Generate sparkles
+const generateSparkles = (count: number) =>
+  Array.from({ length: count }, (_, i) => ({
     id: i,
     top: Math.random() * 100 + "%",
     left: Math.random() * 100 + "%",
     size: Math.random() * 3 + 1 + "px",
     delay: Math.random() * 5,
+    speed: Math.random() * 2 + 1,
   }));
-};
 
 const sparkles = generateSparkles(30);
 
@@ -82,16 +82,17 @@ const Experience: React.FC = () => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
-    };
+    const handleMouseMove = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
-    <section className="relative py-16 bg-gray-900 overflow-hidden">
-      {/* Cursor-reactive sparkles */}
+    <section
+      className="relative py-16 bg-gray-900 overflow-hidden font-serif"
+      style={{ fontFamily: '"Times New Roman", Times, serif' }}
+    >
+      {/* Sparkles */}
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
@@ -103,11 +104,11 @@ const Experience: React.FC = () => {
             height: sparkle.size,
           }}
           animate={{
-            x: (mouse.x / window.innerWidth - 0.5) * 50, // move horizontally relative to cursor
-            y: (mouse.y / window.innerHeight - 0.5) * 50, // move vertically relative to cursor
+            y: [0, 10 * Math.random(), -10 * Math.random(), 0],
+            x: [0, 10 * Math.random(), -10 * Math.random(), 0],
           }}
           transition={{
-            duration: 1.5,
+            duration: sparkle.speed,
             repeat: Infinity,
             repeatType: "mirror",
             ease: "easeInOut",
@@ -121,12 +122,12 @@ const Experience: React.FC = () => {
           Work Experience
         </h2>
 
-        {/* Hero / About My Experience */}
+        {/* About Me */}
         <motion.div
           className="mb-12 text-gray-300 leading-relaxed text-center max-w-3xl mx-auto relative z-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
         >
           <p>
@@ -146,15 +147,12 @@ const Experience: React.FC = () => {
               className="relative bg-gray-800 rounded-2xl p-6 shadow-lg overflow-hidden cursor-pointer group"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
             >
-              {/* Animated Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-all duration-500 rounded-2xl pointer-events-none"></div>
 
-              <h3 className="text-xl font-semibold text-teal-400 mb-1 relative z-10">
-                {exp.title}
-              </h3>
+              <h3 className="text-xl font-semibold text-teal-400 mb-1 relative z-10">{exp.title}</h3>
               <p className="text-teal-300 font-medium relative z-10">{exp.company}</p>
               <p className="text-sm text-gray-400 italic mb-4 relative z-10">{exp.period}</p>
 
@@ -164,7 +162,7 @@ const Experience: React.FC = () => {
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                   >
                     {item}
