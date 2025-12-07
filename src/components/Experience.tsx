@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Server, Monitor, Code2 } from "lucide-react";
 
 interface ExperienceItem {
   title: string;
@@ -9,12 +8,6 @@ interface ExperienceItem {
   period: string;
   responsibilities: string[];
 }
-
-const iconMap: Record<string, JSX.Element> = {
-  "Backend Developer Intern": <Server className="w-6 h-6 text-white" />,
-  "Front-End Developer Intern": <Monitor className="w-6 h-6 text-white" />,
-  "Full Stack Software Engineer": <Code2 className="w-6 h-6 text-white" />,
-};
 
 const experiences: ExperienceItem[] = [
   {
@@ -74,58 +67,56 @@ const experiences: ExperienceItem[] = [
 
 const Experience: React.FC = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-blue-50">
-      <div className="max-w-5xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-blue-700 mb-16">
+    <section className="py-16 bg-gray-900">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center text-teal-400 mb-8">
           Work Experience
         </h2>
 
-        <div className="relative">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-6 top-0 w-1 h-full bg-blue-200 rounded-full" />
+        {/* Hero / About My Experience */}
+        <motion.div
+          className="mb-12 text-gray-300 leading-relaxed text-center max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <p>
+            I build <span className="text-teal-400 font-semibold">scalable backend systems</span>,{" "}
+            <span className="text-teal-400 font-semibold">interactive frontends</span>, and{" "}
+            <span className="text-teal-400 font-semibold">end-to-end applications</span> through
+            hands-on projects and internships. Skilled in{" "}
+            <span className="text-teal-400 font-semibold">Node.js, Express, MongoDB, React, and TypeScript</span>, I deliver clean, maintainable code and reliable, user-focused solutions. I thrive on solving complex problems and turning ideas into production-ready applications.
+          </p>
+        </motion.div>
 
-          <div className="space-y-16">
-            {experiences.map((exp, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
-                className="relative pl-20"
-              >
-                {/* ICON AREA */}
-                <motion.div
-                  initial={{ scale: 0.7 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute left-0 top-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 shadow-lg flex items-center justify-center"
-                >
-                  {iconMap[exp.title] || (
-                    <Code2 className="w-6 h-6 text-white" />
-                  )}
-                </motion.div>
+        {/* Experience Cards */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              className="relative bg-gray-800 rounded-2xl p-6 shadow-lg overflow-hidden cursor-pointer group"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
+            >
+              {/* Animated Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-all duration-500 rounded-2xl pointer-events-none"></div>
 
-                {/* CARD */}
-                <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300">
-                  <h3 className="text-xl font-semibold text-blue-800 mb-1">
-                    {exp.title}
-                  </h3>
+              <h3 className="text-xl font-semibold text-teal-400 mb-1 relative z-10">
+                {exp.title}
+              </h3>
+              <p className="text-teal-300 font-medium relative z-10">{exp.company}</p>
+              <p className="text-sm text-gray-400 italic mb-4 relative z-10">{exp.period}</p>
 
-                  <p className="text-blue-600 font-medium">{exp.company}</p>
-                  <p className="text-sm text-gray-500 italic mb-4">
-                    {exp.period}
-                  </p>
-
-                  <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
-                    {exp.responsibilities.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 leading-relaxed relative z-10">
+                {exp.responsibilities.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
