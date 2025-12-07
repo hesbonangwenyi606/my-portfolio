@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { FaServer, FaDesktop, FaCode } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FaServer, FaDesktop, FaCode, FaPaperPlane } from "react-icons/fa";
 
 interface ExperienceItem {
   title: string;
@@ -71,7 +71,7 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
-// Sparkles
+// Sparkles generator
 const generateSparkles = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -158,7 +158,7 @@ const Experience: React.FC = () => {
       ))}
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Rainbow Gradient Title */}
+        {/* Title */}
         <motion.h2
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient"
           initial={{ opacity: 0, y: -20 }}
@@ -169,7 +169,7 @@ const Experience: React.FC = () => {
         </motion.h2>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Zigzag Timeline Arrow */}
+          {/* Timeline arrow */}
           <svg className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full pointer-events-none">
             <defs>
               <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -180,14 +180,7 @@ const Experience: React.FC = () => {
                 <stop offset="80%" stopColor="#00ffff" />
                 <stop offset="100%" stopColor="#ff00ff" />
               </linearGradient>
-              <marker
-                id="arrowhead"
-                markerWidth="10"
-                markerHeight="10"
-                refX="5"
-                refY="5"
-                orient="auto"
-              >
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
                 <polygon points="0 0, 10 5, 0 10" fill="url(#timelineGradient)" />
               </marker>
             </defs>
@@ -195,7 +188,7 @@ const Experience: React.FC = () => {
             <motion.path
               d={experiences
                 .map((_, idx) => {
-                  const x = idx % 2 === 0 ? 60 : 40; // zigzag
+                  const x = idx % 2 === 0 ? 60 : 40;
                   const y = (idx * 100) / (experiences.length - 1);
                   return `${idx === 0 ? "M" : "L"}${x}% ${y}%`;
                 })
@@ -211,62 +204,66 @@ const Experience: React.FC = () => {
             />
           </svg>
 
-          {/* Experience Cards */}
-          {experiences.map((exp, idx) => {
-            const ref = useRef(null);
-            const isInView = useInView(ref, { once: false, margin: "-50%" });
-            const controls = useAnimation();
+          {/* Experience cards */}
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer z-10 border border-white/10 overflow-hidden"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={{ once: false }}
+              onMouseEnter={() => setHoveredCard(idx)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <motion.div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
+              <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
+              <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
+              <p className="text-teal-300 font-medium text-center mb-1">
+                <a
+                  href={exp.companyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-200"
+                >
+                  {exp.company}
+                </a>
+              </p>
+              <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
+              <div className="space-y-2 text-gray-300 text-sm">
+                {exp.responsibilities.map((item, i) => (
+                  <motion.p key={i} custom={i} variants={itemVariants}>
+                    • {item}
+                  </motion.p>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-            useEffect(() => {
-              if (isInView) {
-                controls.start({
-                  opacity: [0.5, 1, 0.5],
-                  transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                });
-              }
-            }, [isInView, controls]);
-
-            return (
-              <motion.div
-                key={idx}
-                ref={ref}
-                className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer z-10 border border-white/10 overflow-hidden"
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: false }}
-                onMouseEnter={() => setHoveredCard(idx)}
-                onMouseLeave={() => setHoveredCard(null)}
-                animate={controls}
-              >
-                {/* Rainbow glow overlay */}
-                <motion.div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
-
-                <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
-                <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
-                <p className="text-teal-300 font-medium text-center mb-1">
-                  <a
-                    href={exp.companyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-200"
-                  >
-                    {exp.company}
-                  </a>
-                </p>
-                <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
-
-                <div className="space-y-2 text-gray-300 text-sm">
-                  {exp.responsibilities.map((item, i) => (
-                    <motion.p key={i} custom={i} variants={itemVariants}>
-                      • {item}
-                    </motion.p>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Hire Me Button at the bottom */}
+        <div className="flex justify-center mt-12">
+          <motion.div
+            className="flex items-center gap-2 px-6 py-3 bg-gray-900/80 backdrop-blur-md rounded-full text-white font-bold shadow-lg cursor-pointer"
+            animate={{
+              boxShadow: [
+                "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
+                "0 0 15px #00ff00, 0 0 25px #00ffff, 0 0 35px #ff00ff",
+                "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
+              ],
+              rotate: [0, 15, -15, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+          >
+            <FaPaperPlane className="text-white" />
+            Hire Me
+          </motion.div>
         </div>
       </div>
 
