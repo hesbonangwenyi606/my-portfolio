@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaServer, FaDesktop, FaCode } from "react-icons/fa";
 
 interface ExperienceItem {
   title: string;
   company: string;
   period: string;
   responsibilities: string[];
+  icon: React.ReactNode;
 }
 
 const experiences: ExperienceItem[] = [
@@ -14,6 +16,7 @@ const experiences: ExperienceItem[] = [
     title: "Backend Developer Intern",
     company: "HNG Internship",
     period: "Dec 2024 – Oct 2025",
+    icon: <FaServer size={24} className="text-teal-400" />,
     responsibilities: [
       "Developed and maintained scalable backend services for production-level projects.",
       "Built efficient API endpoints using Node.js, Express.js, and MongoDB.",
@@ -27,6 +30,7 @@ const experiences: ExperienceItem[] = [
     title: "Front-End Developer Intern",
     company: "Valos Company",
     period: "Aug 2024 – Nov 2024",
+    icon: <FaDesktop size={24} className="text-teal-400" />,
     responsibilities: [
       "Designed and implemented user-friendly UI components using React.js, JavaScript, HTML, and CSS.",
       "Worked closely with designers and backend developers to ensure smooth API integration.",
@@ -40,6 +44,7 @@ const experiences: ExperienceItem[] = [
     title: "Backend Developer Intern",
     company: "Techno Brain Company",
     period: "Apr 2023 – Apr 2024",
+    icon: <FaServer size={24} className="text-teal-400" />,
     responsibilities: [
       "Developed and optimized RESTful APIs using Node.js, Express.js, and MongoDB.",
       "Implemented secure authentication and authorization mechanisms.",
@@ -54,6 +59,7 @@ const experiences: ExperienceItem[] = [
     title: "Full Stack Software Engineer",
     company: "Personal Projects / Freelance",
     period: "2022 – 2023",
+    icon: <FaCode size={24} className="text-teal-400" />,
     responsibilities: [
       "Built 15+ RESTful APIs using FastAPI (Python) and Node.js.",
       "Containerized applications using Docker for consistent deployment across environments.",
@@ -91,7 +97,7 @@ const Experience: React.FC = () => {
       className="relative py-16 bg-gray-900 overflow-hidden font-serif"
       style={{ fontFamily: '"Times New Roman", Times, serif' }}
     >
-      {/* Pulsating & cursor-reactive sparkles */}
+      {/* Sparkles */}
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
@@ -101,14 +107,14 @@ const Experience: React.FC = () => {
             left: sparkle.left,
             width: sparkle.size,
             height: sparkle.size,
-            backgroundColor: "#14B8A6", // teal color
+            backgroundColor: "#14B8A6",
             boxShadow: "0 0 10px #14B8A6, 0 0 20px #14B8A6",
           }}
           animate={{
             y: [0, 10 * Math.random(), -10 * Math.random(), 0],
             x: [0, 10 * Math.random(), -10 * Math.random(), 0],
-            opacity: [0.3, 0.7, 0.3], // pulsate
-            scale: [0.8, 1.2, 0.8], // subtle growth/shrink
+            opacity: [0.3, 0.7, 0.3],
+            scale: [0.8, 1.2, 0.8],
           }}
           transition={{
             duration: sparkle.speed,
@@ -125,7 +131,6 @@ const Experience: React.FC = () => {
           Work Experience
         </h2>
 
-        {/* About Me */}
         <motion.div
           className="mb-12 text-gray-300 leading-relaxed text-center max-w-3xl mx-auto relative z-10"
           initial={{ opacity: 0, y: 20 }}
@@ -142,7 +147,6 @@ const Experience: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Experience Cards */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 relative z-10">
           {experiences.map((exp, idx) => (
             <motion.div
@@ -153,7 +157,8 @@ const Experience: React.FC = () => {
               viewport={{ once: false }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-all duration-500 rounded-2xl pointer-events-none"></div>
+              {/* Icon */}
+              <div className="mb-4">{exp.icon}</div>
 
               <h3 className="text-xl font-semibold text-teal-400 mb-1 relative z-10">{exp.title}</h3>
               <p className="text-teal-300 font-medium relative z-10">{exp.company}</p>
