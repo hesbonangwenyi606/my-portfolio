@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { FaServer, FaDesktop, FaCode } from "react-icons/fa";
 
 interface ExperienceItem {
@@ -85,7 +85,7 @@ const generateSparkles = (count: number) =>
 const sparkles = generateSparkles(40);
 
 const Experience: React.FC = () => {
-  const [hoveredLine, setHoveredLine] = useState<number | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -169,31 +169,10 @@ const Experience: React.FC = () => {
         </motion.h2>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Animated connecting rainbow lines */}
-          <svg className="hidden md:block absolute w-full h-full pointer-events-none">
-            {[
-              { x1: "10%", y1: "10%", x2: "90%", y2: "10%" },
-              { x1: "90%", y1: "10%", x2: "10%", y2: "90%" },
-              { x1: "10%", y1: "90%", x2: "90%", y2: "90%" },
-            ].map((line, idx) => (
-              <motion.line
-                key={idx}
-                {...line}
-                stroke="url(#rainbowGradient)"
-                strokeWidth={2}
-                strokeDasharray="6"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                animate={
-                  hoveredLine === idx
-                    ? { strokeWidth: 4 }
-                    : {}
-                }
-                transition={{ duration: 1.4, delay: idx * 0.2 }}
-              />
-            ))}
+          {/* Zigzag Timeline Arrow */}
+          <svg className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full pointer-events-none">
             <defs>
-              <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#ff0000" />
                 <stop offset="20%" stopColor="#ff9900" />
                 <stop offset="40%" stopColor="#ffff00" />
@@ -201,52 +180,96 @@ const Experience: React.FC = () => {
                 <stop offset="80%" stopColor="#00ffff" />
                 <stop offset="100%" stopColor="#ff00ff" />
               </linearGradient>
+              <marker
+                id="arrowhead"
+                markerWidth="10"
+                markerHeight="10"
+                refX="5"
+                refY="5"
+                orient="auto"
+              >
+                <polygon points="0 0, 10 5, 0 10" fill="url(#timelineGradient)" />
+              </marker>
             </defs>
+
+            <motion.path
+              d={experiences
+                .map((_, idx) => {
+                  const x = idx % 2 === 0 ? 60 : 40; // zigzag
+                  const y = (idx * 100) / (experiences.length - 1);
+                  return `${idx === 0 ? "M" : "L"}${x}% ${y}%`;
+                })
+                .join(" ")}
+              fill="transparent"
+              stroke="url(#timelineGradient)"
+              strokeWidth={4}
+              markerEnd="url(#arrowhead)"
+              strokeDasharray="8 4"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
           </svg>
 
           {/* Experience Cards */}
-          {experiences.map((exp, idx) => (
-            <motion.div
-              key={idx}
-              className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer z-10 border border-white/10 overflow-hidden"
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: false }}
-              onMouseEnter={() => setHoveredLine(idx)}
-              onMouseLeave={() => setHoveredLine(null)}
-            >
-              {/* Rainbow glow overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl"></div>
+          {experiences.map((exp, idx) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: false, margin: "-50%" });
+            const controls = useAnimation();
 
-              <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
-              <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
-              <p className="text-teal-300 font-medium text-center mb-1">
-                <a
-                  href={exp.companyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-teal-200"
-                >
-                  {exp.company}
-                </a>
-              </p>
-              <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
+            useEffect(() => {
+              if (isInView) {
+                controls.start({
+                  opacity: [0.5, 1, 0.5],
+                  transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                });
+              }
+            }, [isInView, controls]);
 
-              <div className="space-y-2 text-gray-300 text-sm">
-                {exp.responsibilities.map((item, i) => (
-                  <motion.p key={i} custom={i} variants={itemVariants}>
-                    • {item}
-                  </motion.p>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                key={idx}
+                ref={ref}
+                className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer z-10 border border-white/10 overflow-hidden"
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: false }}
+                onMouseEnter={() => setHoveredCard(idx)}
+                onMouseLeave={() => setHoveredCard(null)}
+                animate={controls}
+              >
+                {/* Rainbow glow overlay */}
+                <motion.div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
+
+                <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
+                <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
+                <p className="text-teal-300 font-medium text-center mb-1">
+                  <a
+                    href={exp.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-teal-200"
+                  >
+                    {exp.company}
+                  </a>
+                </p>
+                <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
+
+                <div className="space-y-2 text-gray-300 text-sm">
+                  {exp.responsibilities.map((item, i) => (
+                    <motion.p key={i} custom={i} variants={itemVariants}>
+                      • {item}
+                    </motion.p>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Tailwind Custom Gradient Animation */}
       <style>{`
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
