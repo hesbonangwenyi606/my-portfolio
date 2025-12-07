@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaServer, FaDesktop, FaCode } from "react-icons/fa";
 
@@ -71,32 +71,99 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
+// Generate sparkles for background
+const generateSparkles = (count: number) =>
+  Array.from({ length: count }, (_, i) => ({
+    id: i,
+    top: Math.random() * 100 + "%",
+    left: Math.random() * 100 + "%",
+    size: Math.random() * 3 + 1 + "px",
+    delay: Math.random() * 5,
+    speed: Math.random() * 2 + 1,
+  }));
+
+const sparkles = generateSparkles(40);
+
 const Experience: React.FC = () => {
   const [hoveredLine, setHoveredLine] = useState<number | null>(null);
 
-  const lineVariants = {
-    hidden: { pathLength: 0 },
-    visible: { pathLength: 1 },
-    hover: { stroke: "#22D3EE", strokeWidth: 4, filter: "drop-shadow(0 0 6px #22D3EE)" },
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, rotate: -5, scale: 0.95 },
+    visible: { opacity: 1, y: 0, rotate: 0, scale: 1, transition: { duration: 0.7, type: "spring", stiffness: 120 } },
+    hover: { scale: 1.05, rotate: 1, transition: { type: "spring", stiffness: 300 } },
   };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: { delay: i * 0.1, duration: 0.4 },
+    }),
+  };
+
+  // Optional: Track mouse for parallax effect
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <section
-      className="py-16 bg-gray-900 font-serif relative"
+      className="py-16 bg-gray-900 font-serif relative overflow-hidden"
       style={{ fontFamily: '"Times New Roman", Times, serif' }}
     >
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center text-teal-400 mb-12">
-          Work Experience
-        </h2>
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 -z-10 bg-cover bg-center opacity-20"
+        style={{
+          backgroundImage:
+            "url('https://i.pinimg.com/1200x/4f/a0/f8/4fa0f8d32fac31b4ae03ee9c60f034fb.jpg')",
+          transform: `translate(${mouse.x * 0.01}px, ${mouse.y * 0.01}px)`,
+        }}
+      />
+
+      {/* Sparkles */}
+      {sparkles.map((sparkle) => (
+        <motion.div
+          key={sparkle.id}
+          className="absolute rounded-full"
+          style={{
+            top: sparkle.top,
+            left: sparkle.left,
+            width: sparkle.size,
+            height: sparkle.size,
+            backgroundColor: "#14B8A6",
+            boxShadow: "0 0 10px #14B8A6, 0 0 20px #14B8A6",
+          }}
+          animate={{
+            y: [0, 10 * Math.random(), -10 * Math.random(), 0],
+            x: [0, 10 * Math.random(), -10 * Math.random(), 0],
+            opacity: [0.3, 0.7, 0.3],
+            scale: [0.8, 1.2, 0.8],
+          }}
+          transition={{
+            duration: sparkle.speed,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+            delay: sparkle.delay,
+          }}
+        />
+      ))}
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <h2 className="text-3xl font-bold text-center text-teal-400 mb-12">Work Experience</h2>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Animated Connecting Lines */}
           <svg className="hidden md:block absolute w-full h-full pointer-events-none">
             {[
-              { x1: "10%", y1: "10%", x2: "90%", y2: "10%" }, // Top row
-              { x1: "90%", y1: "10%", x2: "10%", y2: "90%" }, // diagonal
-              { x1: "10%", y1: "90%", x2: "90%", y2: "90%" }, // bottom row
+              { x1: "10%", y1: "10%", x2: "90%", y2: "10%" },
+              { x1: "90%", y1: "10%", x2: "10%", y2: "90%" },
+              { x1: "10%", y1: "90%", x2: "90%", y2: "90%" },
             ].map((line, idx) => (
               <motion.line
                 key={idx}
@@ -104,10 +171,9 @@ const Experience: React.FC = () => {
                 stroke="#14B8A6"
                 strokeWidth={2}
                 strokeDasharray="4"
-                variants={lineVariants}
-                initial="hidden"
-                whileInView="visible"
-                animate={hoveredLine === idx ? "hover" : "visible"}
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                animate={hoveredLine === idx ? { stroke: "#22D3EE", strokeWidth: 4 } : {}}
                 transition={{ duration: 1.2, delay: idx * 0.3 }}
               />
             ))}
@@ -116,11 +182,12 @@ const Experience: React.FC = () => {
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
-              className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition cursor-pointer relative z-10"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="bg-gray-800 p-6 rounded-2xl shadow-lg cursor-pointer relative z-10"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
               viewport={{ once: false }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
               onMouseEnter={() => setHoveredLine(idx)}
               onMouseLeave={() => setHoveredLine(null)}
             >
@@ -139,7 +206,9 @@ const Experience: React.FC = () => {
               <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
               <div className="space-y-2 text-gray-300 text-sm">
                 {exp.responsibilities.map((item, i) => (
-                  <p key={i}>• {item}</p>
+                  <motion.p key={i} custom={i} variants={itemVariants}>
+                    • {item}
+                  </motion.p>
                 ))}
               </div>
             </motion.div>
