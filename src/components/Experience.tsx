@@ -29,7 +29,7 @@ const experiences: ExperienceItem[] = [
   },
   {
     title: "Front-End Developer Intern",
-    company: "Valos Company",
+    company: "Valos.ai",
     companyUrl: "https://valos.ai/",
     period: "Aug 2024 – Nov 2024",
     icon: <FaDesktop size={32} className="text-teal-400" />,
@@ -43,7 +43,7 @@ const experiences: ExperienceItem[] = [
   },
   {
     title: "Backend Developer Intern",
-    company: "Techno Brain Company",
+    company: "Techno Brain Group",
     companyUrl: "https://www.technobraingroup.com/",
     period: "Apr 2023 – Apr 2024",
     icon: <FaServer size={32} className="text-teal-400" />,
