@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import HeroSection from './HeroSection';
 import AboutSection from './AboutSection';
 import SkillsSection from './SkillsSection';
+import Experience from './Experience'; // <-- Import Experience here
 import ProjectsSection from './ProjectsSection';
 import TestimonialsSection from './TestimonialsSection';
 import ContactSection from './ContactSection';
@@ -17,6 +18,7 @@ const AppLayout: React.FC = () => {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
+        <Experience /> {/* <-- Add Experience right after Skills */}
         <ProjectsSection />
         <TestimonialsSection />
         <ContactSection />
