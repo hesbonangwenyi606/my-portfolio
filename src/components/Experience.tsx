@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaServer, FaDesktop, FaCode, FaPaperPlane } from "react-icons/fa";
+import { FaServer, FaDesktop, FaCode, FaEnvelope } from "react-icons/fa";
 
 interface ExperienceItem {
   title: string;
@@ -82,18 +82,71 @@ const generateSparkles = (count: number) =>
     speed: Math.random() * 2 + 1,
   }));
 
-const sparkles = generateSparkles(40);
+const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
+  const [displayed, setDisplayed] = useState("");
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setDisplayed(text.slice(0, index + 1));
+        setIndex(index + 1);
+        if (index + 1 === text.length) setDeleting(true);
+      } else {
+        setDisplayed(text.slice(0, index - 1));
+        setIndex(index - 1);
+        if (index - 1 === 0) setDeleting(false);
+      }
+    }, deleting ? 80 : 120);
+    return () => clearTimeout(timeout);
+  }, [index, deleting, text]);
+
+  return (
+    <span className="overflow-hidden text-white font-bold text-lg">
+      {displayed}
+      <span className="animate-blink">|</span>
+      <style>{`
+        @keyframes blink {
+          0%, 50%, 100% { opacity: 1; }
+          25%, 75% { opacity: 0; }
+        }
+        .animate-blink {
+          display: inline-block;
+          margin-left: 2px;
+          animation: blink 1s infinite;
+        }
+      `}</style>
+    </span>
+  );
+};
 
 const Experience: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [sparkles, setSparkles] = useState(generateSparkles(40));
 
+  // Parallax background
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) =>
-      setMouse({ x: e.clientX, y: e.clientY });
+      setMouse({
+        x: Math.min(Math.max(e.clientX * 0.01, -20), 20),
+        y: Math.min(Math.max(e.clientY * 0.01, -20), 20),
+      });
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  // Card mouse tilt
+  const handleCardMouseMove = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
+    setMouseTilt({ x, y });
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
@@ -103,13 +156,13 @@ const Experience: React.FC = () => {
       scale: 1,
       transition: { duration: 0.9, ease: "easeOut" },
     },
-    hover: {
+    hover: (idx: number) => ({
       scale: 1.06,
-      rotateY: 6,
-      rotateX: 3,
+      rotateX: hoveredCard === idx ? mouseTilt.y : 0,
+      rotateY: hoveredCard === idx ? mouseTilt.x : 0,
       boxShadow: "0 0 25px #ff00ff, 0 0 50px #00ffff",
       transition: { type: "spring", stiffness: 200, damping: 12 },
-    },
+    }),
   };
 
   const itemVariants = {
@@ -130,7 +183,7 @@ const Experience: React.FC = () => {
           backgroundImage:
             "url('https://i.pinimg.com/1200x/4f/a0/f8/4fa0f8d32fac31b4ae03ee9c60f034fb.jpg')",
         }}
-        animate={{ x: mouse.x * 0.01, y: mouse.y * 0.01 }}
+        animate={{ x: mouse.x, y: mouse.y }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       />
 
@@ -169,53 +222,23 @@ const Experience: React.FC = () => {
         </motion.h2>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Timeline arrow */}
-          <svg className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full pointer-events-none">
-            <defs>
-              <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#ff0000" />
-                <stop offset="20%" stopColor="#ff9900" />
-                <stop offset="40%" stopColor="#ffff00" />
-                <stop offset="60%" stopColor="#00ff00" />
-                <stop offset="80%" stopColor="#00ffff" />
-                <stop offset="100%" stopColor="#ff00ff" />
-              </linearGradient>
-              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                <polygon points="0 0, 10 5, 0 10" fill="url(#timelineGradient)" />
-              </marker>
-            </defs>
-
-            <motion.path
-              d={experiences
-                .map((_, idx) => {
-                  const x = idx % 2 === 0 ? 60 : 40;
-                  const y = (idx * 100) / (experiences.length - 1);
-                  return `${idx === 0 ? "M" : "L"}${x}% ${y}%`;
-                })
-                .join(" ")}
-              fill="transparent"
-              stroke="url(#timelineGradient)"
-              strokeWidth={4}
-              markerEnd="url(#arrowhead)"
-              strokeDasharray="8 4"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </svg>
-
           {/* Experience cards */}
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
               className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer z-10 border border-white/10 overflow-hidden"
               variants={cardVariants}
+              custom={idx}
               initial="hidden"
               whileInView="visible"
               whileHover="hover"
               viewport={{ once: false }}
               onMouseEnter={() => setHoveredCard(idx)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseLeave={() => {
+                setHoveredCard(null);
+                setMouseTilt({ x: 0, y: 0 });
+              }}
+              onMouseMove={handleCardMouseMove}
             >
               <motion.div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
               <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
@@ -242,17 +265,17 @@ const Experience: React.FC = () => {
           ))}
         </div>
 
-        {/* Hire Me Button at the bottom */}
+        {/* Available for Hire Button */}
         <div className="flex justify-center mt-12">
-          <motion.div
-            className="flex items-center gap-2 px-6 py-3 bg-gray-900/80 backdrop-blur-md rounded-full text-white font-bold shadow-lg cursor-pointer"
+          <motion.a
+            href="mailto:hesbonmanyinsa96@gmail.com"
+            className="flex items-center gap-2 px-6 py-3 bg-gray-900/80 backdrop-blur-md rounded-full shadow-lg cursor-pointer overflow-hidden"
             animate={{
               boxShadow: [
                 "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
                 "0 0 15px #00ff00, 0 0 25px #00ffff, 0 0 35px #ff00ff",
                 "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
               ],
-              rotate: [0, 15, -15, 0],
             }}
             transition={{
               duration: 2,
@@ -260,10 +283,15 @@ const Experience: React.FC = () => {
               repeatType: "mirror",
               ease: "easeInOut",
             }}
+            whileHover={{
+              scale: [1, 1.1, 1.05, 1.1],
+              y: [0, -5, 0, -3, 0],
+              transition: { duration: 0.6, repeat: Infinity, repeatType: "mirror" },
+            }}
           >
-            <FaPaperPlane className="text-white" />
-            Hire Me
-          </motion.div>
+            <FaEnvelope className="text-white" />
+            <TypewriterText text="Available For Hire" />
+          </motion.a>
         </div>
       </div>
 
