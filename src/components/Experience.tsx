@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { Server, Monitor, Code2 } from "lucide-react"; // ← ICONS ADDED
 
 interface ExperienceItem {
   title: string;
@@ -8,6 +9,12 @@ interface ExperienceItem {
   period: string;
   responsibilities: string[];
 }
+
+const iconMap: Record<string, JSX.Element> = {
+  "Backend Developer Intern": <Server className="w-7 h-7 text-blue-600" />,
+  "Front-End Developer Intern": <Monitor className="w-7 h-7 text-blue-600" />,
+  "Full Stack Software Engineer": <Code2 className="w-7 h-7 text-blue-600" />,
+};
 
 const experiences: ExperienceItem[] = [
   {
@@ -73,7 +80,6 @@ const Experience: React.FC = () => {
           Work Experience
         </h2>
 
-        {/* Responsive grid layout */}
         <div className="grid gap-8 md:grid-cols-2">
           {experiences.map((exp, idx) => (
             <motion.div
@@ -84,15 +90,16 @@ const Experience: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
             >
-              <h3 className="text-xl font-semibold text-blue-800 mb-1">
-                {exp.title}
-              </h3>
-              <p className="text-blue-600 font-medium">{exp.company}</p>
-              <p className="text-sm text-gray-500 italic mb-4">
-                {exp.period}
-              </p>
+              {/* ICON + TITLE */}
+              <div className="flex items-center gap-3 mb-3">
+                {iconMap[exp.title] || <Code2 className="w-7 h-7 text-blue-600" />}
+                <h3 className="text-xl font-semibold text-blue-800">{exp.title}</h3>
+              </div>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+              <p className="text-blue-600 font-medium">{exp.company}</p>
+              <p className="text-sm text-gray-500 italic mb-4">{exp.period}</p>
+
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
                 {exp.responsibilities.map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
