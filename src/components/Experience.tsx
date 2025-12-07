@@ -65,17 +65,51 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
+// Generate random sparkles
+const generateSparkles = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    top: Math.random() * 100 + "%",
+    left: Math.random() * 100 + "%",
+    size: Math.random() * 3 + 1 + "px",
+    delay: Math.random() * 5,
+  }));
+};
+
+const sparkles = generateSparkles(30);
+
 const Experience: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-900">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center text-teal-400 mb-8">
+    <section className="relative py-16 bg-gray-900 overflow-hidden">
+      {/* Sparkles in background */}
+      {sparkles.map((sparkle) => (
+        <motion.div
+          key={sparkle.id}
+          className="absolute bg-teal-400 rounded-full opacity-50"
+          style={{
+            top: sparkle.top,
+            left: sparkle.left,
+            width: sparkle.size,
+            height: sparkle.size,
+          }}
+          animate={{ y: ["0%", "10%", "0%"] }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "mirror",
+            delay: sparkle.delay,
+          }}
+        />
+      ))}
+
+      <div className="relative max-w-6xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center text-teal-400 mb-8 z-10 relative">
           Work Experience
         </h2>
 
         {/* Hero / About My Experience */}
         <motion.div
-          className="mb-12 text-gray-300 leading-relaxed text-center max-w-3xl mx-auto"
+          className="mb-12 text-gray-300 leading-relaxed text-center max-w-3xl mx-auto relative z-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -91,7 +125,7 @@ const Experience: React.FC = () => {
         </motion.div>
 
         {/* Experience Cards */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 relative z-10">
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
