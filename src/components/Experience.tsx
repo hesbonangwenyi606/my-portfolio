@@ -127,7 +127,6 @@ const Experience: React.FC = () => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [sparkles, setSparkles] = useState(generateSparkles(40));
 
-  // Parallax background
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) =>
       setMouse({
@@ -138,10 +137,7 @@ const Experience: React.FC = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Card mouse tilt
-  const handleCardMouseMove = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
@@ -150,12 +146,7 @@ const Experience: React.FC = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.9, ease: "easeOut" },
-    },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.9, ease: "easeOut" } },
     hover: (idx: number) => ({
       scale: 1.06,
       rotateX: hoveredCard === idx ? mouseTilt.y : 0,
@@ -179,10 +170,7 @@ const Experience: React.FC = () => {
       {/* Parallax Background */}
       <motion.div
         className="absolute inset-0 -z-10 bg-cover bg-center opacity-20"
-        style={{
-          backgroundImage:
-            "url('https://i.pinimg.com/1200x/4f/a0/f8/4fa0f8d32fac31b4ae03ee9c60f034fb.jpg')",
-        }}
+        style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4f/a0/f8/4fa0f8d32fac31b4ae03ee9c60f034fb.jpg')" }}
         animate={{ x: mouse.x, y: mouse.y }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       />
@@ -201,17 +189,11 @@ const Experience: React.FC = () => {
             boxShadow: "0 0 12px #14B8A6",
           }}
           animate={{ opacity: [0.2, 0.8, 0.2], scale: [0.8, 1.3, 0.8] }}
-          transition={{
-            duration: sparkle.speed + 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: sparkle.delay,
-          }}
+          transition={{ duration: sparkle.speed + 2, repeat: Infinity, ease: "easeInOut", delay: sparkle.delay }}
         />
       ))}
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Title */}
         <motion.h2
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient"
           initial={{ opacity: 0, y: -20 }}
@@ -222,7 +204,6 @@ const Experience: React.FC = () => {
         </motion.h2>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Experience cards */}
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
@@ -234,24 +215,14 @@ const Experience: React.FC = () => {
               whileHover="hover"
               viewport={{ once: false }}
               onMouseEnter={() => setHoveredCard(idx)}
-              onMouseLeave={() => {
-                setHoveredCard(null);
-                setMouseTilt({ x: 0, y: 0 });
-              }}
+              onMouseLeave={() => { setHoveredCard(null); setMouseTilt({ x: 0, y: 0 }); }}
               onMouseMove={handleCardMouseMove}
             >
               <motion.div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
               <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
               <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
               <p className="text-teal-300 font-medium text-center mb-1">
-                <a
-                  href={exp.companyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-teal-200"
-                >
-                  {exp.company}
-                </a>
+                <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-teal-200">{exp.company}</a>
               </p>
               <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
               <div className="space-y-2 text-gray-300 text-sm">
@@ -277,19 +248,23 @@ const Experience: React.FC = () => {
                 "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
               ],
             }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
             whileHover={{
-              scale: [1, 1.1, 1.05, 1.1],
-              y: [0, -5, 0, -3, 0],
-              transition: { duration: 0.6, repeat: Infinity, repeatType: "mirror" },
+              scale: 1.1,
+              boxShadow: "0 0 20px #ff0000, 0 0 30px #ff9900, 0 0 40px #ffff00, 0 0 25px #00ff00, 0 0 35px #00ffff, 0 0 45px #ff00ff",
+              transition: { duration: 0.3, type: "spring", stiffness: 300 },
             }}
           >
-            <FaEnvelope className="text-white" />
+            <motion.div
+              className="text-white"
+              whileHover={{
+                scale: 1.3,
+                textShadow: "0 0 8px #ffffff, 0 0 12px #14B8A6",
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <FaEnvelope />
+            </motion.div>
             <TypewriterText text="Available For Hire" />
           </motion.a>
         </div>
