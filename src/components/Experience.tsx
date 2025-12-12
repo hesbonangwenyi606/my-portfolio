@@ -78,11 +78,12 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
+// Education in top-down order (FRATIRON → MORINGA → KCA → NYAIKURO)
 const education: EducationItem[] = [
   {
-    school: "KCA UNIVERSITY",
-    qualification: "Diploma | Mathematics & Computer Science",
-    period: "2020 - 2023",
+    school: "FRATIRON SCHOOL",
+    qualification: "Certificate | DevOps Engineering",
+    period: "2024 - 2025",
   },
   {
     school: "MORINGA SCHOOL",
@@ -90,9 +91,9 @@ const education: EducationItem[] = [
     period: "2023 - 2024",
   },
   {
-    school: "FRATIRON SCHOOL",
-    qualification: "Certificate | DevOps Engineering",
-    period: "2024 - 2025",
+    school: "KCA UNIVERSITY",
+    qualification: "Diploma | Mathematics & Computer Science",
+    period: "2020 - 2023",
   },
   {
     school: "NYAIKURO SDA HIGH SCHOOL",
@@ -197,15 +198,13 @@ const Experience: React.FC = () => {
 
   return (
     <section className="relative py-16 bg-gray-900 overflow-hidden">
-      {/* Parallax Background */}
+      {/* Background & sparkles */}
       <motion.div
         className="absolute inset-0 -z-10 bg-cover bg-center opacity-20"
         style={{ backgroundImage: "url('https://i.pinimg.com/1200x/4f/a0/f8/4fa0f8d32fac31b4ae03ee9c60f034fb.jpg')" }}
         animate={{ x: mouse.x, y: mouse.y }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       />
-
-      {/* Sparkles */}
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
@@ -267,14 +266,14 @@ const Experience: React.FC = () => {
           ))}
         </div>
 
-        {/* Education Timeline */}
+        {/* Education Timeline Top-Down */}
         <motion.h2
           className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Education
+          EDUCATION
         </motion.h2>
 
         <div className="relative max-w-4xl mx-auto">
@@ -286,16 +285,14 @@ const Experience: React.FC = () => {
                 className="relative pl-16 flex items-start cursor-pointer"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
               >
-                {/* Timeline Marker */}
                 <div className="absolute left-0 top-2">
                   <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
                     {edu.icon || <FaGraduationCap className="text-gray-900" />}
                   </div>
                 </div>
-
-                {/* Education Card */}
                 <motion.div
                   className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 relative w-full"
                   whileHover={{ scale: 1.05, boxShadow: "0 0 25px #14B8A6, 0 0 50px #00ffff" }}
