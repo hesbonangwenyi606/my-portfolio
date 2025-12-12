@@ -80,13 +80,13 @@ const experiences: ExperienceItem[] = [
 const education: EducationItem[] = [
   {
     school: "KCA University",
-    qualification: "Diploma in Mathematics & Computer Science",
+    qualification: "Diploma | Mathematics & Computer Science",
     period: "2020 | 2023",
   },
   {
     school: "Moringa School",
     qualification: "Certificate | Software Development",
-    period: " Augast 2024",
+    period: " 2023 - 2024",
   },
   {
     school: "Moringa School",
