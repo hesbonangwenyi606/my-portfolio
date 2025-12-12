@@ -94,7 +94,7 @@ const education: EducationItem[] = [
     period: "2024 -  2025",
   },
   {
-    school: "Nyaikuro High School",
+    school: "Nyaikuro SDA High School",
     qualification: "KCSE | Mean Grade: B+",
     period: "2016 – 2019",
   },
