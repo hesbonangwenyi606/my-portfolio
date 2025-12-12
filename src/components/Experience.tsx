@@ -84,12 +84,12 @@ const education: EducationItem[] = [
     period: "2020 - 2023",
   },
   {
-    school: "Moringa School",
+    school: "MORINGA SCHOOL",
     qualification: "Certificate | Software Development",
     period: " 2023 - 2024",
   },
   {
-    school: "MORINGA SCHOOL",
+    school: "FRATIRON SCHOOL",
     qualification: "Certificate | DevOps Engineering",
     period: "2024 -  2025",
   },
