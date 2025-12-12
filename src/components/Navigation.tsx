@@ -19,6 +19,7 @@ const Navigation: React.FC = () => {
   const navItems = [
     { label: 'About', id: 'about' },
     { label: 'Skills', id: 'skills' },
+    { label: 'Work Experience', id: 'experience' }, // <-- updated label
     { label: 'Projects', id: 'projects' },
     { label: 'Contact', id: 'contact' },
   ];
@@ -34,7 +35,7 @@ const Navigation: React.FC = () => {
         />
       </div>
 
-      {/*Navigation Bar*/}
+      {/* Navigation Bar */}
       <nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
@@ -42,7 +43,7 @@ const Navigation: React.FC = () => {
       >
         <div className="max-w-6xl mx-auto px-4 flex justify-end items-center py-3">
 
-          {/* Desktop Navigation (Always Right) */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <button
@@ -57,7 +58,7 @@ const Navigation: React.FC = () => {
             ))}
           </div>
 
-          {/* Mobile Hamburger Button (Right) */}
+          {/* Mobile Hamburger Button */}
           <button
             className={`md:hidden ml-auto ${isScrolled ? 'text-gray-900' : 'text-white'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
