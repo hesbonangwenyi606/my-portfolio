@@ -3,33 +3,53 @@ import React, { useState, useEffect } from 'react';
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-    setIsMobileMenuOpen(false);
-  };
+  const [activeSection, setActiveSection] = useState('about');
 
   const navItems = [
     { label: 'About', id: 'about' },
     { label: 'Skills', id: 'skills' },
-    { label: 'Work Experience', id: 'experience' }, // <-- updated label
+    { label: 'Work Experience', id: 'experience' },
     { label: 'Projects', id: 'projects' },
     { label: 'Contact', id: 'contact' },
   ];
+
+  // Scroll function with offset for fixed navbar
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -80; // adjust to navbar height
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  // Track scrolling to highlight active section
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+
+      navItems.forEach((item) => {
+        const element = document.getElementById(item.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(item.id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
       {/* Small profile picture with gentle pulse animation */}
       <div className="fixed top-2 left-2 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
         <img
-          src="/updated.jpeg" // replace with your profile picture path
+          src="/updated.jpeg"
           alt="Hesbon Angwenyi"
           className="w-full h-full object-cover rounded-full"
         />
@@ -50,7 +70,11 @@ const Navigation: React.FC = () => {
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`font-semibold transition-colors hover:text-blue-600 ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
+                  activeSection === item.id
+                    ? 'text-blue-600'
+                    : isScrolled
+                    ? 'text-gray-700'
+                    : 'text-white'
                 }`}
               >
                 {item.label}
@@ -91,7 +115,9 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold"
+                  className={`block w-full text-left px-4 py-2 font-semibold transition-colors hover:text-blue-600 ${
+                    activeSection === item.id ? 'text-blue-600' : 'text-gray-700'
+                  }`}
                 >
                   {item.label}
                 </button>
