@@ -17,7 +17,6 @@ interface EducationItem {
   qualification: string;
   period: string;
   icon?: React.ReactNode;
-  logoUrl?: string;
 }
 
 const experiences: ExperienceItem[] = [
@@ -84,34 +83,30 @@ const education: EducationItem[] = [
     school: "FRATIRON SCHOOL",
     qualification: "Certificate | DevOps Engineering",
     period: "2024 - 2025",
-    logoUrl: "https://i.pinimg.com/1200x/43/77/ee/4377ee691707868ea4fddaa4e05a4127.jpg",
   },
   {
     school: "MORINGA SCHOOL",
     qualification: "Certificate | Software Development",
     period: "2023 - 2024",
-    logoUrl: "https://i.pinimg.com/1200x/0e/70/ce/0e70ce331a2e005d214d48d8e921650b.jpg",
   },
   {
     school: "KCA UNIVERSITY",
     qualification: "Diploma | Mathematics & Computer Science",
     period: "2020 - 2023",
-    logoUrl: "https://i.pinimg.com/736x/fb/dd/b1/fbddb1af0dd1df8cb49cfe61c0856465.jpg",
   },
   {
     school: "NYAIKURO SDA HIGH SCHOOL",
     qualification: "KCSE | Mean Grade: B+",
     period: "2016 – 2019",
-    logoUrl: "/logos/nyaikuro.png",
   },
 ];
 
 const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
-  const [displayed, setDisplayed] = useState("");
-  const [index, setIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
+  const [displayed, setDisplayed] = React.useState("");
+  const [index, setIndex] = React.useState(0);
+  const [deleting, setDeleting] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timeout = setTimeout(() => {
       if (!deleting) {
         setDisplayed(text.slice(0, index + 1));
@@ -148,6 +143,17 @@ const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
 const Experience: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) =>
+      setMouse({
+        x: Math.min(Math.max(e.clientX * 0.01, -20), 20),
+        y: Math.min(Math.max(e.clientY * 0.01, -20), 20),
+      });
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -167,7 +173,6 @@ const Experience: React.FC = () => {
   return (
     <section className="relative py-16 bg-gray-900 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Work Experience */}
         <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient">
           Work Experience
         </h2>
@@ -178,7 +183,7 @@ const Experience: React.FC = () => {
               key={idx}
               className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer border border-white/10 overflow-hidden"
               onMouseEnter={() => setHoveredCard(idx)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseLeave={() => { setHoveredCard(null); setMouseTilt({ x: 0, y: 0 }); }}
               onMouseMove={handleCardMouseMove}
               animate={hoveredCard === idx ? hoverAnimation(idx) : { scale: 1, rotateX: 0, rotateY: 0, boxShadow: "0 0 10px #00000050" }}
             >
@@ -198,7 +203,6 @@ const Experience: React.FC = () => {
           ))}
         </div>
 
-        {/* Education */}
         <h2 className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400">EDUCATION</h2>
         <div className="relative max-w-4xl mx-auto">
           <div className="absolute left-5 top-0 w-1 bg-teal-500 h-full rounded" />
@@ -210,14 +214,9 @@ const Experience: React.FC = () => {
                 whileHover={{ scale: 1.05, boxShadow: "0 0 25px #14B8A6, 0 0 50px #00ffff" }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
               >
-                {/* Timeline Marker */}
                 <div className="absolute left-0 top-2">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg overflow-hidden bg-gray-800">
-                    {edu.logoUrl ? (
-                      <img src={edu.logoUrl} alt={edu.school} className="w-full h-full object-cover" />
-                    ) : (
-                      edu.icon || <FaGraduationCap className="text-gray-900" />
-                    )}
+                  <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
+                    {edu.icon || <FaGraduationCap className="text-gray-900" />}
                   </div>
                 </div>
                 <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 w-full">
@@ -230,7 +229,6 @@ const Experience: React.FC = () => {
           </div>
         </div>
 
-        {/* Hire Me Button */}
         <div className="flex justify-center mt-12">
           <motion.a
             href="mailto:hesbonmanyinsa96@gmail.com"
@@ -251,7 +249,10 @@ const Experience: React.FC = () => {
           >
             <motion.div
               className="text-white"
-              whileHover={{ scale: 1.3, textShadow: "0 0 8px #ffffff, 0 0 12px #14B8A6" }}
+              whileHover={{
+                scale: 1.3,
+                textShadow: "0 0 8px #ffffff, 0 0 12px #14B8A6",
+              }}
               transition={{ duration: 0.3 }}
             >
               <FaEnvelope />
@@ -260,7 +261,6 @@ const Experience: React.FC = () => {
           </motion.a>
         </div>
       </div>
-
       <style>{`
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
