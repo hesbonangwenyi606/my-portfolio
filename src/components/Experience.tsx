@@ -81,7 +81,7 @@ const education: EducationItem[] = [
   {
     school: "KCA University",
     qualification: "Diploma | Mathematics & Computer Science",
-    period: "2020 | 2023",
+    period: "2020 - 2023",
   },
   {
     school: "Moringa School",
