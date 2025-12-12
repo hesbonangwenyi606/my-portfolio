@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaServer, FaDesktop, FaCode, FaEnvelope, FaGraduationCap } from "react-icons/fa";
 
-// Interfaces
 interface ExperienceItem {
   title: string;
   company: string;
@@ -20,7 +19,6 @@ interface EducationItem {
   icon?: React.ReactNode;
 }
 
-// Data
 const experiences: ExperienceItem[] = [
   {
     title: "Backend Developer Intern",
@@ -85,25 +83,21 @@ const education: EducationItem[] = [
     school: "KCA UNIVERSITY",
     qualification: "Diploma | Mathematics & Computer Science",
     period: "2020 - 2023",
-    icon: <FaGraduationCap size={28} className="text-teal-400" />,
   },
   {
     school: "MORINGA SCHOOL",
     qualification: "Certificate | Software Development",
     period: "2023 - 2024",
-    icon: <FaGraduationCap size={28} className="text-teal-400" />,
   },
   {
     school: "FRATIRON SCHOOL",
     qualification: "Certificate | DevOps Engineering",
     period: "2024 - 2025",
-    icon: <FaGraduationCap size={28} className="text-teal-400" />,
   },
   {
     school: "NYAIKURO SDA HIGH SCHOOL",
     qualification: "KCSE | Mean Grade: B+",
     period: "2016 – 2019",
-    icon: <FaGraduationCap size={28} className="text-teal-400" />,
   },
 ];
 
@@ -118,7 +112,6 @@ const generateSparkles = (count: number) =>
     speed: Math.random() * 2 + 1,
   }));
 
-// Typewriter component
 const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
   const [displayed, setDisplayed] = useState("");
   const [index, setIndex] = useState(0);
@@ -274,7 +267,7 @@ const Experience: React.FC = () => {
           ))}
         </div>
 
-        {/* Education Section */}
+        {/* Education Timeline */}
         <motion.h2
           className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400"
           initial={{ opacity: 0, y: -20 }}
@@ -284,49 +277,52 @@ const Experience: React.FC = () => {
           Education
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {education.map((edu, idx) => (
-            <motion.div
-              key={idx}
-              className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 cursor-pointer overflow-hidden"
-              variants={cardVariants}
-              custom={idx}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: false }}
-              onMouseEnter={() => setHoveredCard(idx)}
-              onMouseLeave={() => setHoveredCard(null)}
-              onMouseMove={handleCardMouseMove}
-            >
-              {/* Small sparkles behind each Education card */}
-              <motion.div className="absolute inset-0 pointer-events-none">
-                {generateSparkles(10).map((sparkle) => (
-                  <motion.div
-                    key={sparkle.id}
-                    className="absolute rounded-full"
-                    style={{
-                      top: sparkle.top,
-                      left: sparkle.left,
-                      width: sparkle.size,
-                      height: sparkle.size,
-                      backgroundColor: "#14B8A6",
-                      boxShadow: "0 0 8px #14B8A6",
-                    }}
-                    animate={{ opacity: [0.2, 0.8, 0.2], scale: [0.8, 1.2, 0.8] }}
-                    transition={{ duration: sparkle.speed + 1.5, repeat: Infinity, ease: "easeInOut", delay: sparkle.delay }}
-                  />
-                ))}
-              </motion.div>
+        <div className="relative max-w-4xl mx-auto">
+          <div className="absolute left-5 top-0 w-1 bg-teal-500 h-full rounded" />
+          <div className="space-y-12">
+            {education.map((edu, idx) => (
+              <motion.div
+                key={idx}
+                className="relative pl-16 flex items-start cursor-pointer"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.2 }}
+              >
+                {/* Timeline Marker */}
+                <div className="absolute left-0 top-2">
+                  <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
+                    {edu.icon || <FaGraduationCap className="text-gray-900" />}
+                  </div>
+                </div>
 
-              <div className="relative z-10 flex items-center gap-2 mb-3">
-                {edu.icon && <div>{edu.icon}</div>}
-                <h3 className="text-lg font-semibold text-teal-400">{edu.school}</h3>
-              </div>
-              <p className="text-gray-300 mb-1">{edu.qualification}</p>
-              <p className="text-sm text-gray-400 italic">{edu.period}</p>
-            </motion.div>
-          ))}
+                {/* Education Card */}
+                <motion.div
+                  className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 relative w-full"
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 25px #14B8A6, 0 0 50px #00ffff" }}
+                >
+                  {generateSparkles(6).map((sparkle) => (
+                    <motion.div
+                      key={sparkle.id}
+                      className="absolute rounded-full"
+                      style={{
+                        top: sparkle.top,
+                        left: sparkle.left,
+                        width: sparkle.size,
+                        height: sparkle.size,
+                        backgroundColor: "#14B8A6",
+                        boxShadow: "0 0 8px #14B8A6",
+                      }}
+                      animate={{ opacity: [0.2, 0.8, 0.2], scale: [0.8, 1.2, 0.8] }}
+                      transition={{ duration: sparkle.speed + 1, repeat: Infinity, ease: "easeInOut", delay: sparkle.delay }}
+                    />
+                  ))}
+                  <h3 className="text-lg font-semibold text-teal-400 mb-1">{edu.school}</h3>
+                  <p className="text-gray-300 mb-1">{edu.qualification}</p>
+                  <p className="text-sm text-gray-400 italic">{edu.period}</p>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Available for Hire Button */}
