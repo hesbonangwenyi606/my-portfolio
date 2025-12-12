@@ -78,7 +78,6 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
-// Education in top-down order (FRATIRON → MORINGA → KCA → NYAIKURO)
 const education: EducationItem[] = [
   {
     school: "FRATIRON SCHOOL",
@@ -226,9 +225,6 @@ const Experience: React.FC = () => {
         {/* Work Experience */}
         <motion.h2
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
         >
           Work Experience
         </motion.h2>
@@ -266,58 +262,25 @@ const Experience: React.FC = () => {
           ))}
         </div>
 
-        {/* Education Timeline Top-Down */}
-        <motion.h2
-          className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          EDUCATION
-        </motion.h2>
+        {/* Education Timeline Top-Down (STATIC) */}
+        <h2 className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400">EDUCATION</h2>
 
         <div className="relative max-w-4xl mx-auto">
           <div className="absolute left-5 top-0 w-1 bg-teal-500 h-full rounded" />
           <div className="space-y-12">
             {education.map((edu, idx) => (
-              <motion.div
-                key={idx}
-                className="relative pl-16 flex items-start cursor-pointer"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
-              >
+              <div key={idx} className="relative pl-16 flex items-start cursor-pointer">
                 <div className="absolute left-0 top-2">
                   <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
                     {edu.icon || <FaGraduationCap className="text-gray-900" />}
                   </div>
                 </div>
-                <motion.div
-                  className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 relative w-full"
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 25px #14B8A6, 0 0 50px #00ffff" }}
-                >
-                  {generateSparkles(6).map((sparkle) => (
-                    <motion.div
-                      key={sparkle.id}
-                      className="absolute rounded-full"
-                      style={{
-                        top: sparkle.top,
-                        left: sparkle.left,
-                        width: sparkle.size,
-                        height: sparkle.size,
-                        backgroundColor: "#14B8A6",
-                        boxShadow: "0 0 8px #14B8A6",
-                      }}
-                      animate={{ opacity: [0.2, 0.8, 0.2], scale: [0.8, 1.2, 0.8] }}
-                      transition={{ duration: sparkle.speed + 1, repeat: Infinity, ease: "easeInOut", delay: sparkle.delay }}
-                    />
-                  ))}
+                <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 relative w-full">
                   <h3 className="text-lg font-semibold text-teal-400 mb-1">{edu.school}</h3>
                   <p className="text-gray-300 mb-1">{edu.qualification}</p>
                   <p className="text-sm text-gray-400 italic">{edu.period}</p>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
