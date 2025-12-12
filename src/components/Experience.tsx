@@ -174,26 +174,13 @@ const Experience: React.FC = () => {
     setMouseTilt({ x, y });
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.9, ease: "easeOut" } },
-    hover: (idx: number) => ({
-      scale: 1.06,
-      rotateX: hoveredCard === idx ? mouseTilt.y : 0,
-      rotateY: hoveredCard === idx ? mouseTilt.x : 0,
-      boxShadow: "0 0 25px #ff00ff, 0 0 50px #00ffff",
-      transition: { type: "spring", stiffness: 200, damping: 12 },
-    }),
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -12 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.07, duration: 0.4, ease: "easeOut" },
-    }),
-  };
+  const cardHoverStyle = (idx: number) => ({
+    scale: 1.06,
+    rotateX: hoveredCard === idx ? mouseTilt.y : 0,
+    rotateY: hoveredCard === idx ? mouseTilt.x : 0,
+    boxShadow: "0 0 25px #ff00ff, 0 0 50px #00ffff",
+    transition: { type: "spring", stiffness: 200, damping: 12 },
+  });
 
   return (
     <section className="relative py-16 bg-gray-900 overflow-hidden">
@@ -223,28 +210,21 @@ const Experience: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Work Experience */}
-        <motion.h2
-          className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient"
-        >
+        <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient">
           Work Experience
-        </motion.h2>
+        </h2>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
           {experiences.map((exp, idx) => (
-            <motion.div
+            <div
               key={idx}
               className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer z-10 border border-white/10 overflow-hidden"
-              variants={cardVariants}
-              custom={idx}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: false }}
               onMouseEnter={() => setHoveredCard(idx)}
               onMouseLeave={() => { setHoveredCard(null); setMouseTilt({ x: 0, y: 0 }); }}
               onMouseMove={handleCardMouseMove}
+              style={hoveredCard === idx ? cardHoverStyle(idx) : {}}
             >
-              <motion.div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
               <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
               <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
               <p className="text-teal-300 font-medium text-center mb-1">
@@ -253,12 +233,10 @@ const Experience: React.FC = () => {
               <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
               <div className="space-y-2 text-gray-300 text-sm">
                 {exp.responsibilities.map((item, i) => (
-                  <motion.p key={i} custom={i} variants={itemVariants}>
-                    • {item}
-                  </motion.p>
+                  <p key={i}>• {item}</p>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
