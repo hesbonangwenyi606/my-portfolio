@@ -223,6 +223,7 @@ const Experience: React.FC = () => {
       ))}
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Work Experience */}
         <motion.h2
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient"
           initial={{ opacity: 0, y: -20 }}
@@ -266,14 +267,34 @@ const Experience: React.FC = () => {
         </div>
 
         {/* Education Section */}
-        <h2 className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400">Education</h2>
+        <motion.h2
+          className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Education
+        </motion.h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {education.map((edu, idx) => (
-            <div key={idx} className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10">
+            <motion.div
+              key={idx}
+              className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 cursor-pointer overflow-hidden"
+              variants={cardVariants}
+              custom={idx}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={{ once: false }}
+              onMouseEnter={() => setHoveredCard(idx)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onMouseMove={handleCardMouseMove}
+            >
               <h3 className="text-lg font-semibold text-teal-400">{edu.school}</h3>
               <p className="text-gray-300 mb-1">{edu.qualification}</p>
               <p className="text-sm text-gray-400 italic">{edu.period}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
