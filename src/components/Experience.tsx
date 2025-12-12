@@ -12,6 +12,12 @@ interface ExperienceItem {
   icon: React.ReactNode;
 }
 
+interface EducationItem {
+  school: string;
+  qualification: string;
+  period: string;
+}
+
 const experiences: ExperienceItem[] = [
   {
     title: "Backend Developer Intern",
@@ -68,6 +74,29 @@ const experiences: ExperienceItem[] = [
       "Optimized database performance for MongoDB and PostgreSQL.",
       "Managed full development lifecycle from design to deployment.",
     ],
+  },
+];
+
+const education: EducationItem[] = [
+  {
+    school: "KCA University",
+    qualification: "Diploma in Mathematics & Computer Science",
+    period: "2020 – 2023",
+  },
+  {
+    school: "Moringa School",
+    qualification: "Certificate in Software Development – Aug 2024",
+    period: "2024",
+  },
+  {
+    school: "Moringa School",
+    qualification: "Certificate in DevOps Engineering – 2025",
+    period: "2025",
+  },
+  {
+    school: "Nyaikuro High School",
+    qualification: "KCSE | Mean Grade: B+",
+    period: "2016 – 2019",
   },
 ];
 
@@ -233,6 +262,18 @@ const Experience: React.FC = () => {
                 ))}
               </div>
             </motion.div>
+          ))}
+        </div>
+
+        {/* Education Section */}
+        <h2 className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400">Education</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {education.map((edu, idx) => (
+            <div key={idx} className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10">
+              <h3 className="text-lg font-semibold text-teal-400">{edu.school}</h3>
+              <p className="text-gray-300 mb-1">{edu.qualification}</p>
+              <p className="text-sm text-gray-400 italic">{edu.period}</p>
+            </div>
           ))}
         </div>
 
