@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {['About', 'Skills', 'Projects', 'Contact'].map((link, i) => (
+              {['About', 'Skills', 'Projects', 'Work Exprience', 'Contact'].map((link, i) => (
                 <li key={i}>
                   <a href={`#${link.toLowerCase()}`} className="text-gray-300 hover:text-blue-400 transition-colors">
                     {link}

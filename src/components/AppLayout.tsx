@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import HeroSection from './HeroSection';
 import AboutSection from './AboutSection';
 import SkillsSection from './SkillsSection';
-import Experience from './Experience'; // <-- Import Experience here
+import Experience from './Experience'; 
 import ProjectsSection from './ProjectsSection';
 import TestimonialsSection from './TestimonialsSection';
 import ContactSection from './ContactSection';
