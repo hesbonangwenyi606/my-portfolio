@@ -16,9 +16,6 @@ const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
-
-  const navRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -32,6 +29,7 @@ const Navigation: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       const scrollPosition = window.scrollY + NAVBAR_HEIGHT + 10;
+
       for (const item of NAV_ITEMS) {
         const section = document.getElementById(item.id);
         if (!section) continue;
@@ -43,18 +41,11 @@ const Navigation: React.FC = () => {
         }
       }
     };
+
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const idx = NAV_ITEMS.findIndex((item) => item.id === activeSection);
-    const el = navRefs.current[idx];
-    if (el) {
-      setIndicatorStyle({ left: el.offsetLeft, width: el.offsetWidth });
-    }
-  }, [activeSection]);
 
   return (
     <>
@@ -73,25 +64,21 @@ const Navigation: React.FC = () => {
           isScrolled ? "bg-white shadow-lg" : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 flex justify-end items-center py-4 relative">
+        <div className="max-w-6xl mx-auto px-4 flex justify-end items-center py-4">
           {/* Desktop */}
-          <div className="hidden md:flex space-x-4 relative">
-            {/* Animated gradient indicator */}
-            <div
-              className="absolute bottom-0 h-1 rounded-md animate-gradient"
-              style={{
-                left: indicatorStyle.left,
-                width: indicatorStyle.width,
-              }}
-            />
-
-            {NAV_ITEMS.map((item, idx) => (
+          <div className="hidden md:flex space-x-4">
+            {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
-                ref={(el) => (navRefs.current[idx] = el)}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative z-10 px-4 py-2 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105
-                  ${activeSection === item.id ? "text-white" : isScrolled ? "text-gray-800" : "text-white"}
+                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
+                  ${
+                    activeSection === item.id
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : isScrolled
+                      ? "bg-gray-200 text-gray-800 hover:bg-blue-100"
+                      : "bg-white/20 text-white hover:bg-white/40"
+                  }
                 `}
               >
                 {item.label}
@@ -129,13 +116,17 @@ const Navigation: React.FC = () => {
         {/* Mobile dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t shadow-lg">
-            <div className="py-4 flex flex-col items-center space-y-4">
+            <div className="py-4 flex flex-col items-center space-y-3">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative w-32 text-center font-semibold rounded-lg transition-all duration-300 transform hover:scale-105
-                    ${activeSection === item.id ? "text-blue-600" : "text-gray-800"}
+                  className={`w-32 text-center px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
+                    ${
+                      activeSection === item.id
+                        ? "bg-blue-600 text-white shadow-lg"
+                        : "bg-gray-200 text-gray-800 hover:bg-blue-100"
+                    }
                   `}
                 >
                   {item.label}
@@ -154,26 +145,6 @@ const Navigation: React.FC = () => {
         }
         .animate-pulse-slow {
           animation: pulse-slow 2s infinite;
-        }
-
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          background: linear-gradient(
-            to right,
-            #ff0000,
-            #ff9900,
-            #ffff00,
-            #00ff00,
-            #00ffff,
-            #ff00ff,
-            #ff0000
-          );
-          background-size: 300% 100%;
-          animation: gradientShift 3s linear infinite;
         }
       `}</style>
     </>
