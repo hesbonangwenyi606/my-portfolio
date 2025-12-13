@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
   { label: "About", id: "about" },
@@ -74,7 +74,7 @@ const Navigation: React.FC = () => {
                 className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
                   ${
                     activeSection === item.id
-                      ? "bg-blue-600 text-white shadow-lg"
+                      ? "bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white shadow-lg"
                       : isScrolled
                       ? "bg-gray-200 text-gray-800 hover:bg-blue-100"
                       : "bg-white/20 text-white hover:bg-white/40"
@@ -124,7 +124,7 @@ const Navigation: React.FC = () => {
                   className={`w-32 text-center px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105
                     ${
                       activeSection === item.id
-                        ? "bg-blue-600 text-white shadow-lg"
+                        ? "bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-white shadow-lg"
                         : "bg-gray-200 text-gray-800 hover:bg-blue-100"
                     }
                   `}
