@@ -12,15 +12,6 @@ const Footer: React.FC = () => {
     { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#25D366' },
   ];
 
-  // Corrected Quick Links mapping
-  const quickLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Experience', href: '#experience' }, // Fixed spelling & href
-    { label: 'Contact', href: '#contact' },
-  ];
-
   return (
     <footer className="relative bg-gray-900 text-white py-16 overflow-hidden">
 
@@ -46,10 +37,10 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {quickLinks.map((link, i) => (
+              {['About', 'Skills', 'Projects', 'Work Experience', 'Contact'].map((link, i) => (
                 <li key={i}>
-                  <a href={link.href} className="text-gray-300 hover:text-blue-400 transition-colors">
-                    {link.label}
+                  <a href={`#${link.toLowerCase()}`} className="text-gray-300 hover:text-blue-400 transition-colors">
+                    {link}
                   </a>
                 </li>
               ))}
@@ -60,9 +51,11 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2 text-gray-300">
-              {['Web Development', 'DevOps Consulting', 'Cloud Architecture', 'Technical Leadership'].map((service, i) => (
-                <li key={i}>{service}</li>
-              ))}
+              <li>Web Development</li>
+              <li>Full-Stack Development</li>
+              <li>DevOps Consulting</li>
+              <li>Cloud Deployment</li>
+              <li>Technical Leadership</li>
             </ul>
           </div>
 
@@ -145,7 +138,10 @@ const Footer: React.FC = () => {
         @keyframes pulseIcon {0%,100%{transform:scale(1); box-shadow:0 0 10px rgba(255,255,255,0.3);}50%{transform:scale(1.08); box-shadow:0 0 25px rgba(255,255,255,0.8);}}
         .pulse-icon { animation: pulseIcon 3s ease-in-out infinite; }
 
+        /* Extra brightness effect */
         .icon-bright:hover { filter: brightness(1.8); }
+
+        .white-glow:hover { box-shadow: 0 0 20px #fff,0 0 40px #fff,0 0 60px #fff; }
       `}</style>
 
     </footer>
