@@ -77,7 +77,7 @@ const Navigation: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`w-16 h-16 flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-110 hover:rotate-6 ${
+                className={`px-4 py-2 font-semibold rounded-lg shadow transition-all duration-300 transform hover:scale-105 ${
                   activeSection === item.id
                     ? "bg-blue-600 text-white shadow-lg"
                     : isScrolled
@@ -125,7 +125,7 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`w-16 h-16 flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-110 hover:rotate-6 ${
+                  className={`w-32 text-center px-4 py-2 font-semibold rounded-lg shadow transition-all duration-300 transform hover:scale-105 ${
                     activeSection === item.id
                       ? "bg-blue-600 text-white shadow-lg"
                       : "bg-gray-200 text-gray-800 hover:bg-blue-400 hover:text-white"
@@ -152,10 +152,6 @@ const Navigation: React.FC = () => {
         }
         .animate-pulse-slow {
           animation: pulse-slow 2s infinite;
-        }
-        /* Smooth rotation for hover */
-        button:hover {
-          transition: transform 0.3s ease;
         }
       `}</style>
     </>
