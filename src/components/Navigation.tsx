@@ -17,19 +17,17 @@ const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
 
-  /* 🔹 Smooth scroll with offset */
+  /* Smooth scroll with offset */
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    const y =
-      el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-
+    const y = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
     window.scrollTo({ top: y, behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
-  /* 🔹 Scroll spy (stable & accurate) */
+  /* Scroll spy */
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -43,10 +41,7 @@ const Navigation: React.FC = () => {
         const top = section.offsetTop;
         const height = section.offsetHeight;
 
-        if (
-          scrollPosition >= top &&
-          scrollPosition < top + height
-        ) {
+        if (scrollPosition >= top && scrollPosition < top + height) {
           setActiveSection(item.id);
           break;
         }
@@ -55,7 +50,6 @@ const Navigation: React.FC = () => {
 
     handleScroll(); // run once on mount
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -78,17 +72,17 @@ const Navigation: React.FC = () => {
       >
         <div className="max-w-6xl mx-auto px-4 flex justify-end items-center py-4">
           {/* Desktop */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-4">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`font-semibold transition-colors duration-300 ${
+                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
                   activeSection === item.id
-                    ? "text-blue-600 border-b-2 border-blue-600"
+                    ? "bg-blue-600 text-white shadow-lg"
                     : isScrolled
-                    ? "text-gray-700 hover:text-blue-600"
-                    : "text-white hover:text-blue-300"
+                    ? "bg-gray-200 text-gray-800 hover:bg-blue-400 hover:text-white"
+                    : "bg-white/20 text-white hover:bg-blue-400 hover:text-white"
                 }`}
               >
                 {item.label}
@@ -103,7 +97,12 @@ const Navigation: React.FC = () => {
             }`}
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -126,10 +125,10 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-4 py-2 text-left font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
                     activeSection === item.id
-                      ? "text-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "bg-gray-200 text-gray-800 hover:bg-blue-400 hover:text-white"
                   }`}
                 >
                   {item.label}
