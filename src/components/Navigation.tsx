@@ -77,7 +77,7 @@ const Navigation: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
+                className={`w-16 h-16 flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-110 hover:rotate-6 ${
                   activeSection === item.id
                     ? "bg-blue-600 text-white shadow-lg"
                     : isScrolled
@@ -120,12 +120,12 @@ const Navigation: React.FC = () => {
         {/* Mobile dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t shadow-lg">
-            <div className="py-4 flex flex-col space-y-2">
+            <div className="py-4 flex flex-col items-center space-y-4">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  className={`w-16 h-16 flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-110 hover:rotate-6 ${
                     activeSection === item.id
                       ? "bg-blue-600 text-white shadow-lg"
                       : "bg-gray-200 text-gray-800 hover:bg-blue-400 hover:text-white"
@@ -139,7 +139,7 @@ const Navigation: React.FC = () => {
         )}
       </nav>
 
-      {/* Animation */}
+      {/* Animations */}
       <style jsx>{`
         @keyframes pulse-slow {
           0%,
@@ -152,6 +152,10 @@ const Navigation: React.FC = () => {
         }
         .animate-pulse-slow {
           animation: pulse-slow 2s infinite;
+        }
+        /* Smooth rotation for hover */
+        button:hover {
+          transition: transform 0.3s ease;
         }
       `}</style>
     </>
