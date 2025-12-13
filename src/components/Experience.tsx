@@ -1,142 +1,287 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaServer, FaDesktop, FaCode, FaEnvelope, FaGraduationCap } from "react-icons/fa";
 
-const Navigation: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
+interface ExperienceItem {
+  title: string;
+  company: string;
+  companyUrl: string;
+  period: string;
+  responsibilities: string[];
+  icon: React.ReactNode;
+}
 
-  const navItems = [
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Experience", id: "experience" },
-    { label: "Projects", id: "projects" },
-    { label: "Contact", id: "contact" },
-  ];
+interface EducationItem {
+  school: string;
+  qualification: string;
+  period: string;
+  icon?: React.ReactNode;
+}
 
-  const sectionOffsets = useRef<Record<string, number>>({});
+const experiences: ExperienceItem[] = [
+  {
+    title: "Backend Developer Intern",
+    company: "HNG Internship",
+    companyUrl: "#",
+    period: "Dec 2024 – Oct 2025",
+    icon: <FaServer size={32} className="text-teal-400" />,
+    responsibilities: [
+      "Built scalable backend systems for production-level projects.",
+      "Developed RESTful APIs using Node.js, Express, and MongoDB.",
+      "Collaborated in agile teams to deliver high-quality solutions.",
+      "Optimized API performance and implemented caching strategies.",
+      "Contributed to documentation, code reviews, and knowledge sharing.",
+    ],
+  },
+  {
+    title: "Front-End Developer Intern",
+    company: "Valos.ai",
+    companyUrl: "https://valos.ai/",
+    period: "Aug 2024 – Nov 2024",
+    icon: <FaDesktop size={32} className="text-teal-400" />,
+    responsibilities: [
+      "Designed and implemented responsive user interfaces with React.",
+      "Integrated frontend with backend APIs seamlessly.",
+      "Improved performance using lazy loading and code splitting.",
+      "Debugged UI issues for better accessibility and usability.",
+      "Assisted in production deployments and QA workflows.",
+    ],
+  },
+  {
+    title: "Backend Developer Intern",
+    company: "Techno Brain Group",
+    companyUrl: "https://www.technobraingroup.com/",
+    period: "Apr 2023 – Apr 2024",
+    icon: <FaServer size={32} className="text-teal-400" />,
+    responsibilities: [
+      "Developed secure and high-performance RESTful APIs.",
+      "Implemented authentication and authorization flows.",
+      "Integrated front-end applications with backend services.",
+      "Troubleshot and resolved system-level issues.",
+      "Designed optimized database schemas for MongoDB and SQL.",
+    ],
+  },
+  {
+    title: "Full Stack Software Engineer",
+    company: "Freelance / Personal Projects",
+    companyUrl: "https://www.freelancer.com/",
+    period: "2022 – 2023",
+    icon: <FaCode size={32} className="text-teal-400" />,
+    responsibilities: [
+      "Delivered 15+ full-stack projects using React and Node.js.",
+      "Containerized apps using Docker for reliable deployments.",
+      "Designed scalable system architectures.",
+      "Optimized database performance for MongoDB and PostgreSQL.",
+      "Managed full development lifecycle from design to deployment.",
+    ],
+  },
+];
 
-  // Smooth scroll with offset
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+const education: EducationItem[] = [
+  {
+    school: "FRATIRON SCHOOL",
+    qualification: "Certificate | DevOps Engineering",
+    period: "2024 - 2025",
+  },
+  {
+    school: "MORINGA SCHOOL",
+    qualification: "Certificate | Software Development",
+    period: "2023 - 2024",
+  },
+  {
+    school: "KCA UNIVERSITY",
+    qualification: "Diploma | Mathematics & Computer Science",
+    period: "2020 - 2023",
+  },
+  {
+    school: "NYAIKURO SDA HIGH SCHOOL",
+    qualification: "KCSE | Mean Grade: B+",
+    period: "2016 – 2019",
+  },
+];
 
-    const yOffset = -80;
-    const y =
-      el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+// Typewriter for "Available for Hire"
+const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
+  const [displayed, setDisplayed] = React.useState("");
+  const [index, setIndex] = React.useState(0);
+  const [deleting, setDeleting] = React.useState(false);
 
-    window.scrollTo({ top: y, behavior: "smooth" });
-    setIsMobileMenuOpen(false);
-  };
-
-  // Scroll spy + navbar background
-  useEffect(() => {
-    const calculateOffsets = () => {
-      navItems.forEach(({ id }) => {
-        const el = document.getElementById(id);
-        if (el) sectionOffsets.current[id] = el.offsetTop;
-      });
-    };
-
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      const scrollPos = window.scrollY + 120;
-
-      for (let i = navItems.length - 1; i >= 0; i--) {
-        const id = navItems[i].id;
-        if (scrollPos >= sectionOffsets.current[id]) {
-          setActiveSection(id);
-          break;
-        }
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setDisplayed(text.slice(0, index + 1));
+        setIndex(index + 1);
+        if (index + 1 === text.length) setDeleting(true);
+      } else {
+        setDisplayed(text.slice(0, index - 1));
+        setIndex(index - 1);
+        if (index - 1 === 0) setDeleting(false);
       }
-    };
-
-    calculateOffsets();
-    window.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", calculateOffsets);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", calculateOffsets);
-    };
-  }, []);
+    }, deleting ? 80 : 120);
+    return () => clearTimeout(timeout);
+  }, [index, deleting, text]);
 
   return (
-    <>
-      {/* Profile image */}
-      <div className="fixed top-2 left-2 z-50 w-10 h-10 rounded-full border-2 border-blue-400 overflow-hidden">
-        <img src="/updated.jpeg" alt="Hesbon" className="w-full h-full object-cover" />
-      </div>
-
-      {/* Navbar */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled ? "bg-white shadow-lg" : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-4 py-3 flex justify-end items-center">
-          {/* Desktop */}
-          <div className="hidden md:flex space-x-8 relative">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative font-semibold transition-colors ${
-                  activeSection === item.id
-                    ? "text-blue-600"
-                    : isScrolled
-                    ? "text-gray-700"
-                    : "text-white"
-                }`}
-              >
-                {item.label}
-
-                {/* Animated underline */}
-                {activeSection === item.id && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-600 rounded-full"
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            className={`md:hidden ml-auto ${
-              isScrolled ? "text-gray-900" : "text-white"
-            }`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            ☰
-          </button>
-        </div>
-
-        {/* Mobile menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t shadow-lg">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left px-4 py-3 font-semibold ${
-                  activeSection === item.id
-                    ? "text-blue-600"
-                    : "text-gray-700"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
-    </>
+    <span className="overflow-hidden text-white font-bold text-lg">
+      {displayed}
+      <span className="animate-blink">|</span>
+      <style>{`
+        @keyframes blink {
+          0%, 50%, 100% { opacity: 1; }
+          25%, 75% { opacity: 0; }
+        }
+        .animate-blink { display:inline-block; margin-left:2px; animation:blink 1s infinite; }
+      `}</style>
+    </span>
   );
 };
 
-export default Navigation;
+// Framer Motion variants for Education
+const educationContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.15 } },
+};
+
+const educationItem = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const Experience: React.FC = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
+    setMouseTilt({ x, y });
+  };
+
+  const hoverAnimation = (idx: number) => ({
+    scale: 1.05,
+    rotateX: hoveredCard === idx ? mouseTilt.y : 0,
+    rotateY: hoveredCard === idx ? mouseTilt.x : 0,
+    boxShadow: "0 0 30px #14B8A6, 0 0 60px #00ffff",
+    transition: { type: "spring", stiffness: 200, damping: 15 },
+  });
+
+  return (
+    <section id="experience" className="relative py-16 bg-gray-900 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+
+        {/* Work Experience */}
+        <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient">
+          Work Experience
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer border border-white/10 overflow-hidden"
+              onMouseEnter={() => setHoveredCard(idx)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onMouseMove={handleCardMouseMove}
+              animate={hoveredCard === idx ? hoverAnimation(idx) : { scale: 1, rotateX: 0, rotateY: 0, boxShadow: "0 0 10px #00000050" }}
+            >
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
+              <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
+              <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
+              <p className="text-teal-300 font-medium text-center mb-1">
+                <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-teal-200">
+                  {exp.company}
+                </a>
+              </p>
+              <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
+              <div className="space-y-2 text-gray-300 text-sm">
+                {exp.responsibilities.map((item, i) => (
+                  <p key={i}>• {item}</p>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Education */}
+        <h2 className="text-3xl font-bold text-center mt-16 mb-8 text-teal-400">EDUCATION</h2>
+        <motion.div
+          className="relative max-w-4xl mx-auto"
+          variants={educationContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <div className="absolute left-5 top-0 w-1 bg-teal-500 h-full rounded" />
+
+          <div className="space-y-12">
+            {education.map((edu, idx) => (
+              <motion.div
+                key={idx}
+                variants={educationItem}
+                whileHover={{ y: -6, boxShadow: "0 0 25px #14B8A6, 0 0 50px #00ffff" }}
+                transition={{ type: "spring", stiffness: 180, damping: 18 }}
+                className="relative pl-16 flex items-start cursor-pointer"
+              >
+                <div className="absolute left-0 top-2">
+                  <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
+                    {edu.icon || <FaGraduationCap className="text-gray-900" />}
+                  </div>
+                </div>
+                <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 w-full">
+                  <h3 className="text-lg font-semibold text-teal-400 mb-1">{edu.school}</h3>
+                  <p className="text-gray-300 mb-1">{edu.qualification}</p>
+                  <p className="text-sm text-gray-400 italic">{edu.period}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Available for Hire */}
+        <div className="flex justify-center mt-12">
+          <motion.a
+            href="mailto:hesbonmanyinsa96@gmail.com"
+            className="flex items-center gap-2 px-6 py-3 bg-gray-900/80 backdrop-blur-md rounded-full shadow-lg cursor-pointer overflow-hidden"
+            animate={{
+              boxShadow: [
+                "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
+                "0 0 15px #00ff00, 0 0 25px #00ffff, 0 0 35px #ff00ff",
+                "0 0 10px #ff0000, 0 0 20px #ff9900, 0 0 30px #ffff00",
+              ],
+            }}
+            transition={{ duration: 2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0 0 20px #ff0000,0 0 30px #ff9900,0 0 40px #ffff00,0 0 25px #00ff00,0 0 35px #00ffff,0 0 45px #ff00ff",
+              transition: { duration: 0.3, type: "spring", stiffness: 300 },
+            }}
+          >
+            <motion.div
+              className="text-white"
+              whileHover={{ scale: 1.3, textShadow: "0 0 8px #ffffff,0 0 12px #14B8A6" }}
+              transition={{ duration: 0.3 }}
+            >
+              <FaEnvelope />
+            </motion.div>
+            <TypewriterText text="Available For Hire" />
+          </motion.a>
+        </div>
+
+      </div>
+
+      <style>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient { background-size: 200% 200%; animation: gradientShift 6s ease infinite; }
+      `}</style>
+    </section>
+  );
+};
+
+export default Experience;
