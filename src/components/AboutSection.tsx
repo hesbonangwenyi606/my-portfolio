@@ -229,7 +229,7 @@ const AboutSection: React.FC = () => {
             ))}
 
             <motion.a
-              href="https://hesbon-angwenyi.vercel.app/"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-md mt-6"
