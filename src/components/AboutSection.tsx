@@ -229,7 +229,7 @@ const AboutSection: React.FC = () => {
             ))}
 
             <motion.a
-              href=""
+              href="file:///home/hesbonangwenyi/Downloads/Hesbon%20Angwenyi%20CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-md mt-6"
