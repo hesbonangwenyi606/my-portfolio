@@ -235,7 +235,7 @@ const AboutSection: React.FC = () => {
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-md mt-6"
               whileHover={{
                 scale: 1.1,
-                backgroundColor: "#e0f2fe",
+                backgroundColor: "#f7b11bff",
                 boxShadow: "0 10px 20px rgba(59,130,246,0.3)",
               }}
               whileTap={{ scale: 0.95 }}
