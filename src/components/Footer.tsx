@@ -32,17 +32,6 @@ const Footer: React.FC = () => {
             <p className="text-gray-300 leading-relaxed mb-6">
               Full Stack & DevOps Engineer passionate about building scalable web applications and automating infrastructure.
             </p>
-
-            {/* QR Code */}
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">Scan to WhatsApp</h3>
-              <QRCode
-                value="https://wa.me/254743573380"
-                size={100}
-                bgColor="#1F2937"
-                fgColor="#10B981"
-              />
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -69,7 +58,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location */}
+          {/* Location + QR Code */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
             {[
@@ -88,6 +77,19 @@ const Footer: React.FC = () => {
                 </a>
               </p>
             ))}
+
+            {/* WhatsApp QR Code */}
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">Scan to WhatsApp</h3>
+              <a href="https://wa.me/254743573380" target="_blank" rel="noopener noreferrer">
+                <QRCode
+                  value="https://wa.me/254743573380"
+                  size={100}
+                  bgColor="#1F2937"
+                  fgColor="#10B981"
+                />
+              </a>
+            </div>
           </div>
 
         </div>
