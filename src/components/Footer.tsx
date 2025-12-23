@@ -54,6 +54,8 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 text-gray-300">
               <li>Full-Stack Development</li>
               <li>Web Development</li>
+              <li>Database Fundamentals</li>
+              <li>Agile Team Collaboration</li>
               <li>Cloud Deployment</li>
             </ul>
           </div>
