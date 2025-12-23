@@ -79,8 +79,8 @@ const Footer: React.FC = () => {
             ))}
           </div>
 
-          {/* QR Code Column */}
-          <div className="flex flex-col items-center">
+          {/* QR Code Column pushed to corner */}
+          <div className="flex flex-col items-center md:items-end md:ml-auto">
             <h3 className="text-lg font-semibold mb-2">Scan to WhatsApp</h3>
             <a href="https://wa.me/254743573380" target="_blank" rel="noopener noreferrer">
               <QRCode
