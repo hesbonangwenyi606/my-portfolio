@@ -10,6 +10,7 @@ const Footer: React.FC = () => {
     { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com' },
     { icon: FaTwitter, href: 'https://x.com/home' },
     { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/' },
+
   ];
 
   return (
