@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import QRCode from 'react-qr-code';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -31,6 +32,17 @@ const Footer: React.FC = () => {
             <p className="text-gray-300 leading-relaxed mb-6">
               Full Stack & DevOps Engineer passionate about building scalable web applications and automating infrastructure.
             </p>
+
+            {/* QR Code */}
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">Scan to WhatsApp</h3>
+              <QRCode
+                value="https://wa.me/254743573380"
+                size={100}
+                bgColor="#1F2937"
+                fgColor="#10B981"
+              />
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -52,7 +64,7 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2 text-gray-300">
               <li>Full-Stack Development</li>
-              <li>Web Development </li>
+              <li>Web Development</li>
               <li>Cloud Deployment</li>
             </ul>
           </div>
@@ -92,7 +104,6 @@ const Footer: React.FC = () => {
               aria-label="Social Link"
             >
               <div className="absolute inset-0 rounded-full rainbow-rotate"></div>
-
               <div
                 className="relative z-11 w-11 h-11 rounded-full flex items-center justify-center 
                 text-white bg-gray-900 pulse-icon transition-transform duration-300 
