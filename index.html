@@ -1,40 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>www.portfolio</title>
+  <meta name="description" content="Hesbon Angwenyi – Software Developer portfolio showcasing skills, projects, and professional experience.">
 
-    <title>www.portfolio</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="https://i.pinimg.com/1200x/ff/a1/70/ffa17092c18fff93dbb783ad3d8c6786.jpg">
 
-    <meta 
-      name="description" 
-      content="Hesbon Angwenyi – Software Developer portfolio showcasing skills, projects, and professional experience."
-    />
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="google6177a1928f7fbf7a" />
+  <meta name="google-site-verification" content="7AsOQGI--k25871qeStC2l9BYgaKUb9ZAJIhKl6elO8" />
 
-    <link rel="icon" type="image/svg+xml" hsref="https://i.pinimg.com/1200x/ff/a1/70/ffa17092c18fff93dbb783ad3d8c6786.jpg" />
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Hesbon Angwenyi – Software Developer" />
+  <meta property="og:description" content="Hesbon Angwenyi – Software Developer portfolio showcasing skills, projects, and professional experience." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hesbonangwenyi.com/updated.jpeg" />
+  <meta property="og:image:alt" content="Hesbon Angwenyi – Software Developer" />
+  <meta property="og:url" content="https://hesbonangwenyi.com" />
 
-    <!-- Google Search Console Verification (existing) -->
-    <meta name="google-site-verification" content="google6177a1928f7fbf7a" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hesbon Angwenyi" />
+  <meta name="twitter:description" content="Hesbon Angwenyi – Software Developer portfolio showcasing skills, projects, and professional experience." />
+  <meta name="twitter:image" content="https://hesbonangwenyi.com/updated.jpeg" />
+  <meta name="twitter:image:alt" content="Hesbon Angwenyi – Software Developer" />
 
-    <!-- Google Search Console Verification (new one you provided) -->
-     <meta name="google-site-verification" content="7AsOQGI--k25871qeStC2l9BYgaKUb9ZAJIhKl6elO8" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* Overlay for readability */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
 
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="Hesbon Angwenyi – Software Developer portfolio showcasing skills, projects, and professional experience." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/updated.jpeg" />
-    <meta property="og:image:alt" content="Hesbon Angwenyi – Software Developer" />
-    <meta property="og:url" content="https://hesbonangwenyi.com" />
+    /* Text on top of the image */
+    .hero h1 {
+      position: relative;
+      z-index: 2;
+      color: white;
+      font-size: 5rem;
+      text-align: center;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hesbon Angwenyi" />
-    <meta name="twitter:description" content="Hesbon Angwenyi – Software Developer portfolio showcasing skills, projects, and professional experience." />
-    <meta name="twitter:image" content="/updated.jpeg" />
-    <meta name="twitter:image:alt" content="Hesbon Angwenyi – Software Developer" />
-  </head>
+    /* Responsive text */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Root for React app -->
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+</body>
 </html>
