@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
       <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-15 animate-gradient-float3 -z-10"></div>
 
       <div className="max-w-6xl mx-auto px-4 opacity-0 animate-fade-up space-y-12">
-        <div className="grid md:grid-cols-4 gap-8 text-center md:text-left">
+        <div className="grid md:grid-cols-5 gap-8 text-center md:text-left">
 
           {/* Brand */}
           <div>
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location + QR Code */}
+          {/* Location */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
             {[
@@ -77,21 +77,20 @@ const Footer: React.FC = () => {
                 </a>
               </p>
             ))}
-
-            {/* WhatsApp QR Code */}
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">Scan to WhatsApp</h3>
-              <a href="https://wa.me/254743573380" target="_blank" rel="noopener noreferrer">
-                <QRCode
-                  value="https://wa.me/254743573380"
-                  size={100}
-                  bgColor="#1F2937"
-                  fgColor="#10B981"
-                />
-              </a>
-            </div>
           </div>
 
+          {/* QR Code Column */}
+          <div className="flex flex-col items-center">
+            <h3 className="text-lg font-semibold mb-2">Scan to WhatsApp</h3>
+            <a href="https://wa.me/254743573380" target="_blank" rel="noopener noreferrer">
+              <QRCode
+                value="https://wa.me/254743573380"
+                size={120}
+                bgColor="#1F2937"
+                fgColor="#10B981"
+              />
+            </a>
+          </div>
         </div>
 
         {/* Social Icons */}
