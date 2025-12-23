@@ -229,7 +229,7 @@ const AboutSection: React.FC = () => {
             ))}
 
             <motion.a
-              href="https://drive.google.com/file/d/1pWM6SXed3UikB6yrbbJ7_NBlqLG7pG_i/view?usp=sharing"
+              href="https://drive.google.com/drive/my-drive"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-md mt-6 font-poppins"
