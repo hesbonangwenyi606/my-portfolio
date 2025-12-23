@@ -41,7 +41,7 @@ const Stats = () => {
               skills={[
                 { name: "Docker", level: 90 },
                 { name: "Kubernetes", level: 75 },
-                { name: "Ansib
+                { name: 
                 { name: "Git & GitHub", level: 92 },
                 { name: "CI/CD Pipelines", level: 85 },
                 { name: "AWS", level: 60 },
