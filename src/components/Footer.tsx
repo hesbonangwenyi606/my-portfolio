@@ -6,17 +6,17 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606', color: '#333' },
-    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#EA4335' },
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/', color: '#0077b5' },
-    { icon: FaTwitter, href: 'https://x.com/home', color: '#1DA1F2' },
-    { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#25D366' },
+    { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606', color: '#3B82F6' },
+    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#10B981' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/', color: '#8B5CF6' },
+    { icon: FaTwitter, href: 'https://x.com/home', color: '#3B82F6' },
+    { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#10B981' },
   ];
 
   return (
     <footer className="relative bg-gray-900 text-white py-16 overflow-hidden font-sans">
 
-      {/* Background subtle glowing gradients */}
+      {/* Background glowing gradients */}
       <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-15 animate-gradient-float1 -z-10"></div>
       <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-15 animate-gradient-float2 -z-10"></div>
       <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 animate-gradient-float3 -z-10"></div>
@@ -109,13 +109,17 @@ const Footer: React.FC = () => {
               className="relative w-12 h-12 flex items-center justify-center group"
               aria-label="Social Link"
             >
-              <div className="absolute inset-0 rounded-full rainbow-rotate opacity-40 blur-sm"></div>
+              {/* Glow behind icon */}
+              <div className="absolute inset-0 rounded-full rainbow-rotate opacity-25 blur-sm"></div>
+
+              {/* Icon */}
               <div
-                className="relative z-11 w-11 h-11 rounded-full flex items-center justify-center 
-                text-white bg-gray-900 pulse-icon transition-transform duration-300 transform hover:scale-110 hover:glow"
+                className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center 
+                           text-white bg-gray-900 pulse-icon transition-transform duration-300 transform 
+                           hover:scale-110 hover:glow"
                 style={{ color }}
               >
-                <Icon className="w-8 h-8" />
+                <Icon className="w-7 h-7" />
               </div>
             </a>
           ))}
@@ -131,11 +135,9 @@ const Footer: React.FC = () => {
 
       {/* Animations and Glow Effects */}
       <style jsx>{`
-        /* Fade Up */
         @keyframes fadeUp { 0% { opacity:0; transform:translateY(20px);} 100% { opacity:1; transform:translateY(0);} }
         .animate-fade-up { animation: fadeUp 1s ease-out forwards; }
 
-        /* Background Gradient Animations */
         @keyframes gradient1 {0%,100%{background:linear-gradient(45deg,#6EE7B7,#3B82F6);}50%{background:linear-gradient(45deg,#3B82F6,#F472B6);}}
         @keyframes gradient2 {0%,100%{background:linear-gradient(135deg,#F9A8D4,#8B5CF6);}50%{background:linear-gradient(135deg,#8B5CF6,#FCD34D);}}
         @keyframes gradient3 {0%,100%{background:linear-gradient(225deg,#FBBF24,#3B82F6);}50%{background:linear-gradient(225deg,#3B82F6,#EC4899);}}
@@ -148,15 +150,12 @@ const Footer: React.FC = () => {
         .animate-gradient-float2 { animation: gradient2 22s ease infinite, float2 32s ease-in-out infinite; }
         .animate-gradient-float3 { animation: gradient3 25s ease infinite, float3 35s ease-in-out infinite; }
 
-        /* Rainbow Rotate for Social Icons */
         @keyframes rotateRainbow {0%{transform:rotate(0deg); filter:hue-rotate(0deg);}100%{transform:rotate(360deg); filter:hue-rotate(360deg);}}
-        .rainbow-rotate { border:3px solid transparent; background:conic-gradient(red,orange,yellow,green,blue,indigo,violet,red); border-radius:9999px; animation:rotateRainbow 12s linear infinite;}
+        .rainbow-rotate { border:3px solid transparent; background:conic-gradient(#10B981,#3B82F6,#8B5CF6,#10B981); border-radius:9999px; animation:rotateRainbow 12s linear infinite;}
 
-        /* Pulse Icon */
         @keyframes pulseIcon {0%,100%{transform:scale(1); box-shadow:0 0 10px rgba(255,255,255,0.3);}50%{transform:scale(1.1); box-shadow:0 0 20px rgba(255,255,255,0.6);}}
         .pulse-icon { animation: pulseIcon 3s ease-in-out infinite; }
 
-        /* Unified Glow Effect */
         .glow {
           transition: all 0.5s ease;
           box-shadow: 0 0 0 rgba(16, 185, 129, 0.5);
@@ -167,7 +166,6 @@ const Footer: React.FC = () => {
                       0 0 25px 10px rgba(59, 130, 246, 0.4);
         }
 
-        /* Bright Hover for Icons */
         .icon-bright:hover { filter: brightness(1.5); }
       `}</style>
     </footer>
