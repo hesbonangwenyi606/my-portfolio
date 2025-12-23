@@ -8,9 +8,8 @@ const Footer: React.FC = () => {
   const socialLinks = [
     { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606' },
     { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com' },
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/' },
     { icon: FaTwitter, href: 'https://x.com/home' },
-    { icon: FaWhatsapp, href: 'https://wa.me/254743573380' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/' },
   ];
 
   return (
