@@ -81,7 +81,7 @@ const experiences: ExperienceItem[] = [
 
 const education: EducationItem[] = [
   {
-    school: "FRATIRON SCHOOL",
+    school: "FRATIRON SCHOOL BOOTCAMP",
     qualification: "Certificate | DevOps Engineering",
     period: "2024 - 2025",
   },
