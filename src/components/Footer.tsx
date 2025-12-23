@@ -88,11 +88,11 @@ const Footer: React.FC = () => {
               href="https://wa.me/254743573380"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-500 hover:glow"
+              className="transition-all duration-700 hover:glow"
             >
               <QRCode
                 value="https://wa.me/254743573380"
-                size={120}
+                size={150}
                 bgColor="#1F2937"
                 fgColor="#10B981"
               />
