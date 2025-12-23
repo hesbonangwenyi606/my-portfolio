@@ -45,7 +45,7 @@ const Stats = () => {
                 { name: "Terraform", level: 78 },
                 { name: "Git & GitHub", level: 92 },
                 { name: "CI/CD Pipelines", level: 85 },
-                { name: "AWS", level: 80 },
+                { name: "AWS", level: 60 },
               ]}
             />
             <SkillCategory
