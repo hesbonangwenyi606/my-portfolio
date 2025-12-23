@@ -42,7 +42,7 @@ const Stats = () => {
                 { name: "Docker", level: 90 },
                 { name: "Kubernetes", level: 75 },
                 { name: "Ansible", level: 80 },
-                { name: "Terraform", 
+                { name: "
                 { name: "Git & GitHub", level: 92 },
                 { name: "CI/CD Pipelines", level: 85 },
                 { name: "AWS", level: 60 },
