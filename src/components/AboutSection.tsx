@@ -244,7 +244,7 @@ const AboutSection: React.FC = () => {
               transition={{ duration: 0.7, delay: 0.4 }}
               viewport={{ once: false }}
             >
-              <FaEye /> View Resume
+              <FaEye /> View CV 
             </motion.a>
           </motion.div>
 
