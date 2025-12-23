@@ -63,7 +63,6 @@ const Stats = () => {
               skills={[
                 { name: "Figma", level: 75 },
                 { name: "Postman", level: 90 },
-                
                 { name: "Agile", level: 85 },
               ]}
             />
