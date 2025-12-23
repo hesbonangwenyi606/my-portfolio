@@ -6,11 +6,11 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606', color: '#3B82F6' },
-    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com', color: '#10B981' },
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/', color: '#8B5CF6' },
-    { icon: FaTwitter, href: 'https://x.com/home', color: '#3B82F6' },
-    { icon: FaWhatsapp, href: 'https://wa.me/254743573380', color: '#10B981' },
+    { icon: FaGithub, href: 'https://github.com/hesbonangwenyi606' },
+    { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/' },
+    { icon: FaTwitter, href: 'https://x.com/home' },
+    { icon: FaWhatsapp, href: 'https://wa.me/254743573380' },
   ];
 
   return (
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
 
         {/* Social Icons */}
         <div className="flex justify-center gap-6 mt-10">
-          {socialLinks.map(({ icon: Icon, href, color }, i) => (
+          {socialLinks.map(({ icon: Icon, href }, i) => (
             <a
               key={i}
               href={href}
@@ -109,16 +109,13 @@ const Footer: React.FC = () => {
               className="relative w-12 h-12 flex items-center justify-center group"
               aria-label="Social Link"
             >
-              {/* Glow behind icon */}
-              <div className="absolute inset-0 rounded-full rainbow-rotate opacity-25 blur-sm"></div>
+              {/* Rotating circle behind icon */}
+              <div className="rotating-circle absolute inset-0 rounded-full"></div>
 
-              {/* Icon */}
-              <div
-                className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center 
-                           text-white bg-gray-900 pulse-icon transition-transform duration-300 transform 
-                           hover:scale-110 hover:glow"
-                style={{ color }}
-              >
+              {/* Static icon */}
+              <div className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center 
+                              bg-gray-900 text-white transition-transform duration-300 transform 
+                              hover:scale-110">
                 <Icon className="w-7 h-7" />
               </div>
             </a>
@@ -150,11 +147,18 @@ const Footer: React.FC = () => {
         .animate-gradient-float2 { animation: gradient2 22s ease infinite, float2 32s ease-in-out infinite; }
         .animate-gradient-float3 { animation: gradient3 25s ease infinite, float3 35s ease-in-out infinite; }
 
-        @keyframes rotateRainbow {0%{transform:rotate(0deg); filter:hue-rotate(0deg);}100%{transform:rotate(360deg); filter:hue-rotate(360deg);}}
-        .rainbow-rotate { border:3px solid transparent; background:conic-gradient(#10B981,#3B82F6,#8B5CF6,#10B981); border-radius:9999px; animation:rotateRainbow 12s linear infinite;}
+        /* Rotating circle behind social icons */
+        @keyframes rotateCircle {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
 
-        @keyframes pulseIcon {0%,100%{transform:scale(1); box-shadow:0 0 10px rgba(255,255,255,0.3);}50%{transform:scale(1.1); box-shadow:0 0 20px rgba(255,255,255,0.6);}}
-        .pulse-icon { animation: pulseIcon 3s ease-in-out infinite; }
+        .rotating-circle {
+          background: conic-gradient(#3B82F6, #FCD34D); /* Blue to yellow */
+          border-radius: 9999px;
+          animation: rotateCircle 6s linear infinite;
+          opacity: 0.8;
+        }
 
         .glow {
           transition: all 0.5s ease;
@@ -165,8 +169,6 @@ const Footer: React.FC = () => {
           box-shadow: 0 0 15px 5px rgba(16, 185, 129, 0.6),
                       0 0 25px 10px rgba(59, 130, 246, 0.4);
         }
-
-        .icon-bright:hover { filter: brightness(1.5); }
       `}</style>
     </footer>
   );
