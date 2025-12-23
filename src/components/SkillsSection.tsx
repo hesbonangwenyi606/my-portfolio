@@ -64,7 +64,7 @@ const Stats = () => {
                 { name: "Figma", level: 75 },
                 { name: "Postman", level: 90 },
                 { name: "Swagger", level: 80 },
-                { name: "Agile ", level: 85 },
+                { name: "Agile", level: 85 },
               ]}
             />
           </div>
