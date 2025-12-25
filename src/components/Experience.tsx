@@ -18,6 +18,7 @@ interface EducationItem {
   qualification: string;
   period: string;
   icon?: React.ReactNode;
+  description?: string;
 }
 
 const experiences: ExperienceItem[] = [
@@ -84,21 +85,25 @@ const education: EducationItem[] = [
     school: "FRATIRON SCHOOL BOOTCAMP",
     qualification: "Certificate | DevOps Engineering",
     period: "2024 - 2025",
+    icon: <FaGraduationCap className="text-gray-900" />,
+    description:
+      "Learned CI/CD pipelines, containerization with Docker, Kubernetes orchestration, cloud deployment strategies, monitoring, and infrastructure automation.",
   },
   {
     school: "MORINGA SCHOOL BOOTCAMP",
     qualification: "Certificate | Software Development",
     period: "2023 - 2024",
+    icon: <FaGraduationCap className="text-gray-900" />,
+    description:
+      "Gained hands-on experience in full-stack web development using React, Node.js, databases, RESTful APIs, and agile software practices.",
   },
   {
     school: "KCA UNIVERSITY",
     qualification: "Diploma | Mathematics & Computer Science",
     period: "2020 - 2023",
-  },
-  {
-    school: "NYAIKURO SDA HIGH SCHOOL",
-    qualification: "KCSE | Mean Grade: B+",
-    period: "2016 – 2019",
+    icon: <FaGraduationCap className="text-gray-900" />,
+    description:
+      "Acquired strong foundations in algorithms, data structures, programming languages, problem-solving, and computer science fundamentals.",
   },
 ];
 
@@ -233,7 +238,8 @@ const Experience: React.FC = () => {
                 <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 w-full">
                   <h3 className="text-lg font-semibold text-teal-400 mb-1">{edu.school}</h3>
                   <p className="text-gray-300 mb-1">{edu.qualification}</p>
-                  <p className="text-sm text-gray-400 italic">{edu.period}</p>
+                  <p className="text-sm text-gray-400 italic mb-2">{edu.period}</p>
+                  {edu.description && <p className="text-gray-300 text-sm">{edu.description}</p>}
                 </div>
               </motion.div>
             ))}
