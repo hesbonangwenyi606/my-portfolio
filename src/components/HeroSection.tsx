@@ -125,9 +125,9 @@ const HeroSection: React.FC = () => {
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
         {/* Left Text */}
-        <div className="text-white space-y-6 md:space-y-8 z-10 relative">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight whitespace-nowrap">
-            <span className="text-blue-400">Hesbon Angwenyi</span>
+        <div className="text-white space-y-3 md:space-y-4 z-5 relative">
+          <h1 className="text-1xl md:text-2xl font-bold leading-tight whitespace-nowrap">
+            <span className="text-blue-200">Hesbon Angwenyi</span>
           </h1>
 
           <p className="text-3xl md:text-4xl text-gray-300 font-semibold h-10">
