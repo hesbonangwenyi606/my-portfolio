@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import QRCode from 'react-qr-code';
 
 const Footer: React.FC = () => {
@@ -77,6 +77,7 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-heading font-semibold mb-2">Location</h3>
 
             <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
+              <FaMapMarkerAlt className="text-white w-4 h-4 flex-shrink-0" />
               <a
                 href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya"
                 className="hover:text-white transition-colors whitespace-nowrap"
@@ -86,6 +87,7 @@ const Footer: React.FC = () => {
             </p>
 
             <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
+              <FaPhoneAlt className="text-white w-4 h-4 flex-shrink-0" />
               <a
                 href="tel:+254743573380"
                 className="hover:text-white transition-colors whitespace-nowrap"
@@ -95,7 +97,7 @@ const Footer: React.FC = () => {
             </p>
 
             <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
-              <FaEnvelope className="text-white w-4 h-4 flex-shrink-0" /> {/* Smaller email icon */}
+              <FaEnvelope className="text-white w-4 h-4 flex-shrink-0" />
               <a
                 href="mailto:hesbonmanyinsa96@gmail.com"
                 className="hover:text-white transition-colors whitespace-nowrap"
