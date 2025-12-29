@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
   const placeholderValues = {
-    name: "John Doe",
+    firstName: "John",
+    lastName: "Doe",
     email: "john.doe@example.com",
     phone: "+254 700 000 000",
     subject: "Project Inquiry / Collaboration / Question",
@@ -16,7 +17,7 @@ const ContactSection: React.FC = () => {
       : null;
 
   const [formValues, setFormValues] = useState(
-    savedValues || { name: "", email: "", phone: "", subject: "", message: "" }
+    savedValues || { firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" }
   );
   const [result, setResult] = useState("");
   const [hue, setHue] = useState(210);
@@ -34,7 +35,7 @@ const ContactSection: React.FC = () => {
     if (result.includes("Successfully")) {
       const timer = setTimeout(() => {
         setResult("");
-        setFormValues({ name: "", email: "", phone: "", subject: "", message: "" });
+        setFormValues({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -54,10 +55,8 @@ const ContactSection: React.FC = () => {
       const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
       const data = await response.json();
       if (data.success) {
-        setResult(
-          "✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You"
-        );
-        setFormValues({ name: "", email: "", phone: "", subject: "", message: "" });
+        setResult("✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You");
+        setFormValues({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
         localStorage.removeItem("contactForm");
       } else setResult(data.message || "Failed to send message.");
     } catch {
@@ -65,15 +64,14 @@ const ContactSection: React.FC = () => {
     }
   };
 
-  const particles = Array.from({ length: 30 }, (_, i) => i); // fewer particles for compactness
+  const particles = Array.from({ length: 30 }, (_, i) => i);
 
   return (
     <section
       id="contact"
       className="relative py-12 min-h-[60vh] overflow-hidden"
       style={{
-        backgroundImage:
-          "url('https://i.pinimg.com/736x/71/a6/d8/71a6d82e769b7778fb900203ab9d45de.jpg')",
+        backgroundImage: "url('https://i.pinimg.com/736x/71/a6/d8/71a6d82e769b7778fb900203ab9d45de.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -95,16 +93,10 @@ const ContactSection: React.FC = () => {
 
       <div className="max-w-3xl mx-auto px-4 relative z-10 -translate-y-4">
         <div className="text-center mb-12">
-          <h2
-            className="text-3xl md:text-4xl font-bold animate-glow-text"
-            style={{ color: "#0a3d91" }}
-          >
+          <h2 className="text-3xl md:text-4xl font-bold animate-glow-text" style={{ color: "#0a3d91" }}>
             Get In Touch
           </h2>
-          <p
-            className="max-w-xl mx-auto text-sm md:text-base animate-glow-text"
-            style={{ color: "#0f4bbd" }}
-          >
+          <p className="max-w-xl mx-auto text-sm md:text-base animate-glow-text" style={{ color: "#0f4bbd" }}>
             Ready to start your next project? Fill out the form below and I’ll get back to you within 24hrs.
           </p>
         </div>
@@ -128,8 +120,28 @@ const ContactSection: React.FC = () => {
               boxShadow: `0 0 15px hsl(${hue}, 100%, 50%), 0 0 30px hsl(${(hue + 30) % 360}, 100%, 50%)`,
             }}
           >
-            {["name", "email", "phone", "subject"].map((field) => (
-              <div key={field} className="w-full">
+            {/* First and Last Name side by side */}
+            <div className="grid grid-cols-2 gap-3">
+              {["firstName", "lastName"].map((field) => (
+                <div key={field}>
+                  <label className="block text-blue-900 font-semibold mb-1 text-sm">
+                    {field === "firstName" ? "First Name" : "Last Name"}
+                  </label>
+                  <input
+                    type="text"
+                    name={field}
+                    required
+                    value={formValues[field as keyof typeof formValues]}
+                    onChange={(e) => handleChange(field, e.target.value)}
+                    placeholder={placeholderValues[field as keyof typeof placeholderValues]}
+                    className="w-full px-3 py-2 border border-blue-500 rounded-md focus:ring-1 focus:ring-blue-400 text-black placeholder-blue-300 text-sm transition hover:shadow-md hover:scale-102"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {["email", "phone", "subject"].map((field) => (
+              <div key={field}>
                 <label className="block text-blue-900 font-semibold mb-1 text-sm">
                   {field.charAt(0).toUpperCase() + field.slice(1)}
                 </label>
@@ -145,7 +157,7 @@ const ContactSection: React.FC = () => {
               </div>
             ))}
 
-            <div className="w-full">
+            <div>
               <label className="block text-blue-900 font-semibold mb-1 text-sm">Message</label>
               <textarea
                 name="message"
