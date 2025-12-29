@@ -39,7 +39,7 @@ const TestimonialsSection: React.FC = () => {
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`w-5 h-5 ${i < rating ? 'text-blue-400' : 'text-gray-300'}`}
+          className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-700'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden="true"
@@ -62,19 +62,19 @@ const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Blue shining background shapes */}
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-40 -z-10 animate-blue-gradient1 blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-40 -z-10 animate-blue-gradient2 blur-3xl"></div>
+    <section className="relative py-24 overflow-hidden bg-gray-900">
+      {/* Navy gradient background shapes */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-40 -z-10 animate-navy-gradient1 blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-40 -z-10 animate-navy-gradient2 blur-3xl"></div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-blue-900 mb-3">
+          <h2 className="text-4xl font-bold text-gray-100 mb-3">
             What Clients Say
           </h2>
-          <div className="w-28 h-1 bg-gradient-to-r from-blue-500 to-blue-400 mx-auto mb-4 rounded-full"></div>
-          <p className="text-blue-700 max-w-2xl mx-auto">
+          <div className="w-28 h-1 bg-gradient-to-r from-gray-700 to-gray-500 mx-auto mb-4 rounded-full"></div>
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Testimonials from clients and colleagues who have experienced the quality of my work.
           </p>
         </div>
@@ -84,18 +84,18 @@ const TestimonialsSection: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-6 shadow-lg transform hover:-translate-y-2 transition-transform duration-700 animate-float"
+              className="bg-gray-800 rounded-2xl p-6 shadow-lg transform hover:-translate-y-2 transition-transform duration-700 animate-float"
             >
               <StarRating rating={testimonial.rating} />
-              <blockquote className="text-blue-600 mt-4 mb-6 leading-relaxed italic">
+              <blockquote className="text-gray-200 mt-4 mb-6 leading-relaxed italic">
                 "{testimonial.content}"
               </blockquote>
-              <div className="border-t border-blue-100 pt-4 flex flex-col">
+              <div className="border-t border-gray-700 pt-4 flex flex-col">
                 <a
                   href={testimonial.linkName}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-blue-900 hover:underline mb-1"
+                  className="font-semibold text-yellow-400 hover:underline mb-1"
                 >
                   {testimonial.name}
                 </a>
@@ -103,7 +103,7 @@ const TestimonialsSection: React.FC = () => {
                   href={testimonial.linkPosition}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 text-sm hover:underline"
+                  className="text-gray-300 text-sm hover:underline"
                 >
                   {testimonial.position}
                 </a>
@@ -117,17 +117,17 @@ const TestimonialsSection: React.FC = () => {
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
               <div key={index} className="px-2">
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform hover:-translate-y-1 transition-transform duration-700 animate-float-small">
+                <div className="bg-gray-800 rounded-2xl p-6 shadow-lg transform hover:-translate-y-1 transition-transform duration-700 animate-float-small">
                   <StarRating rating={testimonial.rating} />
-                  <blockquote className="text-blue-600 mt-4 mb-6 leading-relaxed italic">
+                  <blockquote className="text-gray-200 mt-4 mb-6 leading-relaxed italic">
                     "{testimonial.content}"
                   </blockquote>
-                  <div className="border-t border-blue-100 pt-4 flex flex-col">
+                  <div className="border-t border-gray-700 pt-4 flex flex-col">
                     <a
                       href={testimonial.linkName}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold text-blue-900 hover:underline mb-1"
+                      className="font-semibold text-yellow-400 hover:underline mb-1"
                     >
                       {testimonial.name}
                     </a>
@@ -135,7 +135,7 @@ const TestimonialsSection: React.FC = () => {
                       href={testimonial.linkPosition}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 text-sm hover:underline"
+                      className="text-gray-300 text-sm hover:underline"
                     >
                       {testimonial.position}
                     </a>
@@ -149,18 +149,18 @@ const TestimonialsSection: React.FC = () => {
 
       {/* Tailwind custom animations */}
       <style jsx>{`
-        @keyframes blueGradient1 {
-          0% { background: linear-gradient(45deg, #3B82F6, #60A5FA); }
-          50% { background: linear-gradient(45deg, #2563EB, #3B82F6); }
-          100% { background: linear-gradient(45deg, #3B82F6, #60A5FA); }
+        @keyframes navyGradient1 {
+          0% { background: linear-gradient(45deg, #1E3A8A, #1E40AF); }
+          50% { background: linear-gradient(45deg, #1E40AF, #1E3A8A); }
+          100% { background: linear-gradient(45deg, #1E3A8A, #1E40AF); }
         }
-        @keyframes blueGradient2 {
-          0% { background: linear-gradient(135deg, #60A5FA, #3B82F6); }
-          50% { background: linear-gradient(135deg, #3B82F6, #1D4ED8); }
-          100% { background: linear-gradient(135deg, #60A5FA, #3B82F6); }
+        @keyframes navyGradient2 {
+          0% { background: linear-gradient(135deg, #1E40AF, #1E3A8A); }
+          50% { background: linear-gradient(135deg, #1E3A8A, #1E50C0); }
+          100% { background: linear-gradient(135deg, #1E40AF, #1E3A8A); }
         }
-        .animate-blue-gradient1 { animation: blueGradient1 15s ease infinite alternate; }
-        .animate-blue-gradient2 { animation: blueGradient2 20s ease infinite alternate; }
+        .animate-navy-gradient1 { animation: navyGradient1 15s ease infinite alternate; }
+        .animate-navy-gradient2 { animation: navyGradient2 20s ease infinite alternate; }
 
         @keyframes float {
           0%, 100% { transform: translateY(0); }
