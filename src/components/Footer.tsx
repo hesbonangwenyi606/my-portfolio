@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
             <a
               href="#home"
               aria-label="Back to top"
-              className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group rotate-logo"
+              className="relative w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-4 group rotate-logo"
             >
               <div className="absolute inset-0 rounded-full static-rect"></div>
               <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden flex items-center justify-center">
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
             >
               <QRCode
                 value="https://wa.me/254743573380"
-                size={160}  // Increased size
+                size={160}  // Increased QR code size
                 bgColor="#1F2937"
                 fgColor="#10B981"
               />
