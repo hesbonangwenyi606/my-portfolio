@@ -25,21 +25,24 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* CIRCULAR Logo with static gradient border */}
+            {/* Circular Logo with rotating inner part */}
             <a
               href="#home"
               aria-label="Back to top"
               className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group"
             >
+              {/* Static circular gradient border */}
               <div className="absolute inset-0 rounded-full static-rect"></div>
-              <div className="absolute inset-[4px] rounded-full bg-gray-900"></div>
-              <img
-                src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
-                alt="Hesbon Angwenyi Logo"
-                className="relative z-10 w-full h-full rounded-full object-cover
-                           transition-transform duration-500
-                           group-hover:scale-105 group-hover:glow"
-              />
+
+              {/* Inner background with logo */}
+              <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden">
+                <img
+                  src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
+                  alt="Hesbon Angwenyi Logo"
+                  className="w-full h-full rounded-full object-cover transition-transform duration-1000
+                             group-hover:rotate-12 group-hover:scale-105"
+                />
+              </div>
             </a>
 
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
