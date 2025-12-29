@@ -107,9 +107,11 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* QR Code */}
+          {/* QR Code with text above */}
           <div className="flex flex-col items-center md:items-end md:ml-8 mt-4 md:mt-0">
-            <h3 className="text-lg font-heading font-semibold mb-2">Scan to WhatsApp</h3>
+            <p className="text-white font-semibold text-sm md:text-base mb-2 text-center">
+              Scan to WhatsApp
+            </p>
             <a
               href="https://wa.me/254743573380"
               target="_blank"
