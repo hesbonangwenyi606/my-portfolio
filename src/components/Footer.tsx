@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
             </a>
 
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
-              Full Stack & DevOps Engineer passionate about building scalable web applications and automating infrastructure.
+              Aspiring Full-Stack Developer & DevOps Intern, passionate about building scalable web applications and learning cloud automation.
             </p>
           </div>
 
