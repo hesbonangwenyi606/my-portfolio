@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* Circular Logo with static gradient border */}
+            {/* CIRCULAR Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-heading font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2">
               {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((link, i) => (
                 <li key={i}>
                   <a
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
           {/* Services */}
           <div>
             <h3 className="text-lg font-heading font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300">
               <li>Full-Stack Development</li>
               <li>Web Development</li>
               <li>Database Fundamentals</li>
@@ -134,8 +134,8 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-700 pt-6 text-center text-sm md:text-base">
-          <p className="text-white tracking-wider">
+        <div className="border-t border-gray-700 pt-6 text-center">
+          <p className="text-white text-sm md:text-base tracking-wider">
             © 2023 - {currentYear} Hesbon Angwenyi. All rights reserved
           </p>
         </div>
