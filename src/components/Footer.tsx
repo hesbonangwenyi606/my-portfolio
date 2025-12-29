@@ -26,21 +26,14 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
 
-            {/* RECTANGLE Logo with rotating name behind */}
+            {/* RECTANGLE Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
               className="relative w-40 h-24 mb-4 group"
             >
-              {/* Rotating name behind logo */}
-              <div className="absolute inset-0 flex items-center justify-center rotating-name pointer-events-none">
-                <span className="text-xs tracking-[0.4em] uppercase text-emerald-400 opacity-60">
-                  HESBON • ANGWENYI •
-                </span>
-              </div>
-
-              {/* Rotating gradient border */}
-              <div className="absolute inset-0 rounded-xl rotating-rect"></div>
+              {/* Static gradient border */}
+              <div className="absolute inset-0 rounded-xl static-rect"></div>
 
               {/* Inner background */}
               <div className="absolute inset-[2px] rounded-lg bg-gray-900"></div>
@@ -55,7 +48,7 @@ const Footer: React.FC = () => {
               />
             </a>
 
-            {/* Description only (name removed) */}
+            {/* Description only */}
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
               Full Stack & DevOps Engineer passionate about building scalable web applications and automating infrastructure.
             </p>
@@ -166,29 +159,24 @@ const Footer: React.FC = () => {
           animation: fadeUp 1s ease-out forwards;
         }
 
-        @keyframes slowRotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        .rotating-rect {
-          background: conic-gradient(
+        .static-rect {
+          background: linear-gradient(
+            135deg,
             #10B981,
             #3B82F6,
-            #FCD34D,
-            #10B981
+            #FCD34D
           );
-          animation: slowRotate 14s linear infinite;
         }
 
         .rotating-circle {
           background: conic-gradient(#3B82F6, #FCD34D);
-          animation: slowRotate 6s linear infinite;
+          animation: rotateCircle 6s linear infinite;
           opacity: 0.8;
         }
 
-        .rotating-name {
-          animation: slowRotate 20s linear infinite reverse;
+        @keyframes rotateCircle {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
         .glow:hover {
