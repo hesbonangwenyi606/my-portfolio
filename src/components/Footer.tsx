@@ -13,21 +13,21 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="relative bg-gray-900 text-white py-16 overflow-hidden font-sans">
+    <footer className="relative bg-gray-900 text-white py-10 overflow-hidden font-sans">
       {/* Background glowing gradients */}
       <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-15 animate-gradient-float1 -z-10"></div>
       <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-15 animate-gradient-float2 -z-10"></div>
       <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 animate-gradient-float3 -z-10"></div>
 
-      <div className="max-w-6xl mx-auto px-4 opacity-0 animate-fade-up space-y-12">
-        <div className="grid md:grid-cols-5 gap-8 text-center md:text-left">
+      <div className="max-w-6xl mx-auto px-4 opacity-0 animate-fade-up space-y-8">
+        <div className="grid md:grid-cols-5 gap-6 text-center md:text-left">
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
             <a
               href="#home"
               aria-label="Back to top"
-              className="relative w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-4 group rotate-logo"
+              className="relative w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-2 group rotate-logo"
             >
               <div className="absolute inset-0 rounded-full static-rect"></div>
               <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden flex items-center justify-center">
@@ -46,8 +46,8 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-heading font-semibold mb-3">Quick Links</h3>
+            <ul className="space-y-1.5">
               {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((link, i) => (
                 <li key={i}>
                   <a
@@ -63,8 +63,8 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-gray-300">
+            <h3 className="text-lg font-heading font-semibold mb-3">Services</h3>
+            <ul className="space-y-1.5 text-gray-300">
               <li>Full-Stack Development</li>
               <li>Web Development</li>
               <li>Basic Cloud Deployment</li>
@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* QR Code */}
-          <div className="flex flex-col items-center md:items-end md:ml-8 mt-6 md:mt-0">
+          <div className="flex flex-col items-center md:items-end md:ml-8 mt-4 md:mt-0">
             <h3 className="text-lg font-heading font-semibold mb-2">Scan to WhatsApp</h3>
             <a
               href="https://wa.me/254743573380"
@@ -127,7 +127,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center gap-6 mt-10 flex-wrap">
+        <div className="flex justify-center gap-6 mt-8 flex-wrap">
           {socialLinks.map(({ icon: Icon, href }, i) => (
             <a
               key={i}
@@ -147,7 +147,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-700 pt-6 text-center">
+        <div className="border-t border-gray-700 pt-4 text-center">
           <p className="text-white text-sm md:text-base tracking-wider">
             © 2023 - {currentYear} Hesbon Angwenyi. All rights reserved
           </p>
