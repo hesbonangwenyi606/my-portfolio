@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* CIRCULAR Logo with rotating and glowing effect */}
+            {/* Circular Logo with rotation and hover reverse rotation */}
             <a
               href="#home"
               aria-label="Back to top"
@@ -157,14 +157,24 @@ const Footer: React.FC = () => {
           background: linear-gradient(135deg, #10B981, #3B82F6, #FCD34D);
         }
 
-        /* Rotate the logo continuously */
+        /* Continuous rotation */
         .rotate-logo {
           animation: rotateLogo 20s linear infinite;
+        }
+
+        /* Reverse rotation on hover */
+        .rotate-logo:hover {
+          animation: rotateLogoReverse 10s linear infinite;
         }
 
         @keyframes rotateLogo {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateLogoReverse {
+          0% { transform: rotate(360deg); }
+          100% { transform: rotate(0deg); }
         }
 
         .glow:hover {
