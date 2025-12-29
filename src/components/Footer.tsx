@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* QR Code */}
-          <div className="flex flex-col items-center md:items-end md:ml-auto mt-4 md:mt-0">
+          <div className="flex flex-col items-center md:items-end md:ml-auto mt-6 md:mt-0">
             <h3 className="text-lg font-heading font-semibold mb-2">Scan to WhatsApp</h3>
             <a
               href="https://wa.me/254743573380"
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
             >
               <QRCode
                 value="https://wa.me/254743573380"
-                size={120}
+                size={160}  // Increased size
                 bgColor="#1F2937"
                 fgColor="#10B981"
               />
