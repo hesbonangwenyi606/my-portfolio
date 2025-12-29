@@ -1,5 +1,11 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import {
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaTwitter,
+  FaMapMarkerAlt
+} from 'react-icons/fa';
 import QRCode from 'react-qr-code';
 
 const Footer: React.FC = () => {
@@ -40,7 +46,7 @@ const Footer: React.FC = () => {
               </div>
             </a>
 
-            <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
+            <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs">
               Full-Stack & DevOps Intern, passionate about creating web applications and automating infrastructure.
             </p>
           </div>
@@ -69,25 +75,45 @@ const Footer: React.FC = () => {
               <li>Full-Stack Development</li>
               <li>Web Development</li>
               <li>Basic Cloud Deployment</li>
-              <li> Backend Development (Entry-Level)</li>
+              <li>Backend Development (Entry-Level)</li>
             </ul>
           </div>
 
           {/* Location */}
           <div>
             <h3 className="text-lg font-heading font-semibold mb-2">Location</h3>
-            {[
-              { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya', small: false },
-              { label: '+254 743 573 380', href: 'tel:+254743573380', small: false },
-              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', small: false }, // increased email size
-            ].map((item, i) => (
-              <p key={i} className={`mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base`}>
-                <span className="text-2xl leading-none text-white">•</span>
-                <a href={item.href} className="hover:text-white transition-colors whitespace-nowrap">
-                  {item.label}
-                </a>
-              </p>
-            ))}
+
+            {/* Map */}
+            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
+              <FaMapMarkerAlt className="text-green-400 mt-1" />
+              <a
+                href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors whitespace-nowrap"
+              >
+                Nairobi, Kenya
+              </a>
+            </p>
+
+            {/* Phone */}
+            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
+              <span className="text-white text-xl">•</span>
+              <a href="tel:+254743573380" className="hover:text-white transition-colors">
+                +254 743 573 380
+              </a>
+            </p>
+
+            {/* Email */}
+            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
+              <span className="text-white text-xl">•</span>
+              <a
+                href="mailto:hesbonmanyinsa96@gmail.com"
+                className="hover:text-white transition-colors"
+              >
+                hesbonmanyinsa96@gmail.com
+              </a>
+            </p>
           </div>
 
           {/* QR Code */}
@@ -101,7 +127,7 @@ const Footer: React.FC = () => {
             >
               <QRCode
                 value="https://wa.me/254743573380"
-                size={160}  // Increased QR code size
+                size={160}
                 bgColor="#1F2937"
                 fgColor="#10B981"
               />
@@ -143,6 +169,7 @@ const Footer: React.FC = () => {
           0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
+
         .animate-fade-up {
           animation: fadeUp 1s ease-out forwards;
         }
@@ -151,7 +178,6 @@ const Footer: React.FC = () => {
           background: linear-gradient(135deg, #10B981, #3B82F6, #FCD34D);
         }
 
-        /* Logo rotation */
         .rotate-logo {
           animation: rotateLogo 20s linear infinite;
         }
