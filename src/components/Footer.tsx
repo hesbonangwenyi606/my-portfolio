@@ -76,8 +76,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-heading font-semibold mb-2">Location</h3>
 
-            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
-              <span className="text-2xl leading-none text-white">•</span>
+            <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
               <a
                 href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya"
                 className="hover:text-white transition-colors whitespace-nowrap"
@@ -86,8 +85,7 @@ const Footer: React.FC = () => {
               </a>
             </p>
 
-            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
-              <span className="text-2xl leading-none text-white">•</span>
+            <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
               <a
                 href="tel:+254743573380"
                 className="hover:text-white transition-colors whitespace-nowrap"
@@ -97,8 +95,7 @@ const Footer: React.FC = () => {
             </p>
 
             <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
-              <span className="text-2xl leading-none text-white">•</span>
-              <FaEnvelope className="text-white w-5 h-5 flex-shrink-0" /> {/* Fixed email icon */}
+              <FaEnvelope className="text-white w-4 h-4 flex-shrink-0" /> {/* Smaller email icon */}
               <a
                 href="mailto:hesbonmanyinsa96@gmail.com"
                 className="hover:text-white transition-colors whitespace-nowrap"
