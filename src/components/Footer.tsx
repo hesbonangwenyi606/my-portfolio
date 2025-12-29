@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter } from 'react-icons/fa';
 import QRCode from 'react-qr-code';
 
 const Footer: React.FC = () => {
@@ -10,7 +10,6 @@ const Footer: React.FC = () => {
     { icon: FaEnvelope, href: 'mailto:hesbonmanyinsa96@gmail.com' },
     { icon: FaTwitter, href: 'https://x.com/home' },
     { icon: FaLinkedin, href: 'https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/' },
-
   ];
 
   return (
@@ -25,11 +24,39 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-5 gap-8 text-center md:text-left">
 
           {/* Brand */}
-          <div className="text-center md:text-left">
-            <h2 className="text-3xl md:text-2xl font-heading font-bold mb-2 transition-all duration-500 hover:glow">
-              Hesbon Angwenyi
-            </h2>
-            <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+          <div className="flex flex-col items-center md:items-start">
+
+            {/* RECTANGLE Logo with rotating name behind */}
+            <a
+              href="#home"
+              aria-label="Back to top"
+              className="relative w-40 h-24 mb-4 group"
+            >
+              {/* Rotating name behind logo */}
+              <div className="absolute inset-0 flex items-center justify-center rotating-name pointer-events-none">
+                <span className="text-xs tracking-[0.4em] uppercase text-emerald-400 opacity-60">
+                  HESBON • ANGWENYI •
+                </span>
+              </div>
+
+              {/* Rotating gradient border */}
+              <div className="absolute inset-0 rounded-xl rotating-rect"></div>
+
+              {/* Inner background */}
+              <div className="absolute inset-[2px] rounded-lg bg-gray-900"></div>
+
+              {/* Logo image */}
+              <img
+                src="https://www.krea.ai/api/img?f=webp&i=https%3A%2F%2Fgen.krea.ai%2Fimages%2F201b07f6-5f6f-4a32-8942-175c5d6e9a7e.png&s=1024"
+                alt="Hesbon Angwenyi Logo"
+                className="relative z-10 w-full h-full rounded-lg object-contain
+                           transition-transform duration-500
+                           group-hover:scale-105 group-hover:glow"
+              />
+            </a>
+
+            {/* Description only (name removed) */}
+            <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
               Full Stack & DevOps Engineer passionate about building scalable web applications and automating infrastructure.
             </p>
           </div>
@@ -40,7 +67,10 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((link, i) => (
                 <li key={i}>
-                  <a href={`#${link.toLowerCase()}`} className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <a
+                    href={`#${link.toLowerCase()}`}
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     {link}
                   </a>
                 </li>
@@ -71,10 +101,7 @@ const Footer: React.FC = () => {
             ].map((item, i) => (
               <p key={i} className="mb-1 flex items-start gap-3 text-gray-300">
                 <span className="text-3xl leading-none text-white">•</span>
-                <a
-                  href={item.href}
-                  className="hover:text-white transition-colors"
-                >
+                <a href={item.href} className="hover:text-white transition-colors">
                   {item.label}
                 </a>
               </p>
@@ -109,14 +136,11 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="relative w-12 h-12 flex items-center justify-center group"
-              aria-label="Social Link"
             >
-              {/* Rotating circle behind icon */}
               <div className="rotating-circle absolute inset-0 rounded-full"></div>
 
-              {/* Static icon */}
               <div className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center 
-                              bg-gray-900 text-white transition-transform duration-300 transform 
+                              bg-gray-900 text-white transition-transform duration-300 
                               hover:scale-110">
                 <Icon className="w-7 h-7" />
               </div>
@@ -132,44 +156,44 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Animations and Glow Effects */}
+      {/* Styles */}
       <style jsx>{`
-        @keyframes fadeUp { 0% { opacity:0; transform:translateY(20px);} 100% { opacity:1; transform:translateY(0);} }
-        .animate-fade-up { animation: fadeUp 1s ease-out forwards; }
+        @keyframes fadeUp {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+          animation: fadeUp 1s ease-out forwards;
+        }
 
-        @keyframes gradient1 {0%,100%{background:linear-gradient(45deg,#6EE7B7,#3B82F6);}50%{background:linear-gradient(45deg,#3B82F6,#F472B6);}}
-        @keyframes gradient2 {0%,100%{background:linear-gradient(135deg,#F9A8D4,#8B5CF6);}50%{background:linear-gradient(135deg,#8B5CF6,#FCD34D);}}
-        @keyframes gradient3 {0%,100%{background:linear-gradient(225deg,#FBBF24,#3B82F6);}50%{background:linear-gradient(225deg,#3B82F6,#EC4899);}}
-
-        @keyframes float1 {0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
-        @keyframes float2 {0%,100%{transform:translateY(0);}50%{transform:translateY(20px);}}
-        @keyframes float3 {0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-
-        .animate-gradient-float1 { animation: gradient1 20s ease infinite, float1 30s ease-in-out infinite; }
-        .animate-gradient-float2 { animation: gradient2 22s ease infinite, float2 32s ease-in-out infinite; }
-        .animate-gradient-float3 { animation: gradient3 25s ease infinite, float3 35s ease-in-out infinite; }
-
-        /* Rotating circle behind social icons */
-        @keyframes rotateCircle {
+        @keyframes slowRotate {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
 
+        .rotating-rect {
+          background: conic-gradient(
+            #10B981,
+            #3B82F6,
+            #FCD34D,
+            #10B981
+          );
+          animation: slowRotate 14s linear infinite;
+        }
+
         .rotating-circle {
-          background: conic-gradient(#3B82F6, #FCD34D); /* Blue to yellow */
-          border-radius: 9999px;
-          animation: rotateCircle 6s linear infinite;
+          background: conic-gradient(#3B82F6, #FCD34D);
+          animation: slowRotate 6s linear infinite;
           opacity: 0.8;
         }
 
-        .glow {
-          transition: all 0.5s ease;
-          box-shadow: 0 0 0 rgba(16, 185, 129, 0.5);
+        .rotating-name {
+          animation: slowRotate 20s linear infinite reverse;
         }
+
         .glow:hover {
-          transform: scale(1.05);
-          box-shadow: 0 0 15px 5px rgba(16, 185, 129, 0.6),
-                      0 0 25px 10px rgba(59, 130, 246, 0.4);
+          box-shadow: 0 0 15px rgba(16, 185, 129, 0.6),
+                      0 0 25px rgba(59, 130, 246, 0.4);
         }
       `}</style>
     </footer>
