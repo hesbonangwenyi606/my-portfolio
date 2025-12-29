@@ -25,21 +25,23 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* CIRCULAR Logo with static gradient border */}
+            {/* CIRCULAR Logo with rotating and glowing effect */}
             <a
               href="#home"
               aria-label="Back to top"
-              className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group"
+              className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group rotate-logo"
             >
+              {/* Static circular gradient border */}
               <div className="absolute inset-0 rounded-full static-rect"></div>
-              <div className="absolute inset-[4px] rounded-full bg-gray-900"></div>
-              <img
-                src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
-                alt="Hesbon Angwenyi Logo"
-                className="relative z-10 w-full h-full rounded-full object-cover
-                           transition-transform duration-500
-                           group-hover:scale-105 group-hover:glow"
-              />
+
+              {/* Inner background with logo */}
+              <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden flex items-center justify-center">
+                <img
+                  src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
+                  alt="Hesbon Angwenyi Logo"
+                  className="w-full h-full rounded-full object-cover glow"
+                />
+              </div>
             </a>
 
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
@@ -155,6 +157,21 @@ const Footer: React.FC = () => {
           background: linear-gradient(135deg, #10B981, #3B82F6, #FCD34D);
         }
 
+        /* Rotate the logo continuously */
+        .rotate-logo {
+          animation: rotateLogo 20s linear infinite;
+        }
+
+        @keyframes rotateLogo {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .glow:hover {
+          box-shadow: 0 0 15px rgba(16, 185, 129, 0.6),
+                      0 0 25px rgba(59, 130, 246, 0.4);
+        }
+
         .rotating-circle {
           background: conic-gradient(#3B82F6, #FCD34D);
           animation: rotateCircle 6s linear infinite;
@@ -164,11 +181,6 @@ const Footer: React.FC = () => {
         @keyframes rotateCircle {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
-        }
-
-        .glow:hover {
-          box-shadow: 0 0 15px rgba(16, 185, 129, 0.6),
-                      0 0 25px rgba(59, 130, 246, 0.4);
         }
       `}</style>
     </footer>
