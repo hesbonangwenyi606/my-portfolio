@@ -25,7 +25,6 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* CIRCULAR Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
@@ -82,9 +81,9 @@ const Footer: React.FC = () => {
               { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya', small: false },
               { label: '+254 743 573 380', href: 'tel:+254743573380', small: false },
               { label: '+254 722 514 540', href: 'tel:+254722514540', small: false },
-              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', small: true },
+              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', small: false }, // increased email size
             ].map((item, i) => (
-              <p key={i} className={`mb-1 flex items-start gap-2 text-gray-300 ${item.small ? 'text-[10px] md:text-xs' : 'text-sm md:text-base'}`}>
+              <p key={i} className={`mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base`}>
                 <span className="text-2xl leading-none text-white">•</span>
                 <a href={item.href} className="hover:text-white transition-colors whitespace-nowrap">
                   {item.label}
