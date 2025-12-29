@@ -25,7 +25,7 @@ const bulletItems = [
   {
     title: "DevOps & Cloud Infrastructure",
     description:
-      "Building robust CI/CD pipelines, automating deployments, and managing cloud platforms like AWS, Azure, Docker, and Kubernetes for scalable infrastructure.",
+      "Building robust CI/CD pipelines, automating deployments, and managing cloud platforms like AWS, Docker, and Kubernetes for scalable infrastructure.",
     images: [
       "https://i.pinimg.com/736x/4a/91/ea/4a91ea168314527a010b991def9d1cd1.jpg",
       "https://i.pinimg.com/736x/d8/42/d8/d842d866eeff1fccc7bba203e101d7f2.jpg",
