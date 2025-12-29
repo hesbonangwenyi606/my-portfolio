@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
 
               {/* Logo image */}
               <img
-                src="https://www.krea.ai/api/img?f=webp&i=https%3A%2F%2Fgen.krea.ai%2Fimages%2F201b07f6-5f6f-4a32-8942-175c5d6e9a7e.png&s=1024"
+                src="https://www.krea.ai/api/img?f=webp&i=https%3A%2F%2Fgen.krea.ai%2Fimages%2Fc91863dc-6b80-4900-bb05-8d61cc19ba28.png&s=1024"
                 alt="Hesbon Angwenyi Logo"
                 className="relative z-10 w-full h-full rounded-lg object-contain
                            transition-transform duration-500
