@@ -25,30 +25,23 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-
             {/* RECTANGLE Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
-              className="relative w-40 h-24 mb-4 group"
+              className="relative w-40 h-24 md:w-48 md:h-28 lg:w-56 lg:h-32 mb-4 group"
             >
-              {/* Static gradient border */}
               <div className="absolute inset-0 rounded-xl static-rect"></div>
-
-              {/* Inner background */}
               <div className="absolute inset-[2px] rounded-lg bg-gray-900"></div>
-
-              {/* Logo image */}
               <img
-                src="https://www.krea.ai/api/img?f=webp&i=https%3A%2F%2Fgen.krea.ai%2Fimages%2Fc91863dc-6b80-4900-bb05-8d61cc19ba28.png&s=1024"
+                src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
                 alt="Hesbon Angwenyi Logo"
-                className="relative z-10 w-full h-full rounded-lg object-contain
+                className="relative z-10 w-full h-full max-w-full max-h-full rounded-lg object-contain
                            transition-transform duration-500
                            group-hover:scale-105 group-hover:glow"
               />
             </a>
 
-            {/* Description only */}
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
               Full Stack & DevOps Engineer passionate about building scalable web applications and automating infrastructure.
             </p>
@@ -94,7 +87,7 @@ const Footer: React.FC = () => {
             ].map((item, i) => (
               <p key={i} className="mb-1 flex items-start gap-3 text-gray-300">
                 <span className="text-3xl leading-none text-white">•</span>
-                <a href={item.href} className="hover:text-white transition-colors">
+                <a href={item.href} className="hover:text-white transition-colors break-all">
                   {item.label}
                 </a>
               </p>
@@ -112,7 +105,7 @@ const Footer: React.FC = () => {
             >
               <QRCode
                 value="https://wa.me/254743573380"
-                size={150}
+                size={120} // smaller on mobile
                 bgColor="#1F2937"
                 fgColor="#10B981"
               />
@@ -121,7 +114,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center gap-6 mt-10">
+        <div className="flex justify-center gap-6 mt-10 flex-wrap">
           {socialLinks.map(({ icon: Icon, href }, i) => (
             <a
               key={i}
@@ -135,7 +128,7 @@ const Footer: React.FC = () => {
               <div className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center 
                               bg-gray-900 text-white transition-transform duration-300 
                               hover:scale-110">
-                <Icon className="w-7 h-7" />
+                <Icon className="w-6 h-6 md:w-7 md:h-7" />
               </div>
             </a>
           ))}
@@ -160,12 +153,7 @@ const Footer: React.FC = () => {
         }
 
         .static-rect {
-          background: linear-gradient(
-            135deg,
-            #10B981,
-            #3B82F6,
-            #FCD34D
-          );
+          background: linear-gradient(135deg, #10B981, #3B82F6, #FCD34D);
         }
 
         .rotating-circle {
