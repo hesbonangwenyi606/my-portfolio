@@ -20,9 +20,10 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="relative bg-gray-900 text-white py-16 overflow-hidden font-sans">
+    <footer className="bg-gray-900 text-white py-16 font-sans">
       <div className="max-w-6xl mx-auto px-4 space-y-12 animate-fade-up">
 
+        {/* Main Grid */}
         <div className="grid md:grid-cols-5 gap-8">
 
           {/* Brand */}
@@ -66,7 +67,6 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold mb-3">Location</h3>
 
-            {/* Map */}
             <p className="flex items-start gap-2 text-gray-300 mb-2">
               <FaMapMarkerAlt className="text-green-400 animate-pulse mt-1" />
               <a
@@ -79,7 +79,6 @@ const Footer: React.FC = () => {
               </a>
             </p>
 
-            {/* Phone */}
             <p className="flex items-start gap-2 text-gray-300 mb-2">
               <FaPhoneAlt className="text-blue-400 mt-1" />
               <a href="tel:+254743573380" className="hover:text-white">
@@ -87,9 +86,8 @@ const Footer: React.FC = () => {
               </a>
             </p>
 
-            {/* Email (NO ICON) */}
             <p className="flex items-start gap-2 text-gray-300">
-              <span className="text-white text-xl leading-none">•</span>
+              <FaEnvelope className="text-white mt-1" />
               <a
                 href="mailto:hesbonmanyinsa96@gmail.com"
                 className="hover:text-white"
@@ -99,8 +97,8 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* QR Code */}
-          <div className="text-center md:text-right">
+          {/* QR Code – pushed to the END */}
+          <div className="flex flex-col items-center md:items-end md:text-right">
             <h3 className="font-semibold mb-2">Scan to WhatsApp</h3>
             <QRCode
               value="https://wa.me/254743573380"
@@ -132,7 +130,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Styles */}
+      {/* Animations */}
       <style jsx>{`
         .glow:hover {
           box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
