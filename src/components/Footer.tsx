@@ -25,16 +25,13 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* Circular Logo with rotation and hover reverse rotation */}
+            {/* CIRCULAR Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
               className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group rotate-logo"
             >
-              {/* Static circular gradient border */}
               <div className="absolute inset-0 rounded-full static-rect"></div>
-
-              {/* Inner background with logo */}
               <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden flex items-center justify-center">
                 <img
                   src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
@@ -82,12 +79,12 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-heading font-semibold mb-2">Location</h3>
             {[
-              { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya' },
-              { label: '+254 743 573 380', href: 'tel:+254743573380' },
-              { label: '+254 722 514 540', href: 'tel:+254722514540' },
-              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com' },
+              { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya', small: false },
+              { label: '+254 743 573 380', href: 'tel:+254743573380', small: false },
+              { label: '+254 722 514 540', href: 'tel:+254722514540', small: false },
+              { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', small: true },
             ].map((item, i) => (
-              <p key={i} className="mb-1 flex items-start gap-2 text-gray-300 text-[10px] md:text-xs">
+              <p key={i} className={`mb-1 flex items-start gap-2 text-gray-300 ${item.small ? 'text-[10px] md:text-xs' : 'text-sm md:text-base'}`}>
                 <span className="text-2xl leading-none text-white">•</span>
                 <a href={item.href} className="hover:text-white transition-colors whitespace-nowrap">
                   {item.label}
@@ -157,12 +154,11 @@ const Footer: React.FC = () => {
           background: linear-gradient(135deg, #10B981, #3B82F6, #FCD34D);
         }
 
-        /* Continuous rotation */
+        /* Logo rotation */
         .rotate-logo {
           animation: rotateLogo 20s linear infinite;
         }
 
-        /* Reverse rotation on hover */
         .rotate-logo:hover {
           animation: rotateLogoReverse 10s linear infinite;
         }
