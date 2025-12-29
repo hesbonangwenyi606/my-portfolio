@@ -39,7 +39,7 @@ const TestimonialsSection: React.FC = () => {
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`w-5 h-5 ${i < rating ? 'text-white' : 'text-white/40'}`}
+          className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-700'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden="true"
@@ -70,11 +70,11 @@ const TestimonialsSection: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-3">
+          <h2 className="text-4xl font-bold text-gray-100 mb-3">
             What Clients Say
           </h2>
           <div className="w-28 h-1 bg-gradient-to-r from-gray-700 to-gray-500 mx-auto mb-4 rounded-full"></div>
-          <p className="text-white/80 max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Testimonials from clients and colleagues who have experienced the quality of my work.
           </p>
         </div>
@@ -87,7 +87,7 @@ const TestimonialsSection: React.FC = () => {
               className="bg-gray-800 rounded-2xl p-6 shadow-lg transform hover:-translate-y-2 transition-transform duration-700 animate-float"
             >
               <StarRating rating={testimonial.rating} />
-              <blockquote className="text-white mt-4 mb-6 leading-relaxed italic">
+              <blockquote className="text-gray-200 mt-4 mb-6 leading-relaxed italic">
                 "{testimonial.content}"
               </blockquote>
               <div className="border-t border-gray-700 pt-4 flex flex-col">
@@ -95,7 +95,7 @@ const TestimonialsSection: React.FC = () => {
                   href={testimonial.linkName}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-white hover:underline mb-1"
+                  className="font-semibold text-yellow-400 hover:underline mb-1"
                 >
                   {testimonial.name}
                 </a>
@@ -103,7 +103,7 @@ const TestimonialsSection: React.FC = () => {
                   href={testimonial.linkPosition}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 text-sm hover:underline"
+                  className="text-gray-300 text-sm hover:underline"
                 >
                   {testimonial.position}
                 </a>
@@ -119,7 +119,7 @@ const TestimonialsSection: React.FC = () => {
               <div key={index} className="px-2">
                 <div className="bg-gray-800 rounded-2xl p-6 shadow-lg transform hover:-translate-y-1 transition-transform duration-700 animate-float-small">
                   <StarRating rating={testimonial.rating} />
-                  <blockquote className="text-white mt-4 mb-6 leading-relaxed italic">
+                  <blockquote className="text-gray-200 mt-4 mb-6 leading-relaxed italic">
                     "{testimonial.content}"
                   </blockquote>
                   <div className="border-t border-gray-700 pt-4 flex flex-col">
@@ -127,7 +127,7 @@ const TestimonialsSection: React.FC = () => {
                       href={testimonial.linkName}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold text-white hover:underline mb-1"
+                      className="font-semibold text-yellow-400 hover:underline mb-1"
                     >
                       {testimonial.name}
                     </a>
@@ -135,7 +135,7 @@ const TestimonialsSection: React.FC = () => {
                       href={testimonial.linkPosition}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white/80 text-sm hover:underline"
+                      className="text-gray-300 text-sm hover:underline"
                     >
                       {testimonial.position}
                     </a>
