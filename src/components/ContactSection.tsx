@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ContactSection: React.FC = () => {
   const placeholderValues = {
-    firstName: "John",
-    lastName: "Doe",
+    name: "John Doe",
     email: "john.doe@example.com",
     phone: "+254 700 000 000",
     subject: "Project Inquiry / Collaboration / Question",
@@ -17,7 +16,7 @@ const ContactSection: React.FC = () => {
       : null;
 
   const [formValues, setFormValues] = useState(
-    savedValues || { firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" }
+    savedValues || { name: "", email: "", phone: "", subject: "", message: "" }
   );
   const [result, setResult] = useState("");
   const [hue, setHue] = useState(210);
@@ -35,7 +34,7 @@ const ContactSection: React.FC = () => {
     if (result.includes("Successfully")) {
       const timer = setTimeout(() => {
         setResult("");
-        setFormValues({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
+        setFormValues({ name: "", email: "", phone: "", subject: "", message: "" });
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -56,7 +55,7 @@ const ContactSection: React.FC = () => {
       const data = await response.json();
       if (data.success) {
         setResult("✅ Form Submitted Successfully Hesbon will respond back within 24hrs! Thank You");
-        setFormValues({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
+        setFormValues({ name: "", email: "", phone: "", subject: "", message: "" });
         localStorage.removeItem("contactForm");
       } else setResult(data.message || "Failed to send message.");
     } catch {
@@ -120,15 +119,29 @@ const ContactSection: React.FC = () => {
               boxShadow: `0 0 15px hsl(${hue}, 100%, 50%), 0 0 30px hsl(${(hue + 30) % 360}, 100%, 50%)`,
             }}
           >
-            {/* First and Last Name side by side */}
+            {/* Name field (single box) */}
+            <div>
+              <label className="block text-blue-900 font-semibold mb-1 text-sm">Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={formValues.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+                placeholder={placeholderValues.name}
+                className="w-full px-3 py-2 border border-blue-500 rounded-md focus:ring-1 focus:ring-blue-400 text-black placeholder-blue-300 text-sm transition hover:shadow-md hover:scale-102"
+              />
+            </div>
+
+            {/* Email & Phone side by side */}
             <div className="grid grid-cols-2 gap-3">
-              {["firstName", "lastName"].map((field) => (
+              {["email", "phone"].map((field) => (
                 <div key={field}>
                   <label className="block text-blue-900 font-semibold mb-1 text-sm">
-                    {field === "firstName" ? "First Name" : "Last Name"}
+                    {field.charAt(0).toUpperCase() + field.slice(1)}
                   </label>
                   <input
-                    type="text"
+                    type={field === "email" ? "email" : "tel"}
                     name={field}
                     required
                     value={formValues[field as keyof typeof formValues]}
@@ -140,23 +153,21 @@ const ContactSection: React.FC = () => {
               ))}
             </div>
 
-            {["email", "phone", "subject"].map((field) => (
-              <div key={field}>
-                <label className="block text-blue-900 font-semibold mb-1 text-sm">
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
-                </label>
-                <input
-                  type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
-                  name={field}
-                  required
-                  value={formValues[field as keyof typeof formValues]}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                  placeholder={placeholderValues[field as keyof typeof placeholderValues]}
-                  className="w-full px-3 py-2 border border-blue-500 rounded-md focus:ring-1 focus:ring-blue-400 text-black placeholder-blue-300 text-sm transition hover:shadow-md hover:scale-102"
-                />
-              </div>
-            ))}
+            {/* Subject */}
+            <div>
+              <label className="block text-blue-900 font-semibold mb-1 text-sm">Subject</label>
+              <input
+                type="text"
+                name="subject"
+                required
+                value={formValues.subject}
+                onChange={(e) => handleChange("subject", e.target.value)}
+                placeholder={placeholderValues.subject}
+                className="w-full px-3 py-2 border border-blue-500 rounded-md focus:ring-1 focus:ring-blue-400 text-black placeholder-blue-300 text-sm transition hover:shadow-md hover:scale-102"
+              />
+            </div>
 
+            {/* Message */}
             <div>
               <label className="block text-blue-900 font-semibold mb-1 text-sm">Message</label>
               <textarea
@@ -184,27 +195,15 @@ const ContactSection: React.FC = () => {
       </div>
 
       <style>{`
-        @keyframes float {
-          0% { transform: translateY(0px); opacity: 0.2; }
-          50% { transform: translateY(-15px); opacity: 0.4; }
-          100% { transform: translateY(0px); opacity: 0.2; }
-        }
+        @keyframes float { 0% { transform: translateY(0px); opacity: 0.2; } 50% { transform: translateY(-15px); opacity: 0.4; } 100% { transform: translateY(0px); opacity: 0.2; } }
         .animate-float { animation-name: float; animation-duration: 5s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
 
-        @keyframes glowAnimation {
-          0% { box-shadow: 0 0 8px #0a3d91, 0 0 15px #0f4bbd; }
-          50% { box-shadow: 0 0 15px #1a5eff, 0 0 25px #2980ff; }
-          100% { box-shadow: 0 0 8px #0a3d91, 0 0 15px #0f4bbd; }
-        }
+        @keyframes glowAnimation { 0% { box-shadow: 0 0 8px #0a3d91, 0 0 15px #0f4bbd; } 50% { box-shadow: 0 0 15px #1a5eff, 0 0 25px #2980ff; } 100% { box-shadow: 0 0 8px #0a3d91, 0 0 15px #0f4bbd; } }
         .animate-glow { animation: glowAnimation 6s ease-in-out infinite; }
         .animate-glow-button { animation: glowAnimation 4s ease-in-out infinite; }
         .hover-glow:hover { animation: glowAnimation 2s ease-in-out infinite; transform: scale(1.02); }
 
-        @keyframes glowText {
-          0% { color: #0a3d91; text-shadow: 0 0 4px #0f4bbd; }
-          50% { color: #1a5eff; text-shadow: 0 0 10px #2980ff; }
-          100% { color: #0a3d91; text-shadow: 0 0 4px #0f4bbd; }
-        }
+        @keyframes glowText { 0% { color: #0a3d91; text-shadow: 0 0 4px #0f4bbd; } 50% { color: #1a5eff; text-shadow: 0 0 10px #2980ff; } 100% { color: #0a3d91; text-shadow: 0 0 4px #0f4bbd; } }
         .animate-glow-text { animation: glowText 2s ease-in-out infinite; }
       `}</style>
     </section>
