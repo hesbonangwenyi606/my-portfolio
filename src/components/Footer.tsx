@@ -25,18 +25,18 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* RECTANGLE Logo with static gradient border */}
+            {/* CIRCULAR Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
-              className="relative w-40 h-24 md:w-48 md:h-28 lg:w-56 lg:h-32 mb-4 group"
+              className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group"
             >
-              <div className="absolute inset-0 rounded-xl static-rect"></div>
-              <div className="absolute inset-[2px] rounded-lg bg-gray-900"></div>
+              <div className="absolute inset-0 rounded-full static-rect"></div>
+              <div className="absolute inset-[4px] rounded-full bg-gray-900"></div>
               <img
                 src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
                 alt="Hesbon Angwenyi Logo"
-                className="relative z-10 w-full h-full max-w-full max-h-full rounded-lg object-contain
+                className="relative z-10 w-full h-full rounded-full object-cover
                            transition-transform duration-500
                            group-hover:scale-105 group-hover:glow"
               />
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
             >
               <QRCode
                 value="https://wa.me/254743573380"
-                size={120} // smaller on mobile
+                size={120}
                 bgColor="#1F2937"
                 fgColor="#10B981"
               />
@@ -124,7 +124,6 @@ const Footer: React.FC = () => {
               className="relative w-12 h-12 flex items-center justify-center group"
             >
               <div className="rotating-circle absolute inset-0 rounded-full"></div>
-
               <div className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center 
                               bg-gray-900 text-white transition-transform duration-300 
                               hover:scale-110">
