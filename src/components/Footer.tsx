@@ -79,7 +79,6 @@ const Footer: React.FC = () => {
             {[
               { label: 'Nairobi, Kenya', href: 'https://www.google.com/maps/place/Nairobi+CBD,+Kenya', small: false },
               { label: '+254 743 573 380', href: 'tel:+254743573380', small: false },
-              { label: '+254 722 514 540', href: 'tel:+254722514540', small: false },
               { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com', small: false }, // increased email size
             ].map((item, i) => (
               <p key={i} className={`mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base`}>
