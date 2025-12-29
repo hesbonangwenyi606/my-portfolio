@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter } from 'react-icons/fa';
 import QRCode from 'react-qr-code';
 
 const Footer: React.FC = () => {
@@ -75,21 +75,34 @@ const Footer: React.FC = () => {
           {/* Location */}
           <div>
             <h3 className="text-lg font-heading font-semibold mb-2">Location</h3>
-            <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
-              <FaMapMarkerAlt className="text-white w-5 h-5" />
-              <a href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya" className="hover:text-white transition-colors">
+
+            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
+              <span className="text-2xl leading-none text-white">•</span>
+              <a
+                href="https://www.google.com/maps/place/Nairobi+CBD,+Kenya"
+                className="hover:text-white transition-colors whitespace-nowrap"
+              >
                 Nairobi, Kenya
               </a>
             </p>
-            <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
-              <FaPhone className="text-white w-5 h-5" />
-              <a href="tel:+254743573380" className="hover:text-white transition-colors">
+
+            <p className="mb-1 flex items-start gap-2 text-gray-300 text-sm md:text-base">
+              <span className="text-2xl leading-none text-white">•</span>
+              <a
+                href="tel:+254743573380"
+                className="hover:text-white transition-colors whitespace-nowrap"
+              >
                 +254 743 573 380
               </a>
             </p>
+
             <p className="mb-1 flex items-center gap-2 text-gray-300 text-sm md:text-base">
-              <FaEnvelope className="text-white w-5 h-5" />
-              <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-white transition-colors">
+              <span className="text-2xl leading-none text-white">•</span>
+              <FaEnvelope className="text-white w-5 h-5 flex-shrink-0" /> {/* Fixed email icon */}
+              <a
+                href="mailto:hesbonmanyinsa96@gmail.com"
+                className="hover:text-white transition-colors whitespace-nowrap"
+              >
                 hesbonmanyinsa96@gmail.com
               </a>
             </p>
