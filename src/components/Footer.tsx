@@ -25,24 +25,21 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            {/* Circular Logo with rotating inner part */}
+            {/* Circular Logo with static gradient border */}
             <a
               href="#home"
               aria-label="Back to top"
               className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-4 group"
             >
-              {/* Static circular gradient border */}
               <div className="absolute inset-0 rounded-full static-rect"></div>
-
-              {/* Inner background with logo */}
-              <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden">
-                <img
-                  src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
-                  alt="Hesbon Angwenyi Logo"
-                  className="w-full h-full rounded-full object-cover transition-transform duration-1000
-                             group-hover:rotate-12 group-hover:scale-105"
-                />
-              </div>
+              <div className="absolute inset-[4px] rounded-full bg-gray-900"></div>
+              <img
+                src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
+                alt="Hesbon Angwenyi Logo"
+                className="relative z-10 w-full h-full rounded-full object-cover
+                           transition-transform duration-500
+                           group-hover:scale-105 group-hover:glow"
+              />
             </a>
 
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs text-center md:text-left">
@@ -53,7 +50,7 @@ const Footer: React.FC = () => {
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-heading font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-sm">
               {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((link, i) => (
                 <li key={i}>
                   <a
@@ -70,7 +67,7 @@ const Footer: React.FC = () => {
           {/* Services */}
           <div>
             <h3 className="text-lg font-heading font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-gray-300 text-sm">
               <li>Full-Stack Development</li>
               <li>Web Development</li>
               <li>Database Fundamentals</li>
@@ -88,9 +85,9 @@ const Footer: React.FC = () => {
               { label: '+254 722 514 540', href: 'tel:+254722514540' },
               { label: 'hesbonmanyinsa96@gmail.com', href: 'mailto:hesbonmanyinsa96@gmail.com' },
             ].map((item, i) => (
-              <p key={i} className="mb-1 flex items-start gap-3 text-gray-300">
-                <span className="text-3xl leading-none text-white">•</span>
-                <a href={item.href} className="hover:text-white transition-colors break-all">
+              <p key={i} className="mb-1 flex items-start gap-2 text-gray-300 text-[10px] md:text-xs">
+                <span className="text-2xl leading-none text-white">•</span>
+                <a href={item.href} className="hover:text-white transition-colors whitespace-nowrap">
                   {item.label}
                 </a>
               </p>
@@ -137,8 +134,8 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-700 pt-6 text-center">
-          <p className="text-white text-sm md:text-base tracking-wider">
+        <div className="border-t border-gray-700 pt-6 text-center text-sm md:text-base">
+          <p className="text-white tracking-wider">
             © 2023 - {currentYear} Hesbon Angwenyi. All rights reserved
           </p>
         </div>
