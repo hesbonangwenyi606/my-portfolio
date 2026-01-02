@@ -106,18 +106,18 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-3">Location</h3>
 
             <p className="flex items-center gap-2 text-gray-300">
-              <FaMapMarkerAlt /> Nairobi, Kenya
+              <FaMapMarkerAlt className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" /> Nairobi, Kenya
             </p>
 
             <p className="flex items-center gap-2 text-gray-300">
-              <FaPhoneAlt />
+              <FaPhoneAlt className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
               <a href="tel:+254743573380" className="hover:text-blue-400 transition-colors">
                 +254 743 573 380
               </a>
             </p>
 
             <p className="flex items-center gap-2 text-gray-300">
-              <FaEnvelope />
+              <FaEnvelope className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
               <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-blue-400 transition-colors">
                 hesbonmanyinsa96@gmail.com
               </a>
