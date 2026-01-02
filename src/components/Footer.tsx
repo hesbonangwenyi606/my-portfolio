@@ -101,24 +101,38 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location with smaller icons */}
+          {/* Location with clickable links */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Location</h3>
 
             <p className="flex items-center gap-2 text-gray-300">
-              <FaMapMarkerAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" /> Nairobi, Kenya
+              <FaMapMarkerAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+              <a
+                href="https://www.google.com/maps/place/Nairobi,+Kenya"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400 transition-colors"
+              >
+                Nairobi, Kenya
+              </a>
             </p>
 
             <p className="flex items-center gap-2 text-gray-300">
               <FaPhoneAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-              <a href="tel:+254743573380" className="hover:text-blue-400 transition-colors">
+              <a
+                href="tel:+254743573380"
+                className="hover:text-blue-400 transition-colors"
+              >
                 +254 743 573 380
               </a>
             </p>
 
             <p className="flex items-center gap-2 text-gray-300">
               <FaEnvelope className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-              <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-blue-400 transition-colors">
+              <a
+                href="mailto:hesbonmanyinsa96@gmail.com"
+                className="hover:text-blue-400 transition-colors"
+              >
                 hesbonmanyinsa96@gmail.com
               </a>
             </p>
@@ -129,7 +143,7 @@ const Footer: React.FC = () => {
             <p className="font-semibold mb-2">Scan to WhatsApp</p>
             <QRCode
               value="https://wa.me/254743573380"
-              size={160} // increased size
+              size={160} // larger QR code
               bgColor="#ffffff"
               fgColor="#000000"
             />
