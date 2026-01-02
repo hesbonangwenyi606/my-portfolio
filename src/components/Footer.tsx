@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                    className="text-gray-300" // removed hover
                   >
                     {link.label}
                   </button>
@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
                 href="https://www.google.com/maps/place/Nairobi,+Kenya"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-400 transition-colors"
+                className="text-gray-300"
               >
                 Nairobi, Kenya
               </a>
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
               <FaPhoneAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
                 href="tel:+254743573380"
-                className="hover:text-blue-400 transition-colors"
+                className="text-gray-300"
               >
                 +254 743 573 380
               </a>
@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
               <FaEnvelope className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
                 href="mailto:hesbonmanyinsa96@gmail.com"
-                className="hover:text-blue-400 transition-colors"
+                className="text-gray-300"
               >
                 hesbonmanyinsa96@gmail.com
               </a>
@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden"
             >
               {/* Rotating Gradient Background */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-yellow-400 to-yellow-300 animate-spin-smooth"></div>
@@ -189,14 +189,11 @@ const Footer: React.FC = () => {
           .delay-8s { animation-delay: 8s; }
           @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);} }
 
-          /* Smooth rotating gradient for social icons */
           @keyframes spin-smooth {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
           }
-          .animate-spin-smooth {
-            animation: spin-smooth 8s linear infinite;
-          }
+          .animate-spin-smooth { animation: spin-smooth 8s linear infinite; }
         `}
       </style>
     </footer>
