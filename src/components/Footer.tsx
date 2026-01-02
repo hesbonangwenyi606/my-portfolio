@@ -13,13 +13,10 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaGithub, href: "https://github.com/hesbonangwenyi606" },
-    { icon: FaEnvelope, href: "mailto:hesbonmanyinsa96@gmail.com" },
-    { icon: FaTwitter, href: "https://x.com/home" },
-    {
-      icon: FaLinkedin,
-      href: "https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/",
-    },
+    { icon: FaGithub, href: "https://github.com/hesbonangwenyi606", label: "GitHub" },
+    { icon: FaEnvelope, href: "mailto:hesbonmanyinsa96@gmail.com", label: "Email" },
+    { icon: FaTwitter, href: "https://x.com/hesbon_angwenyi", label: "X (Twitter)" },
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/", label: "LinkedIn" },
   ];
 
   const quickLinks = [
@@ -47,11 +44,11 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative bg-gray-900 text-white py-10 overflow-hidden font-sans">
       {/* Background gradients */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-15 animate-gradient-float1 -z-10"></div>
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-15 animate-gradient-float2 -z-10"></div>
-      <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 animate-gradient-float3 -z-10"></div>
+      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-20 gradient-float-1 -z-10"></div>
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20 gradient-float-2 -z-10"></div>
+      <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 gradient-float-3 -z-10"></div>
 
-      <div className="max-w-6xl mx-auto px-4 opacity-0 animate-fade-up space-y-8">
+      <div className="max-w-6xl mx-auto px-4 animate-fade-up space-y-8">
         <div className="grid md:grid-cols-5 gap-6 text-center md:text-left">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
@@ -78,7 +75,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-3">
+            <h3 className="text-lg font-semibold mb-3">
               Quick Links
             </h3>
             <ul className="space-y-1.5">
@@ -97,7 +94,7 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-3">
+            <h3 className="text-lg font-semibold mb-3">
               Services
             </h3>
             <ul className="space-y-1.5 text-gray-300">
@@ -110,13 +107,12 @@ const Footer: React.FC = () => {
 
           {/* Location */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-2">
+            <h3 className="text-lg font-semibold mb-3">
               Location
             </h3>
 
             <p className="flex items-center gap-2 text-gray-300">
-              <FaMapMarkerAlt />
-              Nairobi, Kenya
+              <FaMapMarkerAlt /> Nairobi, Kenya
             </p>
 
             <p className="flex items-center gap-2 text-gray-300">
@@ -125,8 +121,7 @@ const Footer: React.FC = () => {
             </p>
 
             <p className="flex items-center gap-2 text-gray-300">
-              <FaEnvelope />
-              hesbonmanyinsa96@gmail.com
+              <FaEnvelope /> hesbonmanyinsa96@gmail.com
             </p>
           </div>
 
@@ -137,12 +132,13 @@ const Footer: React.FC = () => {
               href="https://wa.me/254743573380"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Chat on WhatsApp"
             >
               <QRCode
                 value="https://wa.me/254743573380"
                 size={140}
-                bgColor="#1F2937"
-                fgColor="#10B981"
+                bgColor="#ffffff"
+                fgColor="#000000"
               />
             </a>
           </div>
@@ -150,17 +146,19 @@ const Footer: React.FC = () => {
 
         {/* Social Icons */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
-          {socialLinks.map(({ icon: Icon, href }, i) => (
+          {socialLinks.map(({ icon: Icon, href, label }) => (
             <a
-              key={i}
+              key={label}
               href={href}
+              aria-label={label}
+              title={label}
               target="_blank"
               rel="noopener noreferrer"
               className="relative w-12 h-12 flex items-center justify-center group"
             >
               <div className="rotating-circle absolute inset-0 rounded-full"></div>
               <div className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center bg-gray-900 hover:scale-110 transition">
-                <Icon className="w-6 h-6" />
+                <Icon className="w-6 h-6 text-white" />
               </div>
             </a>
           ))}
@@ -169,55 +167,60 @@ const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-4 text-center">
           <p className="text-sm tracking-wider">
-            © 2023 – {currentYear} Hesbon Angwenyi. All rights reserved.
+            © {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
       </div>
 
       {/* Animations */}
-      <style jsx>{`
-        @keyframes fadeUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
+      <style>
+        {`
+          @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
+          .animate-fade-up {
+            animation: fadeUp 1s ease-out forwards;
           }
-        }
-        .animate-fade-up {
-          animation: fadeUp 1s ease-out forwards;
-        }
-        .static-rect {
-          background: linear-gradient(135deg, #10b981, #3b82f6, #fcd34d);
-        }
-        .rotate-logo {
-          animation: rotateLogo 20s linear infinite;
-        }
-        .rotate-logo:hover {
-          animation: rotateLogoReverse 10s linear infinite;
-        }
-        @keyframes rotateLogo {
-          to {
-            transform: rotate(360deg);
+
+          .static-rect {
+            background: linear-gradient(135deg, #10b981, #3b82f6, #fcd34d);
           }
-        }
-        @keyframes rotateLogoReverse {
-          to {
-            transform: rotate(0deg);
+
+          .rotate-logo {
+            animation: rotateLogo 20s linear infinite;
           }
-        }
-        .rotating-circle {
-          background: conic-gradient(#3b82f6, #fcd34d);
-          animation: rotateCircle 6s linear infinite;
-        }
-        @keyframes rotateCircle {
-          to {
-            transform: rotate(360deg);
+          .rotate-logo:hover {
+            animation-duration: 8s;
           }
-        }
-      `}</style>
+          @keyframes rotateLogo {
+            to { transform: rotate(360deg); }
+          }
+
+          .rotating-circle {
+            background: conic-gradient(#3b82f6, #fcd34d);
+            animation: rotateCircle 6s linear infinite;
+          }
+          @keyframes rotateCircle {
+            to { transform: rotate(360deg); }
+          }
+
+          /* Floating background gradients */
+          .gradient-float-1,
+          .gradient-float-2,
+          .gradient-float-3 {
+            background: radial-gradient(circle, #3b82f6, transparent 70%);
+            animation: float 12s ease-in-out infinite;
+          }
+          .gradient-float-2 { animation-delay: 4s; }
+          .gradient-float-3 { animation-delay: 8s; }
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+          }
+        `}
+      </style>
     </footer>
   );
 };
