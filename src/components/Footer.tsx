@@ -138,15 +138,17 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* QR Code */}
+          {/* QR Code with gradient and shadow */}
           <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
             <p className="font-semibold mb-2">Scan to WhatsApp</p>
-            <QRCode
-              value="https://wa.me/254743573380"
-              size={160} // larger QR code
-              bgColor="#ffffff"
-              fgColor="#000000"
-            />
+            <div className="p-3 bg-gradient-to-tr from-blue-500 to-green-400 rounded-xl shadow-lg">
+              <QRCode
+                value="https://wa.me/254743573380"
+                size={160}
+                bgColor="#ffffff"
+                fgColor="#000000"
+              />
+            </div>
           </div>
         </div>
 
