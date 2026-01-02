@@ -137,14 +137,14 @@ const Footer: React.FC = () => {
             <p className="font-semibold mb-2 text-center md:text-right">Scan to WhatsApp</p>
             <QRCode
               value="https://wa.me/254743573380"
-              size={140} // fits nicely under text
+              size={140}
               bgColor="#ffffff"
               fgColor="#000000"
             />
           </div>
         </div>
 
-        {/* Social Icons with smooth rotating gradient */}
+        {/* Social Icons with black icon inside and blue-yellow rotating gradient */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -157,9 +157,9 @@ const Footer: React.FC = () => {
               className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
             >
               {/* Rotating Gradient Background */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-400 to-blue-500 animate-spin-smooth"></div>
-              {/* Icon on top */}
-              <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-white z-10" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-yellow-400 to-yellow-300 animate-spin-smooth"></div>
+              {/* Black icon on top */}
+              <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-black z-10" />
             </a>
           ))}
         </div>
