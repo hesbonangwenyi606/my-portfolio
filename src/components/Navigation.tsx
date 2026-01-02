@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
+  { label: "Home", id: "home" },
   { label: "About", id: "about" },
   { label: "Skills", id: "skills" },
   { label: "Experience", id: "experience" },
@@ -15,12 +16,21 @@ const NAVBAR_HEIGHT = 80;
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("home");
 
   const scrollToSection = (id: string) => {
+    if (id === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
     const el = document.getElementById(id);
     if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+
+    const y =
+      el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+
     window.scrollTo({ top: y, behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
@@ -28,13 +38,23 @@ const Navigation: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      if (window.scrollY < 100) {
+        setActiveSection("home");
+        return;
+      }
+
       const scrollPosition = window.scrollY + NAVBAR_HEIGHT + 10;
 
       for (const item of NAV_ITEMS) {
+        if (item.id === "home") continue;
+
         const section = document.getElementById(item.id);
         if (!section) continue;
+
         const top = section.offsetTop;
         const height = section.offsetHeight;
+
         if (scrollPosition >= top && scrollPosition < top + height) {
           setActiveSection(item.id);
           break;
@@ -65,7 +85,7 @@ const Navigation: React.FC = () => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 flex justify-end items-center py-4">
-          {/* Desktop */}
+          {/* Desktop menu */}
           <div className="hidden md:flex space-x-4">
             {NAV_ITEMS.map((item) => (
               <button
@@ -140,8 +160,13 @@ const Navigation: React.FC = () => {
       {/* Animations */}
       <style jsx>{`
         @keyframes pulse-slow {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.1); }
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
         }
         .animate-pulse-slow {
           animation: pulse-slow 2s infinite;
