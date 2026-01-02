@@ -114,7 +114,10 @@ const Footer: React.FC = () => {
               </a>
             </p>
             <p className="flex items-center gap-2 text-gray-300">
-              <FaEnvelope /> hesbonmanyinsa96@gmail.com
+              <FaEnvelope />
+              <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-blue-400 transition-colors">
+                hesbonmanyinsa96@gmail.com
+              </a>
             </p>
           </div>
 
