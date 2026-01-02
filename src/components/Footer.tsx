@@ -104,15 +104,18 @@ const Footer: React.FC = () => {
           {/* Location */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Location</h3>
+
             <p className="flex items-center gap-2 text-gray-300">
               <FaMapMarkerAlt /> Nairobi, Kenya
             </p>
+
             <p className="flex items-center gap-2 text-gray-300">
               <FaPhoneAlt />
               <a href="tel:+254743573380" className="hover:text-blue-400 transition-colors">
                 +254 743 573 380
               </a>
             </p>
+
             <p className="flex items-center gap-2 text-gray-300">
               <FaEnvelope />
               <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-blue-400 transition-colors">
@@ -140,7 +143,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Social Icons */}
+        {/* Social Icons with rotating blue-yellow gradient */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -150,9 +153,12 @@ const Footer: React.FC = () => {
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center bg-gray-800 rounded-full hover:bg-blue-500 transition-colors duration-300 shadow-md"
+              className="w-12 h-12 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
             >
-              <Icon className="w-6 h-6 text-white" />
+              {/* Rotating Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-yellow-400 animate-spin-slow rounded-full"></div>
+              {/* Icon on top */}
+              <Icon className="relative w-6 h-6 text-white z-10" />
             </a>
           ))}
         </div>
@@ -189,6 +195,15 @@ const Footer: React.FC = () => {
           @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-30px); }
+          }
+
+          /* Rotating gradient for social icons */
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          .animate-spin-slow {
+            animation: spin-slow 6s linear infinite;
           }
         `}
       </style>
