@@ -44,9 +44,9 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative bg-gray-900 text-white py-10 overflow-hidden font-sans">
       {/* Background gradients */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-20 gradient-float-1 -z-10"></div>
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20 gradient-float-2 -z-10"></div>
-      <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 gradient-float-3 -z-10"></div>
+      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-20 bg-gradient-to-tr from-blue-500 to-green-400 animate-float -z-10"></div>
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20 bg-gradient-to-br from-purple-500 to-pink-400 animate-float delay-4s -z-10"></div>
+      <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 bg-gradient-to-r from-yellow-300 to-red-400 animate-float delay-8s -z-10"></div>
 
       <div className="max-w-6xl mx-auto px-4 animate-fade-up space-y-8">
         <div className="grid md:grid-cols-5 gap-6 text-center md:text-left">
@@ -55,14 +55,14 @@ const Footer: React.FC = () => {
             <button
               onClick={() => scrollToSection("home")}
               aria-label="Back to top"
-              className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mb-3 group rotate-logo"
+              className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mb-3 rotate-logo"
             >
-              <div className="absolute inset-0 rounded-full static-rect"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-green-400 via-blue-500 to-yellow-300"></div>
               <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden flex items-center justify-center">
                 <img
                   src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
                   alt="Hesbon Angwenyi Logo"
-                  className="w-full h-full rounded-full object-cover glow"
+                  className="w-full h-full rounded-full object-cover"
                 />
               </div>
             </button>
@@ -75,9 +75,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">
-              Quick Links
-            </h3>
+            <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
             <ul className="space-y-1.5">
               {quickLinks.map((link) => (
                 <li key={link.id}>
@@ -94,9 +92,7 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">
-              Services
-            </h3>
+            <h3 className="text-lg font-semibold mb-3">Services</h3>
             <ul className="space-y-1.5 text-gray-300">
               <li>Full-Stack Development</li>
               <li>Web Development</li>
@@ -107,19 +103,14 @@ const Footer: React.FC = () => {
 
           {/* Location */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">
-              Location
-            </h3>
-
+            <h3 className="text-lg font-semibold mb-3">Location</h3>
             <p className="flex items-center gap-2 text-gray-300">
               <FaMapMarkerAlt /> Nairobi, Kenya
             </p>
-
             <p className="flex items-center gap-2 text-gray-300">
               <FaPhoneAlt />
               <a href="tel:+254743573380">+254 743 573 380</a>
             </p>
-
             <p className="flex items-center gap-2 text-gray-300">
               <FaEnvelope /> hesbonmanyinsa96@gmail.com
             </p>
@@ -146,20 +137,17 @@ const Footer: React.FC = () => {
 
         {/* Social Icons */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
-          {socialLinks.map(({ icon: Icon, href, label }) => (
+          {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
-              key={label}
+              key={i}
               href={href}
               aria-label={label}
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative w-12 h-12 flex items-center justify-center group"
+              className="w-12 h-12 flex items-center justify-center bg-gray-800 rounded-full hover:bg-gray-700 transition"
             >
-              <div className="rotating-circle absolute inset-0 rounded-full"></div>
-              <div className="relative z-20 w-11 h-11 rounded-full flex items-center justify-center bg-gray-900 hover:scale-110 transition">
-                <Icon className="w-6 h-6 text-white" />
-              </div>
+              <Icon className="w-6 h-6 text-white" />
             </a>
           ))}
         </div>
@@ -172,7 +160,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Animations */}
+      {/* Tailwind animations */}
       <style>
         {`
           @keyframes fadeUp {
@@ -182,39 +170,17 @@ const Footer: React.FC = () => {
           .animate-fade-up {
             animation: fadeUp 1s ease-out forwards;
           }
-
-          .static-rect {
-            background: linear-gradient(135deg, #10b981, #3b82f6, #fcd34d);
-          }
-
           .rotate-logo {
             animation: rotateLogo 20s linear infinite;
-          }
-          .rotate-logo:hover {
-            animation-duration: 8s;
           }
           @keyframes rotateLogo {
             to { transform: rotate(360deg); }
           }
-
-          .rotating-circle {
-            background: conic-gradient(#3b82f6, #fcd34d);
-            animation: rotateCircle 6s linear infinite;
-          }
-          @keyframes rotateCircle {
-            to { transform: rotate(360deg); }
-          }
-
-          /* Floating background gradients */
-          .gradient-float-1,
-          .gradient-float-2,
-          .gradient-float-3 {
-            background: radial-gradient(circle, #3b82f6, transparent 70%);
+          .animate-float {
             animation: float 12s ease-in-out infinite;
           }
-          .gradient-float-2 { animation-delay: 4s; }
-          .gradient-float-3 { animation-delay: 8s; }
-
+          .delay-4s { animation-delay: 4s; }
+          .delay-8s { animation-delay: 8s; }
           @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-30px); }
