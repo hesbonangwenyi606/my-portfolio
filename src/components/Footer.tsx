@@ -33,10 +33,8 @@ const Footer: React.FC = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-
     const section = document.getElementById(id);
     if (!section) return;
-
     const y = section.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
@@ -66,7 +64,6 @@ const Footer: React.FC = () => {
                 />
               </div>
             </button>
-
             <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-xs">
               Full-Stack & DevOps Intern, passionate about creating web
               applications and automating infrastructure.
@@ -104,7 +101,6 @@ const Footer: React.FC = () => {
           {/* Location with clickable links */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Location</h3>
-
             <p className="flex items-center gap-2 text-gray-300">
               <FaMapMarkerAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
@@ -116,7 +112,6 @@ const Footer: React.FC = () => {
                 Nairobi, Kenya
               </a>
             </p>
-
             <p className="flex items-center gap-2 text-gray-300">
               <FaPhoneAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
@@ -126,7 +121,6 @@ const Footer: React.FC = () => {
                 +254 743 573 380
               </a>
             </p>
-
             <p className="flex items-center gap-2 text-gray-300">
               <FaEnvelope className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
@@ -138,19 +132,21 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* QR Code */}
+          {/* QR Code under the text */}
           <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
-            <p className="font-semibold mb-2">Scan to WhatsApp</p>
-            <QRCode
-              value="https://wa.me/254743573380"
-              size={160} // larger QR code
-              bgColor="#ffffff"
-              fgColor="#000000"
-            />
+            <p className="font-semibold mb-2 text-center md:text-right">Scan to WhatsApp</p>
+            <div className="p-3 bg-gradient-to-tr from-blue-500 to-green-400 rounded-xl shadow-lg">
+              <QRCode
+                value="https://wa.me/254743573380"
+                size={140} // fits nicely under text
+                bgColor="#ffffff"
+                fgColor="#000000"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Social Icons with rotating blue-green gradient */}
+        {/* Social Icons with smooth rotating gradient */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -163,7 +159,7 @@ const Footer: React.FC = () => {
               className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
             >
               {/* Rotating Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-400 animate-spin-slow rounded-full"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-400 to-blue-500 animate-spin-smooth"></div>
               {/* Icon on top */}
               <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-white z-10" />
             </a>
@@ -185,32 +181,23 @@ const Footer: React.FC = () => {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
           }
-          .animate-fade-up {
-            animation: fadeUp 1s ease-out forwards;
-          }
-          .rotate-logo {
-            animation: rotateLogo 20s linear infinite;
-          }
-          @keyframes rotateLogo {
-            to { transform: rotate(360deg); }
-          }
-          .animate-float {
-            animation: float 12s ease-in-out infinite;
-          }
+          .animate-fade-up { animation: fadeUp 1s ease-out forwards; }
+
+          .rotate-logo { animation: rotateLogo 20s linear infinite; }
+          @keyframes rotateLogo { to { transform: rotate(360deg); } }
+
+          .animate-float { animation: float 12s ease-in-out infinite; }
           .delay-4s { animation-delay: 4s; }
           .delay-8s { animation-delay: 8s; }
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-30px); }
-          }
+          @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);} }
 
-          /* Rotating gradient for social icons */
-          @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+          /* Smooth rotating gradient for social icons */
+          @keyframes spin-smooth {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
-          .animate-spin-slow {
-            animation: spin-slow 6s linear infinite;
+          .animate-spin-smooth {
+            animation: spin-smooth 8s linear infinite;
           }
         `}
       </style>
