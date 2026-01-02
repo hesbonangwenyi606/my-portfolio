@@ -109,7 +109,9 @@ const Footer: React.FC = () => {
             </p>
             <p className="flex items-center gap-2 text-gray-300">
               <FaPhoneAlt />
-              <a href="tel:+254743573380">+254 743 573 380</a>
+              <a href="tel:+254743573380" className="hover:text-blue-400 transition-colors">
+                +254 743 573 380
+              </a>
             </p>
             <p className="flex items-center gap-2 text-gray-300">
               <FaEnvelope /> hesbonmanyinsa96@gmail.com
@@ -145,7 +147,7 @@ const Footer: React.FC = () => {
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center bg-gray-800 rounded-full hover:bg-gray-700 transition"
+              className="w-12 h-12 flex items-center justify-center bg-gray-800 rounded-full hover:bg-blue-500 transition-colors duration-300 shadow-md"
             >
               <Icon className="w-6 h-6 text-white" />
             </a>
