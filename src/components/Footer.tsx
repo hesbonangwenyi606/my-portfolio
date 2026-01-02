@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Social Icons with rotating blue-yellow gradient */}
+        {/* Social Icons with rotating blue-green gradient */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -150,7 +150,7 @@ const Footer: React.FC = () => {
               className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
             >
               {/* Rotating Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-yellow-400 animate-spin-slow rounded-full"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-400 animate-spin-slow rounded-full"></div>
               {/* Icon on top */}
               <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-white z-10" />
             </a>
