@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
       <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 bg-gradient-to-r from-yellow-300 to-red-400 animate-float delay-8s -z-10"></div>
 
       <div className="max-w-6xl mx-auto px-4 animate-fade-up space-y-8">
-        <div className="grid md:grid-cols-5 gap-6 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center md:text-left">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
             <button
@@ -127,19 +127,13 @@ const Footer: React.FC = () => {
           {/* QR Code */}
           <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
             <p className="font-semibold mb-2">Scan to WhatsApp</p>
-            <a
-              href="https://wa.me/254743573380"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat on WhatsApp"
-            >
-              <QRCode
-                value="https://wa.me/254743573380"
-                size={140}
-                bgColor="#ffffff"
-                fgColor="#000000"
-              />
-            </a>
+            {/* QR code (smaller on mobile) */}
+            <QRCode
+              value="https://wa.me/254743573380"
+              size={100}
+              bgColor="#ffffff"
+              fgColor="#000000"
+            />
           </div>
         </div>
 
@@ -153,12 +147,12 @@ const Footer: React.FC = () => {
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden transition-transform duration-500 hover:scale-110"
             >
               {/* Rotating Gradient Background */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-yellow-400 animate-spin-slow rounded-full"></div>
               {/* Icon on top */}
-              <Icon className="relative w-6 h-6 text-white z-10" />
+              <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-white z-10" />
             </a>
           ))}
         </div>
