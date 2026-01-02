@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-300" // removed hover
+                    className="text-gray-300"
                   >
                     {link.label}
                   </button>
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* QR Code under the text (plain) */}
+          {/* QR Code under the text */}
           <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
             <p className="font-semibold mb-2 text-center md:text-right">Scan to WhatsApp</p>
             <QRCode
@@ -144,7 +144,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Social Icons with black icon inside and blue-yellow rotating gradient */}
+        {/* Social Icons with entire icon rotating */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -154,10 +154,10 @@ const Footer: React.FC = () => {
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden animate-spin-smooth"
             >
               {/* Rotating Gradient Background */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-yellow-400 to-yellow-300 animate-spin-smooth"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-yellow-400 to-yellow-300"></div>
               {/* Black icon on top */}
               <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-black z-10" />
             </a>
@@ -189,6 +189,7 @@ const Footer: React.FC = () => {
           .delay-8s { animation-delay: 8s; }
           @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);} }
 
+          /* Entire icon rotation for social buttons */
           @keyframes spin-smooth {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
