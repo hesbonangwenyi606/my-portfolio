@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-gray-900 text-white py-10 overflow-hidden font-sans">
+    <footer className="relative bg-gray-900 text-white py-10 font-sans">
       {/* Background gradients */}
       <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-20 bg-gradient-to-tr from-blue-500 to-green-400 animate-float -z-10"></div>
       <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20 bg-gradient-to-br from-purple-500 to-pink-400 animate-float delay-4s -z-10"></div>
@@ -122,7 +122,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* QR Code */}
-          <div className="flex flex-col items-center md:items-end">
+          <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
             <p className="font-semibold mb-2">Scan to WhatsApp</p>
             <a
               href="https://wa.me/254743573380"
