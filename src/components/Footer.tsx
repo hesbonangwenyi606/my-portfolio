@@ -41,19 +41,14 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative bg-gray-900 text-white py-10 font-sans">
-      {/* Background gradients */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-20 bg-gradient-to-tr from-blue-500 to-green-400 animate-float -z-10"></div>
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20 bg-gradient-to-br from-purple-500 to-pink-400 animate-float delay-4s -z-10"></div>
-      <div className="absolute top-1/2 right-1/2 w-72 h-72 rounded-full opacity-10 bg-gradient-to-r from-yellow-300 to-red-400 animate-float delay-8s -z-10"></div>
-
-      <div className="max-w-6xl mx-auto px-4 animate-fade-up space-y-8">
+      <div className="max-w-6xl mx-auto px-4 space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center md:text-left">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
             <button
               onClick={() => scrollToSection("home")}
               aria-label="Back to top"
-              className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mb-3 rotate-logo"
+              className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mb-3"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-green-400 via-blue-500 to-yellow-300"></div>
               <div className="absolute inset-[4px] rounded-full bg-gray-900 overflow-hidden flex items-center justify-center">
@@ -78,7 +73,7 @@ const Footer: React.FC = () => {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-300 hover:text-gray-300 focus:outline-none"
+                    className="text-gray-300 focus:outline-none"
                   >
                     {link.label}
                   </button>
@@ -107,7 +102,7 @@ const Footer: React.FC = () => {
                 href="https://www.google.com/maps/place/Nairobi,+Kenya"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-gray-300"
+                className="text-gray-300"
               >
                 Nairobi, Kenya
               </a>
@@ -116,7 +111,7 @@ const Footer: React.FC = () => {
               <FaPhoneAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
                 href="tel:+254743573380"
-                className="text-gray-300 hover:text-gray-300"
+                className="text-gray-300"
               >
                 +254 743 573 380
               </a>
@@ -125,7 +120,7 @@ const Footer: React.FC = () => {
               <FaEnvelope className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
                 href="mailto:hesbonmanyinsa96@gmail.com"
-                className="text-gray-300 hover:text-gray-300"
+                className="text-gray-300"
               >
                 hesbonmanyinsa96@gmail.com
               </a>
@@ -154,7 +149,7 @@ const Footer: React.FC = () => {
               title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden animate-spin-smooth"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-yellow-400 to-yellow-300"></div>
               <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-black z-10" />
@@ -169,30 +164,6 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </div>
-
-      <style>
-        {`
-          @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          .animate-fade-up { animation: fadeUp 1s ease-out forwards; }
-
-          .rotate-logo { animation: rotateLogo 20s linear infinite; }
-          @keyframes rotateLogo { to { transform: rotate(360deg); } }
-
-          .animate-float { animation: float 12s ease-in-out infinite; }
-          .delay-4s { animation-delay: 4s; }
-          .delay-8s { animation-delay: 8s; }
-          @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);} }
-
-          @keyframes spin-smooth {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-          .animate-spin-smooth { animation: spin-smooth 8s linear infinite; }
-        `}
-      </style>
     </footer>
   );
 };
