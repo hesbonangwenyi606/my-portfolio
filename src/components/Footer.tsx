@@ -128,13 +128,13 @@ const Footer: React.FC = () => {
           </div>
 
           {/* QR Code */}
-          <div className="flex flex-col items-center md:items-end mt-5 md:mt-0">
+          <div className="flex flex-col items-center md:items-end mt-5 md:mt-8">
             <p className="font-semibold mb-3 text-center md:text-right">Scan to WhatsApp</p>
             <QRCode
               value="https://wa.me/254743573380"
               size={150}
               bgColor="#ffffff"
-              fgColor="#0fcc18ff"
+              fgColor="#3e0f74ff"
             />
           </div>
         </div>
