@@ -87,8 +87,8 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-3">Services</h3>
             <ul className="space-y-1.5 text-gray-300">
               <li>Full-Stack Development</li>
-              <li>Web Development</li>
               <li>Basic Cloud Deployment</li>
+              <li>Web Development</li>
               <li>Backend Development (Entry-Level)</li>
             </ul>
           </div>
