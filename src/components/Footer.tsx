@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-300"
+                    className="text-gray-300 hover:text-gray-300 focus:outline-none"
                   >
                     {link.label}
                   </button>
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location with clickable links */}
+          {/* Location */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Location</h3>
             <p className="flex items-center gap-2 text-gray-300">
@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
                 href="https://www.google.com/maps/place/Nairobi,+Kenya"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300"
+                className="text-gray-300 hover:text-gray-300"
               >
                 Nairobi, Kenya
               </a>
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
               <FaPhoneAlt className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
                 href="tel:+254743573380"
-                className="text-gray-300"
+                className="text-gray-300 hover:text-gray-300"
               >
                 +254 743 573 380
               </a>
@@ -125,14 +125,14 @@ const Footer: React.FC = () => {
               <FaEnvelope className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
               <a
                 href="mailto:hesbonmanyinsa96@gmail.com"
-                className="text-gray-300"
+                className="text-gray-300 hover:text-gray-300"
               >
                 hesbonmanyinsa96@gmail.com
               </a>
             </p>
           </div>
 
-          {/* QR Code under the text */}
+          {/* QR Code */}
           <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
             <p className="font-semibold mb-2 text-center md:text-right">Scan to WhatsApp</p>
             <QRCode
@@ -144,7 +144,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Social Icons with entire icon rotating */}
+        {/* Social Icons */}
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -156,9 +156,7 @@ const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full relative overflow-hidden animate-spin-smooth"
             >
-              {/* Rotating Gradient Background */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-yellow-400 to-yellow-300"></div>
-              {/* Black icon on top */}
               <Icon className="relative w-6 h-6 md:w-7 md:h-7 text-black z-10" />
             </a>
           ))}
@@ -172,7 +170,6 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Tailwind animations */}
       <style>
         {`
           @keyframes fadeUp {
@@ -189,7 +186,6 @@ const Footer: React.FC = () => {
           .delay-8s { animation-delay: 8s; }
           @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);} }
 
-          /* Entire icon rotation for social buttons */
           @keyframes spin-smooth {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
