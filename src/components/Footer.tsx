@@ -134,7 +134,7 @@ const Footer: React.FC = () => {
               value="https://wa.me/254743573380"
               size={150}
               bgColor="#ffffff"
-              fgColor="#000000"
+              fgColor="#0fcc18ff"
             />
           </div>
         </div>
