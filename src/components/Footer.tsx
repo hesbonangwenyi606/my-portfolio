@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
             <p className="font-semibold mb-3 text-center md:text-right">Scan to WhatsApp</p>
             <QRCode
               value="https://wa.me/254743573380"
-              size={150}
+              size={145}
               bgColor="#ffffff"
               fgColor="#3e0f74ff"
             />
