@@ -69,13 +69,19 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      {/* Profile picture */}
-      <div className="fixed top-2 left-2 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
-        <img
-          src="/updated.jpeg"
-          alt="Hesbon Angwenyi"
-          className="w-full h-full object-cover rounded-full"
-        />
+      {/* Profile picture with animated halo behind */}
+      <div className="fixed top-2 left-2 z-50 w-12 h-12 md:w-16 md:h-16">
+        {/* Animated gradient halo */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-rotate-slow blur-xl opacity-60"></div>
+
+        {/* Profile picture */}
+        <div className="relative w-full h-full rounded-full border-2 border-white overflow-hidden shadow-lg">
+          <img
+            src="/updated.jpeg"
+            alt="Hesbon Angwenyi"
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
       </div>
 
       {/* Navbar */}
@@ -159,17 +165,17 @@ const Navigation: React.FC = () => {
 
       {/* Animations */}
       <style jsx>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            transform: scale(1);
+        @keyframes rotate-slow {
+          0% {
+            transform: rotate(0deg);
           }
-          50% {
-            transform: scale(1.1);
+          100% {
+            transform: rotate(360deg);
           }
         }
-        .animate-pulse-slow {
-          animation: pulse-slow 2s infinite;
+
+        .animate-rotate-slow {
+          animation: rotate-slow 10s linear infinite;
         }
       `}</style>
     </>
