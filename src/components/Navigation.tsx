@@ -69,10 +69,10 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      {/* Profile picture with animated halo behind */}
+      {/* Profile picture with animated rotating & pulsing halo */}
       <div className="fixed top-2 left-2 z-50 w-12 h-12 md:w-16 md:h-16">
-        {/* Animated gradient halo */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-rotate-slow blur-xl opacity-60"></div>
+        {/* Rotating + pulsing halo */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-halo blur-xl opacity-60"></div>
 
         {/* Profile picture */}
         <div className="relative w-full h-full rounded-full border-2 border-white overflow-hidden shadow-lg">
@@ -165,17 +165,20 @@ const Navigation: React.FC = () => {
 
       {/* Animations */}
       <style jsx>{`
-        @keyframes rotate-slow {
+        @keyframes rotate {
           0% {
-            transform: rotate(0deg);
+            transform: rotate(0deg) scale(1);
+          }
+          50% {
+            transform: rotate(180deg) scale(1.1);
           }
           100% {
-            transform: rotate(360deg);
+            transform: rotate(360deg) scale(1);
           }
         }
 
-        .animate-rotate-slow {
-          animation: rotate-slow 10s linear infinite;
+        .animate-halo {
+          animation: rotate 10s linear infinite;
         }
       `}</style>
     </>
