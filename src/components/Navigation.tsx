@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: "Contact", id: "contact" },
 ];
 
-const NAVBAR_HEIGHT = 10;
+const NAVBAR_HEIGHT = 80;
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,7 +70,7 @@ const Navigation: React.FC = () => {
   return (
     <>
       {/* Profile picture */}
-      <div className="fixed top-5 left-5 z-50 w-50 h-15 md:w-12 md:h-50 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
+      <div className="fixed top-2 left-2 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
         <img
           src="/updated.jpeg"
           alt="Hesbon Angwenyi"
