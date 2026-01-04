@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: "Contact", id: "contact" },
 ];
 
-const NAVBAR_HEIGHT = 80;
+const NAVBAR_HEIGHT = 10;
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
