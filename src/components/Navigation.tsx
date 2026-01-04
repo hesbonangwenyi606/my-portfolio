@@ -70,7 +70,7 @@ const Navigation: React.FC = () => {
   return (
     <>
       {/* Profile picture */}
-      <div className="fixed top-2 left-2 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
+      <div className="fixed top-2 left-2 z-50 w-10 h-15 md:w-12 md:h-12 rounded-full border-2 border-blue-400 shadow-lg overflow-hidden animate-pulse-slow">
         <img
           src="/updated.jpeg"
           alt="Hesbon Angwenyi"
