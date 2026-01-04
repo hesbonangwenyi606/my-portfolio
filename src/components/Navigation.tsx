@@ -28,9 +28,7 @@ const Navigation: React.FC = () => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    const y =
-      el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-
+    const y = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
     window.scrollTo({ top: y, behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
@@ -69,10 +67,17 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      {/* Profile picture with animated rotating & pulsing halo */}
-      <div className="fixed top-2 left-2 z-50 w-12 h-12 md:w-16 md:h-16">
-        {/* Rotating + pulsing halo */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-halo blur-xl opacity-60"></div>
+      {/* Profile picture with multi-layer animated halo */}
+      <div className="fixed top-2 left-2 z-50 w-16 h-16 md:w-20 md:h-20">
+        {/* Background layers */}
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          {/* Layer 1: rotating gradient clockwise */}
+          <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 opacity-60 blur-xl animate-rotate-clockwise"></div>
+          {/* Layer 2: rotating gradient counter-clockwise */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-400 to-orange-500 opacity-40 blur-2xl animate-rotate-counter"></div>
+          {/* Layer 3: pulsing white glow */}
+          <div className="absolute inset-0 bg-white rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
+        </div>
 
         {/* Profile picture */}
         <div className="relative w-full h-full rounded-full border-2 border-white overflow-hidden shadow-lg">
@@ -165,20 +170,34 @@ const Navigation: React.FC = () => {
 
       {/* Animations */}
       <style jsx>{`
-        @keyframes rotate {
-          0% {
-            transform: rotate(0deg) scale(1);
-          }
-          50% {
-            transform: rotate(180deg) scale(1.1);
-          }
-          100% {
-            transform: rotate(360deg) scale(1);
-          }
+        /* Clockwise rotation */
+        @keyframes rotate-clockwise {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
-        .animate-halo {
-          animation: rotate 10s linear infinite;
+        /* Counter-clockwise rotation */
+        @keyframes rotate-counter {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(-360deg); }
+        }
+
+        /* Slow pulsing */
+        @keyframes pulse-slow {
+          0%, 100% { transform: scale(1); opacity: 0.2; }
+          50% { transform: scale(1.2); opacity: 0.4; }
+        }
+
+        .animate-rotate-clockwise {
+          animation: rotate-clockwise 15s linear infinite;
+        }
+
+        .animate-rotate-counter {
+          animation: rotate-counter 20s linear infinite;
+        }
+
+        .animate-pulse-slow {
+          animation: pulse-slow 4s ease-in-out infinite;
         }
       `}</style>
     </>
@@ -186,3 +205,4 @@ const Navigation: React.FC = () => {
 };
 
 export default Navigation;
+s
