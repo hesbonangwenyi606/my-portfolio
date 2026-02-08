@@ -102,7 +102,7 @@ const education: EducationItem[] = [
   },
   {
     school: "KCA UNIVERSITY",
-    qualification: "Bachelor’s degree in Mathematics & Computer Science",
+    qualification: "Bachelor degree in Mathematics & Computer Science",
     period: "2020 - 2023",
     icon: <FaGraduationCap className="text-gray-900" />,
     description:
