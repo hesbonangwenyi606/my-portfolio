@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaServer, FaDesktop, FaCode, FaEnvelope, FaGraduationCap } from "react-icons/fa";
 
+// ----- Types -----
 interface ExperienceItem {
   title: string;
   company: string;
@@ -21,6 +22,7 @@ interface EducationItem {
   description?: string;
 }
 
+// ----- Experiences -----
 const experiences: ExperienceItem[] = [
   {
     title: "Backend Developer Intern",
@@ -80,6 +82,7 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
+// ----- Education -----
 const education: EducationItem[] = [
   {
     school: "FRATIRON SCHOOL BOOTCAMP",
@@ -99,7 +102,7 @@ const education: EducationItem[] = [
   },
   {
     school: "KCA UNIVERSITY",
-    qualification: "Diploma | Mathematics & Computer Science",
+    qualification: "Bachelor’s degree in Mathematics & Computer Science",
     period: "2020 - 2023",
     icon: <FaGraduationCap className="text-gray-900" />,
     description:
@@ -107,7 +110,7 @@ const education: EducationItem[] = [
   },
 ];
 
-// Typewriter for "Available for Hire"
+// ----- Typewriter -----
 const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
   const [displayed, setDisplayed] = React.useState("");
   const [index, setIndex] = React.useState(0);
@@ -143,32 +146,26 @@ const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-// Framer Motion variants for Education
-const educationContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
-};
+// ----- Framer Motion Variants -----
+const educationContainer = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } };
+const educationItem = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
-const educationItem = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
+// ----- Main Component -----
 const Experience: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
+  const [mouseTilt, setMouseTilt] = useState<{ [key: number]: { x: number; y: number } }>({});
 
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleCardMouseMove = (idx: number, e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
-    setMouseTilt({ x, y });
+    setMouseTilt((prev) => ({ ...prev, [idx]: { x, y } }));
   };
 
   const hoverAnimation = (idx: number) => ({
     scale: 1.05,
-    rotateX: hoveredCard === idx ? mouseTilt.y : 0,
-    rotateY: hoveredCard === idx ? mouseTilt.x : 0,
+    rotateX: hoveredCard === idx ? mouseTilt[idx]?.y || 0 : 0,
+    rotateY: hoveredCard === idx ? mouseTilt[idx]?.x || 0 : 0,
     boxShadow: "0 0 30px #14B8A6, 0 0 60px #00ffff",
     transition: { type: "spring", stiffness: 200, damping: 15 },
   });
@@ -181,7 +178,6 @@ const Experience: React.FC = () => {
         <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 animate-gradient">
           Work Experience
         </h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {experiences.map((exp, idx) => (
             <motion.div
@@ -189,22 +185,18 @@ const Experience: React.FC = () => {
               className="relative bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg cursor-pointer border border-white/10 overflow-hidden"
               onMouseEnter={() => setHoveredCard(idx)}
               onMouseLeave={() => setHoveredCard(null)}
-              onMouseMove={handleCardMouseMove}
+              onMouseMove={(e) => handleCardMouseMove(idx, e)}
               animate={hoveredCard === idx ? hoverAnimation(idx) : { scale: 1, rotateX: 0, rotateY: 0, boxShadow: "0 0 10px #00000050" }}
             >
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-red-500 via-yellow-400 via-green-400 to-blue-500 opacity-20 animate-gradient blur-xl rounded-2xl" />
               <div className="relative z-10 flex justify-center mb-4">{exp.icon}</div>
               <h3 className="text-xl font-semibold text-teal-400 text-center mb-1">{exp.title}</h3>
               <p className="text-teal-300 font-medium text-center mb-1">
-                <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-teal-200">
-                  {exp.company}
-                </a>
+                <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-teal-200">{exp.company}</a>
               </p>
               <p className="text-sm text-gray-400 italic text-center mb-4">{exp.period}</p>
               <div className="space-y-2 text-gray-300 text-sm">
-                {exp.responsibilities.map((item, i) => (
-                  <p key={i}>• {item}</p>
-                ))}
+                {exp.responsibilities.map((item, i) => (<p key={i}>• {item}</p>))}
               </div>
             </motion.div>
           ))}
@@ -220,33 +212,46 @@ const Experience: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <div className="absolute left-5 top-0 w-1 bg-teal-500 h-full rounded" />
-
           <div className="space-y-12">
-            {education.map((edu, idx) => (
-              <motion.div
-                key={idx}
-                variants={educationItem}
-                whileHover={{ y: -6, boxShadow: "0 0 25px #14B8A6, 0 0 50px #00ffff" }}
-                transition={{ type: "spring", stiffness: 180, damping: 18 }}
-                className="relative pl-16 flex items-start cursor-pointer"
-              >
-                <div className="absolute left-0 top-2">
-                  <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
-                    {edu.icon || <FaGraduationCap className="text-gray-900" />}
+            {education.map((edu, idx) => {
+              const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
+              return (
+                <motion.div
+                  key={idx}
+                  variants={educationItem}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+                    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
+                    setTilt({ x, y });
+                  }}
+                  whileHover={{
+                    y: -4,
+                    rotateX: tilt.y,
+                    rotateY: tilt.x,
+                    boxShadow: "0 0 20px #14B8A6, 0 0 40px #00ffff",
+                  }}
+                  transition={{ type: "spring", stiffness: 180, damping: 18 }}
+                  className="relative pl-16 flex items-start cursor-pointer"
+                >
+                  <div className="absolute left-0 top-2">
+                    <div className="w-10 h-10 bg-teal-400 rounded-full flex items-center justify-center shadow-lg">
+                      {edu.icon || <FaGraduationCap className="text-gray-900" />}
+                    </div>
                   </div>
-                </div>
-                <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 w-full">
-                  <h3 className="text-lg font-semibold text-teal-400 mb-1">{edu.school}</h3>
-                  <p className="text-gray-300 mb-1">{edu.qualification}</p>
-                  <p className="text-sm text-gray-400 italic mb-2">{edu.period}</p>
-                  {edu.description && <p className="text-gray-300 text-sm">{edu.description}</p>}
-                </div>
-              </motion.div>
-            ))}
+                  <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10 w-full">
+                    <h3 className="text-lg font-semibold text-teal-400 mb-1">{edu.school}</h3>
+                    <p className="text-gray-300 mb-1">{edu.qualification}</p>
+                    <p className="text-sm text-gray-400 italic mb-2">{edu.period}</p>
+                    {edu.description && <p className="text-gray-300 text-sm">{edu.description}</p>}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 
-        {/* Available for Hire */}
+        {/* Available For Hire CTA */}
         <div className="flex justify-center mt-12">
           <motion.a
             href="mailto:hesbonmanyinsa96@gmail.com"
