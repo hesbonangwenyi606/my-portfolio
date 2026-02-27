@@ -180,6 +180,203 @@
 
 
 
+// import React from "react";
+// import {
+//   FaLinkedin,
+//   FaGithub,
+//   FaEnvelope,
+//   FaTwitter,
+//   FaPhoneAlt,
+//   FaMapMarkerAlt,
+// } from "react-icons/fa";
+// import QRCode from "react-qr-code";
+
+// const Footer: React.FC = () => {
+//   const currentYear = new Date().getFullYear();
+//   const backgroundImage = "https://i.postimg.cc/C1wfz0LX/back-footer.jpg"; 
+
+//   const socialLinks = [
+//     { icon: FaGithub, href: "https://github.com/hesbonangwenyi606", label: "GitHub" },
+//     { icon: FaEnvelope, href: "mailto:hesbonmanyinsa96@gmail.com", label: "Email" },
+//     { icon: FaTwitter, href: "https://x.com/hesbon_angwenyi", label: "X (Twitter)" },
+//     { icon: FaLinkedin, href: "https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/", label: "LinkedIn" },
+//   ];
+
+//   const quickLinks = [
+//     { label: "Home", id: "home" },
+//     { label: "About", id: "about" },
+//     { label: "Skills", id: "skills" },
+//     { label: "Experience", id: "experience" },
+//     { label: "Projects", id: "projects" },
+//     { label: "Contact", id: "contact" },
+//   ];
+
+//   const scrollToSection = (id: string) => {
+//     if (id === "home") {
+//       window.scrollTo({ top: 0, behavior: "smooth" });
+//       return;
+//     }
+//     const section = document.getElementById(id);
+//     if (!section) return;
+//     const y = section.getBoundingClientRect().top + window.scrollY - 80;
+//     window.scrollTo({ top: y, behavior: "smooth" });
+//   };
+
+//   return (
+//     <footer className="relative bg-[#f38d1e] text-white py-10 font-sans overflow-hidden">
+      
+//       {/* BACKGROUND IMAGE LAYER */}
+//       <div 
+//         className="absolute inset-0 z-0 opacity-100 mix-blend-multiply"
+//         style={{
+//           backgroundImage: `url(${backgroundImage})`,
+//           backgroundSize: 'cover', 
+//           backgroundPosition: 'center',
+//           backgroundRepeat: 'no-repeat'
+//         }}
+//       ></div>
+
+//       {/* Increased max-width to 7xl to give columns more horizontal space */}
+//       <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-8">
+//         {/* Reduced gap to gap-4 to prevent text wrapping */}
+//         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-center md:text-left items-start">
+          
+//           {/* Column 1: Brand/Logo */}
+//           <div className="flex flex-col items-center md:items-start">
+//             <button
+//               onClick={() => scrollToSection("home")}
+//               className="relative w-20 h-20 mb-3 hover:scale-105 transition-transform"
+//             >
+//               <div className="absolute inset-0 rounded-full bg-white/20 blur-sm"></div>
+//               <div className="absolute inset-0 rounded-full bg-white overflow-hidden flex items-center justify-center shadow-2xl border-4 border-white/50">
+//                 <img
+//                   src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
+//                   alt="Hesbon Angwenyi Logo"
+//                   className="w-full h-full rounded-full object-cover"
+//                 />
+//               </div>
+//             </button>
+//             <p className="text-white font-bold leading-tight text-xs max-w-[180px] [text-shadow:_0_1px_2px_rgb(0_0_0_/_40%)]">
+//               Full-Stack & DevOps Intern, passionate about web apps.
+//             </p>
+//           </div>
+
+//           {/* Column 2: Quick Links */}
+//           <div>
+//             <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Quick Links</h3>
+//             <ul className="space-y-1">
+//               {quickLinks.map((link) => (
+//                 <li key={link.id}>
+//                   <button
+//                     onClick={() => scrollToSection(link.id)}
+//                     className="text-white hover:text-black text-sm transition-colors font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+//                   >
+//                     {link.label}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+
+//           {/* Column 3: Services */}
+//           <div>
+//             <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Services</h3>
+//             <ul className="space-y-1 text-sm text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
+//               <li>Full-Stack Dev</li>
+//               <li>Cloud Deployment</li>
+//               <li>Web Development</li>
+//               <li>Backend Systems</li>
+//             </ul>
+//           </div>
+
+//           {/* Column 4: Location - FORCED SINGLE LINE */}
+//           <div className="md:col-span-1">
+//             <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Location</h3>
+//             <div className="space-y-3 text-sm font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
+//                 <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
+//                   <FaMapMarkerAlt className="text-black/80 shrink-0" />
+//                   <span>Nairobi, Kenya</span>
+//                 </p>
+//                 <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
+//                   <FaPhoneAlt className="text-black/80 shrink-0" />
+//                   <a href="tel:+254743573380" className="hover:text-black transition-colors">
+//                     +254 743 573 380
+//                   </a>
+//                 </p>
+//                 <p className="flex items-center justify-center md:justify-start gap-2">
+//                   <FaEnvelope className="text-black/80 shrink-0" />
+//                   {/* whitespace-nowrap and slightly smaller text ensures one line */}
+//                   <a 
+//                     href="mailto:hesbonmanyinsa96@gmail.com" 
+//                     className="hover:text-black transition-colors whitespace-nowrap text-[12px] lg:text-sm"
+//                   >
+//                     hesbonmanyinsa96@gmail.com
+//                   </a>
+//                 </p>
+//             </div>
+//           </div>
+
+//           {/* Column 5: QR Code */}
+//           <div className="flex flex-col items-center md:items-end">
+//             <p className="font-extrabold text-xs mb-2 text-black whitespace-nowrap">Scan to WhatsApp</p>
+//             <div className="bg-white p-1.5 rounded-xl shadow-2xl ring-4 ring-white/30">
+//                 <QRCode
+//                   value="https://wa.me/254743573380"
+//                   size={80} 
+//                   bgColor="#ffffff"
+//                   fgColor="#f38d1e" 
+//                 />
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Social Icons Row */}
+//         <div className="flex justify-center gap-5 pt-2">
+//           {socialLinks.map(({ icon: Icon, href, label }, i) => (
+//             <a
+//               key={i}
+//               href={href}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               aria-label={label}
+//               className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black hover:bg-black hover:text-white transition-all shadow-xl"
+//             >
+//               <Icon className="w-5 h-5" />
+//             </a>
+//           ))}
+//         </div>
+
+//         {/* Copyright Section */}
+//         <div className="border-t border-white/20 pt-4 text-center">
+//           <p className="text-[10px] font-black text-white tracking-widest uppercase">
+//             © {currentYear} Hesbon Angwenyi. All rights reserved.
+//           </p>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import {
   FaLinkedin,
@@ -190,10 +387,11 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import QRCode from "react-qr-code";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const backgroundImage = "https://i.postimg.cc/C1wfz0LX/back-footer.jpg"; 
+  const backgroundImage = "https://i.postimg.cc/C1wfz0LX/back-footer.jpg";
 
   const socialLinks = [
     { icon: FaGithub, href: "https://github.com/hesbonangwenyi606", label: "GitHub" },
@@ -211,6 +409,24 @@ const Footer: React.FC = () => {
     { label: "Contact", id: "contact" },
   ];
 
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1, // Elements appear one after another
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   const scrollToSection = (id: string) => {
     if (id === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -224,28 +440,35 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative bg-[#f38d1e] text-white py-10 font-sans overflow-hidden">
-      
-      {/* BACKGROUND IMAGE LAYER */}
-      <div 
+      {/* BACKGROUND IMAGE LAYER with subtle zoom animation */}
+      <motion.div
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2, ease: "easeOut" }}
         className="absolute inset-0 z-0 opacity-100 mix-blend-multiply"
         style={{
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      ></div>
+      ></motion.div>
 
-      {/* Increased max-width to 7xl to give columns more horizontal space */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-8">
-        {/* Reduced gap to gap-4 to prevent text wrapping */}
+      {/* Main Content Area */}
+      <motion.div
+        className="relative z-10 max-w-7xl mx-auto px-4 space-y-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible" // Triggers animation when scrolled into view
+        viewport={{ once: true }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-center md:text-left items-start">
           
           {/* Column 1: Brand/Logo */}
-          <div className="flex flex-col items-center md:items-start">
+          <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start">
             <button
               onClick={() => scrollToSection("home")}
-              className="relative w-20 h-20 mb-3 hover:scale-105 transition-transform"
+              className="relative w-20 h-20 mb-3 hover:scale-110 transition-transform active:scale-95"
             >
               <div className="absolute inset-0 rounded-full bg-white/20 blur-sm"></div>
               <div className="absolute inset-0 rounded-full bg-white overflow-hidden flex items-center justify-center shadow-2xl border-4 border-white/50">
@@ -259,100 +482,94 @@ const Footer: React.FC = () => {
             <p className="text-white font-bold leading-tight text-xs max-w-[180px] [text-shadow:_0_1px_2px_rgb(0_0_0_/_40%)]">
               Full-Stack & DevOps Intern, passionate about web apps.
             </p>
-          </div>
+          </motion.div>
 
           {/* Column 2: Quick Links */}
-          <div>
-            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Quick Links</h3>
+          <motion.div variants={itemVariants}>
+            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block">Quick Links</h3>
             <ul className="space-y-1">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-white hover:text-black text-sm transition-colors font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+                    className="text-white hover:text-black hover:translate-x-1 transition-all text-sm font-bold"
                   >
                     {link.label}
                   </button>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 3: Services */}
-          <div>
-            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Services</h3>
-            <ul className="space-y-1 text-sm text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
-              <li>Full-Stack Dev</li>
-              <li>Cloud Deployment</li>
-              <li>Web Development</li>
-              <li>Backend Systems</li>
+          <motion.div variants={itemVariants}>
+            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block">Services</h3>
+            <ul className="space-y-1 text-sm font-bold">
+              <li className="hover:text-black transition-colors">Full-Stack Dev</li>
+              <li className="hover:text-black transition-colors">Cloud Deployment</li>
+              <li className="hover:text-black transition-colors">Web Development</li>
+              <li className="hover:text-black transition-colors">Backend Systems</li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Column 4: Location - FORCED SINGLE LINE */}
-          <div className="md:col-span-1">
-            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Location</h3>
-            <div className="space-y-3 text-sm font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
-                <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
-                  <FaMapMarkerAlt className="text-black/80 shrink-0" />
-                  <span>Nairobi, Kenya</span>
-                </p>
-                <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
-                  <FaPhoneAlt className="text-black/80 shrink-0" />
-                  <a href="tel:+254743573380" className="hover:text-black transition-colors">
-                    +254 743 573 380
-                  </a>
-                </p>
-                <p className="flex items-center justify-center md:justify-start gap-2">
-                  <FaEnvelope className="text-black/80 shrink-0" />
-                  {/* whitespace-nowrap and slightly smaller text ensures one line */}
-                  <a 
-                    href="mailto:hesbonmanyinsa96@gmail.com" 
-                    className="hover:text-black transition-colors whitespace-nowrap text-[12px] lg:text-sm"
-                  >
-                    hesbonmanyinsa96@gmail.com
-                  </a>
-                </p>
+          {/* Column 4: Location */}
+          <motion.div variants={itemVariants} className="md:col-span-1">
+            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block">Location</h3>
+            <div className="space-y-3 text-sm font-bold">
+              <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
+                <FaMapMarkerAlt className="text-black/80 shrink-0" />
+                <span>Nairobi, Kenya</span>
+              </p>
+              <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
+                <FaPhoneAlt className="text-black/80 shrink-0" />
+                <a href="tel:+254743573380" className="hover:text-black transition-colors">+254 743 573 380</a>
+              </p>
+              <p className="flex items-center justify-center md:justify-start gap-2">
+                <FaEnvelope className="text-black/80 shrink-0" />
+                <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-black transition-colors whitespace-nowrap text-[12px] lg:text-sm">
+                  hesbonmanyinsa96@gmail.com
+                </a>
+              </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Column 5: QR Code */}
-          <div className="flex flex-col items-center md:items-end">
+          {/* Column 5: QR Code with Pulse animation */}
+          <motion.div variants={itemVariants} className="flex flex-col items-center md:items-end">
             <p className="font-extrabold text-xs mb-2 text-black whitespace-nowrap">Scan to WhatsApp</p>
-            <div className="bg-white p-1.5 rounded-xl shadow-2xl ring-4 ring-white/30">
-                <QRCode
-                  value="https://wa.me/254743573380"
-                  size={80} 
-                  bgColor="#ffffff"
-                  fgColor="#f38d1e" 
-                />
-            </div>
-          </div>
+            <motion.div 
+              animate={{ scale: [1, 1.05, 1] }} 
+              transition={{ repeat: Infinity, duration: 3 }}
+              className="bg-white p-1.5 rounded-xl shadow-2xl ring-4 ring-white/30"
+            >
+              <QRCode value="https://wa.me/254743573380" size={80} bgColor="#ffffff" fgColor="#f38d1e" />
+            </motion.div>
+          </motion.div>
         </div>
 
-        {/* Social Icons Row */}
-        <div className="flex justify-center gap-5 pt-2">
+        {/* Social Icons Row with Hover effects */}
+        <motion.div variants={itemVariants} className="flex justify-center gap-5 pt-2">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
-            <a
+            <motion.a
               key={i}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={label}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black hover:bg-black hover:text-white transition-all shadow-xl"
+              whileHover={{ y: -5, scale: 1.1, backgroundColor: "#000", color: "#fff" }}
+              whileTap={{ scale: 0.9 }}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black transition-all shadow-xl"
             >
               <Icon className="w-5 h-5" />
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
 
         {/* Copyright Section */}
-        <div className="border-t border-white/20 pt-4 text-center">
+        <motion.div variants={itemVariants} className="border-t border-white/20 pt-4 text-center">
           <p className="text-[10px] font-black text-white tracking-widest uppercase">
             © {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 };
