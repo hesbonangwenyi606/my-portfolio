@@ -177,6 +177,11 @@
 
 
 
+
+
+
+
+
 import React from "react";
 import {
   FaLinkedin,
@@ -221,15 +226,10 @@ const Footer: React.FC = () => {
   };
 
   return (
-    // bg-[#f38d1e] matches the specific rich orange from your sample image
+    // Main Container with specific rich orange background
     <footer className="relative bg-[#f38d1e] text-white py-16 font-sans overflow-hidden">
       
-      {/* 
-          BACKGROUND IMAGE LAYER 
-          - Zoom set to 170% as requested previously
-          - blend-mode set to 'multiply' to allow the specific #f38d1e orange 
-            to define the sky color perfectly.
-      */}
+      {/* BACKGROUND IMAGE LAYER */}
       <div 
         className="absolute inset-0 z-0 opacity-100 mix-blend-multiply"
         style={{
@@ -240,11 +240,11 @@ const Footer: React.FC = () => {
         }}
       ></div>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 text-center md:text-left">
           
-          {/* Brand */}
+          {/* Column 1: Brand/Logo */}
           <div className="flex flex-col items-center md:items-start">
             <button
               onClick={() => scrollToSection("home")}
@@ -265,7 +265,7 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Column 2: Quick Links */}
           <div>
             <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Quick Links</h3>
             <ul className="space-y-2">
@@ -282,7 +282,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Column 3: Services */}
           <div>
             <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Services</h3>
             <ul className="space-y-2 text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
@@ -293,7 +293,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Location */}
+          {/* Column 4: Contact/Location */}
           <div>
             <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Location</h3>
             <div className="space-y-3 font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
@@ -309,14 +309,14 @@ const Footer: React.FC = () => {
                 </p>
                 <p className="flex items-center gap-3">
                   <FaEnvelope className="text-black/80" />
-                  <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-white transition-colors truncate">
+                  <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-black transition-colors truncate">
                     hesbonmanyinsa96@gmail.com
                   </a>
                 </p>
             </div>
           </div>
 
-          {/* QR Code */}
+          {/* Column 5: QR Code */}
           <div className="flex flex-col items-center md:items-end">
             <p className="font-extrabold mb-3 text-black">Scan to WhatsApp</p>
             <div className="bg-white p-2 rounded-xl shadow-2xl ring-4 ring-white/30">
@@ -324,13 +324,13 @@ const Footer: React.FC = () => {
                   value="https://wa.me/254743573380"
                   size={120}
                   bgColor="#ffffff"
-                  fgColor="#f38d1e" // Matches the new orange color
+                  fgColor="#f38d1e" 
                 />
             </div>
           </div>
         </div>
 
-        {/* Social Icons Row */}
+        {/* Social Icons Row - Icons changed to BLACK */}
         <div className="flex justify-center gap-6 mt-12">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -338,16 +338,17 @@ const Footer: React.FC = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#f38d1e] hover:bg-black hover:text-white transition-all shadow-xl hover:-translate-y-1"
+              aria-label={label}
+              className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-black hover:bg-black hover:text-white transition-all shadow-xl hover:-translate-y-1"
             >
               <Icon className="w-7 h-7" />
             </a>
           ))}
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-black/10 pt-8 text-center">
-          <p className="text-xs font-black text-black/60 tracking-widest uppercase">
+        {/* Copyright Section - Text changed to WHITE */}
+        <div className="border-t border-white/20 pt-8 text-center">
+          <p className="text-xs font-black text-white tracking-widest uppercase [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%)]">
             © {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
@@ -357,3 +358,17 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
