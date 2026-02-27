@@ -215,27 +215,30 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#f58220] text-white py-16 font-sans overflow-hidden">
+    // bg-[#f38d1e] matches the specific rich orange from your sample image
+    <footer className="relative bg-[#f38d1e] text-white py-16 font-sans overflow-hidden">
       
       {/* 
-          MODIFIED BACKGROUND IMAGE LAYER 
-          - Changed 'inset-0' to 'bottom-0 left-0 right-0'
-          - Added 'h-[300px]' (or h-1/2) to reduce the height/size of the image
-          - The top of the footer will now be the solid CSS orange color
+          BACKGROUND IMAGE LAYER 
+          - Zoom set to 170% as requested previously
+          - blend-mode set to 'multiply' to allow the specific #f38d1e orange 
+            to define the sky color perfectly.
       */}
       <div 
-        className="absolute bottom-0 left-0 right-0 z-0 opacity-100 h-[250px] md:h-[350px]" 
+        className="absolute inset-0 z-0 opacity-100 mix-blend-multiply"
         style={{
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'bottom center',
+          backgroundSize: '170%', 
+          backgroundPosition: 'center 85%',
           backgroundRepeat: 'no-repeat'
         }}
       ></div>
 
+      {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 text-center md:text-left">
           
+          {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
             <button
               onClick={() => scrollToSection("home")}
@@ -250,20 +253,21 @@ const Footer: React.FC = () => {
                 />
               </div>
             </button>
-            <p className="text-white font-bold leading-relaxed text-sm md:text-base max-w-xs [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
+            <p className="text-white font-bold leading-relaxed text-sm md:text-base max-w-xs [text-shadow:_0_1px_2px_rgb(0_0_0_/_40%)]">
               Full-Stack & DevOps Intern, passionate about creating web
               applications and automating infrastructure.
             </p>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_30%)]">Quick Links</h3>
+            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-white hover:text-black transition-colors focus:outline-none font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%)]"
+                    className="text-white hover:text-black transition-colors focus:outline-none font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
                   >
                     {link.label}
                   </button>
@@ -272,9 +276,10 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
+          {/* Services */}
           <div>
-            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_30%)]">Services</h3>
-            <ul className="space-y-2 text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%)]">
+            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Services</h3>
+            <ul className="space-y-2 text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
               <li>Full-Stack Development</li>
               <li>Basic Cloud Deployment</li>
               <li>Web Development</li>
@@ -282,9 +287,10 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
+          {/* Location */}
           <div>
-            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_30%)]">Location</h3>
-            <div className="space-y-3 font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%)]">
+            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Location</h3>
+            <div className="space-y-3 font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
                 <p className="flex items-center gap-3">
                   <FaMapMarkerAlt className="text-black/80" />
                   <span>Nairobi, Kenya</span>
@@ -304,6 +310,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
+          {/* QR Code */}
           <div className="flex flex-col items-center md:items-end">
             <p className="font-extrabold mb-3 text-black">Scan to WhatsApp</p>
             <div className="bg-white p-2 rounded-xl shadow-2xl ring-4 ring-white/30">
@@ -311,12 +318,13 @@ const Footer: React.FC = () => {
                   value="https://wa.me/254743573380"
                   size={120}
                   bgColor="#ffffff"
-                  fgColor="#f58220"
+                  fgColor="#f38d1e" // Matches the new orange color
                 />
             </div>
           </div>
         </div>
 
+        {/* Social Icons Row */}
         <div className="flex justify-center gap-6 mt-12">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
@@ -324,13 +332,14 @@ const Footer: React.FC = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#f58220] hover:bg-black hover:text-white transition-all shadow-xl hover:-translate-y-1"
+              className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#f38d1e] hover:bg-black hover:text-white transition-all shadow-xl hover:-translate-y-1"
             >
               <Icon className="w-7 h-7" />
             </a>
           ))}
         </div>
 
+        {/* Copyright */}
         <div className="border-t border-black/10 pt-8 text-center">
           <p className="text-xs font-black text-black/60 tracking-widest uppercase">
             © {currentYear} Hesbon Angwenyi. All rights reserved.
