@@ -190,7 +190,6 @@ import QRCode from "react-qr-code";
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
-  // The orange cityscape image URL you provided
   const backgroundImage = "https://tbgwebsite.s3.eu-west-1.amazonaws.com/storage/uploads/2025/01/31050929/ft_21-2048x400.png"; 
 
   const socialLinks = [
@@ -221,13 +220,16 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#0a0a0a] text-white py-12 font-sans overflow-hidden">
+    // SET BASE BACKGROUND TO THE TARGET VIBRANT ORANGE
+    <footer className="relative bg-[#f38d1e] text-white py-12 font-sans overflow-hidden">
+      
       {/* 
           BACKGROUND IMAGE LAYER 
-          Increased opacity to 60% and set to 'cover' 
+          Set opacity to 100% and use 'multiply' or 'overlay' blend mode 
+          to let the orange background shine through.
       */}
       <div 
-        className="absolute inset-0 z-0 opacity-60"
+        className="absolute inset-0 z-0 opacity-100 mix-blend-multiply"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
@@ -236,14 +238,9 @@ const Footer: React.FC = () => {
         }}
       ></div>
 
-      {/* 
-          OVERLAY LAYER
-          Using a black gradient that is heavy at the top (for text readability) 
-          and clear at the bottom (to let the city glow)
-      */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-transparent z-0"></div>
+      {/* Subtle top-down fade to ensure text is crisp on the bright orange */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-0"></div>
 
-      {/* Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 space-y-10">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 text-center md:text-left">
           
@@ -251,11 +248,11 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:items-start">
             <button
               onClick={() => scrollToSection("home")}
-              aria-label="Back to top"
-              className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mb-4 hover:scale-105 transition-transform"
+              className="relative w-32 h-32 mb-4 hover:scale-105 transition-transform"
             >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-orange-500 via-yellow-400 to-blue-500"></div>
-              <div className="absolute inset-[4px] rounded-full bg-[#0a0a0a] overflow-hidden flex items-center justify-center">
+              {/* White ring around logo to separate from orange bg */}
+              <div className="absolute inset-0 rounded-full bg-white/20"></div>
+              <div className="absolute inset-[4px] rounded-full bg-white overflow-hidden flex items-center justify-center shadow-lg">
                 <img
                   src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
                   alt="Hesbon Angwenyi Logo"
@@ -263,7 +260,7 @@ const Footer: React.FC = () => {
                 />
               </div>
             </button>
-            <p className="text-gray-200 leading-relaxed text-sm md:text-base max-w-xs drop-shadow-lg">
+            <p className="text-white font-medium leading-relaxed text-sm md:text-base max-w-xs drop-shadow-sm">
               Full-Stack & DevOps Intern, passionate about creating web
               applications and automating infrastructure.
             </p>
@@ -271,13 +268,13 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4 border-b border-orange-500/50 pb-2 inline-block">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-4 border-b border-white/40 pb-2 inline-block">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-300 hover:text-orange-400 transition-colors focus:outline-none"
+                    className="text-white/90 hover:text-black transition-colors focus:outline-none font-medium"
                   >
                     {link.label}
                   </button>
@@ -288,8 +285,8 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-4 border-b border-orange-500/50 pb-2 inline-block">Services</h3>
-            <ul className="space-y-2 text-gray-300">
+            <h3 className="text-lg font-bold mb-4 border-b border-white/40 pb-2 inline-block">Services</h3>
+            <ul className="space-y-2 text-white/90 font-medium">
               <li>Full-Stack Development</li>
               <li>Basic Cloud Deployment</li>
               <li>Web Development</li>
@@ -299,69 +296,59 @@ const Footer: React.FC = () => {
 
           {/* Location */}
           <div>
-            <h3 className="text-lg font-bold mb-4 border-b border-orange-500/50 pb-2 inline-block">Location</h3>
-            <div className="space-y-3">
-                <p className="flex items-center gap-3 text-gray-300">
-                <FaMapMarkerAlt className="text-orange-500 flex-shrink-0" />
-                <a
-                    href="https://www.google.com/maps/place/Nairobi,+Kenya"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
-                >
-                    Nairobi, Kenya
-                </a>
+            <h3 className="text-lg font-bold mb-4 border-b border-white/40 pb-2 inline-block">Location</h3>
+            <div className="space-y-3 font-medium">
+                <p className="flex items-center gap-3">
+                  <FaMapMarkerAlt className="text-black/80" />
+                  <span>Nairobi, Kenya</span>
                 </p>
-                <p className="flex items-center gap-3 text-gray-300">
-                <FaPhoneAlt className="text-orange-500 flex-shrink-0" />
-                <a href="tel:+254743573380" className="hover:text-white transition-colors">
+                <p className="flex items-center gap-3">
+                  <FaPhoneAlt className="text-black/80" />
+                  <a href="tel:+254743573380" className="hover:text-black transition-colors">
                     +254 743 573 380
-                </a>
+                  </a>
                 </p>
-                <p className="flex items-center gap-3 text-gray-300">
-                <FaEnvelope className="text-orange-500 flex-shrink-0" />
-                <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-white transition-colors truncate">
+                <p className="flex items-center gap-3">
+                  <FaEnvelope className="text-black/80" />
+                  <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-white transition-colors truncate">
                     hesbonmanyinsa96@gmail.com
-                </a>
+                  </a>
                 </p>
             </div>
           </div>
 
           {/* QR Code */}
-          <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
-            <p className="font-semibold mb-3 text-center md:text-right">Scan to WhatsApp</p>
-            <div className="bg-white p-2 rounded-lg shadow-xl">
+          <div className="flex flex-col items-center md:items-end">
+            <p className="font-bold mb-3 text-black">Scan to WhatsApp</p>
+            <div className="bg-white p-2 rounded-xl shadow-xl">
                 <QRCode
-                value="https://wa.me/254743573380"
-                size={120}
-                bgColor="#ffffff"
-                fgColor="#ea580c" // Orange color (Tailwind orange-600)
+                  value="https://wa.me/254743573380"
+                  size={120}
+                  bgColor="#ffffff"
+                  fgColor="#f38d1e" // Matching orange for the QR code
                 />
             </div>
           </div>
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center gap-6 mt-10 flex-wrap">
+        <div className="flex justify-center gap-6 mt-10">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
               key={i}
               href={href}
-              aria-label={label}
-              title={label}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center rounded-full relative overflow-hidden group hover:scale-110 transition-transform shadow-lg"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#f38d1e] hover:bg-black hover:text-white transition-all shadow-md"
             >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-600 to-yellow-400"></div>
-              <Icon className="relative w-6 h-6 text-black z-10" />
+              <Icon className="w-6 h-6" />
             </a>
           ))}
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/10 pt-6 text-center">
-          <p className="text-xs md:text-sm text-gray-400 tracking-widest uppercase">
+        <div className="border-t border-white/20 pt-6 text-center">
+          <p className="text-xs font-bold text-black/70 tracking-widest uppercase">
             © {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
