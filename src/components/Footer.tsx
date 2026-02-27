@@ -180,8 +180,6 @@
 
 
 
-
-
 import React from "react";
 import {
   FaLinkedin,
@@ -195,7 +193,6 @@ import QRCode from "react-qr-code";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-
   const backgroundImage = "https://i.postimg.cc/C1wfz0LX/back-footer.jpg"; 
 
   const socialLinks = [
@@ -226,29 +223,29 @@ const Footer: React.FC = () => {
   };
 
   return (
-    // Main Container with specific rich orange background
-    <footer className="relative bg-[#f38d1e] text-white py-16 font-sans overflow-hidden">
+    <footer className="relative bg-[#f38d1e] text-white py-10 font-sans overflow-hidden">
       
       {/* BACKGROUND IMAGE LAYER */}
       <div 
         className="absolute inset-0 z-0 opacity-100 mix-blend-multiply"
         style={{
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: '170%', 
-          backgroundPosition: 'center 85%',
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       ></div>
 
-      {/* Main Content Area */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 space-y-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 text-center md:text-left">
+      {/* Increased max-width to 7xl to give columns more horizontal space */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-8">
+        {/* Reduced gap to gap-4 to prevent text wrapping */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-center md:text-left items-start">
           
           {/* Column 1: Brand/Logo */}
           <div className="flex flex-col items-center md:items-start">
             <button
               onClick={() => scrollToSection("home")}
-              className="relative w-32 h-32 mb-4 hover:scale-105 transition-transform"
+              className="relative w-20 h-20 mb-3 hover:scale-105 transition-transform"
             >
               <div className="absolute inset-0 rounded-full bg-white/20 blur-sm"></div>
               <div className="absolute inset-0 rounded-full bg-white overflow-hidden flex items-center justify-center shadow-2xl border-4 border-white/50">
@@ -259,21 +256,20 @@ const Footer: React.FC = () => {
                 />
               </div>
             </button>
-            <p className="text-white font-bold leading-relaxed text-sm md:text-base max-w-xs [text-shadow:_0_1px_2px_rgb(0_0_0_/_40%)]">
-              Full-Stack & DevOps Intern, passionate about creating web
-              applications and automating infrastructure.
+            <p className="text-white font-bold leading-tight text-xs max-w-[180px] [text-shadow:_0_1px_2px_rgb(0_0_0_/_40%)]">
+              Full-Stack & DevOps Intern, passionate about web apps.
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Quick Links</h3>
+            <ul className="space-y-1">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-white hover:text-black transition-colors focus:outline-none font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+                    className="text-white hover:text-black text-sm transition-colors font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
                   >
                     {link.label}
                   </button>
@@ -284,32 +280,36 @@ const Footer: React.FC = () => {
 
           {/* Column 3: Services */}
           <div>
-            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Services</h3>
-            <ul className="space-y-2 text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
-              <li>Full-Stack Development</li>
-              <li>Basic Cloud Deployment</li>
+            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Services</h3>
+            <ul className="space-y-1 text-sm text-white font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
+              <li>Full-Stack Dev</li>
+              <li>Cloud Deployment</li>
               <li>Web Development</li>
-              <li>Backend Development</li>
+              <li>Backend Systems</li>
             </ul>
           </div>
 
-          {/* Column 4: Contact/Location */}
-          <div>
-            <h3 className="text-lg font-extrabold mb-4 border-b-2 border-white/40 pb-2 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Location</h3>
-            <div className="space-y-3 font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
-                <p className="flex items-center gap-3">
-                  <FaMapMarkerAlt className="text-black/80" />
+          {/* Column 4: Location - FORCED SINGLE LINE */}
+          <div className="md:col-span-1">
+            <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Location</h3>
+            <div className="space-y-3 text-sm font-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">
+                <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
+                  <FaMapMarkerAlt className="text-black/80 shrink-0" />
                   <span>Nairobi, Kenya</span>
                 </p>
-                <p className="flex items-center gap-3">
-                  <FaPhoneAlt className="text-black/80" />
+                <p className="flex items-center justify-center md:justify-start gap-2 whitespace-nowrap">
+                  <FaPhoneAlt className="text-black/80 shrink-0" />
                   <a href="tel:+254743573380" className="hover:text-black transition-colors">
                     +254 743 573 380
                   </a>
                 </p>
-                <p className="flex items-center gap-3">
-                  <FaEnvelope className="text-black/80" />
-                  <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-black transition-colors truncate">
+                <p className="flex items-center justify-center md:justify-start gap-2">
+                  <FaEnvelope className="text-black/80 shrink-0" />
+                  {/* whitespace-nowrap and slightly smaller text ensures one line */}
+                  <a 
+                    href="mailto:hesbonmanyinsa96@gmail.com" 
+                    className="hover:text-black transition-colors whitespace-nowrap text-[12px] lg:text-sm"
+                  >
                     hesbonmanyinsa96@gmail.com
                   </a>
                 </p>
@@ -318,11 +318,11 @@ const Footer: React.FC = () => {
 
           {/* Column 5: QR Code */}
           <div className="flex flex-col items-center md:items-end">
-            <p className="font-extrabold mb-3 text-black">Scan to WhatsApp</p>
-            <div className="bg-white p-2 rounded-xl shadow-2xl ring-4 ring-white/30">
+            <p className="font-extrabold text-xs mb-2 text-black whitespace-nowrap">Scan to WhatsApp</p>
+            <div className="bg-white p-1.5 rounded-xl shadow-2xl ring-4 ring-white/30">
                 <QRCode
                   value="https://wa.me/254743573380"
-                  size={120}
+                  size={80} 
                   bgColor="#ffffff"
                   fgColor="#f38d1e" 
                 />
@@ -330,8 +330,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Social Icons Row - Icons changed to BLACK */}
-        <div className="flex justify-center gap-6 mt-12">
+        {/* Social Icons Row */}
+        <div className="flex justify-center gap-5 pt-2">
           {socialLinks.map(({ icon: Icon, href, label }, i) => (
             <a
               key={i}
@@ -339,16 +339,16 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-black hover:bg-black hover:text-white transition-all shadow-xl hover:-translate-y-1"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black hover:bg-black hover:text-white transition-all shadow-xl"
             >
-              <Icon className="w-7 h-7" />
+              <Icon className="w-5 h-5" />
             </a>
           ))}
         </div>
 
-        {/* Copyright Section - Text changed to WHITE */}
-        <div className="border-t border-white/20 pt-8 text-center">
-          <p className="text-xs font-black text-white tracking-widest uppercase [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%)]">
+        {/* Copyright Section */}
+        <div className="border-t border-white/20 pt-4 text-center">
+          <p className="text-[10px] font-black text-white tracking-widest uppercase">
             © {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </div>
@@ -358,17 +358,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
