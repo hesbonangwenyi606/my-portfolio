@@ -61,6 +61,8 @@ const Stats = () => {
                 { name: "Figma", level: 75 },
                 { name: "Postman", level: 90 },
                 { name: "Agile", level: 85 },
+                { name: "Zoho CRM", level: 80 },
+                { name: "CRM Integration", level: 85 },
               ]}
             />
           </div>
