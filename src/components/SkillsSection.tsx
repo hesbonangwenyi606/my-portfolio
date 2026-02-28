@@ -52,6 +52,7 @@ const Stats = () => {
                 { name: "MongoDB", level: 70 },
                 { name: "MySQL", level: 80 },
                 { name: "PostgreSQL", level: 60 },
+                { name: "SQLite", level: 75 },
 
               ]}
             />
