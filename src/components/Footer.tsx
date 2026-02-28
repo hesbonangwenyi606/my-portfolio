@@ -505,10 +505,11 @@ const Footer: React.FC = () => {
           <motion.div variants={itemVariants}>
             <h3 className="text-md font-extrabold mb-3 border-b-2 border-white/40 pb-1 inline-block">Services</h3>
             <ul className="space-y-1 text-sm font-bold">
-              <li className="hover:text-black transition-colors">Full-Stack Dev</li>
+              <li className="hover:text-black transition-colors">Full-Stack Development</li>
               <li className="hover:text-black transition-colors">Cloud Deployment</li>
               <li className="hover:text-black transition-colors">Web Development</li>
-              <li className="hover:text-black transition-colors">Backend Systems</li>
+              <li className="hover:text-black transition-colors">Backend Development</li>
+              <li className="hover:text-black transition-colors">CRM Development & Integration</li>
             </ul>
           </motion.div>
 
@@ -541,7 +542,7 @@ const Footer: React.FC = () => {
               transition={{ repeat: Infinity, duration: 3 }}
               className="bg-white p-1.5 rounded-xl shadow-2xl ring-4 ring-white/30"
             >
-              <QRCode value="https://wa.me/254743573380" size={80} bgColor="#ffffff" fgColor="#f38d1e" />
+              <QRCode value="https://wa.me/254743573380" size={100} bgColor="#ffffff" fgColor="#f38d1e" />
             </motion.div>
           </motion.div>
         </div>
@@ -575,3 +576,12 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
+
+
+
+
+
+
+
+
