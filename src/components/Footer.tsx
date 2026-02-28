@@ -580,6 +580,483 @@
 
 
 
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import {
+//   FaLinkedin,
+//   FaGithub,
+//   FaEnvelope,
+//   FaTwitter,
+//   FaPhoneAlt,
+//   FaMapMarkerAlt,
+// } from "react-icons/fa";
+// import QRCode from "react-qr-code";
+// import { motion } from "framer-motion";
+
+// const Footer: React.FC = () => {
+//   const currentYear = new Date().getFullYear();
+//   const backgroundImage =
+//     "https://i.pinimg.com/736x/ef/76/7f/ef767fe63fb05594484651217b98a0aa.jpg";
+
+//   const socialLinks = [
+//     { icon: FaGithub, href: "https://github.com/hesbonangwenyi606", label: "GitHub" },
+//     { icon: FaEnvelope, href: "mailto:hesbonmanyinsa96@gmail.com", label: "Email" },
+//     { icon: FaTwitter, href: "https://x.com/hesbon_angwenyi", label: "X (Twitter)" },
+//     { icon: FaLinkedin, href: "https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/", label: "LinkedIn" },
+//   ];
+
+//   const quickLinks = [
+//     { label: "Home", id: "home" },
+//     { label: "About", id: "about" },
+//     { label: "Skills", id: "skills" },
+//     { label: "Experience", id: "experience" },
+//     { label: "Projects", id: "projects" },
+//     { label: "Contact", id: "contact" },
+//   ];
+
+//   const containerVariants = {
+//     hidden: { opacity: 0, y: 30 },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       transition: {
+//         duration: 0.6,
+//         staggerChildren: 0.1,
+//       },
+//     },
+//   };
+
+//   const itemVariants = {
+//     hidden: { opacity: 0, y: 20 },
+//     visible: { opacity: 1, y: 0 },
+//   };
+
+//   const scrollToSection = (id: string) => {
+//     if (id === "home") {
+//       window.scrollTo({ top: 0, behavior: "smooth" });
+//       return;
+//     }
+
+//     const section = document.getElementById(id);
+//     if (!section) return;
+
+//     const yOffset = -80;
+//     const y =
+//       section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+//     window.scrollTo({ top: y, behavior: "smooth" });
+//   };
+
+//   return (
+//     <footer className="relative bg-[#0f172a] text-white py-10 font-sans overflow-hidden">
+//       {/* Background Image + Dark Overlay */}
+//       <motion.div
+//         initial={{ scale: 1.1 }}
+//         animate={{ scale: 1 }}
+//         transition={{ duration: 2, ease: "easeOut" }}
+//         className="absolute inset-0 z-0"
+//       >
+//         <div
+//           className="absolute inset-0 bg-cover bg-center"
+//           style={{ backgroundImage: `url(${backgroundImage})` }}
+//         />
+//         <div className="absolute inset-0 bg-black/60" />
+//       </motion.div>
+
+//       {/* Main Content */}
+//       <motion.div
+//         className="relative z-10 max-w-7xl mx-auto px-4 space-y-8"
+//         variants={containerVariants}
+//         initial="hidden"
+//         whileInView="visible"
+//         viewport={{ once: true }}
+//       >
+//         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center md:text-left items-start">
+          
+//           {/* Brand */}
+//           <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start">
+//             <button
+//               onClick={() => scrollToSection("home")}
+//               className="relative w-20 h-20 mb-3 hover:scale-110 transition-transform active:scale-95"
+//             >
+//               <div className="absolute inset-0 rounded-full bg-white/20 blur-sm"></div>
+//               <div className="absolute inset-0 rounded-full bg-white overflow-hidden flex items-center justify-center shadow-2xl border-4 border-white/40">
+//                 <img
+//                   src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
+//                   alt="Hesbon Angwenyi Logo"
+//                   className="w-full h-full rounded-full object-cover"
+//                 />
+//               </div>
+//             </button>
+//             <p className="text-sm font-semibold max-w-[200px] text-gray-200">
+//               Full-Stack & DevOps Intern passionate about building scalable web applications.
+//             </p>
+//           </motion.div>
+
+//           {/* Quick Links */}
+//           <motion.div variants={itemVariants}>
+//             <h3 className="text-md font-bold mb-3 border-b border-white/30 pb-1 inline-block">
+//               Quick Links
+//             </h3>
+//             <ul className="space-y-2 text-sm">
+//               {quickLinks.map((link) => (
+//                 <li key={link.id}>
+//                   <button
+//                     onClick={() => scrollToSection(link.id)}
+//                     className="hover:text-gray-300 transition-all"
+//                   >
+//                     {link.label}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           </motion.div>
+
+//           {/* Services */}
+//           <motion.div variants={itemVariants}>
+//             <h3 className="text-md font-bold mb-3 border-b border-white/30 pb-1 inline-block">
+//               Services
+//             </h3>
+//             <ul className="space-y-2 text-sm text-gray-200">
+//               <li>Full-Stack Development</li>
+//               <li>Cloud Deployment</li>
+//               <li>Web Development</li>
+//               <li>Backend Development</li>
+//               <li>CRM Development & Integration</li>
+//             </ul>
+//           </motion.div>
+
+//           {/* Location */}
+//           <motion.div variants={itemVariants}>
+//             <h3 className="text-md font-bold mb-3 border-b border-white/30 pb-1 inline-block">
+//               Location
+//             </h3>
+//             <div className="space-y-3 text-sm text-gray-200">
+//               <p className="flex items-center gap-2 justify-center md:justify-start">
+//                 <FaMapMarkerAlt className="text-gray-300" />
+//                 Nairobi, Kenya
+//               </p>
+//               <p className="flex items-center gap-2 justify-center md:justify-start">
+//                 <FaPhoneAlt className="text-gray-300" />
+//                 <a href="tel:+254743573380" className="hover:text-white">
+//                   +254 743 573 380
+//                 </a>
+//               </p>
+//               <p className="flex items-center gap-2 justify-center md:justify-start">
+//                 <FaEnvelope className="text-gray-300" />
+//                 <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-white">
+//                   hesbonmanyinsa96@gmail.com
+//                 </a>
+//               </p>
+//             </div>
+//           </motion.div>
+
+//           {/* QR Code */}
+//           <motion.div variants={itemVariants} className="flex flex-col items-center md:items-end">
+//             <p className="font-semibold text-sm mb-2 text-gray-200">
+//               Scan to WhatsApp
+//             </p>
+//             <motion.div
+//               animate={{ scale: [1, 1.05, 1] }}
+//               transition={{ repeat: Infinity, duration: 3 }}
+//               className="bg-white p-2 rounded-xl shadow-xl"
+//             >
+//               <QRCode
+//                 value="https://wa.me/254743573380"
+//                 size={100}
+//                 bgColor="#ffffff"
+//                 fgColor="#0f172a"
+//               />
+//             </motion.div>
+//           </motion.div>
+//         </div>
+
+//         {/* Social Icons */}
+//         <motion.div variants={itemVariants} className="flex justify-center gap-5 pt-4">
+//           {socialLinks.map(({ icon: Icon, href, label }, i) => (
+//             <motion.a
+//               key={i}
+//               href={href}
+//               aria-label={label}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               whileHover={{ y: -5, scale: 1.1 }}
+//               whileTap={{ scale: 0.9 }}
+//               className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#0f172a] shadow-md hover:bg-gray-200 transition-all"
+//             >
+//               <Icon className="w-5 h-5" />
+//             </motion.a>
+//           ))}
+//         </motion.div>
+
+//         {/* Copyright */}
+//         <motion.div variants={itemVariants} className="border-t border-white/20 pt-4 text-center">
+//           <p className="text-xs text-gray-300 tracking-wide">
+//             © {currentYear} Hesbon Angwenyi. All rights reserved.
+//           </p>
+//         </motion.div>
+//       </motion.div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
+
+
+
+
+
+
+
+
+// import React from "react";
+// import {
+//   FaLinkedin,
+//   FaGithub,
+//   FaEnvelope,
+//   FaTwitter,
+//   FaPhoneAlt,
+//   FaMapMarkerAlt,
+// } from "react-icons/fa";
+// import QRCode from "react-qr-code";
+// import { motion } from "framer-motion";
+
+// const Footer: React.FC = () => {
+//   const currentYear = new Date().getFullYear();
+//   const backgroundImage =
+//     "https://i.pinimg.com/736x/ef/76/7f/ef767fe63fb05594484651217b98a0aa.jpg";
+
+//   const socialLinks = [
+//     { icon: FaGithub, href: "https://github.com/hesbonangwenyi606", label: "GitHub" },
+//     { icon: FaEnvelope, href: "mailto:hesbonmanyinsa96@gmail.com", label: "Email" },
+//     { icon: FaTwitter, href: "https://x.com/hesbon_angwenyi", label: "X (Twitter)" },
+//     { icon: FaLinkedin, href: "https://www.linkedin.com/in/hesbon-angwenyi-58b9412b4/", label: "LinkedIn" },
+//   ];
+
+//   const quickLinks = [
+//     { label: "Home", id: "home" },
+//     { label: "About", id: "about" },
+//     { label: "Skills", id: "skills" },
+//     { label: "Experience", id: "experience" },
+//     { label: "Projects", id: "projects" },
+//     { label: "Contact", id: "contact" },
+//   ];
+
+//   const containerVariants = {
+//     hidden: { opacity: 0, y: 30 },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       transition: {
+//         duration: 0.6,
+//         staggerChildren: 0.1,
+//       },
+//     },
+//   };
+
+//   const itemVariants = {
+//     hidden: { opacity: 0, y: 20 },
+//     visible: { opacity: 1, y: 0 },
+//   };
+
+//   const scrollToSection = (id: string) => {
+//     if (id === "home") {
+//       window.scrollTo({ top: 0, behavior: "smooth" });
+//       return;
+//     }
+
+//     const section = document.getElementById(id);
+//     if (!section) return;
+
+//     const yOffset = -80;
+//     const y =
+//       section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+//     window.scrollTo({ top: y, behavior: "smooth" });
+//   };
+
+//   return (
+//     <footer className="relative bg-[#0f172a] text-white py-10 font-sans overflow-hidden">
+      
+//       {/* Background Image + Dark Overlay */}
+//       <motion.div
+//         initial={{ scale: 1.1 }}
+//         animate={{ scale: 1 }}
+//         transition={{ duration: 2, ease: "easeOut" }}
+//         className="absolute inset-0 z-0"
+//       >
+//         <div
+//           className="absolute inset-0 bg-cover bg-center"
+//           style={{ backgroundImage: `url(${backgroundImage})` }}
+//         />
+//         <div className="absolute inset-0 bg-black/60" />
+//       </motion.div>
+
+//       {/* Main Content */}
+//       <motion.div
+//         className="relative z-10 max-w-7xl mx-auto px-4 space-y-8"
+//         variants={containerVariants}
+//         initial="hidden"
+//         whileInView="visible"
+//         viewport={{ once: true }}
+//       >
+//         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center md:text-left items-start">
+
+//           {/* Brand */}
+//           <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start">
+//             <button
+//               onClick={() => scrollToSection("home")}
+//               className="relative w-20 h-20 mb-3 hover:scale-110 transition-transform active:scale-95"
+//             >
+//               <div className="absolute inset-0 rounded-full bg-white/20 blur-sm"></div>
+//               <div className="absolute inset-0 rounded-full bg-white overflow-hidden flex items-center justify-center shadow-2xl border-4 border-white/40">
+//                 <img
+//                   src="https://i.postimg.cc/CKGr3Z0V/hesbon-angwenyi-logo-(2).jpg"
+//                   alt="Hesbon Angwenyi Logo"
+//                   className="w-full h-full rounded-full object-cover"
+//                 />
+//               </div>
+//             </button>
+//             <p className="text-sm font-semibold max-w-[200px] text-gray-200">
+//               Full-Stack & DevOps Intern passionate about building scalable web applications.
+//             </p>
+//           </motion.div>
+
+//           {/* Quick Links */}
+//           <motion.div variants={itemVariants}>
+//             <h3 className="text-md font-bold mb-3 border-b border-white/30 pb-1 inline-block">
+//               Quick Links
+//             </h3>
+//             <ul className="space-y-2 text-sm">
+//               {quickLinks.map((link) => (
+//                 <li key={link.id}>
+//                   <button
+//                     onClick={() => scrollToSection(link.id)}
+//                     className="hover:text-gray-300 transition-all"
+//                   >
+//                     {link.label}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           </motion.div>
+
+//           {/* Services */}
+//           <motion.div variants={itemVariants}>
+//             <h3 className="text-md font-bold mb-3 border-b border-white/30 pb-1 inline-block">
+//               Services
+//             </h3>
+//             <ul className="space-y-2 text-sm text-gray-200">
+//               <li>Full-Stack Development</li>
+//               <li>Cloud Deployment</li>
+//               <li>Web Development</li>
+//               <li>Backend Development</li>
+//               <li>CRM Development & Integration</li>
+//             </ul>
+//           </motion.div>
+
+//           {/* Location */}
+//           <motion.div variants={itemVariants}>
+//             <h3 className="text-md font-bold mb-3 border-b border-white/30 pb-1 inline-block">
+//               Location
+//             </h3>
+//             <div className="space-y-3 text-sm text-gray-200">
+//               <p className="flex items-center gap-2 justify-center md:justify-start">
+//                 <FaMapMarkerAlt className="text-gray-300" />
+//                 Nairobi, Kenya
+//               </p>
+//               <p className="flex items-center gap-2 justify-center md:justify-start">
+//                 <FaPhoneAlt className="text-gray-300" />
+//                 <a href="tel:+254743573380" className="hover:text-white">
+//                   +254 743 573 380
+//                 </a>
+//               </p>
+//               <p className="flex items-center gap-2 justify-center md:justify-start">
+//                 <FaEnvelope className="text-gray-300" />
+//                 <a href="mailto:hesbonmanyinsa96@gmail.com" className="hover:text-white">
+//                   hesbonmanyinsa96@gmail.com
+//                 </a>
+//               </p>
+//             </div>
+//           </motion.div>
+
+//           {/* QR Code (Static - No Glow) */}
+//           <motion.div variants={itemVariants} className="flex flex-col items-center md:items-end">
+//             <p className="font-semibold text-sm mb-2 text-gray-200">
+//               Scan to WhatsApp
+//             </p>
+//             <div className="bg-white p-3 rounded-2xl shadow-xl">
+//               <QRCode
+//                 value="https://wa.me/254743573380"
+//                 size={150}
+//                 bgColor="#ffffff"
+//                 fgColor="#0f172a"
+//               />
+//             </div>
+//           </motion.div>
+//         </div>
+
+//         {/* Social Icons */}
+//         <motion.div variants={itemVariants} className="flex justify-center gap-5 pt-4">
+//           {socialLinks.map(({ icon: Icon, href, label }, i) => (
+//             <motion.a
+//               key={i}
+//               href={href}
+//               aria-label={label}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               whileHover={{ y: -5, scale: 1.1 }}
+//               whileTap={{ scale: 0.9 }}
+//               className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#0f172a] shadow-md hover:bg-gray-200 transition-all"
+//             >
+//               <Icon className="w-5 h-5" />
+//             </motion.a>
+//           ))}
+//         </motion.div>
+
+//         {/* Copyright */}
+//         <motion.div variants={itemVariants} className="border-t border-white/20 pt-4 text-center">
+//           <p className="text-xs text-gray-300 tracking-wide">
+//             © {currentYear} Hesbon Angwenyi. All rights reserved.
+//           </p>
+//         </motion.div>
+
+//       </motion.div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import {
   FaLinkedin,
@@ -648,6 +1125,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative bg-[#0f172a] text-white py-10 font-sans overflow-hidden">
+      
       {/* Background Image + Dark Overlay */}
       <motion.div
         initial={{ scale: 1.1 }}
@@ -671,7 +1149,7 @@ const Footer: React.FC = () => {
         viewport={{ once: true }}
       >
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center md:text-left items-start">
-          
+
           {/* Brand */}
           <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start">
             <button
@@ -733,7 +1211,14 @@ const Footer: React.FC = () => {
             <div className="space-y-3 text-sm text-gray-200">
               <p className="flex items-center gap-2 justify-center md:justify-start">
                 <FaMapMarkerAlt className="text-gray-300" />
-                Nairobi, Kenya
+                <a
+                  href="https://www.google.com/maps/place/Nairobi,+Kenya"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  Nairobi, Kenya
+                </a>
               </p>
               <p className="flex items-center gap-2 justify-center md:justify-start">
                 <FaPhoneAlt className="text-gray-300" />
@@ -751,22 +1236,21 @@ const Footer: React.FC = () => {
           </motion.div>
 
           {/* QR Code */}
-          <motion.div variants={itemVariants} className="flex flex-col items-center md:items-end">
-            <p className="font-semibold text-sm mb-2 text-gray-200">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center justify-center text-center"
+          >
+            <p className="font-semibold text-sm mb-3 text-gray-200 w-full text-center">
               Scan to WhatsApp
             </p>
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ repeat: Infinity, duration: 3 }}
-              className="bg-white p-2 rounded-xl shadow-xl"
-            >
+            <div className="bg-white p-3 rounded-2xl shadow-xl">
               <QRCode
                 value="https://wa.me/254743573380"
-                size={100}
+                size={150}
                 bgColor="#ffffff"
                 fgColor="#0f172a"
               />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 
@@ -794,13 +1278,10 @@ const Footer: React.FC = () => {
             © {currentYear} Hesbon Angwenyi. All rights reserved.
           </p>
         </motion.div>
+
       </motion.div>
     </footer>
   );
 };
 
 export default Footer;
-
-
-
-
