@@ -1315,7 +1315,6 @@ import {
   FaTwitter,
   FaPhoneAlt,
   FaMapMarkerAlt,
-  FaWhatsapp,
 } from "react-icons/fa";
 import QRCode from "react-qr-code";
 import { motion } from "framer-motion";
@@ -1484,7 +1483,7 @@ const Footer: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* QR Code with black WhatsApp icon and continuous rotation */}
+          {/* QR Code without icon */}
           <motion.div
             variants={itemVariants}
             className="flex flex-col items-center justify-center text-center"
@@ -1492,7 +1491,7 @@ const Footer: React.FC = () => {
             <p className="font-semibold text-sm mb-3 text-gray-200 w-full text-center">
               Scan to WhatsApp
             </p>
-            <div className="relative bg-white p-3 rounded-2xl shadow-xl">
+            <div className="bg-white p-3 rounded-2xl shadow-xl">
               <QRCode
                 value="https://wa.me/254743573380"
                 size={150}
@@ -1500,17 +1499,6 @@ const Footer: React.FC = () => {
                 fgColor="#0f172a"
                 level="H"
               />
-              {/* Centered WhatsApp Icon (black color, continuous rotation) */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-                <motion.div
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  <FaWhatsapp className="text-black w-5 h-5" />
-                </motion.div>
-              </div>
             </div>
           </motion.div>
         </div>
