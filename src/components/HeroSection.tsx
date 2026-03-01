@@ -351,7 +351,7 @@ const HeroSection: React.FC = () => {
   return (
     // CHANGE 1: The background gradient is removed from here and replaced with a background image.
     // Make sure to replace '/path/to/your/background-image.jpg' with the actual path to your image.
-    <section className="min-h-screen bg-[url('https://i.pinimg.com/1200x/4f/a0/f8/4fa0f8d32fac31b4ae03ee9c60f034fb.jpg')] bg-cover bg-center bg-fixed flex items-center justify-center px-4 relative">
+    <section className="min-h-screen bg-[url('https://i.pinimg.com/736x/39/ae/7d/39ae7de695649d787af169e4aa16136b.jpg')] bg-cover bg-center bg-fixed flex items-center justify-center px-4 relative">
       
       {/* CHANGE 2: Added a new div for the gradient overlay. 
           The opacity is set with '/95', '/90', etc. You can adjust these values (e.g., from /0 to /100) 
