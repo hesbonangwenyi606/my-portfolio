@@ -70,7 +70,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative py-12 min-h-[60vh] overflow-hidden"
       style={{
-        backgroundImage: "url('https://i.pinimg.com/736x/71/a6/d8/71a6d82e769b7778fb900203ab9d45de.jpg')",
+        backgroundImage: "url('https://i.pinimg.com/736x/10/9f/5a/109f5aac620d83348acc6e8010eb8a1f.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
